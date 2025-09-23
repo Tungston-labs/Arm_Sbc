@@ -5,6 +5,7 @@ import './App.css'
 import { Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
 import Navbar from './Components/Navbar/Navbar'
+import SingleProduct from './pages/product/SingleProduct.jsx'
 
 function App() {
 
@@ -12,6 +13,7 @@ function App() {
 <Routes>
   <Route path='/nav' element={<Navbar/>}/>
 <Route path='/' element={<Home/>}/>
+<Route path='/product/:id' element={<SingleProduct/>}/>
 
 </Routes>
   )

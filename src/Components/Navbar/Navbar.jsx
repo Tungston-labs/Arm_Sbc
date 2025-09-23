@@ -1,4 +1,4 @@
-// src/components/Navbar.jsx
+
 import React, { useState } from "react";
 import {
   Nav,
@@ -25,19 +25,19 @@ const Navbar = () => {
   return (
     <Nav>
       <NavContainer>
-        {/* Logo */}
+
       
 <Logo>
   <img src={logo} alt="ARM SBC" />
 </Logo>
-        {/* Desktop Menu */}
+
         <NavLinks>
           <NavLinkItem href="#">Home</NavLinkItem>
           <NavLinkItem href="#">Products</NavLinkItem>
           <NavLinkItem href="#">Compare</NavLinkItem>
         </NavLinks>
 
-        {/* Right Section */}
+      
         <RightSection>
           <SearchBox>
             <SearchInput type="text" placeholder="Search" />
@@ -48,13 +48,12 @@ const Navbar = () => {
           <InquiryButton>Inquiry</InquiryButton>
         </RightSection>
 
-        {/* Hamburger (mobile) */}
+   
         <Hamburger onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <FaTimes /> : <FaBars />}
         </Hamburger>
       </NavContainer>
 
-      {/* Mobile Menu */}
       {isOpen && (
         <MobileMenu>
           <MobileNavItem href="#">Home</MobileNavItem>

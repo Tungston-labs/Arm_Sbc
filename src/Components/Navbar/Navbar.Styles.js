@@ -2,22 +2,40 @@
 import styled from "styled-components";
 
 export const Nav = styled.nav`
-  width: 100%;
+  /* max-width: 95%;         reduce width so border-radius is visible */
+  margin: 0 auto;         /* center horizontally */
   background: #2b2534;
   color: white;
   position: sticky;
   top: 0;
   z-index: 1000;
+  overflow: hidden;     
+  @media (max-width: 900px) {
+    /* max-width: 100%;      */
+    border-radius: 11px;   
+  }
 `;
 
+
 export const NavContainer = styled.div`
-  max-width: 3840px; 
   margin: 0 auto;
   padding: clamp(0.5rem, 1vw, 1rem) clamp(1rem, 3vw, 3rem);
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  /* Mobile-specific styles */
+  @media (max-width: 900px) {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    border-radius: 11px;
+    background: #2B2534;
+    margin: 0 auto;
+  }
 `;
+
+
 export const Logo = styled.div`
   display: flex;
   align-items: center;

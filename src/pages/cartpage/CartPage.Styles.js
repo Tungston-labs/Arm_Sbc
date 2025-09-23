@@ -1,8 +1,31 @@
 import styled from "styled-components";
 
 export const CartContainer = styled.div`
-  /* Default background image */
-  background: url('/images/cart/cardbackpic .png') no-repeat center center;
+  /* background: url('/images/cart/cardbackpic .png') no-repeat center center; */
+  /* background-size: cover; */
+  color: #fff;
+  /* padding: 8rem; */
+  margin: auto;
+
+  /* Mobile background image */
+  @media (max-width: 900px) {
+     background: url('/images/cart/cardbackpic .png') no-repeat center center;
+    background-size: cover;
+      padding: 1rem;
+  }
+
+  @media (min-width: 3840px) {
+    padding: 6rem 12rem;
+    font-size: 1.5rem;
+  }
+
+  @media (min-width: 7680px) {
+    font-size: 2rem;
+    padding: 8rem 16rem;
+  }
+`;
+export const Container = styled.div`
+ background: url('/images/cart/cardbackpic .png') no-repeat center center;
   background-size: cover; /* ensures image covers the container */
   color: #fff;
   padding: 8rem;
@@ -130,23 +153,30 @@ export const EnquiryButton = styled.button`
 
 export const CartItem = styled.div`
   display: flex;
-  align-items: center; /* Center image vertically relative to details */
-  gap: 1rem;
+  align-items: center;
   margin-bottom: 1rem;
   position: relative;
 
+  @media (min-width: 769px) {
+    gap: 2rem;
+  }
+
   @media (max-width: 768px) {
-    /* flex-direction: column; */
-    /* align-items: center; */
-    /* text-align: center; */
+    gap: 0; 
   }
 `;
 
+export const ProductHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 2rem;
+`;
 
 export const ProductImage = styled.img`
   width: 120px;
   height: auto;
-  border-radius: 8px;
 
   @media (min-width: 3840px) {
     width: 240px;
@@ -165,31 +195,30 @@ export const ProductName = styled.h3`
   font-family: 'Roboto', sans-serif;
   font-style: normal;
   font-weight: 500;
-  line-height: 1.25; 
-  font-size: 1.25rem;
+  font-size: 0.8rem;
   
   @media (min-width: 600px) {
-    font-size: 0.8rem; 
-  }
-
-  @media (min-width: 900px) {
     font-size: 1rem; 
   }
 
-  @media (min-width: 1200px) {
+  @media (min-width: 900px) {
     font-size: 1.2rem; 
   }
 
+  @media (min-width: 1200px) {
+    font-size: 1.8rem; 
+  }
+
   @media (min-width: 1920px) {
-    font-size: 1.5rem; 
+    font-size: 2.2rem; 
   }
 
   @media (min-width: 3840px) {
-    font-size: 2rem; 
+    font-size: 2.8rem; 
   }
 
   @media (min-width: 7680px) {
-    font-size: 2.5rem;
+    font-size: 3rem;
   }
 `;
 
@@ -198,17 +227,44 @@ export const ProductSpecs = styled.ul`
   list-style: none;
   padding: 0;
   margin: 0;
-  font-size: 0.9rem;
+  font-size: 0.9rem; 
   opacity: 0.8;
 
   li {
     margin-bottom: 0.3rem;
   }
 
+  /* Tablets / small screens */
+  @media (min-width: 600px) {
+    font-size: 1rem; /* ~16px */
+  }
+
+  /* Desktop screens */
+  @media (min-width: 900px) {
+    font-size: 1.1rem; /* ~18px */
+  }
+
+  /* Large desktop / 1200px+ */
+  @media (min-width: 1200px) {
+    font-size: 1.2rem; /* ~19px */
+  }
+
+  /* Full HD / 1920px+ */
+  @media (min-width: 1920px) {
+    font-size: 1.4rem; /* ~22px */
+  }
+
+  /* 4K screens */
   @media (min-width: 3840px) {
-    font-size: 1.5rem;
+    font-size: 1.5rem; /* ~24px */
+  }
+
+  /* 8K screens */
+  @media (min-width: 7680px) {
+    font-size: 2rem; /* ~32px */
   }
 `;
+
 
 export const QuantityControl = styled.div`
   display: flex;
@@ -217,16 +273,49 @@ export const QuantityControl = styled.div`
 `;
 
 export const QuantityButton = styled.button`
-  font-size: 1rem;
+  background: none;      
+  border: none;         
+  color: inherit;       
+  font-size: 1rem;      
+  cursor: pointer;      
   min-width: 20px;
   text-align: center;
+  padding: 0;           
 
+  &:focus {
+    outline: none;      
+  }
 
-  @media (min-width: 3840px) {
-    padding: 0.6rem 1.2rem;
+  @media (min-width: 600px) {
+    font-size: 1rem;
+    /* min-width: 22px; */
+  }
+
+  @media (min-width: 900px) {
     font-size: 1.5rem;
+    /* min-width: 24px; */
+  }
+
+  @media (min-width: 1200px) {
+    font-size: 1.8rem;
+    /* min-width: 26px; */
+  }
+
+  @media (min-width: 1920px) {
+    font-size: 2rem;
+    /* min-width: 30px; */
+  }
+  @media (min-width: 3840px) {
+    font-size: 2.5rem;
+    /* min-width: 40px; */
+  }
+
+  @media (min-width: 7680px) {
+    font-size: 2.8rem;
+    /* min-width: 50px; */
   }
 `;
+
 
 export const QuantityValue = styled.span`
  background: #fff;

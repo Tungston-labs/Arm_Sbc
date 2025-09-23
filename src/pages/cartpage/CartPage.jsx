@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {
   CartContainer,
   CartHeader,
+  Container,
   CartTitle,
   EnquiryButton,
   CartItem,
@@ -15,8 +16,10 @@ import {
   RemoveButton,
   MoreInfo,
   Divider,
+  ProductHeader,
 } from "./CartPage.Styles";
 import Navbar from "../../Components/Navbar/Navbar"
+import Footer from "../../Components/Footer/Footer";
 const Cart = () => {
   const [cartItems, setCartItems] = useState([
     {
@@ -67,8 +70,10 @@ const Cart = () => {
 
   return (
   <>
-<Navbar/>
+
     <CartContainer>
+      <Navbar/>
+      <Container>
       {/* Header */}
       <CartHeader>
         <CartTitle>Cart</CartTitle>
@@ -82,7 +87,10 @@ const Cart = () => {
           <CartItem>
             <ProductImage src={item.image} alt={item.name} />
             <ProductDetails>
-              <ProductName>{item.name}</ProductName>
+              <ProductHeader>
+    <ProductName>{item.name}</ProductName>
+    <RemoveButton onClick={() => removeItem(item.id)}>✕</RemoveButton>
+  </ProductHeader>
               <ProductSpecs>
                 {item.specs.map((spec, idx) => (
                   <li key={idx}>{spec}</li>
@@ -95,12 +103,14 @@ const Cart = () => {
               <MoreInfo href="#">See more like this</MoreInfo>
                 </QuantityControl>
             </ProductDetails>
-            <RemoveButton onClick={() => removeItem(item.id)}>✕</RemoveButton>
           </CartItem>
           {index < cartItems.length - 1 && <Divider />}
         </React.Fragment>
       ))}
+      </Container>
     </CartContainer>
+    
+    <Footer />
       </>
   );
 };

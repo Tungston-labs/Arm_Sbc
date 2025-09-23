@@ -161,16 +161,38 @@ export const ProductDetails = styled.div`
 `;
 
 export const ProductName = styled.h3`
-color: #FFF;
-font-family: Roboto;
-font-size: 20px;
-font-style: normal;
-font-weight: 500;
-line-height: 25px; /* 125% */
+  color: #FFF;
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.25; 
+  font-size: 1.25rem;
+  
+  @media (min-width: 600px) {
+    font-size: 0.8rem; 
+  }
+
+  @media (min-width: 900px) {
+    font-size: 1rem; 
+  }
+
+  @media (min-width: 1200px) {
+    font-size: 1.2rem; 
+  }
+
+  @media (min-width: 1920px) {
+    font-size: 1.5rem; 
+  }
+
   @media (min-width: 3840px) {
-    font-size: 2rem;
+    font-size: 2rem; 
+  }
+
+  @media (min-width: 7680px) {
+    font-size: 2.5rem;
   }
 `;
+
 
 export const ProductSpecs = styled.ul`
   list-style: none;

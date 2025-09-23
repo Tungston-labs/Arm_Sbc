@@ -5,12 +5,14 @@ import './App.css'
 import { Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
 import Navbar from './Components/Navbar/Navbar'
+import Footer from './Components/Footer/Footer'
 
 function App() {
 
   return (
 <Routes>
   <Route path='/nav' element={<Navbar/>}/>
+   <Route path='/footer' element={<Footer/>}/>
 <Route path='/' element={<Home/>}/>
 
 </Routes>

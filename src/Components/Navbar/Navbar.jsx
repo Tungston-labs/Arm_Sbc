@@ -14,11 +14,12 @@ import {
   Hamburger,
   MobileMenu,
   MobileNavItem,
-  MobileInquiryButton
+  MobileInquiryButton,
+  SearchIcon
 } from "./Navbar.Styles";
 import { FaShoppingCart, FaBars, FaTimes } from "react-icons/fa";
 import logo from "../../assets/main/logo.svg";
-
+import { IoMdCart } from "react-icons/io";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -40,10 +41,11 @@ const Navbar = () => {
         {/* Right Section */}
         <RightSection>
           <SearchBox>
-            <SearchInput type="text" placeholder="Search" />
-          </SearchBox>
+  <SearchIcon />
+  <SearchInput type="text" placeholder="Search" />
+</SearchBox>
           <CartIcon>
-            <FaShoppingCart />
+            <IoMdCart />
           </CartIcon>
           <InquiryButton>Inquiry</InquiryButton>
         </RightSection>

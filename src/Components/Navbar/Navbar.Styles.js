@@ -1,6 +1,6 @@
 // src/components/Navbar.styles.js
 import styled from "styled-components";
-
+import { FiSearch } from "react-icons/fi";
 export const Nav = styled.nav`
   width: 100%;
   background: #2b2534;
@@ -18,6 +18,7 @@ export const NavContainer = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
+
 export const Logo = styled.div`
   display: flex;
   align-items: center;
@@ -100,65 +101,266 @@ export const Logo = styled.div`
 
 export const NavLinks = styled.div`
   display: flex;
-  gap: clamp(1rem, 2vw, 2.5rem);
+  gap: 3rem; /* default for very large screens */
+
+  @media (max-width: 7680px) {
+    gap: 15rem;
+  }
+
+  @media (max-width: 3840px) {
+    gap: 12rem;
+  }
+
+  @media (max-width: 1920px) {
+    gap: 8rem;
+  }
+
+  @media (max-width: 1200px) {
+    gap: 5rem;
+  }
 
   @media (max-width: 900px) {
-    display: none;
+    display: none; 
   }
 `;
 
 export const NavLinkItem = styled.a`
   text-decoration: none;
   color: #ddd;
-  font-size: clamp(0.9rem, 1vw, 1.2rem);
-  transition: color 0.2s ease;
-
+  font-size: 1.5rem; 
+  font-family: 'Roboto';
   &:hover {
     color: #9a6bff;
+  }
+
+  @media (max-width: 7680px) {
+    font-size: 1.8rem;
+  }
+
+  @media (max-width: 3840px) {
+    font-size: 1.8rem;
+  }
+
+  @media (max-width: 1920px) {
+    font-size: 1rem;
+  }
+
+  @media (max-width: 1200px) {
+    font-size: 0.8rem;
+  }
+
+  @media (max-width: 900px) {
+    font-size: 0.6rem;
+  }
+
+  @media (max-width: 600px) {
+    font-size: 0.5rem;
   }
 `;
 
 export const RightSection = styled.div`
   display: flex;
   align-items: center;
-  gap: clamp(0.8rem, 1.5vw, 2rem);
+  gap: 2.5rem; /* default for 8K */
+
+  @media (max-width: 7680px) {
+    gap: 1.8rem;
+  }
+
+  @media (max-width: 3840px) {
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 1920px) {
+    gap: 1.2rem;
+  }
+
+  @media (max-width: 1200px) {
+    gap: 1rem;
+  }
 
   @media (max-width: 900px) {
     display: none;
   }
 `;
 
+
 export const SearchBox = styled.div`
   position: relative;
+  width: 350px;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+
+  @media (max-width: 7680px) {
+    width: 300px;
+  }
+
+  @media (max-width: 3840px) {
+    width: 250px;
+  }
+
+  @media (max-width: 1920px) {
+    width: 220px;
+  }
+
+  @media (max-width: 1200px) {
+    width: 180px;
+  }
+
+  @media (max-width: 900px) {
+    display: none;
+  }
 `;
 
+
 export const SearchInput = styled.input`
-  padding: 0.4rem 0.8rem;
-  border-radius: 6px;
-  border: none;
+  width: 100%;
+  padding: 0.6rem 1.2rem 0.6rem 2.5rem; 
+  border: 1px solid #716F6F;
+  border-radius: 7px;
+  font-size: 1.4rem;
+  background-color: #2B2534;
+  color: #fff;
   outline: none;
-  font-size: clamp(0.8rem, 0.9vw, 1rem);
+
+  ::placeholder {
+    color: #d3d3d3;
+  }
+
+  @media (max-width: 7680px) {
+    font-size: 1.3rem;
+    padding: 0.55rem 1.1rem 0.55rem 2.2rem;
+  }
+
+  @media (max-width: 3840px) {
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem 0.5rem 2rem;
+  }
+
+  @media (max-width: 1920px) {
+    font-size: 1.1rem;
+    padding: 0.45rem 0.9rem 0.45rem 1.8rem;
+  }
+
+  @media (max-width: 1200px) {
+    font-size: 1rem;
+    padding: 0.4rem 0.8rem 0.4rem 1.5rem;
+  }
+
+  @media (max-width: 900px) {
+    display: none;
+  }
+`;
+
+
+export const SearchIcon = styled(FiSearch)`
+  position: absolute;
+  left: 0.8rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #d3d3d3;
+  font-size: 1.2rem;
+  pointer-events: none; 
+
+  @media (max-width: 7680px) {
+    left: 1.5;
+    font-size: 1.1rem;
+  }
+
+  @media (max-width: 3840px) {
+    left: 1.2rem;
+    font-size: 1.2rem;
+  }
+
+  @media (max-width: 1920px) {
+    left: 0.9rem;
+    font-size: 1rem;
+  }
+
+  @media (max-width: 1200px) {
+    left: 0.7rem;
+    font-size: 1rem;
+  }
 `;
 
 export const CartIcon = styled.div`
-  font-size: clamp(1rem, 1.5vw, 1.6rem);
+  font-size: 2rem; /* default for 8K */
   cursor: pointer;
+
+  @media (max-width: 7680px) {
+    font-size: 1.8rem;
+  }
+
+  @media (max-width: 3840px) {
+    font-size: 1.6rem;
+  }
+
+  @media (max-width: 1920px) {
+    font-size: 1.4rem;
+  }
+
+  @media (max-width: 1200px) {
+    font-size: 1.2rem;
+  }
+
+  @media (max-width: 900px) {
+    font-size: 1rem;
+  }
+
+  @media (max-width: 600px) {
+    font-size: 0.9rem;
+  }
 `;
 
 export const InquiryButton = styled.button`
-  padding: 0.5rem 1rem;
+  padding: 0.7rem 1.4rem;
   background: #9a6bff;
   border: none;
   border-radius: 6px;
   color: white;
   font-weight: 600;
+  font-size: 1.4rem;
   cursor: pointer;
   transition: all 0.2s ease;
 
   &:hover {
     background: #7f4ce0;
   }
+
+  @media (max-width: 7680px) {
+    font-size: 1.3rem;
+    padding: 0.65rem 1.3rem;
+  }
+
+  @media (max-width: 3840px) {
+    font-size: 1.2rem;
+    padding: 0.6rem 1.2rem;
+  }
+
+  @media (max-width: 1920px) {
+    font-size: 1.1rem;
+    padding: 0.55rem 1.1rem;
+  }
+
+  @media (max-width: 1200px) {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+  }
+
+  @media (max-width: 900px) {
+    font-size: 0.9rem;
+    padding: 0.45rem 0.9rem;
+  }
+
+  @media (max-width: 600px) {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+  }
 `;
+
+
+
 
 export const Hamburger = styled.div`
   display: none;

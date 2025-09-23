@@ -1,4 +1,4 @@
-// src/components/Navbar.styles.js
+
 import styled from "styled-components";
 
 export const Nav = styled.nav`
@@ -11,7 +11,7 @@ export const Nav = styled.nav`
 `;
 
 export const NavContainer = styled.div`
-  max-width: 3840px; /* ✅ up to 4K/8K screens */
+  max-width: 3840px; 
   margin: 0 auto;
   padding: clamp(0.5rem, 1vw, 1rem) clamp(1rem, 3vw, 3rem);
   display: flex;
@@ -37,7 +37,6 @@ export const Logo = styled.div`
     font-size: clamp(0.9rem, 2vw, 2rem);
   }
 
-  /* ✅ Extra small mobile (320px–480px) */
   @media (max-width: 480px) {
     font-size: 0.9rem;
 
@@ -47,7 +46,7 @@ export const Logo = styled.div`
     }
   }
 
-  /* ✅ Tablets (481px–1024px) */
+
   @media (min-width: 481px) and (max-width: 1024px) {
     font-size: 1.2rem;
 
@@ -57,7 +56,7 @@ export const Logo = styled.div`
     }
   }
 
-  /* ✅ Small desktops / laptops (1025px–1440px) */
+
   @media (min-width: 1025px) and (max-width: 1440px) {
     font-size: 1.5rem;
 
@@ -67,7 +66,7 @@ export const Logo = styled.div`
     }
   }
 
-  /* ✅ Full HD (1920px) */
+
   @media (min-width: 1441px) and (max-width: 2560px) {
     font-size: 1.8rem;
 
@@ -77,7 +76,7 @@ export const Logo = styled.div`
     }
   }
 
-  /* ✅ 4K UHD (3840px) */
+
   @media (min-width: 2561px) and (max-width: 4096px) {
     font-size: 2.2rem;
 
@@ -87,7 +86,6 @@ export const Logo = styled.div`
     }
   }
 
-  /* ✅ 8K UHD (7680px) */
   @media (min-width: 4097px) {
     font-size: 3rem;
 
@@ -187,7 +185,7 @@ border-bottom: 0.2px solid #FFF;
   text-align: left;
 
   &:first-child {
-    color: #9a6bff; /* Active/Home */
+    color: #9a6bff;
   }
 
   &:last-of-type {

@@ -1,17 +1,15 @@
 import { useState } from 'react'
 import './App.css'
 import { Route, Routes } from 'react-router-dom'
-import Home from './pages/Home'
-// import Navbar from './Components/Navbar/Navbar'
 import CartPage from './pages/cartpage/CartPage'
+import InquiryPage from './pages/Inquiryform/InquiryPage'
 
 function App() {
 
   return (
 <Routes>
   <Route path='/cartpage' element={<CartPage/>}/>
-<Route path='/' element={<Home/>}/>
-
+    <Route path='/inquiry-page' element={<InquiryPage/>}/>
 </Routes>
   )
 }

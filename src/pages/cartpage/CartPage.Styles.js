@@ -1,14 +1,30 @@
 import styled from "styled-components";
 
 export const CartContainer = styled.div`
-  /* Default background image */
-  background: url('/images/cart/cardbackpic .png') no-repeat center center;
-  background-size: cover; /* ensures image covers the container */
+  color: #fff;
+  margin: auto;
+
+  @media (max-width: 900px) {
+     background: url('/images/cart/cardbackpic .png') no-repeat center center;
+    background-size: cover;
+      padding: 1rem;
+  }
+
+  @media (min-width: 3840px) {
+    font-size: 1.5rem;
+  }
+
+  @media (min-width: 7680px) {
+    font-size: 2rem;
+  }
+`;
+export const Container = styled.div`
+ background: url('/images/cart/cardbackpic .png') no-repeat center center;
+  background-size: cover;
   color: #fff;
   padding: 8rem;
   margin: auto;
 
-  /* Mobile background image */
   @media (max-width: 900px) {
      background: url('/images/cart/cardbackpic .png') no-repeat center center;
     background-size: cover;
@@ -30,7 +46,6 @@ export const CartHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* margin-bottom: 2rem; */
 `;
 
 export const CartTitle = styled.h2`
@@ -39,7 +54,7 @@ export const CartTitle = styled.h2`
   font-weight: 700;
   font-style: normal;
   line-height: normal;
-  font-size: 1.5rem; /* default mobile font */
+  font-size: 1.5rem; 
 
   @media (min-width: 600px) {
     font-size: 2rem;
@@ -76,7 +91,7 @@ export const EnquiryButton = styled.button`
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-  font-size: 0.95rem; /* default mobile font */
+  font-size: 0.95rem; 
   padding: 0.5rem 1rem;
   transition: all 0.3s ease;
 
@@ -85,42 +100,40 @@ export const EnquiryButton = styled.button`
     color: #8c52ff;
   }
 
-  /* Tablets / Small screens */
+ 
   @media (min-width: 600px) {
     font-size: 1rem;
     padding: 0.6rem 1.2rem;
     border-radius: 7px;
   }
 
-  /* Desktop screens */
+
   @media (min-width: 900px) {
     font-size: 1.1rem;
     padding: 0.7rem 1.4rem;
     border-radius: 8px;
   }
 
-  /* Large desktop / 1200px+ */
   @media (min-width: 1200px) {
     font-size: 1.2rem;
     padding: 0.8rem 1.6rem;
     border-radius: 9px;
   }
 
-  /* Full HD / 1920px+ */
   @media (min-width: 1920px) {
     font-size: 1.4rem;
     padding: 1rem 2rem;
     border-radius: 10px;
   }
 
-  /* 4K screens */
+
   @media (min-width: 3840px) {
     font-size: 1.5rem;
     padding: 1.2rem 2.5rem;
     border-radius: 12px;
   }
 
-  /* 8K screens */
+
   @media (min-width: 7680px) {
     font-size: 2rem;
     padding: 1.5rem 3rem;
@@ -130,23 +143,30 @@ export const EnquiryButton = styled.button`
 
 export const CartItem = styled.div`
   display: flex;
-  align-items: center; /* Center image vertically relative to details */
-  gap: 1rem;
+  align-items: center;
   margin-bottom: 1rem;
   position: relative;
 
+  @media (min-width: 769px) {
+    gap: 2rem;
+  }
+
   @media (max-width: 768px) {
-    /* flex-direction: column; */
-    /* align-items: center; */
-    /* text-align: center; */
+    gap: 0; 
   }
 `;
 
+export const ProductHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 2rem;
+`;
 
 export const ProductImage = styled.img`
   width: 120px;
   height: auto;
-  border-radius: 8px;
 
   @media (min-width: 3840px) {
     width: 240px;
@@ -161,32 +181,82 @@ export const ProductDetails = styled.div`
 `;
 
 export const ProductName = styled.h3`
-color: #FFF;
-font-family: Roboto;
-font-size: 20px;
-font-style: normal;
-font-weight: 500;
-line-height: 25px; /* 125% */
+  color: #FFF;
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 0.8rem;
+  
+  @media (min-width: 600px) {
+    font-size: 1rem; 
+  }
+
+  @media (min-width: 900px) {
+    font-size: 1.2rem; 
+  }
+
+  @media (min-width: 1200px) {
+    font-size: 1.5rem; 
+  }
+
+  @media (min-width: 1920px) {
+    font-size: 2rem; 
+  }
+
   @media (min-width: 3840px) {
-    font-size: 2rem;
+    font-size: 2.5rem; 
+  }
+
+  @media (min-width: 7680px) {
+    font-size: 3rem;
   }
 `;
+
 
 export const ProductSpecs = styled.ul`
   list-style: none;
   padding: 0;
   margin: 0;
-  font-size: 0.9rem;
+  font-size: 0.9rem; 
   opacity: 0.8;
+
+  margin-top: 10px;
 
   li {
     margin-bottom: 0.3rem;
   }
 
+  @media (min-width: 600px) {
+    font-size: 1rem;
+    margin-top: 0; 
+  }
+
+
+  @media (min-width: 900px) {
+    font-size: 1.1rem;
+  }
+
+
+  @media (min-width: 1200px) {
+    font-size: 1.2rem; 
+  }
+
+  @media (min-width: 1920px) {
+    font-size: 1.4rem; 
+  }
+
+
   @media (min-width: 3840px) {
-    font-size: 1.5rem;
+    font-size: 1.5rem; 
+  }
+
+
+  @media (min-width: 7680px) {
+    font-size: 2rem; 
   }
 `;
+
+
 
 export const QuantityControl = styled.div`
   display: flex;
@@ -195,16 +265,45 @@ export const QuantityControl = styled.div`
 `;
 
 export const QuantityButton = styled.button`
-  font-size: 1rem;
+  background: none;      
+  border: none;         
+  color: inherit;       
+  font-size: 1rem;      
+  cursor: pointer;      
   min-width: 20px;
   text-align: center;
+  padding: 0;           
 
+  &:focus {
+    outline: none;      
+  }
 
-  @media (min-width: 3840px) {
-    padding: 0.6rem 1.2rem;
+  @media (min-width: 600px) {
+    font-size: 1rem;
+
+  }
+
+  @media (min-width: 900px) {
     font-size: 1.5rem;
+   
+  }
+
+  @media (min-width: 1200px) {
+    font-size: 1.8rem;
+  }
+
+  @media (min-width: 1920px) {
+    font-size: 2rem;
+  }
+  @media (min-width: 3840px) {
+    font-size: 2.5rem;
+  }
+
+  @media (min-width: 7680px) {
+    font-size: 2.8rem;
   }
 `;
+
 
 export const QuantityValue = styled.span`
  background: #fff;

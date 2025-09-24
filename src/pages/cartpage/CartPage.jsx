@@ -18,33 +18,12 @@ import {
   Divider,
   ProductHeader,
 } from "./CartPage.Styles";
-import Navbar from "../../Components/Navbar/Navbar"
+import Navbar from "../../Components/Navbar/Navbar";
 import Footer from "../../Components/Footer/Footer";
+import cartData from "./cartData"; 
+
 const Cart = () => {
-  const [cartItems, setCartItems] = useState([
-    {
-      id: 1,
-      name: "ARM Development Board Rockchip 3288, Quad Core 1.7 GHz",
-      specs: ["2 core", "8 GB RAM", "32 GB Storage"],
-    image: "images/cart/chip.png",
-      quantity: 1,
-    },
-    {
-      id: 2,
-      name: "ARM Development Board Rockchip 3288, Quad Core 1.7 GHz",
-      specs: ["2 core", "8 GB RAM", "32 GB Storage"],
-     image: "images/cart/chip.png",
-      quantity: 1,
-    },
-     {
-      id: 3,
-      name: "ARM Development Board Rockchip 3288, Quad Core 1.7 GHz",
-      specs: ["2 core", "8 GB RAM", "32 GB Storage"],
-     image: "images/cart/chip.png",
-      quantity: 1,
-    },
-    
-  ]);
+  const [cartItems, setCartItems] = useState(cartData); 
 
   const increaseQty = (id) => {
     setCartItems((prev) =>
@@ -69,49 +48,45 @@ const Cart = () => {
   };
 
   return (
-  <>
+    <>
+      <CartContainer>
+        <Navbar />
+        <Container>
+          <CartHeader>
+            <CartTitle>Cart</CartTitle>
+            <EnquiryButton>Product Inquire</EnquiryButton>
+          </CartHeader>
+          <Divider />
 
-    <CartContainer>
-      <Navbar/>
-      <Container>
-      {/* Header */}
-      <CartHeader>
-        <CartTitle>Cart</CartTitle>
-        <EnquiryButton>Product Inquire</EnquiryButton>
-        
-      </CartHeader>
-<Divider />
-      {/* Cart Items */}
-      {cartItems.map((item, index) => (
-        <React.Fragment key={item.id}>
-          <CartItem>
-            <ProductImage src={item.image} alt={item.name} />
-            <ProductDetails>
-              <ProductHeader>
-    <ProductName>{item.name}</ProductName>
-    <RemoveButton onClick={() => removeItem(item.id)}>✕</RemoveButton>
-  </ProductHeader>
-              <ProductSpecs>
-                {item.specs.map((spec, idx) => (
-                  <li key={idx}>{spec}</li>
-                ))}
-              </ProductSpecs>
-              <QuantityControl>
-                <QuantityButton onClick={() => decreaseQty(item.id)}>-</QuantityButton>
-                <QuantityValue>{item.quantity}</QuantityValue>
-                <QuantityButton onClick={() => increaseQty(item.id)}>+</QuantityButton>
-              <MoreInfo href="#">See more like this</MoreInfo>
-                </QuantityControl>
-            </ProductDetails>
-          </CartItem>
-          {index < cartItems.length - 1 && <Divider />}
-        </React.Fragment>
-      ))}
-      </Container>
-    </CartContainer>
-    
-    <Footer />
-      </>
+          {cartItems.map((item, index) => (
+            <React.Fragment key={item.id}>
+              <CartItem>
+                <ProductImage src={item.image} alt={item.name} />
+                <ProductDetails>
+                  <ProductHeader>
+                    <ProductName>{item.name}</ProductName>
+                    <RemoveButton onClick={() => removeItem(item.id)}>✕</RemoveButton>
+                  </ProductHeader>
+                  <ProductSpecs>
+                    {item.specs.map((spec, idx) => (
+                      <li key={idx}>{spec}</li>
+                    ))}
+                  </ProductSpecs>
+                  <QuantityControl>
+                    <QuantityButton onClick={() => decreaseQty(item.id)}>-</QuantityButton>
+                    <QuantityValue>{item.quantity}</QuantityValue>
+                    <QuantityButton onClick={() => increaseQty(item.id)}>+</QuantityButton>
+                    <MoreInfo href="#">See more like this</MoreInfo>
+                  </QuantityControl>
+                </ProductDetails>
+              </CartItem>
+              {index < cartItems.length - 1 && <Divider />}
+            </React.Fragment>
+          ))}
+        </Container>
+      </CartContainer>
+      <Footer />
+    </>
   );
 };
 

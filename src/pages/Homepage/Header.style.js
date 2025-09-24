@@ -10,7 +10,10 @@ export const HeaderWrapper = styled.section`
   padding: 0 5%;
   box-sizing: border-box;
   position: relative;
-
+  
+  @media (max-width: 425px) {
+    height: 100vh; 
+  }
 `;
 
 export const Content = styled.div`
@@ -42,6 +45,16 @@ export const Description = styled.p`
   line-height: 1.6;
   margin-bottom: 39px;
   color: #FFFFFF;
+ 
+  @media (max-width: 1024px) {
+    font-size: 0.95rem;
+  }
+  @media (max-width: 1440px) {
+    font-size: 1rem;
+  }
+  @media (min-width: 1441px) {
+    font-size: 1.1rem;
+  }
 
   @media (max-width: 768px) {
     font-size: 0.9rem;
@@ -49,6 +62,9 @@ export const Description = styled.p`
   @media (max-width: 480px) {
     font-size: 0.85rem;
   }
+
+ 
+
 `;
 
 export const ExploreButton = styled.a`

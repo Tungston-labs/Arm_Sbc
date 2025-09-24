@@ -9,7 +9,7 @@ import {
   Link,
 } from "../../pages/product/singleProduct.style";
 import { AiOutlineShoppingCart } from "react-icons/ai";
-
+import details from "../../pages/product/data/productDetailsData.json";
 const SingleProductDeatilSection = () => {
   return (
     <HeaderContainer>
@@ -29,15 +29,7 @@ const SingleProductDeatilSection = () => {
             </AddToCartButton>
           </ButtonSection>
           <ul>
-            {[
-              "4K HDMI port, LVDS and eDP ports with LCD backlight support, voltage selection for LCD 3.3/5/12v",
-              "1G Ethernet, WIFI, Bluetooth",
-              "1G Ethernet, WIFI, Bluetooth",
-              "1G Ethernet, WIFI, Bluetooth",
-              "1G Ethernet, WIFI, Bluetooth",
-              "1G Ethernet, WIFI, Bluetooth",
-              "1G Ethernet, WIFI, Bluetooth",
-            ].map((i) => (
+            {details.map((i) => (
               <li key={i}>{i}</li>
             ))}
           </ul>

@@ -3,14 +3,13 @@ import './App.css'
 import { Route, Routes } from 'react-router-dom'
 import Comparison from './pages/Comparison/Comparison'
 import Navbar from './Components/Navbar/Navbar'
-
-import Home from './pages/Home'
 import SingleProduct from './pages/product/SingleProduct.jsx'
 // import Navbar from './Components/Navbar/Navbar'
 import CartPage from './pages/cartpage/CartPage'
 import Dashboard from './pages/dashboard/Dashboard'
 import Enquiry from './pages/EnquiryPage/Enquiry'
 import EnquiryDetails from './pages/EnquiryPage/EnquiryDetails'
+import InquiryPage from './pages/Inquiryform/InquiryPage'
 
 function App() {
 
@@ -19,7 +18,7 @@ function App() {
   <Route path='/nav' element={<Navbar/>}/>
 <Route path="/compare" element={<Comparison/>}/>
   <Route path='/cartpage' element={<CartPage/>}/>
-<Route path='/' element={<Home/>}/>
+    <Route path='/inquiry-page' element={<InquiryPage/>}/>
 <Route path='/product/:id' element={<SingleProduct/>}/>
 
 

@@ -1,4 +1,4 @@
-// src/components/Navbar.jsx
+
 import React, { useState } from "react";
 import {
   Nav,
@@ -32,11 +32,13 @@ const Navbar = () => {
   <img src={logo} alt="ARM SBC" />
 </Logo>
       
-        <NavLinks>
-          <NavLinkItem href="#">Home</NavLinkItem>
-          <NavLinkItem href="#">Products</NavLinkItem>
-          <NavLinkItem href="#">Compare</NavLinkItem>
-        </NavLinks>
+       <NavLinks>
+  <NavLinkItem href="#">Home</NavLinkItem>
+  <NavLinkItem href="#">Products</NavLinkItem>
+  <NavLinkItem href="#" className="compare" data-count="3">
+    Compare
+  </NavLinkItem>
+</NavLinks>
 
     
         <RightSection>

@@ -12,7 +12,7 @@ function App() {
   return (
 <Routes>
   <Route path='/nav' element={<Navbar/>}/>
-<Route path="/" element={<Comparison/>}/>
+<Route path="/compare" element={<Comparison/>}/>
   <Route path='/cartpage' element={<CartPage/>}/>
 
 </Routes>

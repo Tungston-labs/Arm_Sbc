@@ -1,4 +1,4 @@
-
+// src/components/Navbar.jsx
 import React, { useState } from "react";
 import {
   Nav,
@@ -14,45 +14,49 @@ import {
   Hamburger,
   MobileMenu,
   MobileNavItem,
-  MobileInquiryButton
+  MobileInquiryButton,
+  SearchIcon
 } from "./Navbar.Styles";
 import { FaShoppingCart, FaBars, FaTimes } from "react-icons/fa";
-import logo from "../../assets/main/logo2.svg";
-
+import logo from "../../assets/main/logo.svg";
+import { IoMdCart } from "react-icons/io";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <Nav>
       <NavContainer>
-
-        <Logo>
-          <img src={logo} alt="ARM SBC" />
-        </Logo>
-
+  
+      
+<Logo>
+  <img src={logo} alt="ARM SBC" />
+</Logo>
+      
         <NavLinks>
           <NavLinkItem href="#">Home</NavLinkItem>
           <NavLinkItem href="#">Products</NavLinkItem>
           <NavLinkItem href="#">Compare</NavLinkItem>
         </NavLinks>
 
-
+    
         <RightSection>
           <SearchBox>
-            <SearchInput type="text" placeholder="Search" />
-          </SearchBox>
+  <SearchIcon />
+  <SearchInput type="text" placeholder="Search" />
+</SearchBox>
           <CartIcon>
-            <FaShoppingCart />
+            <IoMdCart />
           </CartIcon>
           <InquiryButton>Inquiry</InquiryButton>
         </RightSection>
 
-
+     
         <Hamburger onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <FaTimes /> : <FaBars />}
         </Hamburger>
       </NavContainer>
 
+    
       {isOpen && (
         <MobileMenu>
           <MobileNavItem href="#">Home</MobileNavItem>

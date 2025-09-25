@@ -1,0 +1,41 @@
+[
+  {
+    "header": "Processor",
+    "items": [
+      {
+        "label": "CPU",
+        "value": "Intel® Core™ Ultra Processors (Meteor Lake-PS)"
+      },
+      { "label": "Socket", "value": "LGA 1851" },
+      { "label": "BIOS", "value": "AMI SPI 256 Mbit" },
+      { "label": "Secure Flash", "value": "AMI SPI 32Mbit (Optional)" }
+    ]
+  },
+  {
+    "header": "Memory",
+    "items": [
+      { "label": "Technology", "value": "Single Channel DDR5 5600 MHz" },
+      { "label": "Capacity", "value": "48GB" },
+      { "label": "Socket", "value": "1 x 262-pin SO-DIMM" }
+    ]
+  },
+  {
+    "header": "Expansion Slot",
+    "items": [
+      {
+        "label": "M.2",
+        "value": "1 x M.2 (Key E, 2230) with PCIe Gen4 x1 and USB 2.0 for Wireless"
+      }
+    ]
+  },
+  {
+    "header": "Ethernet",
+    "items": [
+      {
+        "label": "Controller/ Speed",
+        "value": "LAN1: Intel® I226V with 10/100/1000/2500 Mbps\nLAN2: Intel® I219LM with 10/100/1000 Mbps, supports vPro"
+      },
+      { "label": "Connector", "value": "2 x RJ-45" }
+    ]
+  }
+]

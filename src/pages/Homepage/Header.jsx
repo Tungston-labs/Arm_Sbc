@@ -35,7 +35,7 @@ const Header = () => {
           </ExploreButton>
         </Content>
       </HeaderWrapper>
-      <AboutUs/>
+      <AboutUs/> 
       <Footer />
     </>
   );

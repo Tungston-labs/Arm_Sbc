@@ -1,96 +1,58 @@
 import React, { useState } from "react";
 import {
-  Container,
-  Header,
-  HeaderCard,
-  Box,
-  BoxText,
-  ReadMoreButton,
-  RemoveButton,
+  Container, Header, FeatureName, ProductInfoCell,
+  FeatureCell, RowBox, Button, RowCell, RemoveButton
 } from "./Comparison.styled";
-import Chip from "../../assets/Comparison/chip.svg";
 import Navbar from "../../Components/Navbar/Navbar";
-import smallRows from "./SmallRows";
+import { featureOrder } from "./SmallRows";
+import initialData from "./SmallRows";
+import ModalWithCards from "../../components/Comparison/ModalWithCards";
+
 const Comparison = () => {
-  const row1 = [
-    { text: "Product Info" },
-    {
-      img: Chip,
-      text: "ARM Development Board Rockchip 3288, Quad Core 1.7 GHz. This board is perfect for embedded systems and high-performance applications.",
-    },
-    {
-      img: Chip,
-      text: "ARM Development Board Rockchip 3288, Quad Core 1.7 GHz. Includes GPU acceleration and multiple interfaces for flexible usage.",
-    },
-    {
-      img: Chip,
-      text: "ARM Development Board Rockchip 3288, Quad Core 1.7 GHz. Ideal for IoT, robotics, and edge computing projects.",
-    },
-  ];
+  const [items, setItems] = useState(initialData);
+  const [showModal, setShowModal] = useState(false);
 
- 
-  const handleRemove = (index) => {
+  const handleAddProduct = () => setShowModal(true);
+  const handleCloseModal = () => setShowModal(false);
+  const handleRemove = (index) =>
     setItems((prev) => prev.filter((_, i) => i !== index));
-  };
-
-  const [expanded, setExpanded] = useState({});
-
-  const toggleReadMore = (index) => {
-    setExpanded((prev) => ({ ...prev, [index]: !prev[index] }));
-  };
-
-  const renderRow = (data) =>
-    data.map((item, index) => {
-      const isExpanded = expanded[index];
-      const shouldTruncate = item.text && item.text.length > 60;
-      const displayText =
-        shouldTruncate && !isExpanded
-          ? item.text.slice(0, 60) + "..."
-          : item.text;
-
-      return (
-        <Box key={index}>
-          {/* X Icon */}
-          {item.img && (
-            <RemoveButton onClick={() => handleRemove(index)}>×</RemoveButton>
-          )}
-          <div className="image-scroll"></div>
-          {item.img && <img src={item.img} alt={`box-${index}`} />}
-          {item.text && (
-            <>
-              <BoxText>{displayText}</BoxText>
-              {shouldTruncate && (
-                <ReadMoreButton onClick={() => toggleReadMore(index)}>
-                  {isExpanded ? "Read Less" : "Read More"}
-                </ReadMoreButton>
-              )}
-            </>
-          )}
-        </Box>
-      );
-    });
 
   return (
-<Container>
-  <Navbar />
-  <Header>Comparison Chart</Header>
+    <Container>
+      <Navbar />
+      <Header>
+        Comparison Chart
+        <Button onClick={handleAddProduct}>Compare Product</Button>
+      </Header>
 
-  <div className="scroll-wrapper">
-    <HeaderCard>{renderRow(row1)}</HeaderCard>
+      <RowCell>
+        <RowBox count={items.length}>
+          <FeatureName>Product Info</FeatureName>
+          {items.map((item, idx) => (
+            <ProductInfoCell key={`info-${idx}`}>
+              <RemoveButton onClick={() => handleRemove(idx)}>×</RemoveButton>
 
-    {smallRows.map((row, rowIndex) => (
-      <HeaderCard small key={rowIndex}>
-        {row.map((item, index) => (
-          <Box key={index} small>
-            {item.img && <img src={item.img} alt={`box-${index}`} />}
-            {item.text && <BoxText small>{item.text}</BoxText>}
-          </Box>
+              <img src={item.productInfo.img} alt="product" />
+              <p>{item.productInfo.text}</p>
+              <button>Read More</button>
+            </ProductInfoCell>
+          ))}
+        </RowBox>
+
+        {featureOrder.map((feature) => (
+          <RowBox key={feature} count={items.length}>
+            <FeatureName>{feature}</FeatureName>
+            {items.map((item, idx) => (
+              <FeatureCell key={`${feature}-${idx}`}>
+                {item[feature]}
+              </FeatureCell>
+            ))}
+          </RowBox>
         ))}
-      </HeaderCard>
-    ))}
-  </div>
-</Container>
+      </RowCell>
 
+      {showModal && <ModalWithCards onClose={handleCloseModal} />}
+    </Container>
   );
 };
 

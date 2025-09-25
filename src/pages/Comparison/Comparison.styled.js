@@ -147,11 +147,15 @@ p {
 }
 
   button {
-    background-color: #8a38f5;
-    border-radius: 7px;
-    font-size: 24px;
-    color: white;
-    font-family: "Roboto", sans-serif;
+  color: white;
+  padding: 8px;
+  margin-top: 8px;
+  width: 100px;
+  font-size: 18px;
+  border-radius: 8px;
+  border: none;
+  background-color: #8a38f5;
+  font-family: "Roboto", sans-serif;
    
   @media (max-width: 3800px) { font-size: 22px; }
   @media (max-width: 2600px) { font-size: 16px; }
@@ -187,12 +191,14 @@ export const FeatureCell = styled(Cell)`
   }
 `;
 export const ReadMoreButton = styled.button`
-  border-radius: 2px;
+   color: white;
+  padding: 10px;
+  width: 200px;
+  font-size: 18px;
+  border-radius: 8px;
+  border: none;
   background-color: #8a38f5;
-  color: white;
-  border: 1px solid #8a38f5;
-  font-size: 32px;
-  margin-top: 6px;
+  font-family: "Roboto", sans-serif;
   @media (max-width: 768px) {
     font-size: 8px;
   }

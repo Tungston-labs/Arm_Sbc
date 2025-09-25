@@ -1,5 +1,12 @@
 import styled from "styled-components";
 
+export const NavbarContainer = styled.div`
+  padding: 1rem 1rem 0 1rem;
+  background: #0e0619;
+  @media (width>=500px) {
+    padding: 0;
+  }
+`;
 export const HeaderContainer = styled.section`
   width: 100%;
   display: flex;
@@ -565,6 +572,24 @@ export const ReviewHeader = styled.div`
       font-size: 1.5rem;
     }
   }
+  @media (width >= 2560px) {
+    h4 {
+      font-size: 2rem;
+      padding-bottom: 1.5rem;
+    }
+    p {
+      font-size: 2rem;
+    }
+  }
+  @media (width >= 3840px) {
+    h4 {
+      font-size: 3rem;
+      padding-bottom: 2.5rem;
+    }
+    p {
+      font-size: 3rem;
+    }
+  }
 `;
 export const FormRow = styled.div`
   width: 100%;
@@ -576,6 +601,9 @@ export const FormRow = styled.div`
   }
   @media (width >= 1536px) {
     gap: 2rem;
+  }
+  @media (width >= 3840px) {
+    gap: 4rem;
   }
 `;
 export const FormInputGroup = styled.div`
@@ -597,6 +625,13 @@ export const FormLabel = styled.label`
     font-size: 1.5rem;
     padding: 2rem 0 1rem 0;
   }
+  @media (width >= 2560px) {
+    font-size: 2rem;
+  }
+  @media (width >= 3840px) {
+    font-size: 3rem;
+    padding: 3rem 0 2rem 0;
+  }
 `;
 export const TextInput = styled.input`
   border: 1px solid #817878;
@@ -608,8 +643,15 @@ export const TextInput = styled.input`
   font-size: 0.7rem;
   @media (width >= 1280px) {
     padding: 1rem;
-      font-size: 1.5rem;
-
+    font-size: 1.5rem;
+  }
+  @media (width >= 2560px) {
+    padding: 1.5rem;
+    border-radius: 1rem;
+  }
+  @media (width >= 3840px) {
+    padding: 3rem;
+    border-radius: 1.5rem;
   }
   &[as="textarea"],
   textarea& {
@@ -618,12 +660,32 @@ export const TextInput = styled.input`
     @media (width >= 1280px) {
       min-height: 200px;
     }
+    @media (width >= 2560px) {
+      min-height: 350px;
+    }
+    @media (width >= 3840px) {
+      min-height: 450px;
+    }
   }
 `;
 
 export const StartContainer = styled.div`
   display: flex;
   gap: 0.5rem;
+  @media (width >= 2560px) {
+    svg {
+      height: 2.5rem;
+      width: 2.5rem;
+    }
+  }
+  @media (width >= 3840px) {
+    gap: 1rem;
+
+    svg {
+      height: 4rem;
+      width: 4rem;
+    }
+  }
 `;
 export const FormButton = styled.button`
   background: #8a38f5;
@@ -646,5 +708,249 @@ export const FormButton = styled.button`
   }
   @media (width >= 1536px) {
     font-size: 1.5rem;
+  }
+  @media (width >= 2560px) {
+    font-size: 2rem;
+    border-radius: 1rem;
+    padding: 1rem 2rem;
+  }
+  @media (width >= 3840px) {
+    margin-block: 3rem;
+    font-size: 3rem;
+    border-radius: 2rem;
+    padding: 2rem 3rem;
+  }
+`;
+
+export const RelatedProductContainer = styled.div`
+  width: 100%;
+  background: #0e0619;
+  color: white;
+  padding: 2rem 1rem;
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding-bottom: 1rem;
+    font-family: "Montserrat", sans-serif;
+  }
+  @media (width >= 1536px) {
+    padding: 3rem 10rem;
+    h3 {
+      font-size: 2rem;
+      padding-bottom: 2rem;
+    }
+  }
+`;
+export const ProductCadContainer = styled.div`
+  width: 100%;
+  /* overflow-x: scroll; */
+`;
+
+export const TotalReviewCardContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding-block: 2rem;
+  h4 {
+    font-size: 0.63rem;
+    font-weight: 400;
+  }
+  h5 {
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+  p {
+    display: none;
+  }
+  @media (width <= 750px) {
+    svg {
+      height: 1rem;
+      width: 1rem;
+    }
+  }
+  @media (width>=1024px) {
+    h4 {
+      font-size: 1rem;
+      font-weight: 400;
+    }
+    h5 {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    p {
+      display: block;
+      font-size: 0.6rem;
+      font-weight: 400;
+    }
+  }
+  @media (width>=1280px) {
+    h4 {
+      font-size: 1.2rem;
+    }
+    h5 {
+      font-size: 1.8rem;
+    }
+    p {
+      font-size: 0.7rem;
+    }
+  }
+  @media (width>=1536px) {
+    h4 {
+      font-size: 1.5rem;
+    }
+    h5 {
+      font-size: 2rem;
+    }
+    p {
+      font-size: 0.81rem;
+    }
+  }
+  @media (width>=2560px) {
+    h4 {
+      font-size: 2rem;
+    }
+    h5 {
+      font-size: 3rem;
+    }
+    p {
+      font-size: 1rem;
+    }
+  }
+  @media (width>=3840px) {
+    gap: 1rem;
+    h4 {
+      font-size: 3rem;
+    }
+    h5 {
+      font-size: 5rem;
+    }
+    p {
+      font-size: 2rem;
+    }
+  }
+`;
+export const ReviewCardHeader = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  svg {
+    height: 2rem;
+    width: 2rem;
+    margin-right: 0.5rem;
+  }
+  .review-header__left-container {
+    display: flex;
+    div {
+      margin: auto;
+    }
+  }
+  .review-header__star-container {
+    gap: 0rem;
+    svg {
+      height: 1rem;
+      width: 1rem;
+    }
+    @media (width>=2560px) {
+      svg {
+        height: 1.5rem;
+        width: 1.5rem;
+      }
+    }
+    @media (width>=3840px) {
+      svg {
+        height: 2.2rem;
+        width: 2.2rem;
+      }
+    }
+  }
+  h6 {
+    font-size: 10px;
+    padding-bottom: 0.3rem;
+    font-weight: 400;
+  }
+  span {
+    font-size: 0.5rem;
+    font-weight: 300;
+  }
+  @media (width>=1280px) {
+    h6 {
+      font-size: 0.7rem;
+    }
+    span {
+      font-size: 0.7rem;
+    }
+    svg {
+      height: 2.5rem;
+      width: 2.5rem;
+      margin-right: 0.5rem;
+    }
+  }
+  @media (width>=1536px) {
+    h6 {
+      font-size: 0.82rem;
+    }
+    span {
+      font-size: 0.82rem;
+    }
+    svg {
+      height: 3.125rem;
+      width: 3.125rem;
+    }
+  }
+  @media (width>=2560px) {
+    h6 {
+      font-size: 1.5rem;
+    }
+    span {
+      font-size: 1.5rem;
+    }
+    svg {
+      height: 4.125rem;
+      width: 4.125rem;
+    }
+  }
+  @media (width>=3840px) {
+    h6 {
+      font-size: 2.5rem;
+    }
+    span {
+      font-size: 2.5rem;
+    }
+    svg {
+      height: 7.125rem;
+      width: 7.125rem;
+    }
+  }
+`;
+
+export const ReviewCard = styled.div`
+  p {
+    font-size: 10px;
+    font-weight: 400;
+    padding-block: 0.5rem;
+  }
+  padding-block: 0.5rem;
+  border-bottom: 1px solid #656565;
+  margin-top: 1rem;
+  @media (width>=1280px) {
+    p {
+      font-size: 0.82rem;
+    }
+  }
+  @media (width>=2560px) {
+    p {
+      font-size: 1.4rem;
+    }
+  }
+  @media (width>=3840px) {
+    margin-top: 2rem;
+    padding-block: 2rem;
+    border-bottom: 2px solid #656565;
+
+    p {
+      font-size: 2.2rem;
+    }
   }
 `;

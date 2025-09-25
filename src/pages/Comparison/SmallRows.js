@@ -1,0 +1,93 @@
+// SmallRows.js
+import Chip from "../../assets/Comparison/chip.svg";
+
+const data = [
+  {
+    productInfo: {
+      img: Chip,
+      text: "ARM Development Board Rockchip 3288, Quad Core 1.7 GHz. This board is perfect for embedded systems and high-performance applications.",
+    },
+    dimension: "dummy",
+    price: "dummy",
+    rating: "dummy",
+    description: "dummy",
+    sku: "dummy",
+    availability: "dummy",
+    weight: "dummy",
+    "128 GB": "dummy",
+    "2 Core": "dummy",
+    "2 GB": "dummy",
+    "32 GB": "dummy",
+    "4 Core": "dummy",
+    "4 GB": "dummy",
+    "64 GB": "dummy",
+    "8 GB": "dummy",
+    "8 Core": "dummy",
+  },
+  {
+    productInfo: {
+      img: Chip,
+      text: "ARM Development Board Rockchip 3288, Quad Core 1.7 GHz. Great for embedded projects and prototyping.",
+    },
+    dimension: "dummy",
+    price: "dummy",
+    rating: "dummy",
+    description: "dummy",
+    sku: "dummy",
+    availability: "dummy",
+    weight: "dummy",
+    "128 GB": "dummy",
+    "2 Core": "dummy",
+    "2 GB": "dummy",
+    "32 GB": "dummy",
+    "4 Core": "dummy",
+    "4 GB": "dummy",
+    "64 GB": "dummy",
+    "8 GB": "dummy",
+    "8 Core": "dummy",
+  },
+
+  {
+  productInfo: {
+      img: Chip,
+      text: "ARM Development Board Rockchip 3288, Quad Core 1.7 GHz. Built for high-performance embedded systems.",
+    },
+    dimension: "dummy",
+    price: "dummy",
+    rating: "dummy",
+    description: "dummy",
+    sku: "dummy",
+    availability: "dummy",
+    weight: "dummy",
+    "128 GB": "dummy",
+    "2 Core": "dummy",
+    "2 GB": "dummy",
+    "32 GB": "dummy",
+    "4 Core": "dummy",
+    "4 GB": "dummy",
+    "64 GB": "dummy",
+    "8 GB": "dummy",
+    "8 Core": "dummy",
+  },
+];
+
+export const featureOrder = [
+  "dimension",
+  "price",
+  "rating",
+  "description",
+  "sku",
+  "availability",
+  "weight",
+  "128 GB",
+  "2 Core",
+  "2 GB",
+  "32 GB",
+  "4 Core",
+  "4 GB",
+  "64 GB",
+  "8 GB",
+  "8 Core",
+];
+
+export default data;

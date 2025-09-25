@@ -1,25 +1,24 @@
-
-import './App.css'
-import { Route, Routes } from 'react-router-dom'
-import Comparison from './pages/Comparison/Comparison'
-import Navbar from './Components/Navbar/Navbar'
-import SingleProduct from './pages/product/SingleProduct.jsx'
+import "./App.css";
+import { Route, Routes } from "react-router-dom";
+import Comparison from "./pages/Comparison/Comparison";
+import Navbar from "./Components/Navbar/Navbar";
+import SingleProduct from "./pages/product/SingleProduct.jsx";
 // import Navbar from './Components/Navbar/Navbar'
-import CartPage from './pages/cartpage/CartPage'
-import InquiryPage from './pages/Inquiryform/InquiryPage'
+import CartPage from "./pages/cartpage/CartPage";
+import InquiryPage from "./pages/Inquiryform/InquiryPage";
+import Products from "./pages/product/Products.jsx";
 
 function App() {
-
   return (
-<Routes>
-  <Route path='/nav' element={<Navbar/>}/>
-<Route path="/compare" element={<Comparison/>}/>
-  <Route path='/cartpage' element={<CartPage/>}/>
-    <Route path='/inquiry-page' element={<InquiryPage/>}/>
-<Route path='/product/:id' element={<SingleProduct/>}/>
-
-</Routes>
-  )
+    <Routes>
+      <Route path="/nav" element={<Navbar />} />
+      <Route path="/compare" element={<Comparison />} />
+      <Route path="/cartpage" element={<CartPage />} />
+      <Route path="/inquiry-page" element={<InquiryPage />} />
+      <Route path="/product" element={<Products />} />
+      <Route path="/product/:id" element={<SingleProduct />} />
+    </Routes>
+  );
 }
 
-export default App
+export default App;

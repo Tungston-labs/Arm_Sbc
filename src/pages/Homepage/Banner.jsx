@@ -1,15 +1,21 @@
 import React from "react";
-import { HeaderWrapper, ContentWrapper, LogoWrapper, LogoText, PossibilityText } from "./Banner.style";
-import bgImage from "../../assets/main/banner.png"; 
-import logo from "../../assets/main/logo2.svg"; // ✅ add your ARM SBC logo image here
+import {
+  HeaderWrapper,
+  ContentWrapper,
+  LogoWrapper,
+  LogoText,
+  PossibilityText,
+} from "./Banner.style";
+import backgroundImage from "../../assets/main/banner.svg";
+import logo from "../../assets/main/logo2.svg";
 
 const Banner = () => {
   return (
-    <HeaderWrapper bg={bgImage}>
+    <HeaderWrapper bg={backgroundImage}>
       <ContentWrapper>
         <LogoWrapper>
           <img src={logo} alt="ARM SBC Logo" />
-      
+
         </LogoWrapper>
         <PossibilityText>
           Endless Possibilities_

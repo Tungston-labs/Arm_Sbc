@@ -1,4 +1,3 @@
-// AboutUs.style.js
 import styled from "styled-components";
 
 export const AboutSection = styled.section`
@@ -65,21 +64,21 @@ export const Description = styled.p`
   text-align: justify;
 
   @media (max-width: 1024px) {
-    padding: 0 40px;   /* tablets */
+    padding: 0 40px;  
   }
 
   @media (max-width: 768px) {
-    padding: 0 30px;   /* mobile landscape */
+    padding: 0 30px;  
   }
 
   @media (max-width: 480px) {
     font-size: 0.95rem;
-    padding: 0 20px;   /* small mobiles */
+    padding: 0 20px;   
   }
 
   @media (max-width: 360px) {
     font-size: 0.9rem;
-    padding: 0 15px;   /* very small screens */
+    padding: 0 15px;  
   }
 `;
 

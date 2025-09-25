@@ -6,17 +6,17 @@ import {
   Description,
   ExploreButton,
 } from "./Header.style";
-import bgImage from "../../assets/board.png";
+import backgroundImage from "../../assets/main/background.svg";
 import Navbar from "../../Components/Navbar/Navbar";
 import Footer from "../../Components/Footer/Footer";
 import { FiArrowUpRight } from "react-icons/fi";
-import AboutUs from "./AboutUs";      
+import AboutUs from "./AboutUs";
 
 const Header = () => {
   return (
     <>
       <Navbar />
-      <HeaderWrapper bgImage={bgImage}>
+      <HeaderWrapper backgroundImage={backgroundImage}>
         <Content>
           <Title>The Future of Compact Computing</Title>
           <Description>
@@ -28,14 +28,12 @@ const Header = () => {
             best single board computers.
           </Description>
           <ExploreButton>
-            Explore{" "}
-            <span style={{ fontSize: "1.5rem", marginTop: "8px" }}>
-              <FiArrowUpRight />
-            </span>
+            Explore <span><FiArrowUpRight /></span>
           </ExploreButton>
+
         </Content>
       </HeaderWrapper>
-      <AboutUs/> 
+      <AboutUs />
       <Footer />
     </>
   );

@@ -11,18 +11,18 @@ import {
     OtpInput,
     Button,
     BackLink,
-    ResendOtp,   // 🔹 added
+    ResendOtp,   
 } from "./Verification.style";
 
-import logoImg from "../../assets/main/logo2.svg";
-import bgImg from "../../assets/main/loginBg.png";
+import logoImage from "../../assets/main/logo2.svg";
+import backgroundImage from "../../assets/main/loginBg.svg";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Verification = () => {
-    const [otp, setOtp] = useState(["", "", "", "", "", ""]);
-    const inputsRef = useRef([]);
+    const [otp, setOtp] = useState(Array(6).fill(""));
+    const inputsRef = useRef([]);logoImage
 
     const handleChange = (value, index) => {
         if (/^[0-9]?$/.test(value)) {
@@ -72,10 +72,10 @@ const Verification = () => {
     };
 
     return (
-        <ResetContainer bgImage={bgImg}>
+        <ResetContainer bgImage={backgroundImage}>
             <ResetBox>
                 <LogoWrapper>
-                    <Logo src={logoImg} alt="Logo" />
+                    <Logo src={logoImage} alt="Logo" />
                 </LogoWrapper>
 
                 <Title>Verification</Title>

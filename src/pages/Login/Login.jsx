@@ -15,8 +15,8 @@ import {
 } from "./Login.style";
 
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import logoImg from "../../assets/main/logo2.svg";
-import bgImg from "../../assets/main/loginBg.png";
+import logoImage from "../../assets/main/logo2.svg";
+import backgroundImage from "../../assets/main/loginBg.svg";
 import { Link } from "react-router-dom";
 
 
@@ -24,10 +24,10 @@ const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
 
     return (
-        <LoginContainer bgImage={bgImg}>
+        <LoginContainer bgImage={backgroundImage}>
             <LoginBox>
                 <LogoWrapper>
-                    <Logo src={logoImg} />
+                    <Logo src={logoImage} />
                 </LogoWrapper>
 
                 <Title>Sign in</Title>

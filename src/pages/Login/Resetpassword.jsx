@@ -13,16 +13,16 @@ import {
   BackLink,
 } from "./Resetpassword.style";
 
-import logoImg from "../../assets/main/logo2.svg";
-import bgImg from "../../assets/main/loginBg.png";
+import logoImage from "../../assets/main/logo2.svg";
+import backgroundImage from "../../assets/main/loginBg.svg";
 import { Link } from "react-router-dom";
 
 const Resetpassword = () => {
   return (
-    <ResetContainer bgImage={bgImg}>
+    <ResetContainer bgImage={backgroundImage}>
       <ResetBox>
         <LogoWrapper>
-          <Logo src={logoImg} alt="Logo" />
+          <Logo src={logoImage} alt="Logo" />
         </LogoWrapper>
 
         <Title>Reset password</Title>

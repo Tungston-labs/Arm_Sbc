@@ -51,7 +51,6 @@ export const LogoWrapper = styled.div`
     height: 2rem;
     }
 
-
   }
 `;
 
@@ -83,7 +82,5 @@ export const PossibilityText = styled.h1`
     text-align: right;
     font-size: 0.9rem;
   }
-
- 
 
 `;

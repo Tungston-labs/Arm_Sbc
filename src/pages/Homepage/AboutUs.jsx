@@ -8,7 +8,7 @@ import {
   Description,
 } from "./AboutUs.style";
 
-import aboutImage from "../../assets/main/background2.png";
+import aboutImage from "../../assets/main/background2.svg";
 import HotProducts from "./HotProducts";
 
 const AboutUs = () => {

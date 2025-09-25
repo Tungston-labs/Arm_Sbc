@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const HeaderWrapper = styled.section`
   width: 100%;
   height: 100vh;
-  background: ${({ bgImage }) => `url(${bgImage}) no-repeat center center/cover`};
+  background: ${({ backgroundImage }) => `url(${backgroundImage}) no-repeat center center/cover`};
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -19,7 +19,7 @@ export const HeaderWrapper = styled.section`
 export const Content = styled.div`
   max-width: 1000px;
   color: #fff;
-  z-index: 2; /* above overlay */
+  z-index: 2; 
   text-align: left;
 `;
 
@@ -62,9 +62,6 @@ export const Description = styled.p`
   @media (max-width: 480px) {
     font-size: 0.85rem;
   }
-
- 
-
 `;
 
 export const ExploreButton = styled.a`
@@ -83,7 +80,9 @@ export const ExploreButton = styled.a`
   transition: all 0.3s ease;
 
   span {
-    font-size: 1.2rem;
+    font-size: 1.5rem;   
+    margin-top: 8px;     
+    display: flex;       
   }
 
   &:hover {
@@ -91,3 +90,4 @@ export const ExploreButton = styled.a`
     transform: translateY(-2px);
   }
 `;
+

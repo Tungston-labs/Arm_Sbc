@@ -1,5 +1,4 @@
-
-import React from "react";
+import { useState } from "react";
 import Layout from "../../Layout/Layout";
 import {
   PageTitle,
@@ -15,72 +14,89 @@ import {
   ProductImage,
   ProductName,
   HeaderRow,
+  SubHeaderRow,
 } from "./EnquiryDetails.Styles";
 import { useNavigate } from "react-router-dom";
-import dummyImage from "../../../public/images/cart/chip.png"; 
+import { customerData, productData } from "./EnquiryDetailsData";
+import { FaArrowLeft } from "react-icons/fa6";
 
 const EnquiryDetails = () => {
-      const navigate = useNavigate();
-  const customer = {
-    name: "Ajay kumar",
-    phone: "623894571",
-    company: "Ajkdslfdkh",
-    email: "ajaydummy@gmail.com",
-    address: "Dummy dummy",
-    location:
-      "Lorem ipsum dolor sit amet consectetur. At scelerisque eros urna rhoncus erat...",
-    description:
-      "Lorem ipsum dolor sit amet consectetur. At scelerisque eros urna rhoncus erat...",
-  };
+  const navigate = useNavigate();
+  const [status, setStatus] = useState("");
 
-  const products = [
-    { id: 1, name: "ARM Development Board Rockchip 3288, Quad Core 1.7 GHz", img: dummyImage },
-    { id: 2, name: "ARM Development Board Rockchip 3288, Quad Core 1.7 GHz", img: dummyImage },
-    { id: 3, name: "ARM Development Board Rockchip 3288, Quad Core 1.7 GHz", img: dummyImage },
-    { id: 4, name: "ARM Development Board Rockchip 3288, Quad Core 1.7 GHz", img: dummyImage },
-  ];
+  const getStatusColor = (status) => {
+    switch (status) {
+      case "Pending":
+        return "#F97316";
+      case "Open":
+        return "#22C55E";
+      case "Closed":
+        return "#E53935";
+      default:
+        return "#1e1e24";
+    }
+  };
 
   return (
     <Layout>
-      {/* <BackButton>{"< Enquiry"}</BackButton> */}
       <HeaderRow>
-        <BackButton onClick={() => navigate("/enquiry")}>{`<`}</BackButton>
+        <BackButton onClick={() => navigate("/enquiry-page")}>
+          <FaArrowLeft />
+        </BackButton>
         <PageTitle>Enquiry</PageTitle>
       </HeaderRow>
-      <SubTitle>
-        Welcome back! Manage your products and handle customer enquiries with ease.
-      </SubTitle>
 
-      {/* Status Dropdown */}
-      <StatusSelect>
-        <option>Select a status</option>
-        <option>Pending</option>
-        <option>Open</option>
-        <option>Closed</option>
-      </StatusSelect>
+      <SubHeaderRow>
+        <SubTitle>
+          Stay organized with your product booking enquiries. Follow up on
+          pending, open, or closed requests instantly.
+        </SubTitle>
+        <StatusSelect
+          value={status}
+          onChange={(e) => setStatus(e.target.value)}
+          bgColor={getStatusColor(status)}
+        >
+          <option value="">Select a status</option>
+          <option value="Pending">Pending</option>
+          <option value="Open">Open</option>
+          <option value="Closed">Closed</option>
+        </StatusSelect>
+      </SubHeaderRow>
 
-      {/* Customer Details */}
       <Section>
         <SectionTitle>Customer Details</SectionTitle>
         <CustomerDetailsGrid>
-          <DetailItem><strong>Name</strong> {customer.name}</DetailItem>
-          <DetailItem><strong>Phone number</strong> {customer.phone}</DetailItem>
-          <DetailItem><strong>Company</strong> {customer.company}</DetailItem>
-          <DetailItem><strong>Delivery location</strong> {customer.location}</DetailItem>
-          <DetailItem><strong>Email ID</strong> {customer.email}</DetailItem>
-          <DetailItem><strong>Description</strong> {customer.description}</DetailItem>
-          <DetailItem><strong>Address</strong> {customer.address}</DetailItem>
+          <DetailItem>
+            <strong>Name:</strong> {customerData.name}
+          </DetailItem>
+          <DetailItem>
+            <strong>Phone number:</strong> {customerData.phone}
+          </DetailItem>
+          <DetailItem>
+            <strong>Company:</strong> {customerData.company}
+          </DetailItem>
+          <DetailItem>
+            <strong>Delivery location:</strong> {customerData.location}
+          </DetailItem>
+          <DetailItem>
+            <strong>Email ID:</strong> {customerData.email}
+          </DetailItem>
+          <DetailItem>
+            <strong>Description:</strong> {customerData.description}
+          </DetailItem>
+          <DetailItem>
+            <strong>Address:</strong> {customerData.address}
+          </DetailItem>
         </CustomerDetailsGrid>
       </Section>
 
-      {/* Product Inquiries */}
       <Section>
         <SectionTitle>Product Inquiries</SectionTitle>
         <ProductGrid>
-          {products.map((p) => (
-            <ProductCard key={p.id}>
-              <ProductImage src={p.img} alt={p.name} />
-              <ProductName>{p.name}</ProductName>
+          {productData.map((product) => (
+            <ProductCard key={product.id}>
+              <ProductImage src={product.img} alt={product.name} />
+              <ProductName>{product.name}</ProductName>
             </ProductCard>
           ))}
         </ProductGrid>

@@ -1,4 +1,3 @@
-// src/pages/Enquiry/Enquiry.jsx
 import React from "react";
 import Layout from "../../Layout/Layout";
 import {
@@ -14,16 +13,22 @@ import {
   ViewIcon,
   ArrowButton,
 } from "./Enquiry.Styles";
-
-import enquiryData from "./EnquiryData"; // 👈 import the array here
+import { useNavigate } from "react-router-dom";
+import enquiryData from "./EnquiryData"; 
 
 const Enquiry = () => {
+  const navigate = useNavigate();
+
+  const handleViewClick = (id) => {
+    navigate(`/enquiry-details/${id}`);
+  };
+
   return (
     <Layout>
       <PageTitle>Enquiry</PageTitle>
       <SubTitle>
-        Glad to have you back. Check your dashboard for the latest product updates
-        and manage your enquiries seamlessly.
+        Stay organized with your product booking enquiries. Follow up on
+        pending, open, or closed requests instantly.
       </SubTitle>
 
       <Table>
@@ -38,17 +43,17 @@ const Enquiry = () => {
           </TableRow>
         </thead>
         <tbody>
-          {enquiryData.map((row, i) => (
-            <TableRow key={i}>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>{row.email}</TableCell>
-              <TableCell>{row.phone}</TableCell>
-              <TableCell>{row.location}</TableCell>
+          {enquiryData.map((item) => (
+            <TableRow key={item.id}>
+              <TableCell>{item.name}</TableCell>
+              <TableCell>{item.email}</TableCell>
+              <TableCell>{item.phone}</TableCell>
+              <TableCell>{item.location}</TableCell>
               <TableCell>
-                <StatusBadge status={row.status}>{row.status}</StatusBadge>
+                <StatusBadge status={item.status}>{item.status}</StatusBadge>
               </TableCell>
               <TableCell>
-                <ViewIcon />
+                <ViewIcon onClick={() => handleViewClick(item.id)} />
               </TableCell>
             </TableRow>
           ))}

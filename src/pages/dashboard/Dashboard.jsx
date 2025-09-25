@@ -22,8 +22,7 @@ const Dashboard = () => {
       <DashboardHeader>
         <DashboardTitle>Dashboard</DashboardTitle>
         <SubTitle>
-          Glad to have you back. Check your dashboard for the latest product
-          updates and manage your enquiries seamlessly.
+       Glad to have you back. Check your dashboard for the latest product updates and manage your new enquiries seamlessly.
         </SubTitle>
       </DashboardHeader>
 

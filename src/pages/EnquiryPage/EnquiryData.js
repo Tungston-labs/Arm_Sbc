@@ -1,7 +1,7 @@
-// src/pages/Enquiry/EnquiryData.js
 
 const enquiryData = [
   {
+    id: 1,
     name: "Ajay kumar",
     email: "ajaydummy@gmail.com",
     phone: "6238945012",
@@ -9,6 +9,7 @@ const enquiryData = [
     status: "Pending",
   },
   {
+    id: 2,
     name: "Ajay kumar",
     email: "ajaydummy@gmail.com",
     phone: "6238945012",
@@ -16,6 +17,7 @@ const enquiryData = [
     status: "Open",
   },
   {
+    id: 3,
     name: "Ajay kumar",
     email: "ajaydummy@gmail.com",
     phone: "6238945012",

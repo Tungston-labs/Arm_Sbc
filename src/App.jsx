@@ -18,7 +18,7 @@ function App() {
 
 <Route path='/dashboard' element={<Dashboard/>}/>
 <Route path='/enquiry-page' element={<Enquiry/>}/>
-<Route path='/enquiry-details' element={<EnquiryDetails/>}/>
+\<Route path="/enquiry-details/:id" element={<EnquiryDetails />} />
 </Routes>
   )
 }

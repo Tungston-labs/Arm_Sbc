@@ -1,7 +1,4 @@
 
-
-
-// src/pages/Enquiry/Enquiry.Styles.js
 import styled, { css } from "styled-components";
 import { FaEye } from "react-icons/fa";
 
@@ -9,32 +6,48 @@ export const PageTitle = styled.h2`
   font-family: 'Roboto';
   font-weight: 700;
   font-style: normal;
-  line-height: 1.2;  // adjust as needed
+  line-height: 1.2; 
   margin: 0 0 0.5rem 0;
   color: #FFF;
-
-  /* Fully responsive font-size using clamp */
   font-size: clamp(1.5rem, 2vw, 6rem);
 `;
 
 export const SubTitle = styled.p`
-   font-family: 'Roboto';
+  font-family: 'Roboto', sans-serif;
   font-style: normal;
   font-weight: 400;
-  line-height: 1.4; /* or 36px if you prefer fixed line-height */
-  /* margin: 0; */
+  line-height: 1.4;
+  margin: 0;
   color: #DAD7FF;
+  font-size: 0.9rem; 
+margin-bottom: 10px;
+  @media (min-width: 768px) {
+    font-size: 1.1rem;
+  }
 
-  /* Responsive font-size for all screens up to 8k */
-  font-size: clamp(0.9rem, 1vw, 3rem);
+  @media (min-width: 1024px) {
+    font-size: 1.3rem;
+  }
+
+  
+  @media (min-width: 2560px) {
+    font-size: 2rem;
+  }
+
+   @media (min-width: 3860px) {
+    font-size: 3rem;
+  }
+
+  @media (min-width: 7680px) {
+    font-size: 4rem;
+  }
 `;
 
 
 export const Table = styled.table`
   width: 100%;
-  border-collapse: separate; /* changed from collapse */
-  border-spacing: 0 0.5rem; /* vertical gap between rows */
-  /* background: #1a1a1a; */
+  border-collapse: separate; 
+  border-spacing: 0 0.5rem; 
   border-radius: 8px;
   overflow: hidden;
    font-family: "Roboto";
@@ -50,8 +63,6 @@ export const TableHead = styled.th`
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-
-  /* Round corners on the first and last header cell */
   &:first-child {
     border-top-left-radius: clamp(6px, 1vw, 12px);
   }
@@ -70,13 +81,13 @@ export const TableRow = styled.tr`
    font-family: "Roboto";
   td {
      font-family: "Roboto";
-    padding: clamp(0.8rem, 0.8vw, 1.5rem); /* responsive padding */
+    padding: clamp(0.8rem, 0.8vw, 1.5rem); 
   }
 `;
 
 export const TableCell = styled.td`
-  padding: clamp(0.8rem, 1vw, 1.5rem); /* responsive padding */
-  font-size: clamp(0.85rem, 1vw, 2rem); /* responsive font size */
+  padding: clamp(0.8rem, 1vw, 1.5rem);
+  font-size: clamp(0.85rem, 1vw, 2rem); 
   color: #ddd;
    font-family: "Roboto";
    text-align: center;
@@ -120,11 +131,11 @@ export const StatusBadge = styled.span`
 
 export const Pagination = styled.div`
   position: fixed;          
-  bottom: clamp(1rem, 1.5vw, 2rem);  /* responsive distance from bottom */
-  left: clamp(1rem, 1.5vw, 2rem);    /* responsive distance from left */
+  bottom: clamp(1rem, 1.5vw, 2rem);  
+  left: clamp(1rem, 1.5vw, 2rem);   
   display: flex;
   align-items: center;
-  gap: clamp(0.3rem, 0.8vw, 1rem);   /* responsive gap between buttons */
+  gap: clamp(0.3rem, 0.8vw, 1rem);  
   flex-wrap: wrap;                    
   z-index: 100;                       
 `;
@@ -137,7 +148,7 @@ export const ArrowButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: clamp(1rem, 1vw, 2.5rem); /* responsive icon size */
+  font-size: clamp(1rem, 1vw, 2.5rem); 
   color: ${({ disabled }) => (disabled ? "#bbb" : "#fff")};
   transition: color 0.2s ease;
 
@@ -148,10 +159,10 @@ export const ArrowButton = styled.button`
 
 export const PageButton = styled.button`
   padding: clamp(0.4rem, 0.6vw, 0.8rem) clamp(0.6rem, 0.9vw, 1.2rem);
-  border-radius: clamp(3px, 0.5vw, 6px);       /* responsive radius */
+  border-radius: clamp(3px, 0.5vw, 6px);      
   border: none;
   cursor: pointer;
-  font-size: clamp(0.8rem, 0.8vw, 1.5rem);       /* responsive font */
+  font-size: clamp(0.8rem, 0.8vw, 1.5rem);     
   background: ${({ active }) => (active ? "#8A38F5" : "#353535")};
   color: ${({ active }) => (active ? "#fff" : "#fff")};
   transition: all 0.2s ease;

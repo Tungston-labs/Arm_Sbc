@@ -9,9 +9,7 @@ import Verification from "./pages/Login/Verification";
 import SetNewPassword from "./pages/Login/SetNewPassword";
 import Comparison from './pages/Comparison/Comparison'
 import SingleProduct from './pages/product/SingleProduct.jsx'
-
 import Navbar from './Components/Navbar/Navbar'
-import SingleProduct from './pages/product/SingleProduct.jsx'
 import InquiryPage from './pages/Inquiryform/InquiryPage'
 
 function App() {
@@ -24,9 +22,7 @@ function App() {
       <Route path="/verification" element={<Verification />} />
       <Route path="/setnewpassword" element={<SetNewPassword />} />
       <Route path="/compare" element={<Comparison />} />
-      <Route path='/product/:id' element={<SingleProduct />} />
       <Route path='/nav' element={<Navbar />} />
-      <Route path="/compare" element={<Comparison />} />
       <Route path='/inquiry-page' element={<InquiryPage />} />
       <Route path='/product/:id' element={<SingleProduct />} />
 

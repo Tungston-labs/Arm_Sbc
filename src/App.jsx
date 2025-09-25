@@ -1,6 +1,10 @@
 import { useState } from 'react'
 import './App.css'
 import { Route, Routes } from 'react-router-dom'
+import Home from './pages/Home'
+// import Navbar from './Components/Navbar/Navbar'
+import SingleProduct from './pages/product/SingleProduct.jsx'
+// import Navbar from './Components/Navbar/Navbar'
 import CartPage from './pages/cartpage/CartPage'
 import InquiryPage from './pages/Inquiryform/InquiryPage'
 
@@ -10,6 +14,9 @@ function App() {
 <Routes>
   <Route path='/cartpage' element={<CartPage/>}/>
     <Route path='/inquiry-page' element={<InquiryPage/>}/>
+<Route path='/' element={<Home/>}/>
+<Route path='/product/:id' element={<SingleProduct/>}/>
+
 </Routes>
   )
 }

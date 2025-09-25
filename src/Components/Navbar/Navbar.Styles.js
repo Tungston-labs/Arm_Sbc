@@ -133,10 +133,12 @@ export const NavLinks = styled.div`
 `;
 
 export const NavLinkItem = styled.a`
+  position: relative;
   text-decoration: none;
   color: #ddd;
   font-size: 1.5rem; 
   font-family: 'Roboto';
+
   &:hover {
     color: #9a6bff;
   }
@@ -164,7 +166,19 @@ export const NavLinkItem = styled.a`
   @media (max-width: 600px) {
     font-size: 0.5rem;
   }
+
+
+  &.compare::after {
+    content: attr(data-count); 
+    position: absolute;
+    top: -0.6em; 
+    right: -0.5em;
+    font-size: 0.8rem; 
+    color: red; 
+    font-weight: bold;
+  }
 `;
+
 
 export const RightSection = styled.div`
   display: flex;

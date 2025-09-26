@@ -99,31 +99,42 @@ export const SubHeaderRow = styled.div`
 export const StatusSelect = styled.select`
   background: ${(props) => props.bgColor || "#1e1e24"};
   border: 1px solid #333;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 2.5rem 0.5rem 1rem; /* extra right padding for arrow */
   border-radius: 6px;
   color: #fff;
   font-family: 'Roboto', sans-serif;
   font-size: 0.9rem;
-  appearance: none; 
-option {
-    background: #1e1e24; 
+  appearance: none;
+  cursor: pointer;
+
+  /* Custom white arrow */
+  background-image: url("data:image/svg+xml;utf8,<svg fill='white' xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+
+  option {
+    background: #1e1e24;
     color: #fff;
   }
+
   &:focus {
     outline: none;
     border-color: #9d4edd;
+    box-shadow: 0 0 4px rgba(157, 78, 221, 0.5);
   }
 
   @media (min-width: 768px) {
     font-size: 1rem;
-    padding: 0.6rem 1.2rem;
+    padding: 0.6rem 2.8rem 0.6rem 1.2rem;
   }
 
   @media (min-width: 1024px) {
     font-size: 1.1rem;
-    padding: 0.7rem 1.3rem;
+    padding: 0.7rem 3rem 0.7rem 1.3rem;
   }
 `;
+
 
 
 export const Section = styled.section`

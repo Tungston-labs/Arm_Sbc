@@ -1,4 +1,4 @@
-// src/pages/Dashboard.jsx
+
 import React from "react";
 import Layout from "../../Layout/Layout";
 import {
@@ -18,15 +18,13 @@ import { FaBox, FaClipboardList } from "react-icons/fa";
 const Dashboard = () => {
   return (
     <Layout>
-      {/* Header */}
       <DashboardHeader>
         <DashboardTitle>Dashboard</DashboardTitle>
         <SubTitle>
-       Glad to have you back. Check your dashboard for the latest product updates and manage your new enquiries seamlessly.
+          Glad to have you back. Check your dashboard for the latest product updates and manage your new enquiries seamlessly.
         </SubTitle>
       </DashboardHeader>
 
-      {/* Cards */}
       <CardGrid>
         <Card>
           <CardHeader>

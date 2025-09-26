@@ -1,4 +1,4 @@
-// src/pages/Dashboard.Styles.js
+
 import styled from "styled-components";
 
 export const DashboardHeader = styled.div`
@@ -9,11 +9,9 @@ export const DashboardTitle = styled.h2`
   font-family: 'Roboto';
   font-weight: 700;
   font-style: normal;
-  line-height: 1.2;  // adjust as needed
+  line-height: 1.2; 
   margin: 0 0 0.5rem 0;
   color: #FFF;
-
-  /* Fully responsive font-size using clamp */
   font-size: clamp(1.5rem, 2vw, 6rem);
 `;
 
@@ -22,11 +20,9 @@ export const SubTitle = styled.p`
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
-  line-height: 1.4; /* or 36px if you prefer fixed line-height */
+  line-height: 1.4; 
   margin: 0;
   color: #DAD7FF;
-
-  /* Responsive font-size for all screens up to 8k */
   font-size: clamp(0.9rem, 1vw, 3rem);
 `;
 
@@ -70,10 +66,9 @@ export const CardTitle = styled.span`
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 300;
-  line-height: 1.4; /* adjust as needed */
+  line-height: 1.4; 
   color: #FFF;
-  
-  /* Fully responsive font-size */
+
   font-size: clamp(0.9rem, 1vw, 2.5rem);
 `;
 
@@ -87,11 +82,9 @@ export const CardIcon = styled.div`
 export const CardValue = styled.div`
   font-family: 'Roboto';
   font-style: normal;
-  font-weight: 700; /* keep bold for value */
-  line-height: 1.2; /* adjust as needed */
+  font-weight: 700;
+  line-height: 1.2; 
   margin-top: auto;
   color: #FFF;
-
-  /* Responsive font-size */
   font-size: clamp(1.8rem, 3vw, 3rem);
 `;

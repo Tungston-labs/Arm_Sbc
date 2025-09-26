@@ -1,4 +1,4 @@
-// src/layout/Layout.jsx
+
 import React, { useState } from "react";
 
 import {
@@ -15,19 +15,18 @@ import {
 
 import Topbar from "../Components/Topbar/Topbar";
 import { FaTachometerAlt, FaClipboardList, FaBox } from "react-icons/fa";
+import ChangePasswordModal from "../Components/ChangePasswordModal/ChangePasswordModal";
+import LogoutModal from "../Components/LogoutModal/LogoutModal";
 
 const Layout = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [active, setActive] = useState("dashboard");
-
+  const [showModal, setShowModal] = useState(false);
+  const [showLogout, setShowLogout] = useState(false);
   return (
     <PageWrapper>
       <Topbar setSidebarOpen={setSidebarOpen} />
-
-      {/* Sidebar Overlay */}
       {sidebarOpen && <Overlay onClick={() => setSidebarOpen(false)} />}
-
-      {/* Sidebar */}
       <Sidebar $open={sidebarOpen}>
         <SidebarHeader>
           <button onClick={() => setSidebarOpen(false)}>✕</button>
@@ -55,13 +54,24 @@ const Layout = ({ children }) => {
         </SidebarMenu>
 
         <SidebarFooter>
-          <SidebarButton $variant="purple">Change password</SidebarButton>
-          <SidebarButton $variant="red">Log out</SidebarButton>
+          <SidebarButton $variant="purple"
+             onClick={() => setShowModal(true)}>
+            Change password</SidebarButton>
+          <SidebarButton $variant="red"
+           onClick={() => setShowLogout(true)}>Log out</SidebarButton>
         </SidebarFooter>
       </Sidebar>
-
-      {/* Page content */}
       <Content>{children}</Content>
+  {showModal && <ChangePasswordModal onClose={() => setShowModal(false)} />}
+    {showLogout && (
+  <LogoutModal
+    onConfirm={() => {
+      console.log("Logging out...");
+      setShowLogout(false);
+    }}
+    onCancel={() => setShowLogout(false)}
+  />
+)}
     </PageWrapper>
   );
 };

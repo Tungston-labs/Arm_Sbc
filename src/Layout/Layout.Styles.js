@@ -1,4 +1,4 @@
-// src/layout/Layout.Styles.js
+
 import styled, { css } from "styled-components";
 
 export const PageWrapper = styled.div`
@@ -14,6 +14,19 @@ export const PageWrapper = styled.div`
 export const Content = styled.main`
   flex: 1;
   padding: clamp(1rem, 2vw, 3rem);
+
+  @media (min-width: 2560px) {
+    padding: 4rem;
+  }
+  @media (min-width: 3840px) { 
+    padding: 6rem;
+  }
+  @media (min-width: 5120px) { 
+    padding: 8rem;
+  }
+  @media (min-width: 7680px) { 
+    padding: 10rem;
+  }
 `;
 
 export const Overlay = styled.div`
@@ -29,15 +42,42 @@ export const Overlay = styled.div`
 export const Sidebar = styled.div`
   position: fixed;
   top: 0;
-  right: ${({ $open }) => ($open ? "0" : "-300px")}; /* slide off-screen */
-  width: clamp(280px, 4vw, 480px); 
+  right: 0;
+  width: clamp(280px, 4vw, 480px);
   height: 100%;
   background: #222228;
-  padding:0.9rem;
-  transition: right 0.3s ease-in-out, width 0.3s ease-in-out, padding 0.3s ease-in-out;
+  padding: 0.9rem;
+  transition: transform 0.3s ease-in-out, width 0.3s ease-in-out, padding 0.3s ease-in-out;
   z-index: 1000;
   display: flex;
   flex-direction: column;
+
+  transform: ${({ $open }) => ($open ? "translateX(0)" : "translateX(100%)")};
+
+  @media (min-width: 1719px) {
+    width: 320px;
+    padding: 1.5rem;
+  }
+  @media (min-width: 1990px) {
+    width: 520px;
+    padding: 1.5rem;
+  }
+  @media (min-width: 2560px) {
+    width: 520px;
+    padding: 1.5rem;
+  }
+  @media (min-width: 3840px) {
+    width: 520px;
+    padding: 1.5rem;
+  }
+  @media (min-width: 5120px) {
+    width: 600px;
+    padding: 2rem;
+  }
+  @media (min-width: 7680px) {
+    width: 720px;
+    padding: 2.5rem;
+  }
 `;
 
 export const SidebarHeader = styled.div`
@@ -50,6 +90,13 @@ export const SidebarHeader = styled.div`
     color: #fff;
     font-size: clamp(1.2rem, 2vw, 1.8rem);
     cursor: pointer;
+
+    @media (min-width: 3840px) {
+      font-size: 2.2rem;
+    }
+    @media (min-width: 7680px) {
+      font-size: 3rem;
+    }
   }
 `;
 
@@ -58,24 +105,16 @@ export const SidebarMenu = styled.div`
   flex-direction: column;
   gap: clamp(0.8rem, 1vw, 1.5rem);
   margin-top: clamp(1rem, 2vw, 2rem);
+
+  @media (min-width: 3840px) {
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+  @media (min-width: 7680px) {
+    gap: 3rem;
+    margin-top: 4rem;
+  }
 `;
-
-// export const SidebarItem = styled.div`
-//   display: flex;
-//   align-items: center;
-//   gap: 0.8rem;
-//   font-size: 1rem;
-//   padding: 0.5rem 1rem;
-//   border-radius: 6px;
-//   cursor: pointer;
-//   background: ${({ active }) => (active ? "#9d4edd" : "transparent")};
-//   color: ${({ active }) => (active ? "#fff" : "#ddd")};
-
-//   &:hover {
-//     background: #9d4edd;
-//     color: #fff;
-//   }
-// `;
 
 export const SidebarFooter = styled.div`
   margin-top: auto;
@@ -84,6 +123,17 @@ export const SidebarFooter = styled.div`
   gap: clamp(0.8rem, 1vw, 1.5rem);
   padding: clamp(1rem, 2vw, 2rem);
   margin-bottom: clamp(1rem, 2vw, 2rem);
+
+  @media (min-width: 3840px) {
+    gap: 2rem;
+    padding: 3rem;
+    margin-bottom: 3rem;
+  }
+  @media (min-width: 7680px) {
+    gap: 3rem;
+    padding: 4rem;
+    margin-bottom: 4rem;
+  }
 `;
 
 export const SidebarButton = styled.button`
@@ -139,4 +189,13 @@ export const SidebarItem = styled.div`
             color: white;
           }
         `}
+
+  @media (min-width: 3840px) {
+    font-size: 2.2rem;
+    padding: 1.5rem 2.5rem;
+  }
+  @media (min-width: 7680px) {
+    font-size: 3rem;
+    padding: 2rem 3rem;
+  }
 `;

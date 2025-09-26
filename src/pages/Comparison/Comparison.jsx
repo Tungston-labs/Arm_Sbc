@@ -6,7 +6,7 @@ import {
 import Navbar from "../../Components/Navbar/Navbar";
 import { featureOrder } from "./SmallRows";
 import initialData from "./SmallRows";
-import ModalWithCards from "../../components/Comparison/ModalWithCards";
+import ModalWithCards from "../../Components/Comparison/ModalWithCards";
 
 const Comparison = () => {
   const [items, setItems] = useState(initialData);

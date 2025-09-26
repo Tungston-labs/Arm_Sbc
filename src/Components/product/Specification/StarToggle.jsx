@@ -19,11 +19,15 @@ const StyledStar = styled(Star)`
     `}
 `;
 
-export default function StarToggle() {
-  const [filled, setFilled] = useState(false);
+export default function StarToggle({
+  readOnly = false,
+  filled: initialFilled = false,
+}) {
+  const [filled, setFilled] = useState(initialFilled);
   const [animFill, setAnimFill] = useState(false);
 
   const handleClick = () => {
+    if (readOnly) return;
     if (!filled) {
       setAnimFill(false);
       requestAnimationFrame(() => setAnimFill(true));
@@ -36,8 +40,9 @@ export default function StarToggle() {
       onClick={handleClick}
       animFill={animFill}
       strokeWidth={1.5}
-      stroke="#817878"
-      fill={filled ? "#817878" : "none"}
+      stroke={filled ? "#FFB531" : "#817878"}
+      fill={filled ? "#FFB531" : "none"}
+      style={{ cursor: readOnly ? "default" : "pointer" }}
     />
   );
 }

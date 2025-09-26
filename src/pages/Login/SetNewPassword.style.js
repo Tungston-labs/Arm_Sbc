@@ -20,7 +20,7 @@ export const LoginContainer = styled.div`
 
 export const LoginBox = styled.div`
   background: #0F0A17;
-  padding: 40px 30px;
+   padding: 40px 40px 40px 40px;
   border-radius: 15px;
   border: 2px solid #948CA3;
   width: 100%;
@@ -75,13 +75,13 @@ export const Label = styled.label`
   font-size: 1rem;
   font-weight: 500;
   font-family: 'Roboto', sans-serif;
-  margin: 0 0 6px 8px; /* moved right */
+  margin: 0 0 6px 8px; 
   color: #fff;
   align-self: flex-start;
 `;
 
 export const Input = styled.input`
-  width: calc(100% - 4px); /* prevents right border cut-off */
+  width: calc(100% - 4px); 
   padding: 15px 3px;
   border: 1px solid #AAA4A4;
   border-radius: 6px;
@@ -93,8 +93,11 @@ export const Input = styled.input`
   box-shadow: inset 0px 2px 6px rgba(53, 50, 50, 0.6);
 
   &::placeholder {
-    color: #bbb; /* lighter placeholder */
-  }
+  color: #bbb;
+  font-size: 14px;
+  font-family: "Roboto", sans-serif;
+  margin: 20px 20px 6px 8px;
+}
 `;
 
 export const InputWrapper = styled.div`

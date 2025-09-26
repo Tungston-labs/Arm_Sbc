@@ -72,7 +72,7 @@ const Verification = () => {
     };
 
     return (
-        <ResetContainer bgImage={backgroundImage}>
+        <ResetContainer backgroundImage={backgroundImage}>
             <ResetBox>
                 <LogoWrapper>
                     <Logo src={logoImage} alt="Logo" />

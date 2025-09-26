@@ -19,12 +19,11 @@ import logoImage from "../../assets/main/logo2.svg";
 import backgroundImage from "../../assets/main/loginBg.svg";
 import { Link } from "react-router-dom";
 
-
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
 
     return (
-        <LoginContainer bgImage={backgroundImage}>
+        <LoginContainer backgroundImage={backgroundImage}>
             <LoginBox>
                 <LogoWrapper>
                     <Logo src={logoImage} />

@@ -1,6 +1,5 @@
 import {
   DescriptionSection,
-  ReviewHeader,
   SpecificationContainer,
 } from "../../../pages/product/singleProduct.style";
 import SpecificationNavBar from "./SpecificationNavBar";
@@ -9,7 +8,8 @@ import descriptionData from "../../../pages/product/data/specificationData.json"
 import addetionalData from "../../../pages/product/data/AddetionalInformationData.json";
 import { useState } from "react";
 import AddetionalInformationCard from "./AddetionalInformationCard";
-import ReviewFrom from "./ReviewFrom";
+import ReviewFormcontainer from "./ReviewFormcontainer";
+import ReviewCardSContainer from "./ReviewCardSContainer";
 
 const SpecificationSection = () => {
   const [activeIndex, setActiveIndex] = useState("Description");
@@ -38,16 +38,9 @@ const SpecificationSection = () => {
         </DescriptionSection>
       )}
       {activeIndex === navItem[2] && (
-        <DescriptionSection background="none" display="block">
-          <ReviewHeader>
-            <h4>Reviews</h4>
-            <p>
-              Your email address will not be published. Required fields are
-              marked <span>*</span>
-            </p>
-          </ReviewHeader>
-
-          <ReviewFrom />
+        <DescriptionSection display="block">
+          <ReviewFormcontainer />
+          <ReviewCardSContainer />
         </DescriptionSection>
       )}
     </SpecificationContainer>

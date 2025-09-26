@@ -8,15 +8,15 @@ import descriptionData from "../../../pages/product/data/specificationData.json"
 import addetionalData from "../../../pages/product/data/AddetionalInformationData.json";
 import { useState } from "react";
 import AddetionalInformationCard from "./AddetionalInformationCard";
-import ReviewFormcontainer from "./ReviewFormcontainer";
-import ReviewCardSContainer from "./ReviewCardSContainer";
+import ReviewFormcontainer from "../review/ReviewFormcontainer";
+import ReviewCardSContainer from "../review/ReviewCardSContainer";
 
 const SpecificationSection = () => {
   const [activeIndex, setActiveIndex] = useState("Description");
   const navItem = ["Description", "Additional Information", "Reviews"];
 
   return (
-    <SpecificationContainer>
+    <SpecificationContainer id="specification">
       <h2>Specifications</h2>
       <SpecificationNavBar
         activeIndex={activeIndex}

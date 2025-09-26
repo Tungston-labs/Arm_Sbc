@@ -11,6 +11,10 @@ import {
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import details from "../../pages/product/data/productDetailsData.json";
 const SingleProductDeatilSection = () => {
+  const handleViewMore = () => {
+    const el = document.getElementById("specification");
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  };
   return (
     <HeaderContainer>
       <DividerDiv>
@@ -22,7 +26,9 @@ const SingleProductDeatilSection = () => {
         <HeaderTextContainer>
           <h2>ARM Develeopment Board Rockchip 3288, Quad Core 1.7 GHz</h2>
           <ButtonSection display="none">
-            <Link>View more</Link>
+            <Link as="button" onClick={handleViewMore}>
+              View more
+            </Link>
             <AddToCartButton>
               <AiOutlineShoppingCart />
               Add to cart
@@ -41,7 +47,9 @@ const SingleProductDeatilSection = () => {
           </p>
           <CompareButton>compare</CompareButton>
           <ButtonSection display="flex">
-            <Link>View more</Link>
+            <Link as="button" onClick={handleViewMore}>
+              View more
+            </Link>
             <AddToCartButton>
               <AiOutlineShoppingCart />
               Add to cart

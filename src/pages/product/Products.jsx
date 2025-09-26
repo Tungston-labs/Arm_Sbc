@@ -18,7 +18,7 @@ const Products = () => {
       <AllProductContainer>
         <ProductHeader>Products</ProductHeader>
         <ProductCardContainer>
-         {[...Array(50)].map(i=><ProductCard />)} 
+         {[...Array(10)].map(i=><ProductCard />)} 
         </ProductCardContainer>
         <CustomPagination
           total={50}

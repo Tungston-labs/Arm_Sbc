@@ -1,4 +1,4 @@
-// SmallRows.js
+
 import Chip from "../../assets/Comparison/chip.svg";
 
 const data = [

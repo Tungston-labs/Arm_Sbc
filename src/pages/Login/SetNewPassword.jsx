@@ -25,7 +25,7 @@ const SetNewPassword = () => {
     const [showPassword, setShowPassword] = useState(false);
 
     return (
-        <LoginContainer bgImage={backgroundImage}>
+        <LoginContainer backgroundImage={backgroundImage}>
             <LoginBox>
                 <LogoWrapper>
                     <Logo src={logoImage} />
@@ -36,7 +36,7 @@ const SetNewPassword = () => {
                   Enter new password
                 </Subtitle>
 
-                <Form>
+                <Form>/* prevents right border cut-off */
                     <Label>Email</Label>
 
                     <InputWrapper>
@@ -44,7 +44,7 @@ const SetNewPassword = () => {
                             type={showPassword ? "text" : "password"}
                             placeholder="Enter Email"
                         />
-                        <EyeIcon
+                        <EyeIcon/* prevents right border cut-off */
                             onClick={() => setShowPassword(!showPassword)}
                             title={showPassword ? "Hide Password" : "Show Password"}
                         >
@@ -57,7 +57,7 @@ const SetNewPassword = () => {
                         <Input
                             type={showPassword ? "text" : "password"}
                             placeholder="Enter Password"
-                        />
+                        />/* prevents right border cut-off */
                         <EyeIcon
                             onClick={() => setShowPassword(!showPassword)}
                             title={showPassword ? "Hide Password" : "Show Password"}

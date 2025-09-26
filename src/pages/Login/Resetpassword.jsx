@@ -19,7 +19,7 @@ import { Link } from "react-router-dom";
 
 const Resetpassword = () => {
   return (
-    <ResetContainer bgImage={backgroundImage}>
+    <ResetContainer backgroundImage={backgroundImage}>
       <ResetBox>
         <LogoWrapper>
           <Logo src={logoImage} alt="Logo" />

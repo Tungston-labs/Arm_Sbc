@@ -7,6 +7,7 @@ import SingleProduct from "./pages/product/SingleProduct.jsx";
 import CartPage from "./pages/cartpage/CartPage";
 import AddProduct from "./pages/addproduct/addProduct";
 import AddForm from "./pages/addproduct/addForm/addForm.jsx";
+import AddViewProduct from "./pages/AddSingleView/AddViewProduct.jsx";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Route path="/product/:id" element={<SingleProduct />} />
       <Route path="/addproduct" element={<AddProduct />} />
       <Route path="/addform" element={<AddForm />} />
+      <Route path="/singleview" element={<AddViewProduct />} />
     </Routes>
   );
 }

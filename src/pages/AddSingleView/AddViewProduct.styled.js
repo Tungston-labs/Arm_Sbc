@@ -5,8 +5,8 @@ export const AddContainer = styled.div`
   min-height: 100vh;
   background: linear-gradient(
     to bottom right,
-    rgba(137, 99, 211, 1) 0%,
-    rgba(17, 3, 36, 1) 20%,
+    rgba(114, 62, 218, 1) 0%,
+    rgba(17, 3, 36, 1) 10%,
     rgba(3, 2, 6, 1) 30%,
     rgba(3, 2, 6, 1) 100%
   );
@@ -40,10 +40,10 @@ export const SubText = styled.p`
 
 export const ImageRow = styled.div`
   display: flex;
-  align-items: flex-start;   /* keeps tops aligned */
+  align-items: flex-start;   
   gap: 40px;
   margin-top: 40px;
-  flex-wrap: nowrap;         /* prevent wrap so they stay side-by-side */
+  flex-wrap: nowrap;       
 `;
 
 export const ImageWrapper = styled.div`
@@ -55,6 +55,11 @@ export const ImageWrapper = styled.div`
   justify-content: center;
   align-items: center;
 `;
+export const NavbarContainer=styled.div`
+display: flex;
+justify-content: center;
+
+`
 
 export const FormBlock = styled.div`
   flex: 1;                  

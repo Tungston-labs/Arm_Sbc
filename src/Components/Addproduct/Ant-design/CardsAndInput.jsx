@@ -1,7 +1,7 @@
 import React from "react";
 import { Input } from "antd";
 import { StyledCollapse, StyledPanel } from "./CardsInput.styled";
-import { specSections } from "./Spec-section"; // 👈 import the data
+import { specSections } from "./Spec-section"; 
 
 export default function DemoCollapse() {
   return (

@@ -2,11 +2,6 @@ import React, { useState } from "react";
 import {
   PageWrapper,
   Container,
-  ProductList,
-  ProductCard,
-  ProductTitle,
-  ProductSpecs,
-  ProductAction,
   FormSection,
   FormTitle,
   FormDescription,
@@ -17,23 +12,13 @@ import {
   TextArea,
   SubmitButton,
   InputRow,
-  Heading,
   Main,
-  MobileOnly,
-  DesktopOnly,
-  EmptyCartWrapper,
 } from "./InquiryPage.Styles";
 import Navbar from "../../Components/Navbar/Navbar";
 import Footer from "../../Components/Footer/Footer";
-import { Divider } from "../cartpage/CartPage.Styles";
-import { products as productsData } from "./productsData";
-import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import Swal from "sweetalert2";
+import ProductListSection from "../../Components/Inquirypage/ProductListSection";
 const InquiryPage = () => {
-  const [products] = useState(productsData);
-  const [isOpen, setIsOpen] = useState(false);
-
-  
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -46,21 +31,14 @@ const InquiryPage = () => {
     delivery: "",
     description: "",
   });
-
- 
   const [errors, setErrors] = useState({});
-  const [loading, setLoading] = useState(false); 
-
-
+  const [loading, setLoading] = useState(false);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-
-
   const validate = () => {
     let newErrors = {};
-
     if (!formData.firstName.trim()) newErrors.firstName = "First name is required";
     if (!formData.lastName.trim()) newErrors.lastName = "Last name is required";
     if (!formData.company.trim()) newErrors.company = "Company name is required";
@@ -75,27 +53,21 @@ const InquiryPage = () => {
     if (!formData.state.trim()) newErrors.state = "State is required";
     if (!formData.delivery.trim()) newErrors.delivery = "Delivery location is required";
     if (!formData.description.trim()) newErrors.description = "Description is required";
-
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
-
- 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validate()) {
       setLoading(true);
-
       setTimeout(() => {
         setLoading(false);
-
         Swal.fire({
           icon: "success",
           title: "Submitted!",
           text: "Your inquiry has been sent successfully 🚀",
           confirmButtonColor: "#3085d6",
         });
-
         setFormData({
           firstName: "",
           lastName: "",
@@ -108,99 +80,16 @@ const InquiryPage = () => {
           delivery: "",
           description: "",
         });
-      }, 1500); 
+      }, 1500);
     }
   };
-
   return (
     <>
       <Main>
         <Navbar />
         <PageWrapper>
           <Container>
-           <MobileOnly>
-  <Heading>Product Inquiry</Heading>
-  <Divider />
-  <div
-    onClick={() => setIsOpen(!isOpen)}
-    style={{
-      cursor: "pointer",
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
-      background: "rgba(255,255,255,0.1)",
-      padding: "0.8rem 1rem",
-      borderRadius: "8px",
-      margin: "1rem 0"
-    }}
-  >
-    <span>Items cart</span>
-    {isOpen ? <FaChevronUp /> : <FaChevronDown />}
-  </div>
-
-  {isOpen && (
-    <>
-      {products.length > 0 ? (
-        <ProductList>
-          {products.map((product) => (
-            <ProductCard key={product.id}>
-              <ProductTitle>{product.title}</ProductTitle>
-              <ProductSpecs>
-                {product.specs.map((spec, index) => (
-                  <li key={index}>{spec}</li>
-                ))}
-              </ProductSpecs>
-              <ProductAction>
-                <button>Delete</button>
-                <a href="#">See more like this</a>
-              </ProductAction>
-              <Divider />
-            </ProductCard>
-          ))}
-        </ProductList>
-      ) : (
-        <EmptyCartWrapper>
-        <img src="/images/inquiry/mobilenodata.png"
-    alt="Empty Cart" />
-  </EmptyCartWrapper>
-      )}
-    </>
-  )}
-</MobileOnly>
-
-{/* Desktop version */}
-<DesktopOnly>
-  <Heading>Product Inquiry</Heading>
-  <Divider />
-  {products.length > 0 ? (
-    <ProductList>
-      {products.map((product) => (
-        <ProductCard key={product.id}>
-          <ProductTitle>{product.title}</ProductTitle>
-          <ProductSpecs>
-            {product.specs.map((spec, index) => (
-              <li key={index}>{spec}</li>
-            ))}
-          </ProductSpecs>
-          <ProductAction>
-            <button>Delete</button>
-            <a href="#">See more like this</a>
-          </ProductAction>
-          <Divider />
-        </ProductCard>
-      ))}
-    </ProductList>
-  ) : (
-     <EmptyCartWrapper>
-    <img src="/images/inquiry/nodata.png"
-     alt="Empty Cart" />
-
-  </EmptyCartWrapper>
-  )}
-</DesktopOnly>
-
-
-            
+            <ProductListSection />
             <FormSection>
               <FormTitle>Product Inquiry</FormTitle>
               <FormDescription>
@@ -211,11 +100,11 @@ const InquiryPage = () => {
 
               <Form onSubmit={handleSubmit}>
                 <InputGroup>
-                
+
                   <Label>Your Name</Label>
                   <InputRow>
                     <div>
-                          {errors.firstName && <small style={{ color: "red" }}>{errors.firstName}</small>}
+                      {errors.firstName && <small style={{ color: "red" }}>{errors.firstName}</small>}
                       <Input
                         type="text"
                         name="firstName"
@@ -225,7 +114,7 @@ const InquiryPage = () => {
                       />
                     </div>
                     <div>
-                       {errors.lastName && <small style={{ color: "red" }}>{errors.lastName}</small>}
+                      {errors.lastName && <small style={{ color: "red" }}>{errors.lastName}</small>}
                       <Input
                         type="text"
                         name="lastName"
@@ -233,61 +122,61 @@ const InquiryPage = () => {
                         value={formData.lastName}
                         onChange={handleChange}
                       />
-                     
+
                     </div>
                   </InputRow>
                 </InputGroup>
 
                 <InputGroup>
-                
+
                   <Label>Company Name</Label>
                   <div>
-                     {errors.company && <small style={{ color: "red" }}>{errors.company}</small>}
-                  <Input
-                    type="text"
-                    name="company"
-                    placeholder="Company name"
-                    value={formData.company}
-                    onChange={handleChange}
-                  />
+                    {errors.company && <small style={{ color: "red" }}>{errors.company}</small>}
+                    <Input
+                      type="text"
+                      name="company"
+                      placeholder="Company name"
+                      value={formData.company}
+                      onChange={handleChange}
+                    />
                   </div>
-                 
+
                 </InputGroup>
 
                 <InputGroup>
                   <Label>Email Address</Label>
                   <div>
-                        {errors.email && <small style={{ color: "red" }}>{errors.email}</small>}
-                  <Input
-                    type="email"
-                    name="email"
-                    placeholder="example@example.com"
-                    value={formData.email}
-                    onChange={handleChange}
-                  />
+                    {errors.email && <small style={{ color: "red" }}>{errors.email}</small>}
+                    <Input
+                      type="email"
+                      name="email"
+                      placeholder="example@example.com"
+                      value={formData.email}
+                      onChange={handleChange}
+                    />
                   </div>
-              
+
                 </InputGroup>
 
                 <InputGroup>
                   <Label>Phone Number</Label>
                   <div>
-                     {errors.phone && <small style={{ color: "red" }}>{errors.phone}</small>}
-                  <Input
-                    type="number"
-                    name="phone"
-                    placeholder="Enter phone number"
-                    value={formData.phone}
-                    onChange={handleChange}
-                  />
+                    {errors.phone && <small style={{ color: "red" }}>{errors.phone}</small>}
+                    <Input
+                      type="number"
+                      name="phone"
+                      placeholder="Enter phone number"
+                      value={formData.phone}
+                      onChange={handleChange}
+                    />
                   </div>
-                 
+
                 </InputGroup>
 
                 <InputGroup>
                   <Label>Address</Label>
                   <div>
-                       {errors.street && <small style={{ color: "red" }}>{errors.street}</small>}
+                    {errors.street && <small style={{ color: "red" }}>{errors.street}</small>}
                     <Input
                       type="text"
                       name="street"
@@ -296,10 +185,10 @@ const InquiryPage = () => {
                       onChange={handleChange}
                       style={{ marginBottom: "1rem" }}
                     />
-                 
+
                     <InputRow>
                       <div>
-                            {errors.country && <small style={{ color: "red" }}>{errors.country}</small>}
+                        {errors.country && <small style={{ color: "red" }}>{errors.country}</small>}
                         <Input
                           type="text"
                           name="country"
@@ -307,10 +196,10 @@ const InquiryPage = () => {
                           value={formData.country}
                           onChange={handleChange}
                         />
-                    
+
                       </div>
                       <div>
-                           {errors.state && <small style={{ color: "red" }}>{errors.state}</small>}
+                        {errors.state && <small style={{ color: "red" }}>{errors.state}</small>}
                         <Input
                           type="text"
                           name="state"
@@ -326,31 +215,31 @@ const InquiryPage = () => {
                 <InputGroup>
                   <Label>Delivery Location</Label>
                   <div>
-                      {errors.delivery && <small style={{ color: "red" }}>{errors.delivery}</small>}
-                  <Input
-                    type="text"
-                    name="delivery"
-                    placeholder="Delivery Location"
-                    value={formData.delivery}
-                    onChange={handleChange}
-                  />
+                    {errors.delivery && <small style={{ color: "red" }}>{errors.delivery}</small>}
+                    <Input
+                      type="text"
+                      name="delivery"
+                      placeholder="Delivery Location"
+                      value={formData.delivery}
+                      onChange={handleChange}
+                    />
                   </div>
-                
+
                 </InputGroup>
 
                 <InputGroup>
                   <Label>Description</Label>
 
                   <div>
-                      {errors.description && <small style={{ color: "red" }}>{errors.description}</small>}
-                  <TextArea
-                    name="description"
-                    placeholder="Type here..."
-                    value={formData.description}
-                    onChange={handleChange}
-                  />
+                    {errors.description && <small style={{ color: "red" }}>{errors.description}</small>}
+                    <TextArea
+                      name="description"
+                      placeholder="Type here..."
+                      value={formData.description}
+                      onChange={handleChange}
+                    />
                   </div>
-                
+
                 </InputGroup>
 
                 <SubmitButton type="submit">Submit</SubmitButton>

@@ -26,39 +26,39 @@ const Navbar = () => {
   return (
     <Nav>
       <NavContainer>
-  
-      
-<Logo>
-  <img src={logo} alt="ARM SBC" />
-</Logo>
-      
-       <NavLinks>
-  <NavLinkItem href="#">Home</NavLinkItem>
-  <NavLinkItem href="#">Products</NavLinkItem>
-  <NavLinkItem href="#" className="compare" data-count="3">
-    Compare
-  </NavLinkItem>
-</NavLinks>
 
-    
+
+        <Logo>
+          <img src={logo} alt="ARM SBC" />
+        </Logo>
+
+        <NavLinks>
+          <NavLinkItem href="#">Home</NavLinkItem>
+          <NavLinkItem href="#">Products</NavLinkItem>
+          <NavLinkItem href="#" className="compare" data-count="3">
+            Compare
+          </NavLinkItem>
+        </NavLinks>
+
+
         <RightSection>
           <SearchBox>
-  <SearchIcon />
-  <SearchInput type="text" placeholder="Search" />
-</SearchBox>
+            <SearchIcon />
+            <SearchInput type="text" placeholder="Search" />
+          </SearchBox>
           <CartIcon>
             <IoMdCart />
           </CartIcon>
           <InquiryButton>Inquiry</InquiryButton>
         </RightSection>
 
-     
+
         <Hamburger onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <FaTimes /> : <FaBars />}
         </Hamburger>
       </NavContainer>
 
-    
+
       {isOpen && (
         <MobileMenu>
           <MobileNavItem href="#">Home</MobileNavItem>

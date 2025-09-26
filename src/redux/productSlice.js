@@ -33,7 +33,6 @@ export const updateExistingProduct = createAsyncThunk(
   }
 );
 
-// Public Thunks
 export const fetchProductsPublic = createAsyncThunk("product/fetchProductsPublic", async () => {
   const data = await listProductsPublic();
   return data;

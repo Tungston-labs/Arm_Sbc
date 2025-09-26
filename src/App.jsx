@@ -2,7 +2,6 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 
 import Header from "./pages/Homepage/Header";
-import CartPage from "./pages/cartpage/CartPage";
 import Login from "./pages/Login/Login";
 import Resetpassword from "./pages/Login/Resetpassword";
 import Verification from "./pages/Login/Verification";

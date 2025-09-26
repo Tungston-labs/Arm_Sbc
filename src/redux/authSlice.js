@@ -9,7 +9,6 @@ import {
   logoutUser,
 } from "../services/authService";
 
-
 export const login = createAsyncThunk("auth/login", async ({ email, password }, { rejectWithValue }) => {
   try {
     const data = await loginAdmin(email, password);
@@ -65,3 +64,4 @@ const authSlice = createSlice({
 });
 
 export default authSlice.reducer;
+

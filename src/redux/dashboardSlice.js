@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { getDashboardCounts } from "../services/dashboardService";
 
-
 export const fetchDashboardCounts = createAsyncThunk(
   "dashboard/fetchCounts",
   async (token) => {

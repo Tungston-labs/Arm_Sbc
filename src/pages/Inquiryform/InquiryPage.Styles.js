@@ -463,7 +463,7 @@ export const TextArea = styled.textarea`
   width: 100%;
   padding: clamp(0.6rem, 1vw, 0.8rem);
   border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: none;
   outline: none;
   font-size: clamp(0.9rem, 1vw, 1.2rem);
   background: rgba(255, 255, 255, 0.08);
@@ -577,20 +577,15 @@ export const Heading = styled.div`
   font-style: normal;
   font-weight: 400;
   line-height: 1.4;
-
- 
   font-size: 16px;
-
-
+  
   @media (min-width: 600px) {
     font-size: 1.2rem;
   }
 
-
   @media (min-width: 900px) {
     font-size: 1.5rem;
   }
-
 
   @media (min-width: 1200px) {
     font-size: 1.8rem;
@@ -599,14 +594,15 @@ export const Heading = styled.div`
   @media (min-width: 1920px) {
     font-size: 2rem;
   }
-   @media (min-width: 2560px) {
+
+  @media (min-width: 2560px) {
     font-size: 2.5rem;
   }
-   @media (min-width: 3860px) {
+
+  @media (min-width: 3860px) {
     font-size: 2.8rem;
   }
 `;
-
 export const ToggleButton = styled.button`
   background: none;
   border: none;
@@ -706,4 +702,9 @@ export const EmptyCartWrapper = styled.div`
       font-size: 2rem;
     }
   }
+`;
+export const Divider = styled.hr`
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  margin: 1rem 0;
 `;

@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Layout from "../../Layout/Layout";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   PageTitle,
   SubTitle,
@@ -15,27 +17,50 @@ import {
   ProductName,
   HeaderRow,
   SubHeaderRow,
+  EmptyState,
 } from "./EnquiryDetails.Styles";
-import { useNavigate } from "react-router-dom";
-import { customerData, productData } from "./EnquiryDetailsData";
 import { FaArrowLeft } from "react-icons/fa6";
+import { fetchInquiryDetail, changeInquiryStatus } from "../../redux/inquirySlice";
+import NoEnquiry from "../../assets/inquriy/noenquiry.svg";
 
 const EnquiryDetails = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { id } = useParams();
+  const token = localStorage.getItem("accessToken");
+
+const { inquiryDetail: detail, loading, error } = useSelector((state) => state.inquiry);
   const [status, setStatus] = useState("");
 
+  useEffect(() => {
+    if (token && id) {
+      dispatch(fetchInquiryDetail({ id, token }));
+    }
+  }, [dispatch, id, token]);
+
+useEffect(() => {
+  if (detail?.status) {
+    // Capitalize first letter
+    const normalized = detail.status.charAt(0).toUpperCase() + detail.status.slice(1).toLowerCase();
+    setStatus(normalized);
+  }
+}, [detail]);
+  const handleStatusChange = (newStatus) => {
+    setStatus(newStatus);
+    dispatch(changeInquiryStatus({ id, status: newStatus, token }));
+  };
+
   const getStatusColor = (status) => {
-    switch (status) {
-      case "Pending":
-        return "#F97316";
-      case "Open":
-        return "#22C55E";
-      case "Closed":
-        return "#E53935";
-      default:
-        return "#1e1e24";
+    switch (status?.toLowerCase()) {
+      case "pending": return "#F97316";
+      case "open": return "#22C55E";
+      case "closed": return "#E53935";
+      default: return "#1e1e24";
     }
   };
+
+  if (loading) return <Layout><p>Loading...</p></Layout>;
+  if (error) return <Layout><p style={{ color: "red" }}>{error}</p></Layout>;
 
   return (
     <Layout>
@@ -53,54 +78,57 @@ const EnquiryDetails = () => {
         </SubTitle>
         <StatusSelect
           value={status}
-          onChange={(e) => setStatus(e.target.value)}
+          onChange={(e) => handleStatusChange(e.target.value)}
           bgColor={getStatusColor(status)}
         >
           <option value="">Select a status</option>
-          <option value="Pending">Pending</option>
-          <option value="Open">Open</option>
-          <option value="Closed">Closed</option>
+          <option value="pending">Pending</option>
+          <option value="open">Open</option>
+          <option value="closed">Closed</option>
         </StatusSelect>
       </SubHeaderRow>
 
-      <Section>
-        <SectionTitle>Customer Details</SectionTitle>
-        <CustomerDetailsGrid>
-          <DetailItem>
-            <strong>Name:</strong> {customerData.name}
-          </DetailItem>
-          <DetailItem>
-            <strong>Phone number:</strong> {customerData.phone}
-          </DetailItem>
-          <DetailItem>
-            <strong>Company:</strong> {customerData.company}
-          </DetailItem>
-          <DetailItem>
-            <strong>Delivery location:</strong> {customerData.location}
-          </DetailItem>
-          <DetailItem>
-            <strong>Email ID:</strong> {customerData.email}
-          </DetailItem>
-          <DetailItem>
-            <strong>Description:</strong> {customerData.description}
-          </DetailItem>
-          <DetailItem>
-            <strong>Address:</strong> {customerData.address}
-          </DetailItem>
-        </CustomerDetailsGrid>
-      </Section>
+     <Section>
+  <SectionTitle>Enquiry Details</SectionTitle>
 
-      <Section>
-        <SectionTitle>Product Inquiries</SectionTitle>
-        <ProductGrid>
-          {productData.map((product) => (
-            <ProductCard key={product.id}>
-              <ProductImage src={product.img} alt={product.name} />
-              <ProductName>{product.name}</ProductName>
-            </ProductCard>
-          ))}
-        </ProductGrid>
-      </Section>
+  {/* Always show customer details */}
+  {detail && (
+    <CustomerDetailsGrid>
+      <DetailItem><strong>Name:</strong> {detail.first_name} {detail.last_name}</DetailItem>
+      <DetailItem><strong>Phone:</strong> {detail.phone || "N/A"}</DetailItem>
+      <DetailItem><strong>Company:</strong> {detail.company_name || "N/A"}</DetailItem>
+      <DetailItem><strong>Delivery location:</strong> {detail.delivery_location || "N/A"}</DetailItem>
+      <DetailItem><strong>Email:</strong> {detail.email || "N/A"}</DetailItem>
+      <DetailItem><strong>Description:</strong> {detail.description || "N/A"}</DetailItem>
+      <DetailItem><strong>Address:</strong> {detail.address || "N/A"}</DetailItem>
+      <DetailItem><strong>Country:</strong> {detail.country || "N/A"}</DetailItem>
+      <DetailItem><strong>State:</strong> {detail.state || "N/A"}</DetailItem>
+    </CustomerDetailsGrid>
+  )}
+
+  {/* Products */}
+  <Section>
+    <SectionTitle>Product Inquiries</SectionTitle>
+    {detail?.products?.length > 0 ? (
+      <ProductGrid>
+        {detail.products.map((product) => (
+          <ProductCard key={product.id}>
+            <ProductImage src={product.image} alt={product.name} />
+            <ProductName>{product.name}</ProductName>
+            <p><strong>RAM:</strong> {product.ram}</p>
+            <p><strong>Storage:</strong> {product.storage}</p>
+            <p><strong>Cores:</strong> {product.cores}</p>
+          </ProductCard>
+        ))}
+      </ProductGrid>
+    ) : (
+      <EmptyState>
+        <img src={NoEnquiry} alt="No product enquiries" />
+      </EmptyState>
+    )}
+  </Section>
+</Section>
+
     </Layout>
   );
 };

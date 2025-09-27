@@ -14,11 +14,11 @@ export const submitInquiry = createAsyncThunk(
   }
 );
 
-// List inquiries (admin)
+// List inquiries (admin, with pagination)
 export const fetchInquiries = createAsyncThunk(
   "inquiry/fetchInquiries",
-  async (token) => {
-    return await getInquiries(token);
+  async ({ token, page = 1 }) => {
+    return await getInquiries(token, page);
   }
 );
 
@@ -41,7 +41,10 @@ export const changeInquiryStatus = createAsyncThunk(
 const inquirySlice = createSlice({
   name: "inquiry",
   initialState: {
-    inquiries: [],
+    list: [],          // ✅ results go here
+    count: 0,          // total count of inquiries
+    total_pages: 0,    // pagination
+    current_page: 1,
     inquiryDetail: null,
     loading: false,
     error: null,
@@ -53,7 +56,7 @@ const inquirySlice = createSlice({
       .addCase(submitInquiry.pending, (state) => {
         state.loading = true;
       })
-      .addCase(submitInquiry.fulfilled, (state, action) => {
+      .addCase(submitInquiry.fulfilled, (state) => {
         state.loading = false;
       })
       .addCase(submitInquiry.rejected, (state, action) => {
@@ -67,7 +70,10 @@ const inquirySlice = createSlice({
       })
       .addCase(fetchInquiries.fulfilled, (state, action) => {
         state.loading = false;
-        state.inquiries = action.payload;
+        state.list = action.payload.results;      
+        state.count = action.payload.count;
+        state.total_pages = action.payload.total_pages;
+        state.current_page = action.payload.current_page;
       })
       .addCase(fetchInquiries.rejected, (state, action) => {
         state.loading = false;
@@ -81,11 +87,11 @@ const inquirySlice = createSlice({
 
       // Update status
       .addCase(changeInquiryStatus.fulfilled, (state, action) => {
-        const index = state.inquiries.findIndex(
+        const index = state.list.findIndex(
           (inq) => inq.id === action.payload.id
         );
         if (index !== -1) {
-          state.inquiries[index] = action.payload;
+          state.list[index] = action.payload;
         }
         state.inquiryDetail = action.payload;
       });

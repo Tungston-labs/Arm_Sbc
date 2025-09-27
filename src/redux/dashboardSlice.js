@@ -1,10 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { getDashboardCounts } from "../services/dashboardService";
-
+import { data } from "react-router-dom";
 
 export const fetchDashboardCounts = createAsyncThunk(
   "dashboard/fetchCounts",
-  async (token) => {
+  async () => {
+    const token = localStorage.getItem("accessToken"); 
+    if (!token) throw new Error("No token found. Please log in again.");
     return await getDashboardCounts(token);
   }
 );

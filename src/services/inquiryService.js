@@ -7,8 +7,8 @@ export const createInquiry = async (inquiryData) => {
 };
 
 //  List all inquiries (admin)
-export const getInquiries = async (token) => {
-  const response = await api.get("inquiries/", {
+export const getInquiries = async (token, page = 1) => {
+  const response = await api.get(`inquiries/?page=${page}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
   return response.data;

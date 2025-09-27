@@ -182,7 +182,7 @@ export const ForgotPassword = styled.a`
 `;
 
 export const Button = styled.button`
-  width: 106%;
+  width: 21.2rem;
   background: #8a38f5;
   color: #fff;
   font-size: 20px;

@@ -13,25 +13,30 @@ import EnquiryDetails from './pages/EnquiryPage/EnquiryDetails'
 import InquiryPage from './pages/Inquiryform/InquiryPage'
 import CartPage from "./pages/cartpage/CartPage.jsx"
 import Products from "./pages/product/Products.jsx";
+import PersistLogin from "./Components/PersistLogin.jsx"
 
 function App() {
   return (
 
        
     <Routes>
+      {/* Public Routes */}
       <Route path="/" element={<Header />} />
       <Route path="/compare" element={<Comparison />} />
       <Route path="/cartpage" element={<CartPage />} />
       <Route path="/inquiry-page" element={<InquiryPage />} />
       <Route path="/product" element={<Products />} />
       <Route path="/product/:id" element={<SingleProduct />} />
-      <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/enquiry-page" element={<Enquiry />} />
-      <Route path="/enquiry-details/:id" element={<EnquiryDetails />} />
       <Route path="/login" element={<Login />} />
       <Route path="/reset-password" element={<Resetpassword />} />
       <Route path="/verification" element={<Verification />} />
       <Route path="/setnewpassword" element={<SetNewPassword />} />
+
+      <Route element={<PersistLogin />}>
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/enquiry-page" element={<Enquiry />} />
+        <Route path="/enquiry-details/:id" element={<EnquiryDetails />} />
+      </Route>
     </Routes>
   );
 }

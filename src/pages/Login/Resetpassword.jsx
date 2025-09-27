@@ -47,17 +47,21 @@ const Resetpassword = () => {
     }
     setValidationError("");
 
-    // Dispatch send OTP action from slice
+    // Dispatch send OTP action
     dispatch(sendOtpAction(email))
       .unwrap()
       .then(() => {
-        // Reset slice state for next use
+        // Save email in localStorage as fallback
+        localStorage.setItem("resetEmail", email);
+
+        // Reset slice state
         dispatch(resetForgotState());
-        // Navigate to verification page and pass email
+
+        // Navigate to Verification page
         navigate("/verification", { state: { email } });
       })
       .catch(() => {
-        // error handled via forgotError in slice
+        // Error handled via forgotError in slice
       });
   };
 

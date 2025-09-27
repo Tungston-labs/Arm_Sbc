@@ -21,21 +21,16 @@ import backgroundImage from "../../assets/main/loginBg.svg";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { resetPasswordAction } from "../../redux/authSlice";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
 
 const SetNewPassword = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-let { email } = location.state || {};
-if (!email) {
-  // fallback to localStorage
-  email = localStorage.getItem("resetEmail");
-}
 
-
-  // Get email from previous page
+  // Get email from previous page or fallback to localStorage
+  let email = location.state?.email || localStorage.getItem("resetEmail");
 
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -48,30 +43,71 @@ if (!email) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // Check if both fields are filled
     if (!newPassword || !confirmPassword) {
-      toast.error("Please fill in both fields.");
+      Swal.fire({
+        icon: "warning",
+        title: "Oops...",
+        text: "Please fill in both fields!",
+      });
       return;
     }
 
+    // Check minimum 6 characters
+    if (newPassword.length < 6) {
+      Swal.fire({
+        icon: "warning",
+        title: "Weak Password",
+        text: "Password should be at least 6 characters long.",
+      });
+      return;
+    }
+
+    // Check password match
     if (newPassword !== confirmPassword) {
-      toast.error("Passwords do not match.");
+      Swal.fire({
+        icon: "error",
+        title: "Password Mismatch",
+        text: "Passwords do not match!",
+      });
       return;
     }
 
+    // Check email exists
     if (!email) {
-      toast.error("Email not found. Please retry the reset process.");
+      Swal.fire({
+        icon: "error",
+        title: "Email Missing",
+        text: "Email not found. Retry the reset process.",
+      });
       return;
     }
 
-    dispatch(resetPasswordAction({ email, new_password: newPassword }));
+    // Dispatch reset password action
+    dispatch(
+      resetPasswordAction({
+        email: email.trim(),
+        new_password: newPassword.trim(),
+      })
+    );
   };
 
   useEffect(() => {
     if (resetSuccess) {
-      toast.success("Password reset successfully!", { autoClose: 3000 });
+      Swal.fire({
+        icon: "success",
+        title: "Success",
+        text: "Password reset successfully!",
+        timer: 2500,
+        showConfirmButton: false,
+      });
       navigate("/login");
     } else if (resetError) {
-      toast.error(resetError.detail || "Failed to reset password.");
+      Swal.fire({
+        icon: "error",
+        title: "Failed",
+        text: resetError.detail || "Failed to reset password.",
+      });
     }
   }, [resetSuccess, resetError, navigate]);
 
@@ -88,8 +124,6 @@ if (!email) {
         </Subtitle>
 
         <Form onSubmit={handleSubmit}>
-          {/* Show email as read-only */}
-          
           <Label>New Password</Label>
           <InputWrapper>
             <Input
@@ -131,8 +165,6 @@ if (!email) {
           <BackLink>Back to Login</BackLink>
         </Link>
       </LoginBox>
-
-      <ToastContainer />
     </LoginContainer>
   );
 };

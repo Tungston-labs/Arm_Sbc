@@ -1,6 +1,6 @@
 import React from "react";
-import { AddProductNav } from "./Addproduct.styles";
-import { AddNavItem } from "./Addproduct.styles";
+import { AddProductNav } from "./DescriptionDetails/Addproduct.styles";
+import { AddNavItem } from "./DescriptionDetails/Addproduct.styles";
 
 const AddProductNavBar = ({ activeTab, setActiveTab }) => {
   const tabs = ["Description", "Additional Information"];

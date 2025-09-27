@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import { Button } from "antd";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import productImg from "../../assets/Comparison/chip.svg";
-
-import descriptionData from "../../components/Addproduct/DescriptionData.json";
+import addetionalData from "../../pages/product/data/AddetionalInformationData.json";
+import descriptionData from "../../components/Addproduct/DescriptionDetails/DescriptionData.json";
 import AddProductNavBar from "../../components/Addproduct/AddProductNavbar";
-import AddProductDescriptionCard from "../../components/Addproduct/DescriptionSection";
+import AddProductDescriptionCard from "../../components/Addproduct/DescriptionDetails/DescriptionSection";
 
 import {
   AddContainer,
@@ -24,7 +24,12 @@ import {
   Input,
   TextArea,
   NavbarContainer,
+  DescriptionSection,
+  ActionBar,
+  EditButton,
+  DeleteButton,
 } from "./AddViewProduct.styled";
+import AddetionalInformationCard from "../../Components/product/Specification/AddetionalInformationCard";
 
 const AddViewProduct = () => {
   // track currently active tab
@@ -35,12 +40,11 @@ const AddViewProduct = () => {
       <TopBar>
         <IoMdArrowRoundBack size={28} color="#fff" />
         <Header>Add product</Header>
-        <div style={{ marginLeft: "auto" }}>
-          <Button type="primary" style={{ marginRight: 12 }}>
-            Edit
-          </Button>
-          <Button danger>Delete</Button>
-        </div>
+       <ActionBar>
+  <EditButton type="primary">Edit</EditButton>
+  <DeleteButton danger>Delete</DeleteButton>
+</ActionBar>
+
       </TopBar>
 
       <SubText>
@@ -78,20 +82,24 @@ const AddViewProduct = () => {
       {activeTab === "Description" && (
         <div style={{ marginTop: "2rem" }}>
           {Array.isArray(descriptionData) && descriptionData.length ? (
-            descriptionData.map((section, idx) => (
-              <AddProductDescriptionCard key={idx} data={section} />
-            ))
+            <AddProductDescriptionCard allData={descriptionData} />
           ) : (
             <div>No description data available.</div>
           )}
         </div>
       )}
 
-      {activeTab === "Additional Information" && (
-        <div style={{ marginTop: "2rem" }}>
-          <p style={{ color: "#ccc" }}>Additional information content goes here.</p>
-        </div>
+   
+
+    {activeTab === "Additional Information" && (
+        <DescriptionSection background="#ffffff1a">
+          {addetionalData?.map((i, index) => (
+            <AddetionalInformationCard data={i} key={index} />
+          ))}
+        </DescriptionSection>
       )}
+
+      
     </AddContainer>
   );
 };

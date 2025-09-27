@@ -66,10 +66,10 @@ export const TextBox = styled.div`
     font-size: 20px;
   }
   @media (min-width: 2560px) {
-    font-size: 24px;
+    font-size: 2rem;
   }
   @media (min-width: 3860px) {
-    font-size: 28px;
+    font-size: 2.5rem;
   }
 `;
 
@@ -130,7 +130,7 @@ export const FullWidth = styled.div`
 export const Input = styled.input`
   padding: 15px 14px;
   background: #2b2534;
-  color: #fff;
+  color: #FFFFFF;
   border: none;
   border-radius: 6px;
   width: 100%;
@@ -141,19 +141,76 @@ export const Input = styled.input`
     padding: 18px 16px;
   }
   @media (min-width: 2560px) {
-    font-size: 20px;
+    font-size: 2rem;
     padding: 20px 18px;
   }
   @media (min-width: 3860px) {
-    font-size: 24px;
+    font-size: 2rem;
     padding: 24px 20px;
   }
 `;
-
+export const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 16px;
+  gap: 12px;
+  margin-bottom: 40px;
+  @media (min-width: 768px) {
+    gap: 16px;
+  }
+  @media (min-width: 1920px) {
+    gap: 24px;
+  }
+  @media (min-width: 2560px) {
+    gap: 32px;
+  }
+`
+export const AddButton = styled.button`
+  background-color: #8a38f5;
+  color: #fff;
+  border-radius: 5px;
+  padding: 8px 20px;
+  font-size: 16px;
+  min-width: 100px;
+  @media (min-width: 768px) {
+    min-width: 120px;
+    font-size: 17px;
+  }
+  @media (min-width: 1920px) {
+    min-width: 140px;
+    font-size: 18px;
+  }
+  @media (min-width: 2560px) {
+    min-width: 160px;
+    font-size: 20px;
+  }
+  `
+  export const CancelButton = styled.button`
+  background-color: white;
+  color: #000;
+  border-radius: 5px;
+  padding: 8px 20px;
+  font-size: 16px;
+  min-width: 100px;
+  @media (min-width: 768px) {
+    min-width: 120px;
+    font-size: 17px;
+  }
+  @media (min-width: 1920px) {
+    min-width: 140px;
+    font-size: 18px;
+  }
+  @media (min-width: 2560px) {
+    min-width: 160px;
+    font-size: 20px;
+  }
+`;
 export const TextArea = styled.textarea`
   padding: 24px 14px;
   background: #2b2534;
-  color: #fff;
+  color: #FFFFFF;
   border: none;
   border-radius: 6px;
   width: 100%;

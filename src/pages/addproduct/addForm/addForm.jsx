@@ -1,6 +1,9 @@
 import React from "react";
 import { AddContainer, Header, Text } from "../addProduct.styled";
 import {
+  AddButton,
+  ButtonContainer,
+  CancelButton,
   FormArea,
   FullWidth,
   Input,
@@ -50,7 +53,7 @@ const AddForm = () => {
 
         <Row>
           <TextBox>
-            <LabelInline>Specifications</LabelInline>
+            <LabelInline style={{marginTop:"60px"}}>Specifications</LabelInline>
           </TextBox>
           <FormArea>
             <DemoCollapse />
@@ -69,6 +72,11 @@ const AddForm = () => {
           </FormArea>
         </Row>
       </LabelInputBox>
+      <ButtonContainer>
+<CancelButton>Cancel</CancelButton>
+<AddButton>Save</AddButton>
+
+      </ButtonContainer>
     </AddContainer>
   );
 };

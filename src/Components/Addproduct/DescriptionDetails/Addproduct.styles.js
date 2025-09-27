@@ -10,11 +10,11 @@ export const AddProductNav = styled.nav`
   ul {
     display: flex;
     list-style: none;
-    justify-content: center;     /* center the li items inside the ul */
+    justify-content: center;     
     font-size: 0.75rem;
     color: white;
-    margin: 0;                   /* remove default ul margin */
-    padding: 0;                  /* remove default ul padding */
+    margin: 0;                  
+    padding: 0;                  
   }
 
   @media (width >= 1024px) {

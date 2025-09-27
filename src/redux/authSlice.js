@@ -9,7 +9,7 @@ import {
   logoutUser,
 } from "../services/authService";
 
-// 🔑 Login
+
 export const login = createAsyncThunk(
   "auth/login",
   async ({ email, password }, { rejectWithValue }) => {

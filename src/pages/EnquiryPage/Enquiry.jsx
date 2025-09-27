@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Layout from "../../Layout/Layout";
 import NoEnquiry from "../../assets/inquriy/noenquiry.svg";
-
 import {
   PageTitle,
   SubTitle,
@@ -16,29 +15,33 @@ import {
   PageButton,
   ViewIcon,
   ArrowButton,
-  EmptyState,   // 👈 import it here
+  EmptyState,
 } from "./Enquiry.Styles";
-
 import { fetchInquiries } from "../../redux/inquirySlice";
 
 const Enquiry = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { list: enquiries = [], loading, error } = useSelector(
-    (state) => state.inquiry || {}
-  );
+  const { list: enquiries, total_pages, current_page, loading, error } =
+    useSelector((state) => state.inquiry);
 
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("accessToken");
 
   useEffect(() => {
     if (token) {
-      dispatch(fetchInquiries(token));
+      dispatch(fetchInquiries({ token, page: 1 }));
     }
   }, [dispatch, token]);
 
   const handleViewClick = (id) => {
     navigate(`/enquiry-details/${id}`);
+  };
+
+  const handlePageChange = (page) => {
+    if (page !== current_page && token) {
+      dispatch(fetchInquiries({ token, page }));
+    }
   };
 
   return (
@@ -73,12 +76,16 @@ const Enquiry = () => {
           <tbody>
             {enquiries.map((item) => (
               <TableRow key={item.id}>
-                <TableCell>{item.name}</TableCell>
+                <TableCell>
+                  {item.first_name} {item.last_name}
+                </TableCell>
                 <TableCell>{item.email}</TableCell>
                 <TableCell>{item.phone}</TableCell>
-                <TableCell>{item.location}</TableCell>
+                <TableCell>{item.delivery_location}</TableCell>
                 <TableCell>
-                  <StatusBadge status={item.status}>{item.status}</StatusBadge>
+                  <StatusBadge status={item.status?.toLowerCase()}>
+                    {item.status}
+                  </StatusBadge>
                 </TableCell>
                 <TableCell>
                   <ViewIcon onClick={() => handleViewClick(item.id)} />
@@ -89,14 +96,33 @@ const Enquiry = () => {
         </Table>
       )}
 
-      <Pagination>
-        <ArrowButton disabled>{`<`}</ArrowButton>
-        <PageButton active>1</PageButton>
-        <PageButton>2</PageButton>
-        <PageButton>3</PageButton>
-        <PageButton>4</PageButton>
-        <ArrowButton>{`>`}</ArrowButton>
-      </Pagination>
+      {total_pages > 1 && (
+        <Pagination>
+          <ArrowButton
+            disabled={current_page === 1}
+            onClick={() => handlePageChange(current_page - 1)}
+          >
+            {"<"}
+          </ArrowButton>
+
+          {Array.from({ length: total_pages }, (_, i) => (
+            <PageButton
+              key={i + 1}
+              active={current_page === i + 1}
+              onClick={() => handlePageChange(i + 1)}
+            >
+              {i + 1}
+            </PageButton>
+          ))}
+
+          <ArrowButton
+            disabled={current_page === total_pages}
+            onClick={() => handlePageChange(current_page + 1)}
+          >
+            {">"}
+          </ArrowButton>
+        </Pagination>
+      )}
     </Layout>
   );
 };

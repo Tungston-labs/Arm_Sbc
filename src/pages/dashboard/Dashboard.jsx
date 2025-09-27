@@ -18,12 +18,14 @@ import { fetchDashboardCounts } from "../../redux/dashboardSlice";
 const Dashboard = () => {
   const dispatch = useDispatch();
   const { counts, loading, error } = useSelector((state) => state.dashboard);
- const token = localStorage.getItem("token"); 
+const token = localStorage.getItem("accessToken");
+
 console.log("🔑 Token from localStorage:", token);
 
 
+
   useEffect(() => {
-  dispatch(fetchDashboardCounts()); // no token needed
+  dispatch(fetchDashboardCounts()); 
 }, [dispatch]);
 
 useEffect(() => {
@@ -49,7 +51,7 @@ useEffect(() => {
               <FaClipboardList />
             </CardIcon>
           </CardHeader>
-          <CardValue>{counts.new_enquiries || 0}</CardValue>
+        <CardValue>{counts.new_inquiries_count || 0}</CardValue>
         </Card>
 
         <Card>
@@ -59,7 +61,7 @@ useEffect(() => {
               <FaBox />
             </CardIcon>
           </CardHeader>
-          <CardValue>{counts.products || 0}</CardValue>
+<CardValue>{counts.total_products_count || 0}</CardValue>
         </Card>
       </CardGrid>
     </Layout>

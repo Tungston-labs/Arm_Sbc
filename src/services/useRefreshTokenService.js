@@ -2,19 +2,19 @@ import api from "./api";
 
 export const refreshToken = async () => {
   try {
-    const response = await api.post("accounts/refresh/", {
-      refresh: localStorage.getItem("refresh_token"),
+    const response = await api.post("accounts/token/refresh/", {
+      refresh: localStorage.getItem("refreshToken"),
     });
 
     const newAccessToken = response.data.access;
     if (newAccessToken) {
-      localStorage.setItem("access_token", newAccessToken);
+      localStorage.setItem("accessToken", newAccessToken);
     }
     return newAccessToken;
   } catch (err) {
     console.error("Refresh token failed", err);
-    localStorage.removeItem("access_token");
-    localStorage.removeItem("refresh_token");
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
     return null;
   }
 };

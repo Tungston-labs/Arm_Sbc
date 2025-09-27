@@ -5,7 +5,9 @@ import { data } from "react-router-dom";
 export const fetchDashboardCounts = createAsyncThunk(
   "dashboard/fetchCounts",
   async () => {
-    return await getDashboardCounts();
+    const token = localStorage.getItem("accessToken"); 
+    if (!token) throw new Error("No token found. Please log in again.");
+    return await getDashboardCounts(token);
   }
 );
 

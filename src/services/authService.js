@@ -24,11 +24,6 @@ export const verifyOTP = async (email, otp) => {
   return response.data;
 };
 
-// Reset Password
-export const resetPassword = async (email, new_password) => {
-  const response = await api.post("accounts/reset-password/", { email, new_password });
-  return response.data;
-};
 
 // Change Password
 export const changePassword = async (current_password, new_password, confirm_new_password) => {

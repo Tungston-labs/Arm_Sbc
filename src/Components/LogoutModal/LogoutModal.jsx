@@ -10,8 +10,23 @@ import {
 } from "./LogoutModal.Styles";
 
 import logoutImg from "../../assets/main/logout.svg";
+import { useDispatch } from "react-redux";
+import { logout } from "../../redux/authSlice"; // 🔑 import logout thunk
+import { useNavigate } from "react-router-dom"; // if using react-router
 
-const LogoutModal = ({ onConfirm, onCancel }) => {
+const LogoutModal = ({ onCancel }) => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const handleConfirm = async () => {
+        try {
+            await dispatch(logout()).unwrap(); // ✅ call API + clear tokens
+            navigate("/login"); // redirect after logout
+        } catch (err) {
+            console.error("Logout failed:", err);
+        }
+    };
+
     return (
         <ModalOverlay>
             <ModalContent>
@@ -22,7 +37,7 @@ const LogoutModal = ({ onConfirm, onCancel }) => {
                     Are you sure you want <br /> to log out ?
                 </ModalMessage>
                 <ButtonGroup>
-                    <ConfirmButton onClick={onConfirm}>Confirm</ConfirmButton>
+                    <ConfirmButton onClick={handleConfirm}>Confirm</ConfirmButton>
                     <CancelButton onClick={onCancel}>Cancel</CancelButton>
                 </ButtonGroup>
             </ModalContent>

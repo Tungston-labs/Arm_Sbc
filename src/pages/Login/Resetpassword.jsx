@@ -17,41 +17,29 @@ import logoImage from "../../assets/main/logo2.svg";
 import backgroundImage from "../../assets/main/loginBg.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import { sendOTP } from "../../services/authService";
-
-export const requestOTP = createAsyncThunk(
-  "auth/requestOTP",
-  async (email, { rejectWithValue }) => {
-    try {
-      const data = await sendOTP(email);
-      return data;
-    } catch (err) {
-      return rejectWithValue(err.response?.data || "Something went wrong");
-    }
-  }
-);
+import { sendOtpAction, resetForgotState } from "../../redux/authSlice";
 
 const Resetpassword = () => {
   const [email, setEmail] = useState("");
   const [validationError, setValidationError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { loading, error } = useSelector((state) => state.auth);
 
+  const { forgotLoading, otpSent, forgotError } = useSelector(
+    (state) => state.auth
+  );
+
+  // Validate email format
   const validateForm = () => {
-    if (!email) {
-      return "Empty Field: Please enter your email address.";
-    }
+    if (!email) return "Empty Field: Please enter your email address.";
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      return "Invalid Format: Enter a valid email address (e.g., name@example.com).";
-    }
+    if (!emailRegex.test(email)) return "Invalid Format: Enter a valid email address.";
     return "";
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const validationMsg = validateForm();
     if (validationMsg) {
       setValidationError(validationMsg);
@@ -59,13 +47,17 @@ const Resetpassword = () => {
     }
     setValidationError("");
 
-    dispatch(requestOTP(email))
+    // Dispatch send OTP action from slice
+    dispatch(sendOtpAction(email))
       .unwrap()
       .then(() => {
+        // Reset slice state for next use
+        dispatch(resetForgotState());
+        // Navigate to verification page and pass email
         navigate("/verification", { state: { email } });
       })
       .catch(() => {
-        
+        // error handled via forgotError in slice
       });
   };
 
@@ -91,14 +83,14 @@ const Resetpassword = () => {
             required
           />
 
-          {(validationError || error) && (
+          {(validationError || forgotError) && (
             <p style={{ color: "red", marginBottom: "10px" }}>
-              {validationError || error?.detail || "Failed to send reset link. Please try again."}
+              {validationError || forgotError?.detail || "Failed to send reset link. Please try again."}
             </p>
           )}
 
-          <Button type="submit" disabled={loading}>
-            {loading ? "Sending..." : "Continue"}
+          <Button type="submit" disabled={forgotLoading}>
+            {forgotLoading ? "Sending..." : "Continue"}
           </Button>
         </Form>
 

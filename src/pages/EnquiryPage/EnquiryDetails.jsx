@@ -40,7 +40,7 @@ const { inquiryDetail: detail, loading, error } = useSelector((state) => state.i
 
 useEffect(() => {
   if (detail?.status) {
-    setStatus(detail.status.toLowerCase()); // always store lowercase
+    setStatus(detail.status.toLowerCase()); 
   }
 }, [detail]);
   const handleStatusChange = (newStatus) => {
@@ -88,8 +88,6 @@ useEffect(() => {
 
      <Section>
   <SectionTitle>Customer Details</SectionTitle>
-
-  {/* Always show customer details */}
   {detail && (
     <CustomerDetailsGrid>
       <DetailItem><strong>Name:</strong> {detail.first_name} {detail.last_name}</DetailItem>
@@ -103,8 +101,6 @@ useEffect(() => {
       <DetailItem><strong>State:</strong> {detail.state || "N/A"}</DetailItem> */}
     </CustomerDetailsGrid>
   )}
-
-  {/* Products */}
   <Section>
     <SectionTitle>Product Inquiries</SectionTitle>
     {detail?.products?.length > 0 ? (

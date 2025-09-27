@@ -254,7 +254,7 @@ export const ProductGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 1rem;
-    justify-content: center; 
+  justify-content: center; 
 
 
   @media (min-width: 768px) {
@@ -282,17 +282,17 @@ export const ProductGrid = styled.div`
 `;
 
 export const ProductCard = styled.div`
-  background: rgba(30, 30, 36, 0.4); /* 👈 transparent dark background */
+  background: rgba(30, 30, 36, 0.4); 
   border-radius: 10px;
   padding: 1rem;
   text-align: center;
   transition: transform 0.2s ease;
   font-family: 'Roboto', sans-serif;
 
-  /* Glassmorphism effect */
+
   backdrop-filter: blur(50px);
   -webkit-backdrop-filter: blur(50px);
-  border: 1px solid rgba(255, 255, 255, 0.1); /* subtle border for glass look */
+  border: 1px solid rgba(255, 255, 255, 0.1); 
 
   width: 100%;
   max-width: 250px;

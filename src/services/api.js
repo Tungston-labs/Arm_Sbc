@@ -2,29 +2,28 @@ import axios from "axios";
 import { refreshToken } from "./useRefreshTokenService";
 
 const api = axios.create({
-  baseURL: "http://178.248.112.16:8002/api/",
+  baseURL: "http://178.248.112.16:8002/api/", 
   headers: {
     "Content-Type": "application/json",
   },
 });
+
 
 export const privateApi = axios.create({
   baseURL: "http://178.248.112.16:8002/api/",
   headers: {
-    "Content-Type": "application/json",
+    Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
   },
 });
 
-// 🔑 Attach token
 privateApi.interceptors.request.use((config) => {
   const token = localStorage.getItem("accessToken");
+  console.log("hjhjh",token)
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
   return config;
 });
-
-// 🔄 Handle expired token
 privateApi.interceptors.response.use(
   (response) => response,
   async (error) => {
@@ -36,12 +35,14 @@ privateApi.interceptors.response.use(
       const newToken = await refreshToken();
 
       if (newToken) {
+        localStorage.setItem("accessToken", newToken);
         prevRequest.headers.Authorization = `Bearer ${newToken}`;
-        return privateApi(prevRequest); // ✅ use privateApi, not api
+        return privateApi(prevRequest);
       }
     }
     return Promise.reject(error);
   }
 );
+
 
 export default api;

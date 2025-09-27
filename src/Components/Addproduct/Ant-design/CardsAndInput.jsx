@@ -1,16 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { Input } from "antd";
 import { StyledCollapse, StyledPanel } from "./CardsInput.styled";
-import { specSections } from "./Spec-section"; 
+import { specSections } from "./Spec-section";
 
-export default function DemoCollapse() {
+export default function DemoCollapse({ specs, onSpecsChange }) {
+  const handleChange = (sectionKey, field, value) => {
+    onSpecsChange({
+      ...specs,
+      [sectionKey]: {
+        ...specs?.[sectionKey],
+        [field]: value,
+      },
+    });
+  };
+
   return (
     <StyledCollapse accordion>
       {specSections.map((section) => (
         <StyledPanel header={section.title} key={section.key}>
-          {section.fields.map((field, idx) => (
+          {section.fields.map((field) => (
             <div
-              key={idx}
+              key={field}
               style={{
                 display: "grid",
                 gridTemplateColumns: "1fr 1fr",
@@ -18,8 +28,14 @@ export default function DemoCollapse() {
                 marginBottom: "20px",
               }}
             >
-              <Input placeholder={field} />
-              <Input placeholder="overview" />
+              <Input value={field} disabled />
+              <Input
+                placeholder="Overview"
+                value={specs?.[section.key]?.[field] || ""}
+                onChange={(e) =>
+                  handleChange(section.key, field, e.target.value)
+                }
+              />
             </div>
           ))}
         </StyledPanel>
@@ -27,3 +43,4 @@ export default function DemoCollapse() {
     </StyledCollapse>
   );
 }
+

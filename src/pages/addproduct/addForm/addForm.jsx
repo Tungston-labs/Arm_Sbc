@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addNewProduct } from "../../../redux/productSlice";
 import { AddContainer, Header, Text } from "../addProduct.styled";
 import {
   AddButton,
@@ -10,18 +12,76 @@ import {
   LabelInline,
   LabelInputBox,
   Row,
-  TextArea,
   TextBox,
   TopBar,
   TwoCols,
+  TextArea,
 } from "./addForm.styled";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import ImageUploader from "../../../components/Addproduct/ImageUploadSection/ImageUpload";
 import DemoCollapse from "../../../components/Addproduct/Ant-design/CardsAndInput";
+import axios from "axios";
 
 const AddForm = () => {
+  // const dispatch = useDispatch();
+
+  const [formData, setFormData] = useState({
+    name: "",
+    ram: "",
+    core: "",
+    storage: "",
+    description: "",
+    specifications: {},
+    additionalName: "",
+    additionalRam: "",
+    images: [],
+  });
+
+  const updateFormData = (field, value) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const token = localStorage.getItem("accessToken");
+
+      const fd = new FormData();
+      fd.append("name", formData.name);
+      fd.append("ram", formData.ram);
+      fd.append("cores", formData.core);
+      fd.append("storage", formData.storage);
+      fd.append("description", formData.description);
+      fd.append(
+        "additional_info",
+        JSON.stringify({
+          name: formData.additionalName,
+          ram: formData.additionalRam,
+        })
+      );
+      fd.append("specs", JSON.stringify(formData.specifications));
+
+      if (formData.images?.[0]) {
+        fd.append("image", formData.images[0]);
+      }
+      const response = await axios.post(
+        "http://178.248.112.16:8002/api/products/create/",
+        fd,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      console.log("Product created:", response.data);
+    } catch (error) {
+      console.error("Error creating product:", error);
+    }
+  };
   return (
-    <AddContainer>
+    <AddContainer as="form" onSubmit={handleSubmit}>
       <TopBar>
         <IoMdArrowRoundBack size={28} color="#fff" />
         <Header>Add Product</Header>
@@ -30,7 +90,12 @@ const AddForm = () => {
       <Text>
         Enter new products fast and accurately. Stay on top of your inventory.
       </Text>
-      <ImageUploader />
+
+      <ImageUploader
+        images={formData.images}
+        onImagesChange={(imgs) => updateFormData("images", imgs)}
+      />
+
       <LabelInputBox>
         <Row>
           <TextBox>
@@ -38,25 +103,50 @@ const AddForm = () => {
           </TextBox>
           <FormArea>
             <TwoCols>
-              <Input placeholder="Enter product name" />
-              <Input placeholder="Ram" />
+              <Input
+                placeholder="Enter product name"
+                value={formData.name}
+                onChange={(e) => updateFormData("name", e.target.value)}
+              />
+              <Input
+                placeholder="Ram"
+                value={formData.ram}
+                onChange={(e) => updateFormData("ram", e.target.value)}
+              />
             </TwoCols>
             <TwoCols>
-              <Input placeholder="Core" />
-              <Input placeholder="Storage" />
+              <Input
+                placeholder="Core"
+                value={formData.core}
+                onChange={(e) => updateFormData("core", e.target.value)}
+              />
+              <Input
+                placeholder="Storage"
+                value={formData.storage}
+                onChange={(e) => updateFormData("storage", e.target.value)}
+              />
             </TwoCols>
             <FullWidth>
-              <TextArea placeholder="Add description" />
+              <TextArea
+                placeholder="Add description"
+                value={formData.description}
+                onChange={(e) => updateFormData("description", e.target.value)}
+              />
             </FullWidth>
           </FormArea>
         </Row>
 
         <Row>
           <TextBox>
-            <LabelInline style={{marginTop:"60px"}}>Specifications</LabelInline>
+            <LabelInline style={{ marginTop: "60px" }}>
+              Specifications
+            </LabelInline>
           </TextBox>
           <FormArea>
-            <DemoCollapse />
+            <DemoCollapse
+              specs={formData.specifications}
+              onSpecsChange={(specs) => updateFormData("specifications", specs)}
+            />
           </FormArea>
         </Row>
 
@@ -66,16 +156,28 @@ const AddForm = () => {
           </TextBox>
           <FormArea>
             <TwoCols>
-              <Input placeholder="Enter product name" />
-              <Input placeholder="Ram" />
+              <Input
+                placeholder="Enter product name"
+                value={formData.additionalName}
+                onChange={(e) =>
+                  updateFormData("additionalName", e.target.value)
+                }
+              />
+              <Input
+                placeholder="Ram"
+                value={formData.additionalRam}
+                onChange={(e) =>
+                  updateFormData("additionalRam", e.target.value)
+                }
+              />
             </TwoCols>
           </FormArea>
         </Row>
       </LabelInputBox>
-      <ButtonContainer>
-<CancelButton>Cancel</CancelButton>
-<AddButton>Save</AddButton>
 
+      <ButtonContainer>
+        <CancelButton type="button">Cancel</CancelButton>
+        <AddButton type="submit">Save</AddButton>
       </ButtonContainer>
     </AddContainer>
   );

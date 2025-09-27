@@ -8,7 +8,6 @@ import {
 } from "./addProduct.styled";
 import SmallCard from "../../components/Addproduct/SmallCard";
 import { useNavigate } from "react-router-dom";
-
 const AddProduct = () => {
   const navigate = useNavigate();
   const handleNavigate = () => {
@@ -17,7 +16,7 @@ const AddProduct = () => {
   return (
     <AddContainer>
       <TopBar>
-        <Header>Add product</Header>
+        <Header>Products</Header>
         <Button onClick={handleNavigate}>Add Product</Button>
       </TopBar>
 

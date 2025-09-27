@@ -1,136 +1,40 @@
-import React from "react";
-import { CardGrid, Card, CardImage, CardTitle, CardDetail, CardDetailsWrap} from "./SmallCard.styles";
-import Chip from "../../assets/Comparison/chip.svg";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProductsAdmin } from "../../redux/productSlice";
+import {
+  CardGrid,
+  Card,
+  CardImage,
+  CardTitle,
+  CardDetail,
+  CardDetailsWrap,
+} from "./SmallCard.styles";
 
 const SmallCard = () => {
-  const productInfo = [
-    {
-      img: Chip,
-      text: "ARM Development Board Rockchip 3288, Quad Core 1.7 GHz. This board is perfect for embedded systems and high-performance applications.",
-      price: "₹3000",
-      Ram: "8GB Core",
-      Storage: "64GB Storage",
-    },
-    {
-      img: Chip,
-      text: "ARM Development Board Rockchip 3288, Quad Core 1.7 GHz. Great for embedded projects and prototyping.",
-      price: "₹3000",
-      Ram: "8GB Core",
-      Storage: "64GB Storage",
-    },
-    {
-      img: Chip,
-      text: "ARM Development Board Rockchip 3288, Quad Core 1.7 GHz. Great for embedded projects and prototyping.",
-      price: "₹3000",
-      Ram: "8GB Core",
-      Storage: "64GB Storage",
-    },
-     {
-      img: Chip,
-      text: "ARM Development Board Rockchip 3288, Quad Core 1.7 GHz. Great for embedded projects and prototyping.",
-      price: "₹3000",
-      Ram: "8GB Core",
-      Storage: "64GB Storage",
-    },
-     {
-      img: Chip,
-      text: "ARM Development Board Rockchip 3288, Quad Core 1.7 GHz. Great for embedded projects and prototyping.",
-      price: "₹3000",
-      Ram: "8GB Core",
-      Storage: "64GB Storage",
-    },
-      {
-      img: Chip,
-      text: "ARM Development Board Rockchip 3288, Quad Core 1.7 GHz. Great for embedded projects and prototyping.",
-      price: "₹3000",
-      Ram: "8GB Core",
-      Storage: "64GB Storage",
-    },
-      {
-      img: Chip,
-      text: "ARM Development Board Rockchip 3288, Quad Core 1.7 GHz. Great for embedded projects and prototyping.",
-      price: "₹3000",
-      Ram: "8GB Core",
-      Storage: "64GB Storage",
-    },
-      {
-      img: Chip,
-      text: "ARM Development Board Rockchip 3288, Quad Core 1.7 GHz. Great for embedded projects and prototyping.",
-      price: "₹3000",
-      Ram: "8GB Core",
-      Storage: "64GB Storage",
-    },
-      {
-      img: Chip,
-      text: "ARM Development Board Rockchip 3288, Quad Core 1.7 GHz. Great for embedded projects and prototyping.",
-      price: "₹3000",
-      Ram: "8GB Core",
-      Storage: "64GB Storage",
-    },
-      {
-      img: Chip,
-      text: "ARM Development Board Rockchip 3288, Quad Core 1.7 GHz. Great for embedded projects and prototyping.",
-      price: "₹3000",
-      Ram: "8GB Core",
-      Storage: "64GB Storage",
-    },
-      {
-      img: Chip,
-      text: "ARM Development Board Rockchip 3288, Quad Core 1.7 GHz. Great for embedded projects and prototyping.",
-      price: "₹3000",
-      Ram: "8GB Core",
-      Storage: "64GB Storage",
-    },
-      {
-      img: Chip,
-      text: "ARM Development Board Rockchip 3288, Quad Core 1.7 GHz. Great for embedded projects and prototyping.",
-      price: "₹3000",
-      Ram: "8GB Core",
-      Storage: "64GB Storage",
-    },
-      {
-      img: Chip,
-      text: "ARM Development Board Rockchip 3288, Quad Core 1.7 GHz. Great for embedded projects and prototyping.",
-      price: "₹3000",
-      Ram: "8GB Core",
-      Storage: "64GB Storage",
-    },
-      {
-      img: Chip,
-      text: "ARM Development Board Rockchip 3288, Quad Core 1.7 GHz. Great for embedded projects and prototyping.",
-      price: "₹3000",
-      Ram: "8GB Core",
-      Storage: "64GB Storage",
-    },
-      {
-      img: Chip,
-      text: "ARM Development Board Rockchip 3288, Quad Core 1.7 GHz. Great for embedded projects and prototyping.",
-      price: "₹3000",
-      Ram: "8GB Core",
-      Storage: "64GB Storage",
-    },
-      {
-      img: Chip,
-      text: "ARM Development Board Rockchip 3288, Quad Core 1.7 GHz. Great for embedded projects and prototyping.",
-      price: "₹3000",
-      Ram: "8GB Core",
-      Storage: "64GB Storage",
-    },
-    
+  const dispatch = useDispatch();
+  const { productsAdmin, loading, error } = useSelector(
+    (state) => state.product
+  );
 
-  ];
+  useEffect(() => {
+    dispatch(fetchProductsAdmin());
+  }, [dispatch]);
+
+  if (loading) return <p>Loading…</p>;
+  if (error) return <p>Error: {error}</p>;
 
   return (
     <CardGrid>
-      {productInfo.map((item, i) => (
-        <Card key={i}>
-          <CardImage src={item.img} alt="chip" />
-          <CardTitle>{item.text}</CardTitle>
+      {productsAdmin?.map((item) => (
+        <Card key={item.id}>
+          {/* use a fallback if image is null */}
+          <CardImage src={item.image || "/placeholder.png"} alt={item.name} />
+          <CardTitle>{item.description}</CardTitle>
           <CardDetailsWrap>
-    <CardDetail>{item.price}</CardDetail>
-    <CardDetail> {item.Ram}</CardDetail>
-    <CardDetail> {item.Storage}</CardDetail>
-  </CardDetailsWrap>
+            <CardDetail>₹{item.price || "N/A"}</CardDetail>
+            <CardDetail>{item.ram}</CardDetail>
+            <CardDetail>{item.storage}</CardDetail>
+          </CardDetailsWrap>
         </Card>
       ))}
     </CardGrid>

@@ -7,14 +7,14 @@ import App from "./App";
 import store from "./redux/store"
 import "./index.css";
 
-
-
 ReactDOM.createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
       <Provider store={store}>
-        <App />
-      </Provider>
+      <App />
+        </Provider>
     </BrowserRouter>
   </StrictMode>
+  
+
 );

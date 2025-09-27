@@ -60,7 +60,7 @@ const Layout = ({ children }) => {
             $active={active === "product"}
             onClick={() => {
               setActive("product");
-              navigate("/product"); 
+              navigate("/addproduct"); 
             }}
           >
             <FaBox /> Product

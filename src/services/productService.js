@@ -1,6 +1,11 @@
 import api from "./api";
 import privateApi from "./api";
-
+const config = {
+  headers: {
+    "Content-Type": "application/json",
+     Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+  },
+}
 // Admin APIs
 export const addProduct = async (productData) => {
   const response = await privateApi.post("products/create/", productData);
@@ -8,7 +13,7 @@ export const addProduct = async (productData) => {
 };
 
 export const listProductsAdmin = async () => {
-  const response = await privateApi.get("products/create/");
+  const response = await privateApi.get("products/create/",config);
   return response.data;
 };
 

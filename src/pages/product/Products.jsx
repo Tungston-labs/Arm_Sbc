@@ -17,6 +17,7 @@ const Products = ({
   currentPage,
   setCurrentPage,
   totalPages,
+  totalCount,
   limit,
 }) => {
   return (
@@ -48,8 +49,8 @@ const Products = ({
         )}
         {products?.length > 0 && totalPages > 1 && !loading && (
           <CustomPagination
-            total={limit}
-            pageSize={totalPages}
+            total={totalCount}
+            pageSize={limit}
             current={currentPage}
             onChange={(newPage) => setCurrentPage(newPage)}
           />

@@ -12,7 +12,7 @@ const ProductsContainer = () => {
   );
   useEffect(() => {
     dispatch(fetchProductsPublic({ currentPage, limit }));
-  }, [dispatch, currentPage, limit]);
+  }, [dispatch, currentPage]);
 
   return (
     <Products
@@ -22,6 +22,7 @@ const ProductsContainer = () => {
       currentPage={currentPage}
       setCurrentPage={setCurrentPage}
       totalPages={productsPublic?.totalPages || 0}
+      totalCount={productsPublic?.totalCount || 0}
       limit={limit}
     />
   );

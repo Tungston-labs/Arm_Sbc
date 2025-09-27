@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Header from "./pages/Homepage/Header";
 import Login from "./pages/Login/Login";
 import Resetpassword from "./pages/Login/Resetpassword";
-import Verification from "./pages/Login/Verification";
+import Verification from "./pages/Login/Verification.jsx";
 import SetNewPassword from "./pages/Login/SetNewPassword";
 import Comparison from "./pages/Comparison/Comparison";
 import SingleProduct from "./pages/product/SingleProduct.jsx";

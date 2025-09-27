@@ -11,21 +11,23 @@ export const GlobalStyle = createGlobalStyle`
 
 export const ResetContainer = styled.div`
   width: 100%;
+  
   height: 100vh;
-  background: ${({ backgroundImage }) => `url(${backgroundImage}) no-repeat center center/cover`};
+  background: ${({backgroundimage }) =>
+    `url(${backgroundimage}) no-repeat center center/cover`};
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
 export const ResetBox = styled.div`
-  background: #0F0A17;
+  background: #0f0a17;
   padding: 40px 30px;
   border-radius: 12px;
-  border: 2px solid #948CA3;
+  border: 2px solid #948ca3;
   width: 100%;
   max-width: 400px;
-  box-shadow: 0px 4px 20px rgba(0,0,0,0.5);
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
   text-align: center;
 
   @media (max-width: 768px) {
@@ -49,16 +51,14 @@ export const Logo = styled.img`
 
 export const Title = styled.h3`
   font-size: 1.8rem;
-  font-family: 'Roboto', sans-serif;
   margin: 15px 0 10px 0;
-  color: #FFFFFF;
+  color: #ffffff;
   font-weight: bold;
 `;
 
 export const Subtitle = styled.p`
-  font-size: 0.95rem;
-  font-family: 'Roboto', sans-serif;
-  color: #FFFFFF;
+  font-size: 0.8rem;
+  color: #ffffff;
   line-height: 1.4;
   margin-bottom: 25px;
 `;
@@ -83,28 +83,27 @@ export const OtpInput = styled.input`
   font-size: 20px;
   font-weight: bold;
   text-align: center;
-  border: 1px solid #AAA4A4;
+  border: 1px solid #aaa4a4;
   border-radius: 6px;
-  background: #FFFFFF;
-  color: #0F0A17;
+  background: #ffffff;
+  color: #0f0a17;
   box-shadow: inset 0px 2px 6px rgba(53, 50, 50, 0.6);
 
   &::placeholder {
-    color: #0F0A17;
+    color: #0f0a17;
   }
 
   &:focus {
-    border-color: #8A38F5;
+    border-color: #8a38f5;
     outline: none;
   }
 `;
 
 export const Button = styled.button`
-  width: 100%;
-  background: #8A38F5;
+  width: 87%;
+  background: #8a38f5;
   color: #fff;
   font-size: 16px;
-  font-family: 'Roboto', sans-serif;
   font-weight: bold;
   padding: 12px;
   border: none;
@@ -117,11 +116,10 @@ export const Button = styled.button`
   }
 `;
 
-export const BackLink = styled.a`
+export const BackLink = styled.span`
   display: block;
   margin-top: 15px;
-  font-size: 0.9rem;
-  font-family: 'Roboto', sans-serif;
+  font-size: 0.7rem;
   color: #ccc;
   cursor: pointer;
 
@@ -132,15 +130,14 @@ export const BackLink = styled.a`
 
 export const ResendOtp = styled.p`
   margin-top: 15px;
-  font-size: 0.9rem;
-  color: #8A38F5;
+  font-size: 0.8rem;
+  color: #8a38f5;
   font-weight: 500;
-  font-family: 'Roboto', sans-serif;
   cursor: pointer;
   transition: color 0.3s ease;
 
   &:hover {
-    color: #A159FF;
+    color: #a159ff;
     text-decoration: underline;
   }
 `;

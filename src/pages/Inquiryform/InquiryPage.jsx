@@ -18,21 +18,26 @@ import Navbar from "../../Components/Navbar/Navbar";
 import Footer from "../../Components/Footer/Footer";
 import Swal from "sweetalert2";
 import ProductListSection from "../../Components/Inquirypage/ProductListSection";
+import { useDispatch, useSelector } from "react-redux";
+import { submitInquiry } from "../../redux/inquirySlice";
 const InquiryPage = () => {
+  const dispatch = useDispatch();
+  const { loading } = useSelector((state) => state.inquiry);
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     company: "",
     email: "",
     phone: "",
-    street: "",
+    address: "",
     country: "",
     state: "",
-    delivery: "",
+    delivery_location: "",
     description: "",
   });
   const [errors, setErrors] = useState({});
-  const [loading, setLoading] = useState(false);
+    const [products, setProducts] = useState([]);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -48,7 +53,7 @@ const InquiryPage = () => {
       newErrors.email = "Invalid email format";
     }
     if (!formData.phone.trim()) newErrors.phone = "Phone number is required";
-    if (!formData.street.trim()) newErrors.street = "Street address is required";
+    if (!formData.address.trim()) newErrors.address = "Street address is required";
     if (!formData.country.trim()) newErrors.country = "Country is required";
     if (!formData.state.trim()) newErrors.state = "State is required";
     if (!formData.delivery.trim()) newErrors.delivery = "Delivery location is required";
@@ -56,40 +61,67 @@ const InquiryPage = () => {
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (validate()) {
-      setLoading(true);
-      setTimeout(() => {
-        setLoading(false);
-        Swal.fire({
-          icon: "success",
-          title: "Submitted!",
-          text: "Your inquiry has been sent successfully 🚀",
-          confirmButtonColor: "#3085d6",
-        });
-        setFormData({
-          firstName: "",
-          lastName: "",
-          company: "",
-          email: "",
-          phone: "",
-          street: "",
-          country: "",
-          state: "",
-          delivery: "",
-          description: "",
-        });
-      }, 1500);
-    }
-  };
+
+   const handleSubmit = async (e) => {
+  e.preventDefault();
+  if (!validate()) return;
+
+const payload = {
+  first_name: formData.firstName,
+  last_name: formData.lastName,
+  company_name: formData.company,
+  email: formData.email,
+  
+  phone: formData.phone,
+  address: formData.address,
+  country: formData.country,
+  state: formData.state,
+  delivery_location: formData.delivery,
+  description: formData.description,
+  product_ids: products.length > 0 ? products.map((p) => p.id) : [],
+};
+
+
+  try {
+    await dispatch(submitInquiry(payload)).unwrap();
+
+    Swal.fire({
+      icon: "success",
+      title: "Submitted!",
+      text: "Your inquiry has been sent successfully 🚀",
+      confirmButtonColor: "#3085d6",
+    });
+
+    setFormData({
+      firstName: "",
+      lastName: "",
+      company: "",
+      email: "",
+      phone: "",
+      address: "",
+      country: "",
+      state: "",
+      delivery: "",
+      description: "",
+    });
+    setProducts([]); 
+  } catch (err) {
+    Swal.fire({
+      icon: "error",
+      title: "Oops!",
+      text: err || "Something went wrong. Please try again.",
+    });
+  }
+};
+
   return (
     <>
       <Main>
         <Navbar />
         <PageWrapper>
           <Container>
-            <ProductListSection />
+                    <ProductListSection selectedProducts={products} setSelectedProducts={setProducts} />
+
             <FormSection>
               <FormTitle>Product Inquiry</FormTitle>
               <FormDescription>
@@ -109,6 +141,7 @@ const InquiryPage = () => {
                         type="text"
                         name="firstName"
                         placeholder="First name"
+                        autoComplete="off"
                         value={formData.firstName}
                         onChange={handleChange}
                       />
@@ -119,6 +152,7 @@ const InquiryPage = () => {
                         type="text"
                         name="lastName"
                         placeholder="Last name"
+                          autoComplete="off"
                         value={formData.lastName}
                         onChange={handleChange}
                       />
@@ -136,6 +170,7 @@ const InquiryPage = () => {
                       type="text"
                       name="company"
                       placeholder="Company name"
+                        autoComplete="off"
                       value={formData.company}
                       onChange={handleChange}
                     />
@@ -151,6 +186,7 @@ const InquiryPage = () => {
                       type="email"
                       name="email"
                       placeholder="example@example.com"
+                        autoComplete="off"
                       value={formData.email}
                       onChange={handleChange}
                     />
@@ -166,6 +202,7 @@ const InquiryPage = () => {
                       type="number"
                       name="phone"
                       placeholder="Enter phone number"
+                        autoComplete="off"
                       value={formData.phone}
                       onChange={handleChange}
                     />
@@ -176,12 +213,13 @@ const InquiryPage = () => {
                 <InputGroup>
                   <Label>Address</Label>
                   <div>
-                    {errors.street && <small style={{ color: "red" }}>{errors.street}</small>}
+                    {errors.address && <small style={{ color: "red" }}>{errors.address}</small>}
                     <Input
                       type="text"
-                      name="street"
+                      name="address"
                       placeholder="Street Address"
-                      value={formData.street}
+                        autoComplete="off"
+                      value={formData.address}
                       onChange={handleChange}
                       style={{ marginBottom: "1rem" }}
                     />
@@ -193,6 +231,7 @@ const InquiryPage = () => {
                           type="text"
                           name="country"
                           placeholder="Country"
+                            autoComplete="off"
                           value={formData.country}
                           onChange={handleChange}
                         />
@@ -204,6 +243,7 @@ const InquiryPage = () => {
                           type="text"
                           name="state"
                           placeholder="State"
+                            autoComplete="off"
                           value={formData.state}
                           onChange={handleChange}
                         />
@@ -219,6 +259,7 @@ const InquiryPage = () => {
                     <Input
                       type="text"
                       name="delivery"
+                        autoComplete="off"
                       placeholder="Delivery Location"
                       value={formData.delivery}
                       onChange={handleChange}
@@ -234,6 +275,7 @@ const InquiryPage = () => {
                     {errors.description && <small style={{ color: "red" }}>{errors.description}</small>}
                     <TextArea
                       name="description"
+                        autoComplete="off"
                       placeholder="Type here..."
                       value={formData.description}
                       onChange={handleChange}
@@ -242,7 +284,9 @@ const InquiryPage = () => {
 
                 </InputGroup>
 
-                <SubmitButton type="submit">Submit</SubmitButton>
+         <SubmitButton type="submit" disabled={loading}>
+                  {loading ? "Submitting..." : "Submit"}
+                </SubmitButton>
               </Form>
             </FormSection>
           </Container>

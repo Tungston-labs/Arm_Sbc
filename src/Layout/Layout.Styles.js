@@ -3,7 +3,18 @@ import styled, { css } from "styled-components";
 
 export const PageWrapper = styled.div`
   min-height: 100vh;
-  background: radial-gradient(circle at top left, #2b1a42, #0d0d0d);
+  /* background: radial-gradient(circle at top left, #2b1a42, #0d0d0d); */
+background: radial-gradient(
+  circle 950px at top left,
+  rgb(77, 52, 126) 0%,
+  rgb(22, 5, 46) 35%,
+ rgba(3, 2, 6, 1)80%
+);
+
+
+
+
+
   color: #fff;
   font-family: "Satoshi", sans-serif;
   display: flex;

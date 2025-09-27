@@ -15,7 +15,7 @@ import {
 } from "./Verification.style";
 
 import logoImage from "../../assets/main/logo2.svg";
-import backgroundImage from "../../assets/main/loginBg.svg";
+import backgroundimage from "../../assets/main/loginBg.svg";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { verifyOtpAction, sendOtpAction } from "../../redux/authSlice";
@@ -25,85 +25,89 @@ import "react-toastify/dist/ReactToastify.css";
 const Verification = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  
   const dispatch = useDispatch();
-  const { email } = location.state || {}; // get email from navigation state
+
+  // Get email from navigation state or localStorage fallback
+  const locationStateEmail = location.state?.email;
+  const verifiedEmail = locationStateEmail || localStorage.getItem("resetEmail");
 
   const [otp, setOtp] = useState(Array(5).fill(""));
   const inputsRef = useRef([]);
 
-  const { verifyLoading, verifySuccess, verifyError, otpSent } = useSelector(
+  // Get redux state
+  const { forgotLoading, otpVerified, forgotError, otpSent } = useSelector(
     (state) => state.auth
   );
 
+  // Handle OTP input change
   const handleChange = (value, index) => {
     if (/^[0-9]?$/.test(value)) {
       const newOtp = [...otp];
       newOtp[index] = value;
       setOtp(newOtp);
-
       if (value && index < otp.length - 1) {
         inputsRef.current[index + 1].focus();
       }
     }
   };
 
+  // Handle backspace key
   const handleKeyDown = (e, index) => {
     if (e.key === "Backspace" && !otp[index] && index > 0) {
       inputsRef.current[index - 1].focus();
     }
   };
 
+  // Submit OTP
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const enteredOtp = otp.join("");
-    if (!email) {
+
+    if (enteredOtp.length !== 5) {
+      toast.error("OTP must be exactly 5 digits");
+      return;
+    }
+
+    if (!verifiedEmail) {
       toast.error("Email not found. Please go back and enter your email.");
       return;
     }
-    dispatch(verifyOtpAction({ email, otp: enteredOtp }));
+
+    dispatch(verifyOtpAction({ email: verifiedEmail, otp: enteredOtp }));
   };
 
-  // Handle success/error effects
-//   useEffect(() => {
-//     if (verifySuccess) {
-//       toast.success("OTP verified successfully!", {
-//         position: "top-right",
-//         autoClose: 3000,
-//       });
-//       navigate("/setnewpassword", { state: { email } });
-//     } else if (verifyError) {
-//       toast.error(verifyError.detail || "Invalid OTP", {
-//         position: "top-right",
-//         autoClose: 3000,
-//       });
-//     }
-//   }, [verifySuccess, verifyError, navigate, email]);
-useEffect(() => {
-    if (verifySuccess) {
-      // Pass email to SetNewPassword page
-      navigate("/setnewpassword", { state: { email } });
-    } else if (verifyError) {
-      toast.error(verifyError.detail || "Invalid OTP");
+  // Navigate on OTP verified or show error
+  useEffect(() => {
+    if (otpVerified) {
+      navigate("/setnewpassword", { state: { email: verifiedEmail } });
+    } else if (forgotError) {
+      toast.error(forgotError?.detail || "Invalid OTP");
     }
-  }, [verifySuccess, verifyError, navigate, email]);
-// In Verification page, after OTP is sent successfully
-useEffect(() => {
-    if (email) {
-      localStorage.setItem("resetEmail", email);
+  }, [otpVerified, forgotError, navigate, verifiedEmail]);
+
+  // Save email in localStorage
+  useEffect(() => {
+    if (verifiedEmail) {
+      localStorage.setItem("resetEmail", verifiedEmail);
     }
-  }, [email]);
-    
+  }, [verifiedEmail]);
+
+  // Resend OTP
   const handleResend = () => {
-    if (!email) return;
-    dispatch(sendOtpAction(email))
+    if (!verifiedEmail) {
+      toast.error("Email not found. Cannot resend OTP.");
+      return;
+    }
+
+    dispatch(sendOtpAction(verifiedEmail))
       .unwrap()
       .then(() => toast.info("OTP resent successfully!"))
       .catch(() => toast.error("Failed to resend OTP."));
   };
 
   return (
-    <ResetContainer backgroundImage={backgroundImage}>
+    <ResetContainer backgroundimage={backgroundimage}>
       <ResetBox>
         <LogoWrapper>
           <Logo src={logoImage} alt="Logo" />
@@ -111,7 +115,7 @@ useEffect(() => {
 
         <Title>Verification</Title>
         <Subtitle>
-          We sent a code to <br /> {email || "your email"}
+          We sent a code to <br /> {verifiedEmail || "your email"}
         </Subtitle>
 
         <Form onSubmit={handleSubmit}>
@@ -129,8 +133,8 @@ useEffect(() => {
             ))}
           </OtpWrapper>
 
-          <Button type="submit" disabled={verifyLoading}>
-            {verifyLoading ? "Verifying..." : "Verify"}
+          <Button type="submit" disabled={forgotLoading}>
+            {forgotLoading ? "Verifying..." : "Verify"}
           </Button>
 
           <ResendOtp onClick={handleResend}>Resend OTP</ResendOtp>
@@ -147,3 +151,4 @@ useEffect(() => {
 };
 
 export default Verification;
+

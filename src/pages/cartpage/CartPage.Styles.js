@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const CartContainer = styled.div`
   color: #fff;
   margin: auto;
+min-height: 100vh;
 
   @media (max-width: 900px) {
      background: url('/images/cart/cardbackpic .png') no-repeat center center;
@@ -24,6 +25,7 @@ export const Container = styled.div`
   color: #fff;
   padding: 8rem;
   margin: auto;
+  min-height: 100vh;
 
   @media (max-width: 900px) {
      background: url('/images/cart/cardbackpic .png') no-repeat center center;

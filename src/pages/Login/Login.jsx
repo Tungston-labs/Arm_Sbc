@@ -41,6 +41,8 @@ const Login = () => {
         if (!password) {
             return "Empty Field: Please enter your password.";
         }
+       
+
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
             return "Invalid Format: Enter a valid email address (e.g., name@example.com).";
@@ -55,8 +57,8 @@ const Login = () => {
             setValidationError(validationMsg);
             return;
         }
-        setValidationError("");
-
+        setValidationError(""); 
+        
         dispatch(login({ email, password }))
             .unwrap()
             .then(() => {

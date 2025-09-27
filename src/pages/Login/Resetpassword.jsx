@@ -20,7 +20,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { sendOtpAction, resetForgotState } from "../../redux/authSlice";
 
 const Resetpassword = () => {
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState(""); // ✅ keep local state for input
   const [validationError, setValidationError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -47,17 +47,21 @@ const Resetpassword = () => {
     }
     setValidationError("");
 
-    // Dispatch send OTP action from slice
+    // Dispatch send OTP action
     dispatch(sendOtpAction(email))
       .unwrap()
       .then(() => {
-        // Reset slice state for next use
+        // Save email in localStorage as fallback
+        localStorage.setItem("resetEmail", email);
+
+        // Reset slice state
         dispatch(resetForgotState());
-        // Navigate to verification page and pass email
+
+        // Navigate to Verification page
         navigate("/verification", { state: { email } });
       })
       .catch(() => {
-        // error handled via forgotError in slice
+        // Error handled via forgotError in slice
       });
   };
 
@@ -70,7 +74,7 @@ const Resetpassword = () => {
 
         <Title>Reset password</Title>
         <Subtitle>
-          Enter your registered email below, and we’ll send you a link to reset your password securely.
+          Enter your registered email below, and we’ll send you a code to reset your password securely.
         </Subtitle>
 
         <Form onSubmit={handleSubmit}>

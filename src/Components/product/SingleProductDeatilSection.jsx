@@ -9,21 +9,55 @@ import {
   Link,
 } from "../../pages/product/singleProduct.style";
 import { AiOutlineShoppingCart } from "react-icons/ai";
-import details from "../../pages/product/data/productDetailsData.json";
-const SingleProductDeatilSection = () => {
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { addProductToCart } from "../../redux/cartSlice";
+const SingleProductDeatilSection = ({
+  id,
+  name,
+  description,
+  image,
+  category,
+}) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const cartToken = localStorage.getItem("cartToken");
+
+  const handleAddToCart = () => {
+    if (!cartToken) {
+      // generate or fetch a token if needed
+      console.error("No cart token found");
+      return;
+    }
+
+    // dispatch redux action to backend
+  dispatch(addProductToCart({ productId: id, cartToken }))
+  .then(() => {
+    navigate("/cartpage");
+  });
+  
+  };
+  const handleViewMore = () => {
+    const el = document.getElementById("specification");
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  };
+  const details = description ? description.split("\\n") : [];
+
   return (
     <HeaderContainer>
       <DividerDiv>
         <HeaderImageContainer>
-          <img src="https://placehold.co/600x400" />
+          <img src={image} />
         </HeaderImageContainer>
       </DividerDiv>
       <DividerDiv>
         <HeaderTextContainer>
-          <h2>ARM Develeopment Board Rockchip 3288, Quad Core 1.7 GHz</h2>
+          <h2>{name}</h2>
           <ButtonSection display="none">
-            <Link>View more</Link>
-            <AddToCartButton>
+            <Link as="button" onClick={handleViewMore}>
+              View more
+            </Link>
+          <AddToCartButton onClick={handleAddToCart}>
               <AiOutlineShoppingCart />
               Add to cart
             </AddToCartButton>
@@ -33,16 +67,18 @@ const SingleProductDeatilSection = () => {
               <li key={i}>{i}</li>
             ))}
           </ul>
-          <p>SKU: 123-1-2</p>
+          <p></p>  {/* need to add SKU here */}
           <p>
-            {[1, 2, 3].map((i) => (
-              <span>{i}</span>
-            ))}
+            {/* {[1, 2, 3].map((i) => ( */}
+            <span>{category}</span>
+            {/* ))} */}
           </p>
           <CompareButton>compare</CompareButton>
           <ButtonSection display="flex">
-            <Link>View more</Link>
-            <AddToCartButton>
+            <Link as="button" onClick={handleViewMore}>
+              View more
+            </Link>
+                       <AddToCartButton onClick={handleAddToCart}>
               <AiOutlineShoppingCart />
               Add to cart
             </AddToCartButton>

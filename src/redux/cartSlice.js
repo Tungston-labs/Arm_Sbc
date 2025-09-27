@@ -4,11 +4,16 @@ import { addToCart, getCartItems, updateCartItem, removeCartItem } from "../serv
 // Add product to cart
 export const addProductToCart = createAsyncThunk(
   "cart/addProductToCart",
-  async ({ productId, cartToken }) => {
-    const data = await addToCart(productId, cartToken);
-    return data;
+  async ({ id, token }) => {
+    const response = await api.post(
+      `/cart/add/${id}/`,
+      { quantity: 1 },
+      { headers: { "X-Cart-Token": token } }
+    );
+    return response.data;
   }
 );
+
 
 // Get cart items
 export const fetchCartItems = createAsyncThunk(

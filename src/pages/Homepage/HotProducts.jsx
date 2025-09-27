@@ -49,9 +49,10 @@ import { fetchProductsPublic } from "../../redux/productSlice";
 const HotProducts = () => {
   const dispatch = useDispatch();
   const { productsPublic, loading, error } = useSelector((state) => state.product);
-
+const currentPage=1;
+const limit =4;
   useEffect(() => {
-    dispatch(fetchProductsPublic());
+    dispatch(fetchProductsPublic({currentPage, limit}));
   }, [dispatch]);
 
   if (loading) return <p>Loading hot products...</p>;

@@ -10,7 +10,6 @@ const SpecificationDescriptionCard = ({ data }) => {
   return (
     <Descriptioncard>
       <DescriptionHeader>{data?.header}</DescriptionHeader>
-      {data?.itemsitems}
       {data?.items?.map((i) => (
         <DescriptionTextContainer>
           <DescriptionLabel>{i?.label}</DescriptionLabel>

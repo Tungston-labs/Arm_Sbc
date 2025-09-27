@@ -1,20 +1,13 @@
-import { useState } from "react";
 import { Pagination } from "antd";
 import { PaginationStyles } from "./customPagination.style";
 
 const CustomPagination = ({
+  current,
   total,
-  pageSize = 10,
-  defaultPage = 1,
+  pageSize ,
   onChange,
   align = "center",
 }) => {
-  const [page, setPage] = useState(defaultPage);
-
-  const handleChange = (p) => {
-    setPage(p);
-    if (onChange) onChange(p);
-  };
 
   return (
     <>
@@ -22,8 +15,8 @@ const CustomPagination = ({
       <Pagination
         total={total}
         pageSize={pageSize}
-        current={page}
-        onChange={handleChange}
+        current={current}
+        onChange={onChange}
         showSizeChanger={false}
         align={align}
       />

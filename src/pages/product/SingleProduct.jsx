@@ -5,14 +5,22 @@ import SingleProductDeatilSection from "../../Components/product/SingleProductDe
 import SpecificationSection from "../../Components/product/Specification/SpecificationSection";
 import { NavbarContainer } from "./singleProduct.style";
 
-const SingleProduct = () => {
+const SingleProduct = ({ product,addetionalInformation,description }) => {
   return (
     <>
       <NavbarContainer>
         <Navbar />
       </NavbarContainer>
-      <SingleProductDeatilSection />
-      <SpecificationSection />
+      <SingleProductDeatilSection
+        name={product?.name}
+        description={product?.description}
+        image={product?.image}
+        category={product?.ram}
+      />
+      <SpecificationSection
+        description={description}
+        addetionalInformation={addetionalInformation}
+      />
       <RelatedProduct />
       <Footer />
     </>

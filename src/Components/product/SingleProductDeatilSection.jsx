@@ -9,20 +9,33 @@ import {
   Link,
 } from "../../pages/product/singleProduct.style";
 import { AiOutlineShoppingCart } from "react-icons/ai";
-import details from "../../pages/product/data/productDetailsData.json";
-const SingleProductDeatilSection = () => {
+// import details from "../../pages/product/data/productDetailsData.json";
+const SingleProductDeatilSection = ({
+  name,
+  description,
+  image,
+  category,
+}) => {
+  const handleViewMore = () => {
+    const el = document.getElementById("specification");
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  };
+  const details = description ? description.split("\\n") : [];
+
   return (
     <HeaderContainer>
       <DividerDiv>
         <HeaderImageContainer>
-          <img src="https://placehold.co/600x400" />
+          <img src={image} />
         </HeaderImageContainer>
       </DividerDiv>
       <DividerDiv>
         <HeaderTextContainer>
-          <h2>ARM Develeopment Board Rockchip 3288, Quad Core 1.7 GHz</h2>
+          <h2>{name}</h2>
           <ButtonSection display="none">
-            <Link>View more</Link>
+            <Link as="button" onClick={handleViewMore}>
+              View more
+            </Link>
             <AddToCartButton>
               <AiOutlineShoppingCart />
               Add to cart
@@ -33,15 +46,17 @@ const SingleProductDeatilSection = () => {
               <li key={i}>{i}</li>
             ))}
           </ul>
-          <p>SKU: 123-1-2</p>
+          <p></p>  {/* need to add SKU here */}
           <p>
-            {[1, 2, 3].map((i) => (
-              <span>{i}</span>
-            ))}
+            {/* {[1, 2, 3].map((i) => ( */}
+            <span>{category}</span>
+            {/* ))} */}
           </p>
           <CompareButton>compare</CompareButton>
           <ButtonSection display="flex">
-            <Link>View more</Link>
+            <Link as="button" onClick={handleViewMore}>
+              View more
+            </Link>
             <AddToCartButton>
               <AiOutlineShoppingCart />
               Add to cart

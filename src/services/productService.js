@@ -22,8 +22,8 @@ export const getProductByIdAdmin = async (productId) => {
 };
 
 // Public APIs
-export const listProductsPublic = async () => {
-  const response = await api.get("products/public/");
+export const listProductsPublic = async (currentPage, limit ) => {
+  const response = await api.get(`products/public?page=${currentPage}&page_size=${limit}`);
   return response.data;
 };
 

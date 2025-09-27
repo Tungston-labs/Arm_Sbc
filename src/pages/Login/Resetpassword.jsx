@@ -20,7 +20,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { sendOtpAction, resetForgotState } from "../../redux/authSlice";
 
 const Resetpassword = () => {
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState(""); // ✅ keep local state for input
   const [validationError, setValidationError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -74,7 +74,7 @@ const Resetpassword = () => {
 
         <Title>Reset password</Title>
         <Subtitle>
-          Enter your registered email below, and we’ll send you a link to reset your password securely.
+          Enter your registered email below, and we’ll send you a code to reset your password securely.
         </Subtitle>
 
         <Form onSubmit={handleSubmit}>

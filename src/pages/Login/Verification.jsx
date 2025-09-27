@@ -15,7 +15,7 @@ import {
 } from "./Verification.style";
 
 import logoImage from "../../assets/main/logo2.svg";
-import backgroundImage from "../../assets/main/loginBg.svg";
+import backgroundimage from "../../assets/main/loginBg.svg";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { verifyOtpAction, sendOtpAction } from "../../redux/authSlice";
@@ -107,7 +107,7 @@ const Verification = () => {
   };
 
   return (
-    <ResetContainer backgroundImage={backgroundImage}>
+    <ResetContainer backgroundimage={backgroundimage}>
       <ResetBox>
         <LogoWrapper>
           <Logo src={logoImage} alt="Logo" />
@@ -151,3 +151,4 @@ const Verification = () => {
 };
 
 export default Verification;
+

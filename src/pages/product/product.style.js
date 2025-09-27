@@ -59,3 +59,17 @@ export const ProductCardContainer = styled.div`
     padding: 6rem 15rem;
   }
 `;
+
+export const CenterContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  width: 100%;
+  text-align: center;
+  background: transparent;
+  color: gray;
+  @media (width>=1024px) {
+    height: 500px;
+  }
+`;

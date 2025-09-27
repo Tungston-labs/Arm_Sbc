@@ -1,5 +1,5 @@
-
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; 
 
 import {
   PageWrapper,
@@ -23,6 +23,9 @@ const Layout = ({ children }) => {
   const [active, setActive] = useState("dashboard");
   const [showModal, setShowModal] = useState(false);
   const [showLogout, setShowLogout] = useState(false);
+
+  const navigate = useNavigate();
+
   return (
     <PageWrapper>
       <Topbar setSidebarOpen={setSidebarOpen} />
@@ -35,43 +38,66 @@ const Layout = ({ children }) => {
         <SidebarMenu>
           <SidebarItem
             $active={active === "dashboard"}
-            onClick={() => setActive("dashboard")}
+            onClick={() => {
+              setActive("dashboard");
+              navigate("/dashboard"); 
+            }}
           >
             <FaTachometerAlt /> Dashboard
           </SidebarItem>
+
           <SidebarItem
             $active={active === "enquiry"}
-            onClick={() => setActive("enquiry")}
+            onClick={() => {
+              setActive("enquiry");
+              navigate("/enquiry-page"); 
+            }}
           >
             <FaClipboardList /> Enquiry
           </SidebarItem>
+
           <SidebarItem
             $active={active === "product"}
-            onClick={() => setActive("product")}
+            onClick={() => {
+              setActive("product");
+              navigate("/product"); 
+            }}
           >
             <FaBox /> Product
           </SidebarItem>
         </SidebarMenu>
 
         <SidebarFooter>
-          <SidebarButton $variant="purple"
-             onClick={() => setShowModal(true)}>
-            Change password</SidebarButton>
-          <SidebarButton $variant="red"
-           onClick={() => setShowLogout(true)}>Log out</SidebarButton>
+          <SidebarButton
+            $variant="purple"
+            onClick={() => setShowModal(true)}
+          >
+            Change password
+          </SidebarButton>
+
+          <SidebarButton
+            $variant="red"
+            onClick={() => setShowLogout(true)}
+          >
+            Log out
+          </SidebarButton>
         </SidebarFooter>
       </Sidebar>
+
       <Content>{children}</Content>
-  {showModal && <ChangePasswordModal onClose={() => setShowModal(false)} />}
-    {showLogout && (
-  <LogoutModal
-    onConfirm={() => {
-      console.log("Logging out...");
-      setShowLogout(false);
-    }}
-    onCancel={() => setShowLogout(false)}
-  />
-)}
+
+      {showModal && <ChangePasswordModal onClose={() => setShowModal(false)} />}
+      {showLogout && (
+        <LogoutModal
+          onConfirm={() => {
+            console.log("Logging out...");
+            localStorage.removeItem("token"); 
+            setShowLogout(false);
+            navigate("/login"); 
+          }}
+          onCancel={() => setShowLogout(false)}
+        />
+      )}
     </PageWrapper>
   );
 };

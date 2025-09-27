@@ -5,19 +5,20 @@ import Login from "./pages/Login/Login";
 import Resetpassword from "./pages/Login/Resetpassword";
 import Verification from "./pages/Login/Verification";
 import SetNewPassword from "./pages/Login/SetNewPassword";
-import Comparison from "./pages/Comparison/Comparison";
-import SingleProduct from "./pages/product/SingleProduct.jsx";
-import CartPage from "./pages/cartpage/CartPage.jsx";
-import Dashboard from "./pages/dashboard/Dashboard";
-import Enquiry from "./pages/EnquiryPage/Enquiry";
-import EnquiryDetails from "./pages/EnquiryPage/EnquiryDetails";
-import InquiryPage from "./pages/Inquiryform/InquiryPage";
-import ChangePasswordModal from "./Components/ChangePasswordModal/ChangePasswordModal.jsx";
+import Comparison from './pages/Comparison/Comparison'
+import SingleProduct from './pages/product/SingleProduct.jsx'
+import Dashboard from './pages/dashboard/Dashboard'
+import Enquiry from './pages/EnquiryPage/Enquiry'
+import EnquiryDetails from './pages/EnquiryPage/EnquiryDetails'
+import InquiryPage from './pages/Inquiryform/InquiryPage'
+import CartPage from "./pages/cartpage/CartPage.jsx"
 import Products from "./pages/product/Products.jsx";
 import PersistLogin from "./Components/PersistLogin.jsx"
 
 function App() {
   return (
+
+       
     <Routes>
       {/* Public Routes */}
       <Route path="/" element={<Header />} />
@@ -35,7 +36,6 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/enquiry-page" element={<Enquiry />} />
         <Route path="/enquiry-details/:id" element={<EnquiryDetails />} />
-        <Route path="/password" element={<ChangePasswordModal />} />
       </Route>
     </Routes>
   );

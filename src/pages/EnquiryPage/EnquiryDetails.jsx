@@ -40,9 +40,7 @@ const { inquiryDetail: detail, loading, error } = useSelector((state) => state.i
 
 useEffect(() => {
   if (detail?.status) {
-    // Capitalize first letter
-    const normalized = detail.status.charAt(0).toUpperCase() + detail.status.slice(1).toLowerCase();
-    setStatus(normalized);
+    setStatus(detail.status.toLowerCase()); // always store lowercase
   }
 }, [detail]);
   const handleStatusChange = (newStatus) => {
@@ -89,7 +87,7 @@ useEffect(() => {
       </SubHeaderRow>
 
      <Section>
-  <SectionTitle>Enquiry Details</SectionTitle>
+  <SectionTitle>Customer Details</SectionTitle>
 
   {/* Always show customer details */}
   {detail && (
@@ -101,8 +99,8 @@ useEffect(() => {
       <DetailItem><strong>Email:</strong> {detail.email || "N/A"}</DetailItem>
       <DetailItem><strong>Description:</strong> {detail.description || "N/A"}</DetailItem>
       <DetailItem><strong>Address:</strong> {detail.address || "N/A"}</DetailItem>
-      <DetailItem><strong>Country:</strong> {detail.country || "N/A"}</DetailItem>
-      <DetailItem><strong>State:</strong> {detail.state || "N/A"}</DetailItem>
+      {/* <DetailItem><strong>Country:</strong> {detail.country || "N/A"}</DetailItem>
+      <DetailItem><strong>State:</strong> {detail.state || "N/A"}</DetailItem> */}
     </CustomerDetailsGrid>
   )}
 

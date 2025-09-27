@@ -1,5 +1,6 @@
 import api from "./api";
 
+
 // Add product to cart (needs X-Cart-Token header)
 export const addToCart = async (productId, cartToken) => {
   const response = await api.post(`cart/add/${productId}/`, {}, {

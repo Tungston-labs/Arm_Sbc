@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
   ProductList,
   ProductCard,
@@ -15,9 +15,20 @@ import { Divider } from '../../pages/cartpage/CartPage.Styles';
 import Nodata from "../../assets/inquriy/mobilenodata.svg";
 import Nodatas from "../../assets/inquriy/nodata.svg";
 import { products as productsData } from "../../pages/Inquiryform/productsData";
-function ProductListSection() {
+
+function ProductListSection({ selectedProducts, setSelectedProducts }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [products] = useState(productsData);
+  useEffect(() => {
+    if (selectedProducts.length === 0) {
+      setSelectedProducts(productsData);
+    }
+  }, []);
+
+  const handleDelete = (id) => {
+    const updated = selectedProducts.filter((p) => p.id !== id);
+    setSelectedProducts(updated);
+  };
+
   return (
     <div>
       <MobileOnly>
@@ -42,9 +53,9 @@ function ProductListSection() {
 
         {isOpen && (
           <>
-            {products.length > 0 ? (
+            {selectedProducts.length > 0 ? (
               <ProductList>
-                {products.map((product) => (
+                {selectedProducts.map((product) => (
                   <ProductCard key={product.id}>
                     <ProductTitle>{product.title}</ProductTitle>
                     <ProductSpecs>
@@ -53,7 +64,7 @@ function ProductListSection() {
                       ))}
                     </ProductSpecs>
                     <ProductAction>
-                      <button>Delete</button>
+                      <button onClick={() => handleDelete(product.id)}>Delete</button>
                       <a href="#">See more like this</a>
                     </ProductAction>
                     <Divider />
@@ -62,8 +73,7 @@ function ProductListSection() {
               </ProductList>
             ) : (
               <EmptyCartWrapper>
-                   <img src={Nodata} 
-                  alt="Empty Cart" />
+                <img src={Nodata} alt="Empty Cart" />
               </EmptyCartWrapper>
             )}
           </>
@@ -73,9 +83,9 @@ function ProductListSection() {
       <DesktopOnly>
         <Heading>Product Inquiry</Heading>
         <Divider />
-        {products.length > 0 ? (
+        {selectedProducts.length > 0 ? (
           <ProductList>
-            {products.map((product) => (
+            {selectedProducts.map((product) => (
               <ProductCard key={product.id}>
                 <ProductTitle>{product.title}</ProductTitle>
                 <ProductSpecs>
@@ -84,7 +94,7 @@ function ProductListSection() {
                   ))}
                 </ProductSpecs>
                 <ProductAction>
-                  <button>Delete</button>
+                  <button onClick={() => handleDelete(product.id)}>Delete</button>
                   <a href="#">See more like this</a>
                 </ProductAction>
                 <Divider />
@@ -93,9 +103,7 @@ function ProductListSection() {
           </ProductList>
         ) : (
           <EmptyCartWrapper>
-            <img src={Nodatas} 
-                  alt="Empty Cart" />
-
+            <img src={Nodatas} alt="Empty Cart" />
           </EmptyCartWrapper>
         )}
       </DesktopOnly>
@@ -103,4 +111,4 @@ function ProductListSection() {
   )
 }
 
-export default ProductListSection
+export default ProductListSection;

@@ -11,9 +11,10 @@ export const GlobalStyle = createGlobalStyle`
 
 export const ResetContainer = styled.div`
   width: 100%;
+  
   height: 100vh;
-  background: ${({ $backgroundImage }) =>
-    `url(${$backgroundImage}) no-repeat center center/cover`};
+  background: ${({backgroundimage }) =>
+    `url(${backgroundimage}) no-repeat center center/cover`};
   display: flex;
   justify-content: center;
   align-items: center;

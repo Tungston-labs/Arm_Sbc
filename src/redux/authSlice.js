@@ -4,11 +4,12 @@ import {
   refreshAccessToken,
   sendOTP,
   verifyOTP,
-  changePassword as changePasswordAPI,
+  resetPassword,
+  changePasswordAPI,
   logoutUser,
 } from "../services/authService";
 
-// 🔑 Login
+// 🔹 LOGIN
 export const login = createAsyncThunk(
   "auth/login",
   async ({ email, password }, { rejectWithValue }) => {
@@ -23,13 +24,26 @@ export const login = createAsyncThunk(
   }
 );
 
-// 🔑 Logout
+// 🔹 CHANGE PASSWORD
+export const changePassword = createAsyncThunk(
+  "auth/changePassword",
+  async ({ current_password, new_password, confirm_new_password }, { rejectWithValue }) => {
+    try {
+      const data = await changePasswordAPI(current_password, new_password, confirm_new_password);
+      return data;
+    } catch (err) {
+      return rejectWithValue(err.response?.data || "Password change failed");
+    }
+  }
+);
+
+// 🔹 LOGOUT
 export const logout = createAsyncThunk(
   "auth/logout",
   async (_, { rejectWithValue }) => {
     try {
       const refresh = localStorage.getItem("refreshToken");
-      if (refresh) await logoutUser(refresh);
+      await logoutUser(refresh);
     } catch (err) {
       console.error("Logout failed:", err);
     } finally {
@@ -39,7 +53,7 @@ export const logout = createAsyncThunk(
   }
 );
 
-// 🔑 Refresh Access Token
+// 🔹 REFRESH TOKEN
 export const refresh = createAsyncThunk(
   "auth/refresh",
   async (_, { rejectWithValue }) => {
@@ -55,8 +69,10 @@ export const refresh = createAsyncThunk(
   }
 );
 
-// 🔑 Send OTP (Forgot Password)
-export const sendOtp = createAsyncThunk(
+// 🔹 FORGOT PASSWORD FLOW
+
+// Send OTP
+export const sendOtpAction = createAsyncThunk(
   "auth/sendOtp",
   async (email, { rejectWithValue }) => {
     try {
@@ -68,8 +84,8 @@ export const sendOtp = createAsyncThunk(
   }
 );
 
-// 🔑 Verify OTP
-export const verifyOtp = createAsyncThunk(
+// Verify OTP
+export const verifyOtpAction = createAsyncThunk(
   "auth/verifyOtp",
   async ({ email, otp }, { rejectWithValue }) => {
     try {
@@ -81,15 +97,15 @@ export const verifyOtp = createAsyncThunk(
   }
 );
 
-// 🔑 Change Password
-export const changePassword = createAsyncThunk(
-  "auth/changePassword",
-  async ({ current_password, new_password, confirm_new_password }, { rejectWithValue }) => {
+// Reset Password
+export const resetPasswordAction = createAsyncThunk(
+  "auth/resetPassword",
+  async ({ email, new_password }, { rejectWithValue }) => {
     try {
-      const data = await changePasswordAPI(current_password, new_password, confirm_new_password);
+      const data = await resetPassword(email, new_password);
       return data;
     } catch (err) {
-      return rejectWithValue(err.response?.data || "Password change failed");
+      return rejectWithValue(err.response?.data || "Reset password failed");
     }
   }
 );
@@ -102,24 +118,39 @@ const authSlice = createSlice({
     refreshToken: localStorage.getItem("refreshToken") || null,
     loading: false,
     error: null,
+
+    // Change password
+    changePasswordLoading: false,
+    changePasswordSuccess: false,
+    changePasswordError: null,
+
+    // Forgot password flow
+    forgotLoading: false,
     otpSent: false,
     otpVerified: false,
-    changePasswordSuccess: false,
+    resetSuccess: false,
+    forgotError: null,
   },
   reducers: {
     setAccessToken: (state, action) => {
       state.accessToken = action.payload.accessToken;
     },
-    resetFlags: (state) => {
+    resetPasswordState: (state) => {
+      state.changePasswordLoading = false;
+      state.changePasswordSuccess = false;
+      state.changePasswordError = null;
+    },
+    resetForgotState: (state) => {
+      state.forgotLoading = false;
       state.otpSent = false;
       state.otpVerified = false;
-      state.changePasswordSuccess = false;
-      state.error = null;
+      state.resetSuccess = false;
+      state.forgotError = null;
     },
   },
   extraReducers: (builder) => {
     builder
-      // Login
+      // LOGIN
       .addCase(login.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -134,64 +165,81 @@ const authSlice = createSlice({
         state.error = action.payload;
       })
 
-      // Logout
+      // LOGOUT
       .addCase(logout.fulfilled, (state) => {
         state.accessToken = null;
         state.refreshToken = null;
       })
 
-      // Refresh Token
+      // REFRESH
       .addCase(refresh.fulfilled, (state, action) => {
         state.accessToken = action.payload;
       })
-      .addCase(refresh.rejected, (state) => {
+      .addCase(refresh.rejected, (state, action) => {
         state.accessToken = null;
         state.refreshToken = null;
-      })
-
-      // Send OTP
-      .addCase(sendOtp.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(sendOtp.fulfilled, (state) => {
-        state.loading = false;
-        state.otpSent = true;
-      })
-      .addCase(sendOtp.rejected, (state, action) => {
-        state.loading = false;
         state.error = action.payload;
       })
 
-      // Verify OTP
-      .addCase(verifyOtp.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(verifyOtp.fulfilled, (state) => {
-        state.loading = false;
-        state.otpVerified = true;
-      })
-      .addCase(verifyOtp.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
-      })
-
-      // Change Password
+      // CHANGE PASSWORD
       .addCase(changePassword.pending, (state) => {
-        state.loading = true;
-        state.error = null;
+        state.changePasswordLoading = true;
+        state.changePasswordError = null;
+        state.changePasswordSuccess = false;
       })
       .addCase(changePassword.fulfilled, (state) => {
-        state.loading = false;
+        state.changePasswordLoading = false;
         state.changePasswordSuccess = true;
       })
       .addCase(changePassword.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
+        state.changePasswordLoading = false;
+        state.changePasswordError = action.payload;
+      })
+
+      // SEND OTP
+      .addCase(sendOtpAction.pending, (state) => {
+        state.forgotLoading = true;
+        state.forgotError = null;
+      })
+      .addCase(sendOtpAction.fulfilled, (state) => {
+        state.forgotLoading = false;
+        state.otpSent = true;
+      })
+      .addCase(sendOtpAction.rejected, (state, action) => {
+        state.forgotLoading = false;
+        state.forgotError = action.payload;
+      })
+
+      // VERIFY OTP
+      .addCase(verifyOtpAction.pending, (state) => {
+        state.forgotLoading = true;
+        state.forgotError = null;
+      })
+      .addCase(verifyOtpAction.fulfilled, (state) => {
+        state.forgotLoading = false;
+        state.otpVerified = true;
+      })
+      .addCase(verifyOtpAction.rejected, (state, action) => {
+        state.forgotLoading = false;
+        state.forgotError = action.payload;
+      })
+
+      // RESET PASSWORD
+      .addCase(resetPasswordAction.pending, (state) => {
+        state.forgotLoading = true;
+        state.forgotError = null;
+        state.resetSuccess = false;
+      })
+      .addCase(resetPasswordAction.fulfilled, (state) => {
+        state.forgotLoading = false;
+        state.resetSuccess = true;
+      })
+      .addCase(resetPasswordAction.rejected, (state, action) => {
+        state.forgotLoading = false;
+        state.forgotError = action.payload;
       });
   },
 });
 
-export const { setAccessToken, resetFlags } = authSlice.actions;
+export const { setAccessToken, resetPasswordState, resetForgotState } = authSlice.actions;
 export default authSlice.reducer;

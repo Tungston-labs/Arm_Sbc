@@ -15,95 +15,99 @@ import {
 } from "./Verification.style";
 
 import logoImage from "../../assets/main/logo2.svg";
-import backgroundImage from "../../assets/main/loginBg.svg";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import backgroundimage from "../../assets/main/loginBg.svg";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { verifyOtpAction, sendOtpAction } from "../../redux/authSlice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { useDispatch, useSelector } from "react-redux";
-import { verifyOtp, sendOtp, resetFlags } from "../../redux/authSlice";
+const Verification = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-function Verification() {
+  // Get email from navigation state or localStorage fallback
+  const locationStateEmail = location.state?.email;
+  const verifiedEmail = locationStateEmail || localStorage.getItem("resetEmail");
+
   const [otp, setOtp] = useState(Array(5).fill(""));
   const inputsRef = useRef([]);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const location = useLocation();
 
-  
-  const passedEmail = location.state?.email;
-  const { loading, error, otpVerified, email: reduxEmail } = useSelector(
+  // Get redux state
+  const { forgotLoading, otpVerified, forgotError, otpSent } = useSelector(
     (state) => state.auth
   );
-  const userEmail = reduxEmail || passedEmail;
 
-  
+  // Handle OTP input change
   const handleChange = (value, index) => {
     if (/^[0-9]?$/.test(value)) {
       const newOtp = [...otp];
       newOtp[index] = value;
       setOtp(newOtp);
-
       if (value && index < otp.length - 1) {
         inputsRef.current[index + 1].focus();
       }
     }
   };
 
+  // Handle backspace key
   const handleKeyDown = (e, index) => {
     if (e.key === "Backspace" && !otp[index] && index > 0) {
       inputsRef.current[index - 1].focus();
     }
   };
 
-  
+  // Submit OTP
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const enteredOtp = otp.join("");
 
-    if (enteredOtp.length < 5) {
-      toast.error("Please enter the complete 5-digit OTP");
+    if (enteredOtp.length !== 5) {
+      toast.error("OTP must be exactly 5 digits");
       return;
     }
 
-    if (!userEmail) {
-      toast.error("Email not found. Please restart the process.");
+    if (!verifiedEmail) {
+      toast.error("Email not found. Please go back and enter your email.");
       return;
     }
 
-    dispatch(verifyOtp({ email: userEmail, otp: enteredOtp }));
+    dispatch(verifyOtpAction({ email: verifiedEmail, otp: enteredOtp }));
   };
 
-  
-  const handleResendOtp = () => {
-    if (!userEmail) {
-      toast.error("Email not found. Please restart the process.");
-      return;
-    }
-
-    dispatch(sendOtp({ email: userEmail }))
-      .unwrap()
-      .then(() => toast.info("OTP resent to your email"))
-      .catch(() => toast.error("Failed to resend OTP"));
-  };
-
- 
+  // Navigate on OTP verified or show error
   useEffect(() => {
     if (otpVerified) {
-      toast.success("OTP Verified Successfully!");
-      dispatch(resetFlags());
-      setTimeout(() => {
-        navigate("/setnewpassword");
-      }, 1500);
+      navigate("/setnewpassword", { state: { email: verifiedEmail } });
+    } else if (forgotError) {
+      toast.error(forgotError?.detail || "Invalid OTP");
     }
-    if (error) {
-      toast.error(error);
-      dispatch(resetFlags());
+  }, [otpVerified, forgotError, navigate, verifiedEmail]);
+
+  // Save email in localStorage
+  useEffect(() => {
+    if (verifiedEmail) {
+      localStorage.setItem("resetEmail", verifiedEmail);
     }
-  }, [otpVerified, error, navigate, dispatch]);
+  }, [verifiedEmail]);
+
+  // Resend OTP
+  const handleResend = () => {
+    if (!verifiedEmail) {
+      toast.error("Email not found. Cannot resend OTP.");
+      return;
+    }
+
+    dispatch(sendOtpAction(verifiedEmail))
+      .unwrap()
+      .then(() => toast.info("OTP resent successfully!"))
+      .catch(() => toast.error("Failed to resend OTP."));
+  };
 
   return (
-    <ResetContainer $backgroundImage={backgroundImage}>
+    <ResetContainer backgroundimage={backgroundimage}>
       <ResetBox>
         <LogoWrapper>
           <Logo src={logoImage} alt="Logo" />
@@ -111,8 +115,7 @@ function Verification() {
 
         <Title>Verification</Title>
         <Subtitle>
-          Verification code sent to your email. <br />
-          Enter the code below to continue.
+          We sent a code to <br /> {verifiedEmail || "your email"}
         </Subtitle>
 
         <Form onSubmit={handleSubmit}>
@@ -130,11 +133,11 @@ function Verification() {
             ))}
           </OtpWrapper>
 
-          <Button type="submit" disabled={loading}>
-            {loading ? "Verifying..." : "Verify"}
+          <Button type="submit" disabled={forgotLoading}>
+            {forgotLoading ? "Verifying..." : "Verify"}
           </Button>
 
-          <ResendOtp onClick={handleResendOtp}>Resend OTP</ResendOtp>
+          <ResendOtp onClick={handleResend}>Resend OTP</ResendOtp>
         </Form>
 
         <Link to="/login">
@@ -145,6 +148,7 @@ function Verification() {
       <ToastContainer />
     </ResetContainer>
   );
-}
+};
 
 export default Verification;
+

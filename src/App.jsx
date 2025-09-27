@@ -17,8 +17,7 @@ import PersistLogin from "./Components/PersistLogin.jsx"
 
 function App() {
   return (
-
-       
+     
     <Routes>
       {/* Public Routes */}
       <Route path="/" element={<Header />} />

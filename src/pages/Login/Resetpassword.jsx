@@ -20,6 +20,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { sendOTP } from "../../services/authService";
 
+// 🔹 Async thunk to request OTP
 export const requestOTP = createAsyncThunk(
   "auth/requestOTP",
   async (email, { rejectWithValue }) => {
@@ -33,12 +34,13 @@ export const requestOTP = createAsyncThunk(
 );
 
 const Resetpassword = () => {
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState(""); // ✅ keep local state for input
   const [validationError, setValidationError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { loading, error } = useSelector((state) => state.auth);
 
+  // ✅ validate email before sending
   const validateForm = () => {
     if (!email) {
       return "Empty Field: Please enter your email address.";
@@ -59,13 +61,15 @@ const Resetpassword = () => {
     }
     setValidationError("");
 
+    // 🔹 Dispatch async thunk
     dispatch(requestOTP(email))
       .unwrap()
       .then(() => {
+        // 🔹 Navigate to verification and pass email
         navigate("/verification", { state: { email } });
       })
       .catch(() => {
-        
+        // error will be shown from redux
       });
   };
 
@@ -78,7 +82,7 @@ const Resetpassword = () => {
 
         <Title>Reset password</Title>
         <Subtitle>
-          Enter your registered email below, and we’ll send you a link to reset your password securely.
+          Enter your registered email below, and we’ll send you a code to reset your password securely.
         </Subtitle>
 
         <Form onSubmit={handleSubmit}>

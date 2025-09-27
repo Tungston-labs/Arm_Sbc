@@ -2,8 +2,8 @@ import { Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { refreshToken } from "../services/useRefreshTokenService";
-import { setAccessToken } from "../redux/authSlice";  // ✅ FIX
-import api from "../services/api"; // ✅ FIX
+import { setAccessToken } from "../redux/authSlice";  
+import api from "../services/api"; 
 
 const PersistLogin = () => {
   const accessToken = useSelector((state) => state.auth.accessToken);
@@ -17,7 +17,7 @@ const PersistLogin = () => {
           const newAccessToken = await refreshToken();
           if (newAccessToken) {
             dispatch(setAccessToken({ accessToken: newAccessToken }));
-            api.defaults.headers.Authorization = `Bearer ${newAccessToken}`; // ✅ FIX
+            api.defaults.headers.Authorization = `Bearer ${newAccessToken}`; 
           }
         }
       } catch (err) {

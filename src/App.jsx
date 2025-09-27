@@ -12,8 +12,6 @@ import Enquiry from './pages/EnquiryPage/Enquiry'
 import EnquiryDetails from './pages/EnquiryPage/EnquiryDetails'
 import InquiryPage from './pages/Inquiryform/InquiryPage'
 import CartPage from "./pages/cartpage/CartPage.jsx"
-import Comparison from "./pages/Comparison/Comparison";
-import SingleProduct from "./pages/product/SingleProduct.jsx";
 import Products from "./pages/product/Products.jsx";
 
 function App() {
@@ -34,7 +32,6 @@ function App() {
       <Route path="/reset-password" element={<Resetpassword />} />
       <Route path="/verification" element={<Verification />} />
       <Route path="/setnewpassword" element={<SetNewPassword />} />
-      <Route path="/compare" element={<Comparison />} />
     </Routes>
   );
 }

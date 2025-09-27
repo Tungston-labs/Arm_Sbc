@@ -17,19 +17,18 @@ import { fetchDashboardCounts } from "../../redux/dashboardSlice";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
-
-  // Get state from Redux
   const { counts, loading, error } = useSelector((state) => state.dashboard);
+ const token = localStorage.getItem("token"); 
+console.log("🔑 Token from localStorage:", token);
 
-  // Get token (from localStorage / Redux auth slice)
-  const token = localStorage.getItem("token"); 
 
   useEffect(() => {
-    if (token) {
-      dispatch(fetchDashboardCounts(token));
-    }
-  }, [dispatch, token]);
+  dispatch(fetchDashboardCounts()); // no token needed
+}, [dispatch]);
 
+useEffect(() => {
+  console.log("Dashboard counts from Redux:", counts);
+}, [counts]);
   return (
     <Layout>
       <DashboardHeader>

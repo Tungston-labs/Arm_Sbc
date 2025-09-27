@@ -183,3 +183,48 @@ export const ViewIcon = styled(FaEye)`
     color: #b76cff;
   }
 `;
+
+export const EmptyState = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+  text-align: center;
+
+  img {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 16px;
+
+    @media (min-width: 768px) {
+      width: 200px;
+      height: 200px;
+    }
+
+@media (min-width: 1440px) {
+      width: 300px;
+      height: 300px;
+    }
+
+    @media (min-width: 1920px) {
+      width: 300px;
+      height: 300px;
+    }
+
+    @media (min-width: 2560px) {
+      width: 500px;
+      height: 500px;
+    }
+
+    @media (min-width: 3840px) {
+      width: 800px;
+      height: 800px;
+    }
+
+    @media (min-width: 7680px) {
+      width: 800px;
+      height: 800px;
+    }
+  }
+`;

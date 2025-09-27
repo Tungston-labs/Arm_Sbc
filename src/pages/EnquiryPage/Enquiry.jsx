@@ -1,5 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import Layout from "../../Layout/Layout";
+import NoEnquiry from "../../assets/inquriy/noenquiry.svg";
+
 import {
   PageTitle,
   SubTitle,
@@ -12,12 +16,26 @@ import {
   PageButton,
   ViewIcon,
   ArrowButton,
+  EmptyState,   // 👈 import it here
 } from "./Enquiry.Styles";
-import { useNavigate } from "react-router-dom";
-import enquiryData from "./EnquiryData"; 
+
+import { fetchInquiries } from "../../redux/inquirySlice";
 
 const Enquiry = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const { list: enquiries = [], loading, error } = useSelector(
+    (state) => state.inquiry || {}
+  );
+
+  const token = localStorage.getItem("token");
+
+  useEffect(() => {
+    if (token) {
+      dispatch(fetchInquiries(token));
+    }
+  }, [dispatch, token]);
 
   const handleViewClick = (id) => {
     navigate(`/enquiry-details/${id}`);
@@ -31,34 +49,45 @@ const Enquiry = () => {
         pending, open, or closed requests instantly.
       </SubTitle>
 
-      <Table>
-        <thead>
-          <TableRow>
-            <TableHead>Name</TableHead>
-            <TableHead>Email ID</TableHead>
-            <TableHead>Phone number</TableHead>
-            <TableHead>Delivery location</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead></TableHead>
-          </TableRow>
-        </thead>
-        <tbody>
-          {enquiryData.map((item) => (
-            <TableRow key={item.id}>
-              <TableCell>{item.name}</TableCell>
-              <TableCell>{item.email}</TableCell>
-              <TableCell>{item.phone}</TableCell>
-              <TableCell>{item.location}</TableCell>
-              <TableCell>
-                <StatusBadge status={item.status}>{item.status}</StatusBadge>
-              </TableCell>
-              <TableCell>
-                <ViewIcon onClick={() => handleViewClick(item.id)} />
-              </TableCell>
+      {loading && <p>Loading enquiries...</p>}
+      {error && <p style={{ color: "red" }}>{error}</p>}
+
+      {!loading && enquiries.length === 0 && (
+        <EmptyState>
+          <img src={NoEnquiry} alt="No enquiries" />
+        </EmptyState>
+      )}
+
+      {enquiries.length > 0 && (
+        <Table>
+          <thead>
+            <TableRow>
+              <TableHead>Name</TableHead>
+              <TableHead>Email ID</TableHead>
+              <TableHead>Phone number</TableHead>
+              <TableHead>Delivery location</TableHead>
+              <TableHead>Status</TableHead>
+              <TableHead></TableHead>
             </TableRow>
-          ))}
-        </tbody>
-      </Table>
+          </thead>
+          <tbody>
+            {enquiries.map((item) => (
+              <TableRow key={item.id}>
+                <TableCell>{item.name}</TableCell>
+                <TableCell>{item.email}</TableCell>
+                <TableCell>{item.phone}</TableCell>
+                <TableCell>{item.location}</TableCell>
+                <TableCell>
+                  <StatusBadge status={item.status}>{item.status}</StatusBadge>
+                </TableCell>
+                <TableCell>
+                  <ViewIcon onClick={() => handleViewClick(item.id)} />
+                </TableCell>
+              </TableRow>
+            ))}
+          </tbody>
+        </Table>
+      )}
 
       <Pagination>
         <ArrowButton disabled>{`<`}</ArrowButton>

@@ -8,8 +8,9 @@ import { useState } from "react";
 import AddetionalInformationCard from "./AddetionalInformationCard";
 import ReviewFormcontainer from "../review/ReviewFormcontainer";
 import ReviewCardSContainer from "../review/ReviewCardSContainer";
+import { CenterContainer } from "../../../pages/product/product.style";
 
-const SpecificationSection = ({description,addetionalInformation}) => {
+const SpecificationSection = ({ description, addetionalInformation }) => {
   const [activeIndex, setActiveIndex] = useState("Description");
   const navItem = ["Description", "Additional Information", "Reviews"];
 
@@ -23,16 +24,28 @@ const SpecificationSection = ({description,addetionalInformation}) => {
       />
       {activeIndex === navItem[0] && (
         <DescriptionSection>
-          {description?.map((i, index) => (
-            <SpecificationDescriptionCard data={i} key={index} />
-          ))}
+          {description?.length > 0 ? (
+            description?.map((i, index) => (
+              <SpecificationDescriptionCard data={i} key={index} />
+            ))
+          ) : (
+            <CenterContainer>
+              <p>No description available for this product. </p>
+            </CenterContainer>
+          )}
         </DescriptionSection>
       )}
       {activeIndex === navItem[1] && (
         <DescriptionSection background="#ffffff1a">
-          {addetionalInformation?.map((i, index) => (
-            <AddetionalInformationCard data={i} key={index} />
-          ))}
+          {addetionalInformation?.length > 0 ? (
+            addetionalInformation?.map((i, index) => (
+              <AddetionalInformationCard data={i} key={index} />
+            ))
+          ) : (
+            <CenterContainer>
+              <p>No additional information available. </p>
+            </CenterContainer>
+          )}
         </DescriptionSection>
       )}
       {activeIndex === navItem[2] && (

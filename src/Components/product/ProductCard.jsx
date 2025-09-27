@@ -7,15 +7,10 @@ import {
   ImageContainer,
 } from "./poductCard.style";
 
-const ProductCard = ({
-  image = "https://placehold.co/600x400",
-  text = "ARM Develeopment Board Rockchip 3288, Quad Core 1.7 GHz",
-  onCompare,
-  display = "flex",
-}) => {
+const ProductCard = ({ id, image, text, onCompare, display = "flex" }) => {
   const navigate = useNavigate();
   return (
-    <Card onClick={() => navigate("/product/1")}>
+    <Card onClick={() => navigate(`/product/${id}`)}>
       <ImageContainer>
         <img
           src={image}
@@ -28,13 +23,13 @@ const ProductCard = ({
         <CardButton
           onClick={(e) => {
             e.stopPropagation();
-            navigate("/product/1");
+            navigate(`/product/${id}`);
           }}
         >
           Read More
         </CardButton>
         <CardButton
-          bg="#0E0619"
+          $bg="#0E0619"
           onClick={(e) => {
             e.stopPropagation();
             onCompare && onCompare();

@@ -100,7 +100,7 @@ export const CardButton = styled.button`
   border-radius: 0.5rem;
   border: 1px solid #8a38f5;
   color: #fff;
-  background: ${(props) => (props.bg ? props.bg : "transparent")};
+  background: ${(props) => props.$bg || "transparent"};
   cursor: pointer;
   font-size: 0.63rem;
   transition: background 0.2s, color 0.2s;

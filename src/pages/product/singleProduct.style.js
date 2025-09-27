@@ -91,6 +91,7 @@ export const HeaderTextContainer = styled.section`
     padding-left: 2.5rem;
   }
   @media (max-width: 480px) {
+    width: 100%;
     padding-inline: 0rem;
     h2 {
       font-size: 1.12rem;

@@ -4,9 +4,10 @@ import { Button } from "antd";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import productImg from "../../assets/Comparison/chip.svg";
 import addetionalData from "../../pages/product/data/AddetionalInformationData.json";
-import descriptionData from "../../components/Addproduct/DescriptionDetails/DescriptionData.json";
-import AddProductNavBar from "../../components/Addproduct/AddProductNavbar";
-import AddProductDescriptionCard from "../../components/Addproduct/DescriptionDetails/DescriptionSection";
+// import descriptionData from "../../components/Addproduct/DescriptionDetails/DescriptionData.json";
+ import descriptionData from "../../Components/Addproduct/DescriptionDetails/DescriptionData.json";
+import AddProductNavBar from "../../Components/Addproduct/AddProductNavbar";
+import AddProductDescriptionCard from "../../Components/Addproduct/DescriptionDetails/DescriptionSection";
 
 import {
   AddContainer,

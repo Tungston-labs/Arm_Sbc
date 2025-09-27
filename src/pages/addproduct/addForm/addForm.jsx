@@ -18,8 +18,8 @@ import {
   TextArea,
 } from "./addForm.styled";
 import { IoMdArrowRoundBack } from "react-icons/io";
-import ImageUploader from "../../../components/Addproduct/ImageUploadSection/ImageUpload";
-import DemoCollapse from "../../../components/Addproduct/Ant-design/CardsAndInput";
+import ImageUploader from "../../../Components/Addproduct/ImageUploadSection/ImageUpload";
+import DemoCollapse from "../../../Components/Addproduct/Ant-design/CardsAndInput";
 import axios from "axios";
 
 const AddForm = () => {

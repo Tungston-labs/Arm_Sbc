@@ -1,8 +1,9 @@
-import api from "./api";
+import privateApi from "./api";
+
 
 // Fetch dashboard counts (admin only)
 export const getDashboardCounts = async (token) => {
-  const response = await api.get("inquiries/dashboard/", {
+  const response = await privateApi.get("inquiries/dashboard/", {
     headers: { Authorization: `Bearer ${token}` },
   });
 

@@ -6,8 +6,14 @@ const api = axios.create({
     "Content-Type": "application/json",
   },
 });
+export const privateApi = axios.create({
+  baseURL: "http://178.248.112.16:8002/api/", 
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
 
-api.interceptors.request.use((config) => {
+privateApi.interceptors.request.use((config) => {
   const token = localStorage.getItem("accessToken");
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
@@ -15,11 +21,11 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-api.interceptors.response.use(
+privateApi.interceptors.response.use(
   (response) => response,
   async (error) => {
     const prevRequest = error.config;
-    if (error.response?.status === 401 && !prevRequest._retry) {
+    if (error.response?.status === 403 && !prevRequest._retry) {
       prevRequest._retry = true;
       const newToken = await refreshToken();
       if (newToken) {

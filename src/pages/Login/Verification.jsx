@@ -21,7 +21,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Verification = () => {
-    const [otp, setOtp] = useState(Array(6).fill(""));
+    const [otp, setOtp] = useState(Array(5).fill(""));
     const inputsRef = useRef([]);logoImage
 
     const handleChange = (value, index) => {
@@ -118,6 +118,6 @@ const Verification = () => {
             <ToastContainer />
         </ResetContainer>
     );
-};
+    };
 
 export default Verification;

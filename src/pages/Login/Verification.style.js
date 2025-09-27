@@ -100,7 +100,7 @@ export const OtpInput = styled.input`
 `;
 
 export const Button = styled.button`
-  width: 100%;
+  width: 83%;
   background: #8A38F5;
   color: #fff;
   font-size: 16px;
@@ -132,7 +132,7 @@ export const BackLink = styled.a`
 
 export const ResendOtp = styled.p`
   margin-top: 15px;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   color: #8A38F5;
   font-weight: 500;
   font-family: 'Roboto', sans-serif;

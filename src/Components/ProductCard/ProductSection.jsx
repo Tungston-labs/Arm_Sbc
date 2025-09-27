@@ -16,7 +16,7 @@ const ProductSection = ({ products }) => {
       {products.map((product) => (
         <Card key={product.id}>
           <ProductImage src={product.image} alt={product.name} />
-          <ProductTitle>{product.ram} {product.storage}</ProductTitle>
+          <ProductTitle>{product.name}, {product.ram}, {product.storage}</ProductTitle>
         </Card>
       ))}
     </ProductsWrapper>

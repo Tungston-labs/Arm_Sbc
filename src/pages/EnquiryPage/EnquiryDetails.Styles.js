@@ -146,6 +146,7 @@ export const SectionTitle = styled.h2`
   font-weight: 600;
   color: #9140FB;
   margin-bottom: 1rem;
+  margin-top: 2rem;
   font-family: 'Roboto', sans-serif;
   
   @media (min-width: 768px) {
@@ -208,13 +209,20 @@ export const CustomerDetailsGrid = styled.div`
 
 export const DetailItem = styled.p`
   font-size: 0.8rem;
-  color: #ddd;
+  color: white;
   font-family: 'Roboto', sans-serif;
+  margin-bottom: 1.5rem;
   strong {
     display: block;
-    color: #9d4edd;
-    margin-bottom: 0.2rem;
+     color: gray;
+    margin-bottom: 0.5rem;
       font-family: 'Roboto', sans-serif;
+      font-family: Roboto;
+font-weight: 400;
+font-style: Regular;
+line-height: 100%;
+letter-spacing: 0%;
+
   }
 
   
@@ -246,6 +254,7 @@ export const ProductGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 1rem;
+  justify-content: center; 
 
 
   @media (min-width: 768px) {
@@ -273,31 +282,48 @@ export const ProductGrid = styled.div`
 `;
 
 export const ProductCard = styled.div`
-  background: #1e1e24;
+  background: rgba(30, 30, 36, 0.4); 
   border-radius: 10px;
   padding: 1rem;
   text-align: center;
   transition: transform 0.2s ease;
   font-family: 'Roboto', sans-serif;
+
+
+  backdrop-filter: blur(50px);
+  -webkit-backdrop-filter: blur(50px);
+  border: 1px solid rgba(255, 255, 255, 0.1); 
+
+  width: 100%;
+  max-width: 250px;
+  margin: 0 auto;
+
   &:hover {
     transform: translateY(-5px);
   }
 
- 
   @media (min-width: 1024px) {
+    max-width: 280px;
     padding: 1.5rem;
   }
 
   @media (min-width: 2560px) {
+    max-width: 350px;
     padding: 2rem;
   }
+
   @media (min-width: 3860px) {
+    max-width: 500px;
     padding: 4rem;
   }
+
   @media (min-width: 7680px) {
+    max-width: 700px;
     padding: 3rem;
   }
 `;
+
+
 
 export const ProductImage = styled.img`
   max-width: 100%;

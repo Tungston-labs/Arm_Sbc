@@ -18,33 +18,49 @@ import AddProduct from "./pages/addproduct/addProduct";
 import AddForm from "./pages/addproduct/addForm/addForm.jsx";
 import AddViewProduct from "./pages/AddSingleView/AddViewProduct.jsx";
 import ProtectedRoute from "./components/ProtectedRoute";
+import { ToastContainer, Bounce } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Header />} />
-      <Route path="/compare" element={<Comparison />} />
-      <Route path="/cartpage" element={<CartPage />} />
-      <Route path="/inquiry-page" element={<InquiryPage />} />
-      <Route path="/product" element={<Products />} />
-      <Route path="/product/:id" element={<SingleProduct />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/reset-password" element={<Resetpassword />} />
-      <Route path="/verification" element={<Verification />} />
-      <Route path="/setnewpassword" element={<SetNewPassword />} />
+      <>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover={false}
+        theme="colored"
+        transition={Bounce}
+      />
 
-      {/* <Route element={<PersistLogin />}> */}
-      <Route element={<ProtectedRoute />}>
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/products/:productId" element={<AddViewProduct />} />
-        <Route path="/enquiry-page" element={<Enquiry />} />
-        <Route path="/enquiry-details/:id" element={<EnquiryDetails />} />
-        <Route path="/addproduct" element={<AddProduct />} />
-        <Route path="/addform" element={<AddForm />} />
-        <Route path="/addform/:productId" element={<AddForm />}/>
-      </Route>
-      {/* </Route> */}
-    </Routes>
+      <Routes>
+        <Route path="/" element={<Header />} />
+        <Route path="/compare" element={<Comparison />} />
+        <Route path="/cartpage" element={<CartPage />} />
+        <Route path="/inquiry-page" element={<InquiryPage />} />
+        <Route path="/product" element={<Products />} />
+        <Route path="/product/:id" element={<SingleProduct />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/reset-password" element={<Resetpassword />} />
+        <Route path="/verification" element={<Verification />} />
+        <Route path="/setnewpassword" element={<SetNewPassword />} />
+
+        <Route element={<ProtectedRoute />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/products/:productId" element={<AddViewProduct />} />
+          <Route path="/enquiry-page" element={<Enquiry />} />
+          <Route path="/enquiry-details/:id" element={<EnquiryDetails />} />
+          <Route path="/addproduct" element={<AddProduct />} />
+          <Route path="/addform" element={<AddForm />} />
+          <Route path="/addform/:productId" element={<AddForm />} />
+        </Route>
+      </Routes>
+    </>
   );
 }
 

@@ -113,9 +113,8 @@ const AddForm = () => {
 
       toast.success(`Product ${productId ? "updated" : "added"} successfully!`);
 
-      setTimeout(() => navigate("/addproduct"), 1000).then(() =>
-        navigate("/addproduct")
-      );
+     setTimeout(() => navigate("/addproduct"), 1000);
+      
     } catch (error) {
       console.error("Error saving product:", error);
       toast.error("Failed to save product. Please check your input.");

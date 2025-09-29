@@ -40,7 +40,7 @@ const SmallCard = () => {
             style={{ cursor: "pointer" }}
           >
             <CardImage src={item.image || "/placeholder.png"} alt={item.name} />
-            <CardTitle>{item.description}</CardTitle>
+            <CardTitle>{item.name}</CardTitle>
             <CardDetailsWrap>
               <CardDetail>{item.cores || "N/A"} Core</CardDetail>
               <CardDetail>{item.ram} Ram</CardDetail>

@@ -4,19 +4,18 @@ import {
 } from "../../../pages/product/singleProduct.style";
 import SpecificationNavBar from "./SpecificationNavBar";
 import SpecificationDescriptionCard from "./SpecificationDescriptionCard";
-import descriptionData from "../../../pages/product/data/specificationData.json";
-import addetionalData from "../../../pages/product/data/AddetionalInformationData.json";
 import { useState } from "react";
 import AddetionalInformationCard from "./AddetionalInformationCard";
-import ReviewFormcontainer from "./ReviewFormcontainer";
-import ReviewCardSContainer from "./ReviewCardSContainer";
+import ReviewFormcontainer from "../review/ReviewFormcontainer";
+import ReviewCardSContainer from "../review/ReviewCardSContainer";
+import { CenterContainer } from "../../../pages/product/product.style";
 
-const SpecificationSection = () => {
+const SpecificationSection = ({ description, addetionalInformation }) => {
   const [activeIndex, setActiveIndex] = useState("Description");
   const navItem = ["Description", "Additional Information", "Reviews"];
 
   return (
-    <SpecificationContainer>
+    <SpecificationContainer id="specification">
       <h2>Specifications</h2>
       <SpecificationNavBar
         activeIndex={activeIndex}
@@ -25,16 +24,28 @@ const SpecificationSection = () => {
       />
       {activeIndex === navItem[0] && (
         <DescriptionSection>
-          {descriptionData?.map((i, index) => (
-            <SpecificationDescriptionCard data={i} key={index} />
-          ))}
+          {description?.length > 0 ? (
+            description?.map((i, index) => (
+              <SpecificationDescriptionCard data={i} key={index} />
+            ))
+          ) : (
+            <CenterContainer>
+              <p>No description available for this product. </p>
+            </CenterContainer>
+          )}
         </DescriptionSection>
       )}
       {activeIndex === navItem[1] && (
         <DescriptionSection background="#ffffff1a">
-          {addetionalData?.map((i, index) => (
-            <AddetionalInformationCard data={i} key={index} />
-          ))}
+          {addetionalInformation?.length > 0 ? (
+            addetionalInformation?.map((i, index) => (
+              <AddetionalInformationCard data={i} key={index} />
+            ))
+          ) : (
+            <CenterContainer>
+              <p>No additional information available. </p>
+            </CenterContainer>
+          )}
         </DescriptionSection>
       )}
       {activeIndex === navItem[2] && (

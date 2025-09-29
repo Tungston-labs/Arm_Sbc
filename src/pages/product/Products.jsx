@@ -1,5 +1,6 @@
 import {
   AllProductContainer,
+  CenterContainer,
   ProductCardContainer,
   ProductHeader,
 } from "./product.style";
@@ -8,8 +9,17 @@ import { NavbarContainer } from "./singleProduct.style";
 import Navbar from "../../Components/Navbar/Navbar";
 import Footer from "../../Components/Footer/Footer";
 import ProductCard from "../../Components/product/ProductCard";
+import OvalSpinner from "../../Components/spinner/OvalSpinner";
 
-const Products = () => {
+const Products = ({
+  products,
+  loading,
+  currentPage,
+  setCurrentPage,
+  totalPages,
+  totalCount,
+  limit,
+}) => {
   return (
     <>
       <NavbarContainer>
@@ -17,15 +27,34 @@ const Products = () => {
       </NavbarContainer>
       <AllProductContainer>
         <ProductHeader>Products</ProductHeader>
-        <ProductCardContainer>
-         {[...Array(50)].map(i=><ProductCard />)} 
-        </ProductCardContainer>
-        <CustomPagination
-          total={50}
-          pageSize={5}
-          defaultPage={1}
-          onChange={(page) => console.log("Current Page:", page)}
-        />
+        {loading ? (
+          <CenterContainer>
+            <OvalSpinner size="large" />
+          </CenterContainer>
+        ) : !products?.length > 0 ? (
+          <CenterContainer>
+            <p>No products found.</p>
+          </CenterContainer>
+        ) : (
+          <ProductCardContainer>
+            {products.map((i) => (
+              <ProductCard
+                key={i?.id}
+                image={i?.image}
+                text={i?.name}
+                id={i?.id}
+              />
+            ))}
+          </ProductCardContainer>
+        )}
+        {products?.length > 0 && totalPages > 1 && !loading && (
+          <CustomPagination
+            total={totalCount}
+            pageSize={limit}
+            current={currentPage}
+            onChange={(newPage) => setCurrentPage(newPage)}
+          />
+        )}
       </AllProductContainer>
       <Footer />
     </>

@@ -1,5 +1,5 @@
 import TotalReviewCard from "./TotalReviewCard";
-import ReviewCardComponent from "./ReviewCardComponent";
+import ReviewCardComponent from "../review/ReviewCardComponent";
 
 const ReviewCardSContainer = () => {
   return (

@@ -45,17 +45,18 @@ export const updateExistingProduct = createAsyncThunk(
   }
 );
 
+// Public Thunks
 export const fetchProductsPublic = createAsyncThunk(
   "product/fetchProductsPublic",
-  async () => {
-    const data = await listProductsPublic();
+  async ({ currentPage, limit }) => {
+    const data = await listProductsPublic(currentPage, limit);
     return data;
   }
 );
 
 export const fetchProductPublic = createAsyncThunk(
   "product/fetchProductPublic",
-  async (productId) => {
+  async ({ productId }) => {
     const data = await getProductByIdPublic(productId);
     return data;
   }
@@ -63,7 +64,7 @@ export const fetchProductPublic = createAsyncThunk(
 
 export const fetchRelatedProducts = createAsyncThunk(
   "product/fetchRelatedProducts",
-  async (productId) => {
+  async ({ productId }) => {
     const data = await getRelatedProducts(productId);
     return data;
   }
@@ -73,12 +74,21 @@ const productSlice = createSlice({
   name: "product",
   initialState: {
     productsAdmin: [],
-    productsPublic: [],
+    productsPublic: {
+      results: [],
+      currentPage: 0,
+      totalPages: 0,
+      totalCount: 0,
+    },
     productDetailAdmin: null,
     productDetailPublic: null,
+    productDetailLoading: false,
+    productDetailError: null,
     relatedProducts: [],
     loading: false,
     error: null,
+    relatedLoading: false,
+    relatedError: null,
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -121,14 +131,50 @@ const productSlice = createSlice({
         if (index !== -1) state.productsAdmin[index] = action.payload;
       })
       // Public
+      .addCase(fetchProductsPublic.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
       .addCase(fetchProductsPublic.fulfilled, (state, action) => {
-        state.productsPublic = action.payload;
+        state.loading = false;
+        state.productsPublic = {
+          results: action.payload.results,
+          currentPage: action.payload.current_page,
+          totalPages: action.payload.total_pages,
+          totalCount: action.payload.count,
+        };
+      })
+      .addCase(fetchProductsPublic.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error?.message || "Failed to fetch products";
+      })
+
+      .addCase(fetchProductPublic.pending, (state) => {
+        state.productDetailLoading = true;
+        state.productDetailError = null;
       })
       .addCase(fetchProductPublic.fulfilled, (state, action) => {
+        state.productDetailLoading = false;
         state.productDetailPublic = action.payload;
       })
+      .addCase(fetchProductPublic.rejected, (state, action) => {
+        state.productDetailLoading = false;
+        state.productDetailError =
+          action.error?.message || "Failed to fetch product details";
+      })
+
+      .addCase(fetchRelatedProducts.pending, (state) => {
+        state.relatedLoading = true;
+        state.relatedError = null;
+      })
       .addCase(fetchRelatedProducts.fulfilled, (state, action) => {
-        state.relatedProducts = action.payload.results;
+        state.relatedLoading = false;
+        state.relatedProducts = action.payload.results || [];
+      })
+      .addCase(fetchRelatedProducts.rejected, (state, action) => {
+        state.relatedLoading = false;
+        state.relatedError =
+          action.error?.message || "Failed to fetch related products";
       });
   },
 });

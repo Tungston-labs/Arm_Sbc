@@ -91,6 +91,7 @@ export const HeaderTextContainer = styled.section`
     padding-left: 2.5rem;
   }
   @media (max-width: 480px) {
+    width: 100%;
     padding-inline: 0rem;
     h2 {
       font-size: 1.12rem;
@@ -248,7 +249,9 @@ export const Link = styled.a`
   text-decoration: underline;
   font-size: 1.5rem;
   cursor: pointer;
-
+  background: none;
+  border: none;
+  padding: 0;
   &:active {
     transform: scale(0.98);
   }
@@ -733,6 +736,20 @@ export const RelatedProductContainer = styled.div`
     padding-bottom: 1rem;
     font-family: "Montserrat", sans-serif;
   }
+  @media (width >= 1024px) {
+    padding: 2rem 4rem;
+    h3 {
+      font-size: 1.5rem;
+      padding-bottom: 1.5rem;
+    }
+  }
+  @media (width >= 1280px) {
+    padding: 2.5rem 5rem;
+    h3 {
+      font-size: 1.75rem;
+      padding-bottom: 1.75rem;
+    }
+  }
   @media (width >= 1536px) {
     padding: 3rem 10rem;
     h3 {
@@ -740,10 +757,55 @@ export const RelatedProductContainer = styled.div`
       padding-bottom: 2rem;
     }
   }
+  @media (width >= 2560px) {
+    padding: 5rem 10rem;
+    h3 {
+      font-size: 3rem;
+      padding-bottom: 3rem;
+    }
+  }
+  @media (width >= 3840px) {
+    padding: 7rem 10rem;
+    h3 {
+      font-size: 5rem;
+      padding-bottom: 5rem;
+    }
+  }
 `;
 export const ProductCadContainer = styled.div`
-  width: 100%;
-  /* overflow-x: scroll; */
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+  scroll-snap-type: x mandatory;
+
+  & > * {
+    flex: 0 0 80%;
+    scroll-snap-align: start;
+    max-width: 50vw;
+  }
+
+  @media (min-width: 1024px) {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    overflow-x: unset;
+    padding-bottom: 0;
+
+    & > * {
+      flex: unset;
+      max-width: unset;
+      scroll-snap-align: unset;
+    }
+  }
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+  }
+  @media (min-width: 1536px) {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3rem;
+  }
 `;
 
 export const TotalReviewCardContainer = styled.div`

@@ -6,7 +6,7 @@ import {
   Button,
   Text,
 } from "./addProduct.styled";
-import SmallCard from "../../components/Addproduct/SmallCard";
+import SmallCard from "../../Components/Addproduct/SmallCard";
 import { useNavigate } from "react-router-dom";
 import CustomPagination from "../../Components/paginaton/CustomPagination";
 const AddProduct = () => {

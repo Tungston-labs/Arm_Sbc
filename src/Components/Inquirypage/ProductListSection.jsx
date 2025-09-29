@@ -15,8 +15,12 @@ import { Divider } from '../../pages/cartpage/CartPage.Styles';
 import Nodata from "../../assets/inquriy/mobilenodata.svg";
 import Nodatas from "../../assets/inquriy/nodata.svg";
 import { products as productsData } from "../../pages/Inquiryform/productsData";
+import { useSelector } from 'react-redux';
 
 function ProductListSection({ selectedProducts, setSelectedProducts }) {
+   const { items} = useSelector(
+    (state) => state.cart
+  );
   const [isOpen, setIsOpen] = useState(false);
   useEffect(() => {
     if (selectedProducts.length === 0) {
@@ -53,15 +57,18 @@ function ProductListSection({ selectedProducts, setSelectedProducts }) {
 
         {isOpen && (
           <>
-            {selectedProducts.length > 0 ? (
+            {items?.items?.length > 0 ? (
               <ProductList>
-                {selectedProducts.map((product) => (
+                {items?.items?.map((product) => (
                   <ProductCard key={product.id}>
-                    <ProductTitle>{product.title}</ProductTitle>
+                    <ProductTitle>{product?.product?.name}</ProductTitle>
                     <ProductSpecs>
-                      {product.specs.map((spec, index) => (
+                      {/* {product.specs.map((spec, index) => (
                         <li key={index}>{spec}</li>
-                      ))}
+                      ))} */}
+                      <li>{product?.product?.cores} core</li>
+                      <li>{product?.product?.ram}</li>
+                      <li>{product?.product?.storage}</li>
                     </ProductSpecs>
                     <ProductAction>
                       <button onClick={() => handleDelete(product.id)}>Delete</button>
@@ -83,15 +90,18 @@ function ProductListSection({ selectedProducts, setSelectedProducts }) {
       <DesktopOnly>
         <Heading>Product Inquiry</Heading>
         <Divider />
-        {selectedProducts.length > 0 ? (
+        {items?.items?.length > 0 ? (
           <ProductList>
-            {selectedProducts.map((product) => (
+            {items?.items?.map((product) => (
               <ProductCard key={product.id}>
-                <ProductTitle>{product.title}</ProductTitle>
+                <ProductTitle>{product?.product?.name}</ProductTitle>
                 <ProductSpecs>
-                  {product.specs.map((spec, index) => (
+                  <li>{product?.product?.cores} core</li>
+                      <li>{product?.product?.ram}</li>
+                      <li>{product?.product?.storage}</li>
+                  {/* {product.specs.map((spec, index) => (
                     <li key={index}>{spec}</li>
-                  ))}
+                  ))} */}
                 </ProductSpecs>
                 <ProductAction>
                   <button onClick={() => handleDelete(product.id)}>Delete</button>

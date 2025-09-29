@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProductsPublic } from "../../redux/productSlice";
 import Products from "./Products";
+import { toast } from "react-toastify";
 
 const ProductsContainer = () => {
   const dispatch = useDispatch();
@@ -10,9 +11,22 @@ const ProductsContainer = () => {
   const { productsPublic, loading, error } = useSelector(
     (state) => state.product
   );
+  const hasFetched = useRef(false);
+
   useEffect(() => {
-    dispatch(fetchProductsPublic({ currentPage, limit }));
-  }, [dispatch, currentPage]);
+    const loadProducts = async () => {
+      if (hasFetched.current) return;
+      hasFetched.current = true;
+
+      try {
+        await dispatch(fetchProductsPublic({ currentPage, limit })).unwrap();
+      } catch (err) {
+        toast.error("Failed to load products");
+      }
+    };
+
+    loadProducts();
+  }, [dispatch, currentPage, limit]);
 
   return (
     <Products

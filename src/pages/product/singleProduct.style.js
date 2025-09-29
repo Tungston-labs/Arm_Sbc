@@ -50,6 +50,16 @@ export const HeaderImageContainer = styled.section`
       height: auto;
     }
   }
+  @media (max-width: 780px) {
+    padding-block: 1rem;
+    display: flex;
+    justify-content: center;
+    img {
+      width: 70%;
+      min-width: 250px;
+      height: auto;
+    }
+  }
   @media (min-width: 1024px) and (max-width: 1439px) {
     img {
       width: 70%;
@@ -91,6 +101,26 @@ export const HeaderTextContainer = styled.section`
     padding-left: 2.5rem;
   }
   @media (max-width: 480px) {
+    width: 100%;
+    padding-inline: 0rem;
+    h2 {
+      font-size: 1.12rem;
+      padding-bottom: 0rem;
+    }
+    p,
+    li {
+      font-size: 0.8rem;
+      line-height: 1.5rem;
+    }
+    ul {
+      padding-bottom: 1rem;
+      padding-left: 1.5rem;
+    }
+    p:nth-of-type(2) {
+      padding-bottom: 0.5rem;
+    }
+  }
+  @media (max-width: 780px) {
     width: 100%;
     padding-inline: 0rem;
     h2 {
@@ -228,6 +258,10 @@ export const AddToCartButton = styled.button`
     font-size: 0.8rem;
     padding: 0.6rem 1rem;
   }
+  @media (max-width: 780px) {
+    font-size: 0.8rem;
+    padding: 0.6rem 1rem;
+  }
   @media (min-width: 1024px) and (max-width: 1439px) {
     padding: 0.7rem 1.2rem;
     color: #000;
@@ -258,6 +292,9 @@ export const Link = styled.a`
   @media (max-width: 480px) {
     font-size: 0.8rem;
   }
+  @media (max-width: 780px) {
+    font-size: 0.8rem;
+  }
   @media (min-width: 1024px) and (max-width: 1439px) {
     font-size: 0.8rem;
   }
@@ -282,6 +319,14 @@ export const SpecificationContainer = styled.section`
     text-align: center;
     font-size: 1.25rem;
     font-family: "Montserrat", sans-serif;
+  }
+  @media (width >= 760px) {
+    padding-block: 1rem;
+    padding-inline: 2rem;
+    h2 {
+      font-size: 2.1rem;
+      padding-bottom: 1rem;
+    }
   }
   @media (width >= 1024px) {
     padding-block: 2rem;
@@ -704,6 +749,12 @@ export const FormButton = styled.button`
   }
   &:active {
     transform: scale(0.95);
+  }
+   &:disabled {
+    background: #bfa0f9; 
+    border: 1px solid #bfa0f9;
+    cursor: not-allowed;
+    opacity: 0.6;
   }
   margin-block: 1rem;
   @media (width >= 1280px) {

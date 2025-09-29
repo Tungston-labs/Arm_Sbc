@@ -26,18 +26,18 @@ import {
   updateCartQuantity,
   deleteCartItem,
 } from "../../redux/cartSlice";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { EmptyState } from "../EnquiryPage/EnquiryDetails.Styles";
 import NoEnquiry from "../../assets/inquriy/noenquiry.svg";
 const Cart = () => {
   const dispatch = useDispatch();
-  const { items: cartItems, loading } = useSelector((state) => state.cart);
+  const { items, loading } = useSelector((state) => state.cart);
   const navigate = useNavigate();
   const cartToken = localStorage.getItem("cartToken"); 
-
+  console.log({items})
   useEffect(() => {
     if (cartToken) {
-      dispatch(fetchCartItems(cartToken));
+      dispatch(fetchCartItems({cartToken}));
     }
   }, [dispatch, cartToken]);
 
@@ -70,22 +70,25 @@ const Cart = () => {
 
           {loading ? (
             <p>Loading...</p>
-          ) : cartItems.length > 0 ? (
-            cartItems.map((item, index) => (
+          ) : items?.items?.length > 0 ? (
+            items?.items?.map((item, index) => (
               <React.Fragment key={item.id}>
                 <CartItem>
-                  <ProductImage src={item.image} alt={item.name} />
+                  <ProductImage src={item?.product?.image} alt={item.name} />
                   <ProductDetails>
                     <ProductHeader>
-                      <ProductName>{item.name}</ProductName>
+                      <ProductName>{item?.product?.name}</ProductName>
                       <RemoveButton onClick={() => removeItem(item.id)}>
                         ✕
                       </RemoveButton>
                     </ProductHeader>
                     <ProductSpecs>
-                      {item.specs.map((spec, idx) => (
+                      <li>{item?.product?.cores} core</li>
+                      <li>{item?.product?.ram}</li>
+                      <li>{item?.product?.storage}</li>
+                      {/* {item.specs?.map((spec, idx) => (
                         <li key={idx}>{spec}</li>
-                      ))}
+                      ))} */}
                     </ProductSpecs>
                     <QuantityControl>
                       <QuantityButton
@@ -99,11 +102,11 @@ const Cart = () => {
                       >
                         +
                       </QuantityButton>
-                      <MoreInfo href="#">See more like this</MoreInfo>
+                      <MoreInfo as={Link} to="/product">See more like this</MoreInfo>
                     </QuantityControl>
                   </ProductDetails>
                 </CartItem>
-                {index < cartItems.length - 1 && <Divider />}
+                {index < items?.items?.length - 1 && <Divider />}
               </React.Fragment>
             ))
           ) : (

@@ -1,4 +1,4 @@
-import api, { privateApi } from "./api";
+import { privateApi } from "./api";
 
 export const loginAdmin = async (email, password) => {
   const response = await privateApi.post("accounts/login/", { email, password });

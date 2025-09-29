@@ -7,6 +7,8 @@ import {
   Text,
 } from "./addProduct.styled";
 import SmallCard from "../../Components/Addproduct/SmallCard";
+import Layout from "../../Layout/Layout";
+
 import { useNavigate } from "react-router-dom";
 const AddProduct = () => {
   const navigate = useNavigate();
@@ -14,7 +16,8 @@ const AddProduct = () => {
     navigate("/addform");
   };
   return (
-    <AddContainer>
+    <Layout>
+      <AddContainer>
       <TopBar>
         <Header>Products</Header>
         <Button onClick={handleNavigate}>Add Product</Button>
@@ -25,6 +28,7 @@ const AddProduct = () => {
       </Text>
       <SmallCard />
     </AddContainer>
+    </Layout>
   );
 };
 

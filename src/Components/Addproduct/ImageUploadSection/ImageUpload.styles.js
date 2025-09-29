@@ -3,9 +3,6 @@ import styled from "styled-components";
 export const CardWrapper = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 100px;
-
-  @media (min-width: 768px) {
     margin-top: 150px;
   }
   @media (min-width: 1920px) {

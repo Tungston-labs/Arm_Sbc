@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addNewProduct } from "../../../redux/productSlice";
 import { AddContainer, Header, Text } from "../addProduct.styled";
+import Layout from "../../../Layout/Layout"
 import {
   AddButton,
   ButtonContainer,
@@ -102,7 +103,8 @@ const AddForm = () => {
     }
   };
   return (
-    <AddContainer as="form" onSubmit={handleSubmit}>
+   <Layout>
+     <AddContainer as="form" onSubmit={handleSubmit}>
       <TopBar>
         <IoMdArrowRoundBack size={28} color="#fff" />
         <Header>Add Product</Header>
@@ -201,6 +203,7 @@ const AddForm = () => {
         <AddButton type="submit">Save</AddButton>
       </ButtonContainer>
     </AddContainer>
+   </Layout>
   );
 };
 

@@ -1,4 +1,4 @@
-import api from "./api";
+// import api from "./api";
 import privateApi from "./api";
 const config = {
   headers: {
@@ -18,6 +18,10 @@ export const listProductsAdmin = async () => {
 
 export const updateProduct = async (productId, productData) => {
   const response = await privateApi.put(`products/${productId}/`, productData);
+  return response.data;
+};
+export const deleteProduct = async (productId) => {
+  const response = await privateApi.delete(`products/${productId}/`, config);
   return response.data;
 };
 

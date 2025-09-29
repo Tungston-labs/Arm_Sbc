@@ -21,6 +21,8 @@ import AddViewProduct from "./pages/AddSingleView/AddViewProduct.jsx";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { ToastContainer, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Products from "./pages/product/Products.jsx";
+import SingleProduct from "./pages/product/SingleProduct.jsx";
 
 function App() {
   return (

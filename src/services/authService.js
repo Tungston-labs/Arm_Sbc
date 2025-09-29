@@ -1,7 +1,7 @@
-import api, { privateApi } from "./api";
+import api,{privateApi} from "./api";
 
 export const loginAdmin = async (email, password) => {
-  const response = await privateApi.post("accounts/login/", { email, password });
+  const response = await api.post("accounts/login/", { email, password });
   return response.data;
 };
 
@@ -11,17 +11,17 @@ export const refreshAccessToken = async (refresh) => {
 };
 
 export const sendOTP = async (email) => {
-  const response = await privateApi.post("accounts/forgot-password/", { email });
+  const response = await api.post("accounts/forgot-password/", { email });
   return response.data;
 };
 
 export const verifyOTP = async (email, otp) => {
-  const response = await privateApi.post("accounts/verify-otp/", { email, otp });
+  const response = await api.post("accounts/verify-otp/", { email, otp });
   return response.data;
 };
 
 export const resetPassword = async (email, new_password) => {
-  const response = await privateApi.post("accounts/reset-password/", { email, new_password });
+  const response = await api.post("accounts/reset-password/", { email, new_password });
   return response.data;
 };
 

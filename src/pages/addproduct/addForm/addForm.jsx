@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addNewProduct, fetchProductAdmin } from "../../../redux/productSlice";
 import { AddContainer, Header, Text } from "../addProduct.styled";
+import Layout from "../../../Layout/Layout"
 import {
   AddButton,
   ButtonContainer,
@@ -122,7 +123,8 @@ const AddForm = () => {
   };
 
   return (
-    <AddContainer as="form" onSubmit={handleSubmit}>
+   <Layout>
+     <AddContainer as="form" onSubmit={handleSubmit}>
       <TopBar>
         <button
           type="button"
@@ -247,6 +249,7 @@ const AddForm = () => {
         <AddButton type="submit">Save</AddButton>
       </ButtonContainer>
     </AddContainer>
+   </Layout>
   );
 };
 

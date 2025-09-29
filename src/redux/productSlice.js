@@ -6,7 +6,7 @@ import {
   getProductByIdAdmin,
   listProductsPublic,
   getProductByIdPublic,
-  getRelatedProducts,
+  getRelatedProducts,deleteProduct
 } from "../services/productService";
 
 export const fetchProductsAdmin = createAsyncThunk(
@@ -45,14 +45,24 @@ export const updateExistingProduct = createAsyncThunk(
   }
 );
 
-// Public Thunks
+export const deleteExistingProduct = createAsyncThunk(
+  "product/deleteExistingProduct",
+  async (productId) => {
+    const data = await deleteProduct(productId);
+    return { productId, data };
+  }
+);
+
+
 export const fetchProductsPublic = createAsyncThunk(
   "product/fetchProductsPublic",
-  async ({ currentPage, limit }) => {
-    const data = await listProductsPublic(currentPage, limit);
+  async ({ currentPage = 1, limit = 10, search = "" }) => {
+    const data = await listProductsPublic({ currentPage, limit, search });
     return data;
   }
 );
+
+
 
 export const fetchProductPublic = createAsyncThunk(
   "product/fetchProductPublic",
@@ -130,6 +140,15 @@ const productSlice = createSlice({
         );
         if (index !== -1) state.productsAdmin[index] = action.payload;
       })
+      .addCase(deleteExistingProduct.fulfilled, (state, action) => {
+        state.productsAdmin = state.productsAdmin.filter(
+          (p) => p.id !== action.payload.productId
+        );
+      })
+      .addCase(deleteExistingProduct.rejected, (state, action) => {
+        state.error = action.error?.message || "Failed to delete product";
+      })
+      
       // Public
       .addCase(fetchProductsPublic.pending, (state) => {
         state.loading = true;

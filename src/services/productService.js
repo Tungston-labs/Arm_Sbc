@@ -6,7 +6,6 @@ const config = {
      Authorization: `Bearer ${localStorage.getItem("accessToken")}`
   },
 }
-// Admin APIs
 export const addProduct = async (productData) => {
   const response = await privateApi.post("products/create/", productData);
   return response.data;
@@ -23,13 +22,12 @@ export const updateProduct = async (productId, productData) => {
 };
 
 export const getProductByIdAdmin = async (productId) => {
-  const response = await privateApi.get(`products/${productId}/`);
+  const response = await privateApi.get(`products/${productId}/`,config);
   return response.data;
 };
 
-// Public APIs
-export const listProductsPublic = async (currentPage, limit ) => {
-  const response = await api.get(`products/public?page=${currentPage}&page_size=${limit}`);
+export const listProductsPublic = async () => {
+  const response = await api.get("products/public/");
   return response.data;
 };
 

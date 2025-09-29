@@ -1,13 +1,14 @@
 // src/pages/AddViewProduct.jsx
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "antd";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import productImg from "../../assets/Comparison/chip.svg";
-import addetionalData from "../../pages/product/data/AddetionalInformationData.json";
-// import descriptionData from "../../components/Addproduct/DescriptionDetails/DescriptionData.json";
- import descriptionData from "../../Components/Addproduct/DescriptionDetails/DescriptionData.json";
-import AddProductNavBar from "../../Components/Addproduct/AddProductNavbar";
-import AddProductDescriptionCard from "../../Components/Addproduct/DescriptionDetails/DescriptionSection";
+import AddProductNavBar from "../../components/Addproduct/AddProductNavbar";
+import AddProductDescriptionCard from "../../components/Addproduct/DescriptionDetails/DescriptionSection";
+
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { fetchProductAdmin } from "../../redux/productSlice";
 
 import {
   AddContainer,
@@ -31,21 +32,71 @@ import {
   DeleteButton,
 } from "./AddViewProduct.styled";
 import AddetionalInformationCard from "../../Components/product/Specification/AddetionalInformationCard";
-
 const AddViewProduct = () => {
-  // track currently active tab
   const [activeTab, setActiveTab] = useState("Description");
+  const dispatch = useDispatch();
+  const { productId } = useParams();
+  const { productDetailAdmin, loading } = useSelector((state) => state.product);
+  useEffect(() => {
+    if (productId) {
+      dispatch(fetchProductAdmin(productId));
+    }
+  }, [dispatch, productId]);
+  const descriptionDataFromApi =
+    productDetailAdmin?.descriptionData ||
+    productDetailAdmin?.specifications ||
+    productDetailAdmin?.specs ||
+    productDetailAdmin?.details ||
+    [];
+  const normalizeDescription = (raw) => {
+    if (!raw) return [];
+    if (Array.isArray(raw) && raw.length && raw[0].header) return raw;
+
+    if (typeof raw === "object" && !Array.isArray(raw)) {
+      return Object.entries(raw).map(([header, itemsObj]) => {
+        if (Array.isArray(itemsObj)) {
+          return { header, items: itemsObj };
+        }
+        const items = Object.entries(itemsObj || {}).map(([label, value]) => ({
+          label,
+          value,
+        }));
+        return { header, items };
+      });
+    }
+
+    if (typeof raw === "string") {
+      const lines = raw
+        .split("\n")
+        .map((l) => l.trim())
+        .filter(Boolean);
+      return [
+        {
+          header: "Description",
+          items: lines.map((line, i) => ({
+            label: `Line ${i + 1}`,
+            value: line,
+          })),
+        },
+      ];
+    }
+
+    return [];
+  };
+
+  const descriptionDataFromApiNormalized = normalizeDescription(
+    descriptionDataFromApi
+  );
 
   return (
     <AddContainer>
       <TopBar>
         <IoMdArrowRoundBack size={28} color="#fff" />
-        <Header>Add product</Header>
-       <ActionBar>
-  <EditButton type="primary">Edit</EditButton>
-  <DeleteButton danger>Delete</DeleteButton>
-</ActionBar>
-
+        <Header>{productId ? "Edit product" : "Add product"}</Header>
+        <ActionBar>
+          <EditButton type="primary">Edit</EditButton>
+          <DeleteButton danger>Delete</DeleteButton>
+        </ActionBar>
       </TopBar>
 
       <SubText>
@@ -54,7 +105,10 @@ const AddViewProduct = () => {
 
       <ImageRow>
         <ImageWrapper>
-          <ImageContainer src={productImg} alt="Product preview" />
+          <ImageContainer
+            src={productDetailAdmin?.image || productImg}
+            alt={productDetailAdmin?.name || "Product preview"}
+          />
         </ImageWrapper>
 
         <FormBlock>
@@ -62,15 +116,30 @@ const AddViewProduct = () => {
 
           <FormArea>
             <TwoCols>
-              <Input placeholder="Enter product name" />
-              <Input placeholder="Ram" />
+              <Input
+                placeholder="Enter product name"
+                defaultValue={productDetailAdmin?.name || ""}
+              />
+              <Input
+                placeholder="Ram"
+                defaultValue={productDetailAdmin?.ram || ""}
+              />
             </TwoCols>
             <TwoCols>
-              <Input placeholder="Core" />
-              <Input placeholder="Storage" />
+              <Input
+                placeholder="Core"
+                defaultValue={productDetailAdmin?.cores || ""}
+              />
+              <Input
+                placeholder="Storage"
+                defaultValue={productDetailAdmin?.storage || ""}
+              />
             </TwoCols>
             <FullWidth>
-              <TextArea placeholder="Add description" />
+              <TextArea
+                placeholder="Add description"
+                defaultValue={productDetailAdmin?.description || ""}
+              />
             </FullWidth>
           </FormArea>
         </FormBlock>
@@ -82,25 +151,32 @@ const AddViewProduct = () => {
 
       {activeTab === "Description" && (
         <div style={{ marginTop: "2rem" }}>
-          {Array.isArray(descriptionData) && descriptionData.length ? (
-            <AddProductDescriptionCard allData={descriptionData} />
+          {loading ? (
+            <div>Loading...</div>
+          ) : descriptionDataFromApiNormalized.length ? (
+            <AddProductDescriptionCard
+              allData={descriptionDataFromApiNormalized}
+            />
           ) : (
             <div>No description data available.</div>
           )}
         </div>
       )}
+{activeTab === "Additional Information" && (
+  <DescriptionSection background="#ffffff1a">
+    {productDetailAdmin?.additional_info
+      ? Object.entries(productDetailAdmin.additional_info).map(
+          ([key, value], idx) => (
+            <AddetionalInformationCard
+              key={idx}
+              data={{ label: key, value }}
+            />
+          )
+        )
+      : <div>No additional info</div>}
+  </DescriptionSection>
+)}
 
-   
-
-    {activeTab === "Additional Information" && (
-        <DescriptionSection background="#ffffff1a">
-          {addetionalData?.map((i, index) => (
-            <AddetionalInformationCard data={i} key={index} />
-          ))}
-        </DescriptionSection>
-      )}
-
-      
     </AddContainer>
   );
 };

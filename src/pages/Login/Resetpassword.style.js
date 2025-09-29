@@ -92,7 +92,11 @@ export const Input = styled.input`
   background: #2C2C2D;
   color: #fff;
   margin-bottom: 20px;
-  box-shadow: inset 0px 2px 6px rgba(53, 50, 50, 0.6);
+  box-shadow: 
+  inset 4px 4px 4px rgba(68, 67, 66, 0.92),   /* top-left */
+  inset -4px -4px 4px rgba(68, 67, 66, 0.92), /* bottom-right */
+  inset 4px -4px 4px rgba(68, 67, 66, 0.92),  /* top-right */
+  inset -4px 4px 4px rgba(68, 67, 66, 0.92);  /* bottom-left */
 
 Email
 

@@ -19,6 +19,7 @@ import AddProduct from "./pages/addproduct/addProduct";
 import AddForm from "./pages/addproduct/addForm/addForm.jsx";
 import AddViewProduct from "./pages/AddSingleView/AddViewProduct.jsx";
 import ProtectedRoute from "./Components/ProtectedRoute";
+
 function App() {
   return (
 <>

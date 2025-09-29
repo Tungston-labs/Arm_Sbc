@@ -1,5 +1,4 @@
-// src/components/Navbar.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Nav,
   NavContainer,
@@ -14,53 +13,97 @@ import {
   Hamburger,
   MobileMenu,
   MobileNavItem,
-  MobileInquiryButton
+  MobileInquiryButton,
+  SearchIcon,Badge
 } from "./Navbar.Styles";
-import { FaShoppingCart, FaBars, FaTimes } from "react-icons/fa";
+import { FaBars, FaTimes } from "react-icons/fa";
 import logo from "../../assets/main/logo.svg";
+import { IoMdCart } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [query, setQuery] = useState("");
+  const [compareCount, setCompareCount] = useState(0);
+  const navigate = useNavigate();
+
+  // Load comparison count from localStorage
+  useEffect(() => {
+    const updateCount = () => {
+      const stored = localStorage.getItem("comparisonProducts");
+      setCompareCount(stored ? JSON.parse(stored).length : 0);
+    };
+  
+    // Initial load
+    updateCount();
+  
+    // Listen for updates
+    window.addEventListener("comparisonUpdated", updateCount);
+  
+    return () => window.removeEventListener("comparisonUpdated", updateCount);
+  }, []);
+  
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (query.trim()) {
+      navigate(`/product?search=${encodeURIComponent(query)}`);
+    }
+  };
 
   return (
     <Nav>
       <NavContainer>
-        {/* Logo */}
-      
-<Logo>
-  <img src={logo} alt="ARM SBC" />
-</Logo>
-        {/* Desktop Menu */}
+        <Logo>
+          <img src={logo} alt="ARM SBC" />
+        </Logo>
+
         <NavLinks>
-          <NavLinkItem href="#">Home</NavLinkItem>
-          <NavLinkItem href="#">Products</NavLinkItem>
-          <NavLinkItem href="#">Compare</NavLinkItem>
+          <NavLinkItem href="/">Home</NavLinkItem>
+          <NavLinkItem href="/product">Products</NavLinkItem>
+          <NavLinkItem href="/compare" className="compare">
+  Compare {compareCount > 0 && <Badge>{compareCount}</Badge>}
+</NavLinkItem>
+
+
         </NavLinks>
 
-        {/* Right Section */}
         <RightSection>
-          <SearchBox>
-            <SearchInput type="text" placeholder="Search" />
+          <SearchBox onSubmit={handleSearch}>
+            <SearchIcon />
+            <SearchInput
+              type="text"
+              placeholder="Search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") handleSearch(e);
+              }}
+            />
           </SearchBox>
-          <CartIcon>
-            <FaShoppingCart />
+
+          <CartIcon onClick={() => navigate("/cartpage")}>
+            <IoMdCart />
           </CartIcon>
-          <InquiryButton>Inquiry</InquiryButton>
+
+          <InquiryButton onClick={() => navigate("/inquiry-page")}>
+            Inquiry
+          </InquiryButton>
         </RightSection>
 
-        {/* Hamburger (mobile) */}
         <Hamburger onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <FaTimes /> : <FaBars />}
         </Hamburger>
       </NavContainer>
 
-      {/* Mobile Menu */}
       {isOpen && (
         <MobileMenu>
-          <MobileNavItem href="#">Home</MobileNavItem>
-          <MobileNavItem href="#">Product</MobileNavItem>
-          <MobileNavItem href="#">Compare</MobileNavItem>
-          <MobileNavItem href="#">Cart</MobileNavItem>
+          <MobileNavItem href="/">Home</MobileNavItem>
+          <MobileNavItem href="/product">Product</MobileNavItem>
+          <MobileNavItem href="/compare">
+            Compare {compareCount > 0 && `(${compareCount})`}
+          </MobileNavItem>
+          <MobileNavItem href="/cartpage">Cart</MobileNavItem>
           <MobileInquiryButton>Inquiry</MobileInquiryButton>
         </MobileMenu>
       )}

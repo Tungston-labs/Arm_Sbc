@@ -21,6 +21,8 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 import ImageUploader from "../../../components/Addproduct/ImageUploadSection/ImageUpload";
 import DemoCollapse from "../../../components/Addproduct/Ant-design/CardsAndInput";
 import axios from "axios";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const AddForm = () => {
   // const dispatch = useDispatch();
@@ -40,6 +42,8 @@ const AddForm = () => {
   const updateFormData = (field, value) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
+
+    const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -65,19 +69,36 @@ const AddForm = () => {
       if (formData.images?.[0]) {
         fd.append("image", formData.images[0]);
       }
-      const response = await axios.post(
+
+      await axios.post(
         "http://178.248.112.16:8002/api/products/create/",
         fd,
         {
           headers: {
             Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
           },
         }
       );
 
-      console.log("Product created:", response.data);
+      // ✅ Show success popup
+      Swal.fire({
+        title: "Product Created!",
+        text: "Your product was added successfully.",
+        icon: "success",
+        confirmButtonText: "OK",
+      }).then(() => {
+        navigate("/addproduct");
+      });
     } catch (error) {
       console.error("Error creating product:", error);
+
+      Swal.fire({
+        title: "Error",
+        text: "Failed to create product. Please try again.",
+        icon: "error",
+        confirmButtonText: "Close",
+      });
     }
   };
   return (
@@ -157,14 +178,14 @@ const AddForm = () => {
           <FormArea>
             <TwoCols>
               <Input
-                placeholder="Enter product name"
+                placeholder="Height"
                 value={formData.additionalName}
                 onChange={(e) =>
                   updateFormData("additionalName", e.target.value)
                 }
               />
               <Input
-                placeholder="Ram"
+                placeholder="Dimension"
                 value={formData.additionalRam}
                 onChange={(e) =>
                   updateFormData("additionalRam", e.target.value)

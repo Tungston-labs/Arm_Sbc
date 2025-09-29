@@ -92,6 +92,18 @@ const productSlice = createSlice({
         state.loading = false;
         state.productsAdmin = action.payload.results || [];
       })
+      .addCase(fetchProductAdmin.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchProductAdmin.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
+      .addCase(fetchProductAdmin.fulfilled, (state, action) => {
+        state.loading = false;
+        state.productDetailAdmin = action.payload;
+      })
 
       .addCase(addNewProduct.fulfilled, (state, action) => {
         state.productsAdmin.push(action.payload);

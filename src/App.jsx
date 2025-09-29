@@ -17,7 +17,7 @@ import Products from "./pages/product/Products.jsx";
 import AddProduct from "./pages/addproduct/addProduct";
 import AddForm from "./pages/addproduct/addForm/addForm.jsx";
 import AddViewProduct from "./pages/AddSingleView/AddViewProduct.jsx";
-import ProtectedRoute from "./components/ProtectedRoute";  
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -32,16 +32,16 @@ function App() {
       <Route path="/reset-password" element={<Resetpassword />} />
       <Route path="/verification" element={<Verification />} />
       <Route path="/setnewpassword" element={<SetNewPassword />} />
-      <Route path="/singleview" element={<AddViewProduct />} />
 
       {/* <Route element={<PersistLogin />}> */}
-        <Route element={<ProtectedRoute />}>
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/enquiry-page" element={<Enquiry />} />
-          <Route path="/enquiry-details/:id" element={<EnquiryDetails />} />
-          <Route path="/addproduct" element={<AddProduct />} />
-          <Route path="/addform" element={<AddForm />} />
-        </Route>
+      <Route element={<ProtectedRoute />}>
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/products/:productId" element={<AddViewProduct />} />
+        <Route path="/enquiry-page" element={<Enquiry />} />
+        <Route path="/enquiry-details/:id" element={<EnquiryDetails />} />
+        <Route path="/addproduct" element={<AddProduct />} />
+        <Route path="/addform" element={<AddForm />} />
+      </Route>
       {/* </Route> */}
     </Routes>
   );

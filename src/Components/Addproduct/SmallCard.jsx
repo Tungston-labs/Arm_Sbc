@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { fetchProductsAdmin } from "../../redux/productSlice";
 import {
   CardGrid,
@@ -12,9 +13,8 @@ import {
 
 const SmallCard = () => {
   const dispatch = useDispatch();
-  const { productsAdmin, loading, error } = useSelector(
-    (state) => state.product
-  );
+  const navigate = useNavigate();
+  const { productsAdmin, loading, error } = useSelector((state) => state.product);
 
   useEffect(() => {
     dispatch(fetchProductsAdmin());
@@ -26,14 +26,17 @@ const SmallCard = () => {
   return (
     <CardGrid>
       {productsAdmin?.map((item) => (
-        <Card key={item.id}>
-          {/* use a fallback if image is null */}
+        <Card
+          key={item.id}
+          onClick={() => navigate(`/products/${item.id}`)}
+          style={{ cursor: "pointer" }}  
+        >
           <CardImage src={item.image || "/placeholder.png"} alt={item.name} />
           <CardTitle>{item.description}</CardTitle>
           <CardDetailsWrap>
-            <CardDetail>₹{item.price || "N/A"}</CardDetail>
-            <CardDetail>{item.ram}</CardDetail>
-            <CardDetail>{item.storage}</CardDetail>
+            <CardDetail>{item.cores || "N/A"} Core</CardDetail>
+            <CardDetail>{item.ram} Ram</CardDetail>
+            <CardDetail>{item.storage} Storage</CardDetail>
           </CardDetailsWrap>
         </Card>
       ))}

@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { addNewProduct } from "../../../redux/productSlice";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addNewProduct, fetchProductAdmin } from "../../../redux/productSlice";
 import { AddContainer, Header, Text } from "../addProduct.styled";
 import {
   AddButton,
@@ -21,16 +21,19 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 import ImageUploader from "../../../components/Addproduct/ImageUploadSection/ImageUpload";
 import DemoCollapse from "../../../components/Addproduct/Ant-design/CardsAndInput";
 import axios from "axios";
-import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
+// import Swal from "sweetalert2";
+import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const AddForm = () => {
-  // const dispatch = useDispatch();
-
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { productId } = useParams();
+  const { productDetailAdmin } = useSelector((state) => state.product);
   const [formData, setFormData] = useState({
     name: "",
     ram: "",
-    core: "",
+    cores: "",
     storage: "",
     description: "",
     specifications: {},
@@ -42,19 +45,41 @@ const AddForm = () => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
-  const navigate = useNavigate();
-
+  useEffect(() => {
+    if (productId) {
+      dispatch(fetchProductAdmin(productId));
+    }
+  }, [dispatch, productId]);
+  useEffect(() => {
+    if (productId && productDetailAdmin) {
+      setFormData({
+        name: productDetailAdmin.name || "",
+        ram: productDetailAdmin.ram || "",
+        cores: productDetailAdmin.cores || "",
+        storage: productDetailAdmin.storage || "",
+        description: productDetailAdmin.description || "",
+        additional_info: productDetailAdmin.additional_info || {
+          weight: "",
+          dimension: "",
+        },
+        specifications:
+          productDetailAdmin.specifications || productDetailAdmin.specs || {},
+        images: productDetailAdmin.image
+          ? [String(productDetailAdmin.image)]
+          : [],
+      });
+    }
+  }, [productId, productDetailAdmin]);
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       const token = localStorage.getItem("accessToken");
-
       const fd = new FormData();
+
       fd.append("name", formData.name);
-      fd.append("ram", formData.ram);
-      fd.append("cores", formData.core);
-      fd.append("storage", formData.storage);
+      fd.append("ram", parseInt(formData.ram, 10));
+      fd.append("cores", parseInt(formData.cores, 10));
+      fd.append("storage", parseInt(formData.storage, 10));
       fd.append("description", formData.description);
 
       fd.append(
@@ -65,43 +90,57 @@ const AddForm = () => {
         })
       );
 
-      fd.append("specs", JSON.stringify(formData.specifications));
+      fd.append("specs", JSON.stringify(formData.specifications || {}));
 
-      if (formData.images?.[0]) {
+      if (formData.images?.[0] instanceof File) {
         fd.append("image", formData.images[0]);
       }
 
-      await axios.post("http://178.248.112.16:8002/api/products/create/", fd, {
+      const config = {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data",
         },
-      });
+      };
 
-      Swal.fire({
-        title: "Product Created!",
-        text: "Your product was added successfully.",
-        icon: "success",
-        confirmButtonText: "OK",
-      }).then(() => {
-        navigate("/addproduct");
-      });
+      const url = productId
+        ? `http://178.248.112.16:8002/api/products/${productId}/`
+        : `http://178.248.112.16:8002/api/products/create/`;
+
+      const method = productId ? "put" : "post";
+
+      await axios[method](url, fd, config);
+
+      toast.success(`Product ${productId ? "updated" : "added"} successfully!`);
+
+      setTimeout(() => navigate("/addproduct"), 1000).then(() =>
+        navigate("/addproduct")
+      );
     } catch (error) {
-      console.error("Error creating product:", error);
-
-      Swal.fire({
-        title: "Error",
-        text: "Failed to create product. Please try again.",
-        icon: "error",
-        confirmButtonText: "Close",
-      });
+      console.error("Error saving product:", error);
+      toast.error("Failed to save product. Please check your input.");
     }
   };
+
   return (
     <AddContainer as="form" onSubmit={handleSubmit}>
       <TopBar>
-        <IoMdArrowRoundBack size={28} color="#fff" />
-        <Header>Add Product</Header>
+        <button
+          type="button"
+          style={{
+            background: "transparent",
+            border: "none",
+            cursor: "pointer",
+            padding: 0,
+            display: "flex",
+            alignItems: "center",
+          }}
+          onClick={() => navigate("/addproduct")}
+        >
+          <IoMdArrowRoundBack size={28} color="#fff" />
+        </button>
+
+        <Header>{productId ? "Edit Product" : "Add Product"}</Header>
       </TopBar>
 
       <Text>
@@ -134,8 +173,8 @@ const AddForm = () => {
             <TwoCols>
               <Input
                 placeholder="Core"
-                value={formData.core}
-                onChange={(e) => updateFormData("core", e.target.value)}
+                value={formData.cores}
+                onChange={(e) => updateFormData("cores", e.target.value)}
               />
               <Input
                 placeholder="Storage"
@@ -197,9 +236,15 @@ const AddForm = () => {
           </FormArea>
         </Row>
       </LabelInputBox>
-
       <ButtonContainer>
-        <CancelButton type="button">Cancel</CancelButton>
+        <CancelButton
+          type="button"
+          onClick={() => {
+            navigate("/addproduct");
+          }}
+        >
+          Cancel
+        </CancelButton>
         <AddButton type="submit">Save</AddButton>
       </ButtonContainer>
     </AddContainer>

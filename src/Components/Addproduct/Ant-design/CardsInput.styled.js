@@ -5,7 +5,7 @@ const { Panel } = Collapse;
 
 export const StyledCollapse = styled(Collapse)`
   flex: 1;
-  width: 100%;
+ 
   background: transparent;
   border: none;
   margin-top: 24px;
@@ -22,7 +22,9 @@ export const StyledCollapse = styled(Collapse)`
 
   .ant-collapse-item {
     border-radius: 12px;
+     width: 95%;
     margin-bottom: 20px;
+    border-top: none;
     overflow: hidden;
     border-bottom: none;
 
@@ -91,7 +93,7 @@ export const StyledCollapse = styled(Collapse)`
   .ant-input {
     background: #2b2534;
     border: 1px solid #2b2534;
-    color: #4b4343ff;
+    color: rgba(255, 255, 255, 1);
     padding: 8px 12px;
     border-radius: 6px;
     width: 100%;

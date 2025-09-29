@@ -6,7 +6,7 @@ export const AddContainer = styled.div`
   background: linear-gradient(
     to bottom right,
     rgba(137, 99, 211, 1) 0%,
-    rgba(17, 3, 36, 1) 20%,
+    rgba(17, 3, 36, 1) 15%,
     rgba(3, 2, 6, 1) 30%,
     rgba(3, 2, 6, 1) 100%
   );
@@ -27,7 +27,6 @@ export const Header = styled.h1`
   font-family: "Roboto", sans-serif;
   font-weight: 600;
 
-  /* Base mobile styles */
   font-size: 20px;
   width: auto;
   margin: 0;

@@ -7,7 +7,7 @@ import AddProductNavBar from "../../components/Addproduct/AddProductNavbar";
 import AddProductDescriptionCard from "../../components/Addproduct/DescriptionDetails/DescriptionSection";
 
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { fetchProductAdmin } from "../../redux/productSlice";
 
 import {
@@ -87,14 +87,30 @@ const AddViewProduct = () => {
   const descriptionDataFromApiNormalized = normalizeDescription(
     descriptionDataFromApi
   );
-
+  const navigate=useNavigate();
+const handleNavigate=()=>{
+  navigate(`/addform/${productId}`)
+}
   return (
     <AddContainer>
       <TopBar>
-        <IoMdArrowRoundBack size={28} color="#fff" />
+  <button
+          type="button"
+          style={{
+            background: "transparent",
+            border: "none",
+            cursor: "pointer",
+            padding: 0,
+            display: "flex",
+            alignItems: "center",
+          }}
+          onClick={() => navigate("/addproduct")}
+        >
+          <IoMdArrowRoundBack size={28} color="#fff" />
+        </button>        
         <Header>{productId ? "Edit product" : "Add product"}</Header>
         <ActionBar>
-          <EditButton type="primary">Edit</EditButton>
+          <EditButton type="primary" onClick={handleNavigate}>Edit</EditButton>
           <DeleteButton danger>Delete</DeleteButton>
         </ActionBar>
       </TopBar>

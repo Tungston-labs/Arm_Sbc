@@ -110,7 +110,6 @@ export const Input = styled.input`
   font-size: 14px;
   font-family: "Roboto", sans-serif;
   background: #2c2c2d;
-  color: #fff;
   margin-bottom: 20px;
   box-shadow: inset 0px 2px 6px rgba(53, 50, 50, 0.6);
 

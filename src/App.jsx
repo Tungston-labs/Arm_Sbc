@@ -41,6 +41,7 @@ function App() {
         <Route path="/enquiry-details/:id" element={<EnquiryDetails />} />
         <Route path="/addproduct" element={<AddProduct />} />
         <Route path="/addform" element={<AddForm />} />
+        <Route path="/addform/:productId" element={<AddForm />}/>
       </Route>
       {/* </Route> */}
     </Routes>

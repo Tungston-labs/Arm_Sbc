@@ -20,7 +20,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { sendOtpAction, resetForgotState } from "../../redux/authSlice";
 
 const Resetpassword = () => {
-  const [email, setEmail] = useState(""); // ✅ keep local state for input
+  const [email, setEmail] = useState(""); 
   const [validationError, setValidationError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ const Resetpassword = () => {
     (state) => state.auth
   );
 
-  // Validate email format
+  
   const validateForm = () => {
     if (!email) return "Empty Field: Please enter your email address.";
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -47,21 +47,21 @@ const Resetpassword = () => {
     }
     setValidationError("");
 
-    // Dispatch send OTP action
+    
     dispatch(sendOtpAction(email))
       .unwrap()
       .then(() => {
-        // Save email in localStorage as fallback
+        
         localStorage.setItem("resetEmail", email);
 
-        // Reset slice state
+        
         dispatch(resetForgotState());
 
-        // Navigate to Verification page
+        
         navigate("/verification", { state: { email } });
       })
       .catch(() => {
-        // Error handled via forgotError in slice
+       
       });
   };
 

@@ -132,6 +132,22 @@ export const NavLinks = styled.div`
   }
 `;
 
+export const Badge = styled.span`
+  color: RED;
+  font-size: 0.9rem;
+  font-weight: bold;
+  border-radius: 50%;
+  padding: 0.2rem 0.5rem;
+  min-width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: -8px;
+  right: -10px;
+`;
+
 export const NavLinkItem = styled.a`
   position: relative;
   text-decoration: none;

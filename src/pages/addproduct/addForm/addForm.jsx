@@ -35,8 +35,7 @@ const AddForm = () => {
     storage: "",
     description: "",
     specifications: {},
-    additionalName: "",
-    additionalRam: "",
+    additional_info: { weight: "", dimension: "" },
     images: [],
   });
 
@@ -44,7 +43,7 @@ const AddForm = () => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -58,31 +57,28 @@ const AddForm = () => {
       fd.append("cores", formData.core);
       fd.append("storage", formData.storage);
       fd.append("description", formData.description);
+
       fd.append(
         "additional_info",
         JSON.stringify({
-          name: formData.additionalName,
-          ram: formData.additionalRam,
+          weight: formData.additional_info.weight,
+          dimension: formData.additional_info.dimension,
         })
       );
+
       fd.append("specs", JSON.stringify(formData.specifications));
 
       if (formData.images?.[0]) {
         fd.append("image", formData.images[0]);
       }
 
-      await axios.post(
-        "http://178.248.112.16:8002/api/products/create/",
-        fd,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      await axios.post("http://178.248.112.16:8002/api/products/create/", fd, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
-      // ✅ Show success popup
       Swal.fire({
         title: "Product Created!",
         text: "Your product was added successfully.",
@@ -180,17 +176,23 @@ const AddForm = () => {
           <FormArea>
             <TwoCols>
               <Input
-                placeholder="Height"
-                value={formData.additionalName}
+                placeholder="Weight"
+                value={formData.additional_info.weight || ""}
                 onChange={(e) =>
-                  updateFormData("additionalName", e.target.value)
+                  updateFormData("additional_info", {
+                    ...formData.additional_info,
+                    weight: e.target.value,
+                  })
                 }
               />
               <Input
                 placeholder="Dimension"
-                value={formData.additionalRam}
+                value={formData.additional_info.dimension || ""}
                 onChange={(e) =>
-                  updateFormData("additionalRam", e.target.value)
+                  updateFormData("additional_info", {
+                    ...formData.additional_info,
+                    dimension: e.target.value,
+                  })
                 }
               />
             </TwoCols>

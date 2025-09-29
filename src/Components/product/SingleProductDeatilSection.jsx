@@ -9,13 +9,34 @@ import {
   Link,
 } from "../../pages/product/singleProduct.style";
 import { AiOutlineShoppingCart } from "react-icons/ai";
-// import details from "../../pages/product/data/productDetailsData.json";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { addProductToCart } from "../../redux/cartSlice";
 const SingleProductDeatilSection = ({
+  id,
   name,
   description,
   image,
   category,
 }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const cartToken = localStorage.getItem("cartToken");
+
+  const handleAddToCart = () => {
+    if (!cartToken) {
+      // generate or fetch a token if needed
+      console.error("No cart token found");
+      return;
+    }
+
+    // dispatch redux action to backend
+  dispatch(addProductToCart({ productId: id, cartToken }))
+  .then(() => {
+    navigate("/cartpage");
+  });
+  
+  };
   const handleViewMore = () => {
     const el = document.getElementById("specification");
     if (el) el.scrollIntoView({ behavior: "smooth" });
@@ -36,7 +57,7 @@ const SingleProductDeatilSection = ({
             <Link as="button" onClick={handleViewMore}>
               View more
             </Link>
-            <AddToCartButton>
+          <AddToCartButton onClick={handleAddToCart}>
               <AiOutlineShoppingCart />
               Add to cart
             </AddToCartButton>
@@ -57,7 +78,7 @@ const SingleProductDeatilSection = ({
             <Link as="button" onClick={handleViewMore}>
               View more
             </Link>
-            <AddToCartButton>
+                       <AddToCartButton onClick={handleAddToCart}>
               <AiOutlineShoppingCart />
               Add to cart
             </AddToCartButton>

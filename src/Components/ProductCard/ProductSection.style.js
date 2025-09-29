@@ -38,7 +38,8 @@ export const Card = styled.div`
 `;
 
 export const ProductImage = styled.img`
-  height: auto;
+  height: 220px;
+  width: 240px;
   margin-bottom: 16px;
 `;
 

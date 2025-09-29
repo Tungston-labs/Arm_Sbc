@@ -1,5 +1,5 @@
-
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Layout from "../../Layout/Layout";
 import {
   DashboardHeader,
@@ -12,10 +12,25 @@ import {
   CardIcon,
   CardValue,
 } from "./Dashboard.Styles";
-
 import { FaBox, FaClipboardList } from "react-icons/fa";
+import { fetchDashboardCounts } from "../../redux/dashboardSlice";
 
 const Dashboard = () => {
+  const dispatch = useDispatch();
+  const { counts, loading, error } = useSelector((state) => state.dashboard);
+const token = localStorage.getItem("accessToken");
+
+console.log("🔑 Token from localStorage:", token);
+
+
+
+  useEffect(() => {
+  dispatch(fetchDashboardCounts()); 
+}, [dispatch]);
+
+useEffect(() => {
+  console.log("Dashboard counts from Redux:", counts);
+}, [counts]);
   return (
     <Layout>
       <DashboardHeader>
@@ -25,6 +40,9 @@ const Dashboard = () => {
         </SubTitle>
       </DashboardHeader>
 
+      {loading && <p>Loading...</p>}
+      {error && <p style={{ color: "red" }}>{error}</p>}
+
       <CardGrid>
         <Card>
           <CardHeader>
@@ -33,7 +51,7 @@ const Dashboard = () => {
               <FaClipboardList />
             </CardIcon>
           </CardHeader>
-          <CardValue>23</CardValue>
+        <CardValue>{counts.new_inquiries_count || 0}</CardValue>
         </Card>
 
         <Card>
@@ -43,7 +61,7 @@ const Dashboard = () => {
               <FaBox />
             </CardIcon>
           </CardHeader>
-          <CardValue>44</CardValue>
+<CardValue>{counts.total_products_count || 0}</CardValue>
         </Card>
       </CardGrid>
     </Layout>

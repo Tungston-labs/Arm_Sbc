@@ -20,7 +20,7 @@ export const ResetContainer = styled.div`
 
 export const ResetBox = styled.div`
   background: #0F0A17;
-  padding: 40px 30px;
+  padding: 40px 20px 20px 40px;
   border-radius: 12px;
   border: 2px solid #948CA3;
   width: 100%;
@@ -50,17 +50,19 @@ export const Logo = styled.img`
 export const Title = styled.h3`
   font-size: 1.8rem;
   font-family: 'Roboto', sans-serif;
-  margin: 15px 0 10px 0;
+  margin: 25px 20px 20px 5px;
   color: #FFFFFF;
   font-weight: bold;
 `;
 
 export const Subtitle = styled.p`
-  font-size: 0.95rem;
+  font-size: 0.80rem;
   font-family: 'Roboto', sans-serif;
   color: #FFFFFF;
+  text-align: center;
   line-height: 1.2;
   margin-bottom: 25px;
+  margin-right: 15px;
 `;
 
 export const Form = styled.form`
@@ -72,9 +74,11 @@ export const Form = styled.form`
 
 export const Label = styled.label`
   font-size: 1rem;
+Email
+
   font-family: 'Roboto', sans-serif;
   font-weight: 500;
-  margin: 0 0 6px 8px;
+  margin: 0 0 10px 8px;
   color: #fff;
   align-self: flex-start;
 `;
@@ -90,13 +94,15 @@ export const Input = styled.input`
   margin-bottom: 20px;
   box-shadow: inset 0px 2px 6px rgba(53, 50, 50, 0.6);
 
+Email
+
   &::placeholder {
     color: #aaa;
   }
 `;
 
 export const Button = styled.button`
-  width: 100%;
+  width: 94%;
   background: #8A38F5;
   color: #fff;
   font-family: 'Roboto', sans-serif;
@@ -116,8 +122,11 @@ export const Button = styled.button`
 export const BackLink = styled.a`
   display: block;
   font-family: 'Roboto', sans-serif;
-  margin-top: 15px;
-  font-size: 0.9rem;
+  margin-top: 25px;
+  margin-bottom: 15px;
+  text-align: center;
+  margin-right: 15px;
+  font-size: 0.7rem;
   color: #ccc;
   cursor: pointer;
 

@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import Layout from "../../Layout/Layout";
+import NoEnquiry from "../../assets/inquriy/noenquiry.svg";
 import {
   PageTitle,
   SubTitle,
@@ -12,15 +15,33 @@ import {
   PageButton,
   ViewIcon,
   ArrowButton,
+  EmptyState,
 } from "./Enquiry.Styles";
-import { useNavigate } from "react-router-dom";
-import enquiryData from "./EnquiryData"; 
+import { fetchInquiries } from "../../redux/inquirySlice";
 
 const Enquiry = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const { list: enquiries, total_pages, current_page, loading, error } =
+    useSelector((state) => state.inquiry);
+
+  const token = localStorage.getItem("accessToken");
+
+  useEffect(() => {
+    if (token) {
+      dispatch(fetchInquiries({ token, page: 1 }));
+    }
+  }, [dispatch, token]);
 
   const handleViewClick = (id) => {
     navigate(`/enquiry-details/${id}`);
+  };
+
+  const handlePageChange = (page) => {
+    if (page !== current_page && token) {
+      dispatch(fetchInquiries({ token, page }));
+    }
   };
 
   return (
@@ -31,43 +52,77 @@ const Enquiry = () => {
         pending, open, or closed requests instantly.
       </SubTitle>
 
-      <Table>
-        <thead>
-          <TableRow>
-            <TableHead>Name</TableHead>
-            <TableHead>Email ID</TableHead>
-            <TableHead>Phone number</TableHead>
-            <TableHead>Delivery location</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead></TableHead>
-          </TableRow>
-        </thead>
-        <tbody>
-          {enquiryData.map((item) => (
-            <TableRow key={item.id}>
-              <TableCell>{item.name}</TableCell>
-              <TableCell>{item.email}</TableCell>
-              <TableCell>{item.phone}</TableCell>
-              <TableCell>{item.location}</TableCell>
-              <TableCell>
-                <StatusBadge status={item.status}>{item.status}</StatusBadge>
-              </TableCell>
-              <TableCell>
-                <ViewIcon onClick={() => handleViewClick(item.id)} />
-              </TableCell>
-            </TableRow>
-          ))}
-        </tbody>
-      </Table>
+      {loading && <p>Loading enquiries...</p>}
+      {error && <p style={{ color: "red" }}>{error}</p>}
 
-      <Pagination>
-        <ArrowButton disabled>{`<`}</ArrowButton>
-        <PageButton active>1</PageButton>
-        <PageButton>2</PageButton>
-        <PageButton>3</PageButton>
-        <PageButton>4</PageButton>
-        <ArrowButton>{`>`}</ArrowButton>
-      </Pagination>
+      {!loading && enquiries.length === 0 && (
+        <EmptyState>
+          <img src={NoEnquiry} alt="No enquiries" />
+        </EmptyState>
+      )}
+
+      {enquiries.length > 0 && (
+        <Table>
+          <thead>
+            <TableRow>
+              <TableHead>Name</TableHead>
+              <TableHead>Email ID</TableHead>
+              <TableHead>Phone number</TableHead>
+              <TableHead>Delivery location</TableHead>
+              <TableHead>Status</TableHead>
+              <TableHead></TableHead>
+            </TableRow>
+          </thead>
+          <tbody>
+            {enquiries.map((item) => (
+              <TableRow key={item.id}>
+                <TableCell>
+                  {item.first_name} {item.last_name}
+                </TableCell>
+                <TableCell>{item.email}</TableCell>
+                <TableCell>{item.phone}</TableCell>
+                <TableCell>{item.delivery_location}</TableCell>
+                <TableCell>
+                  <StatusBadge status={item.status?.toLowerCase()}>
+                    {item.status}
+                  </StatusBadge>
+                </TableCell>
+                <TableCell>
+                  <ViewIcon onClick={() => handleViewClick(item.id)} />
+                </TableCell>
+              </TableRow>
+            ))}
+          </tbody>
+        </Table>
+      )}
+
+      {total_pages > 1 && (
+        <Pagination>
+          <ArrowButton
+            disabled={current_page === 1}
+            onClick={() => handlePageChange(current_page - 1)}
+          >
+            {"<"}
+          </ArrowButton>
+
+          {Array.from({ length: total_pages }, (_, i) => (
+            <PageButton
+              key={i + 1}
+              active={current_page === i + 1}
+              onClick={() => handlePageChange(i + 1)}
+            >
+              {i + 1}
+            </PageButton>
+          ))}
+
+          <ArrowButton
+            disabled={current_page === total_pages}
+            onClick={() => handlePageChange(current_page + 1)}
+          >
+            {">"}
+          </ArrowButton>
+        </Pagination>
+      )}
     </Layout>
   );
 };

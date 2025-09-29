@@ -29,8 +29,7 @@ export const fetchProductAdmin = createAsyncThunk(
 export const addNewProduct = createAsyncThunk(
   "product/addNewProduct",
   async (productData) => {
-    const data = await addProduct(productData);
-    return data;
+    return await addProduct(productData);
   }
 );
 
@@ -94,17 +93,16 @@ const productSlice = createSlice({
       .addCase(fetchProductsAdmin.pending, (state) => {
         state.loading = true;
       })
-      .addCase(fetchProductsAdmin.fulfilled, (state, action) => {
-        state.loading = false;
-        state.productsAdmin = action.payload;
-      })
+
       .addCase(fetchProductsAdmin.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       })
-      .addCase(fetchProductAdmin.fulfilled, (state, action) => {
-        state.productDetailAdmin = action.payload;
+      .addCase(fetchProductsAdmin.fulfilled, (state, action) => {
+        state.loading = false;
+        state.productsAdmin = action.payload.results || [];
       })
+
       .addCase(addNewProduct.fulfilled, (state, action) => {
         state.productsAdmin.push(action.payload);
       })

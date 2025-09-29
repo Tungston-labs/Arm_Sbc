@@ -33,7 +33,7 @@ export const LoginContainer = styled.div`
 
 export const LoginBox = styled.div`
   background: #0f0a17;
-  padding: 40px 40px 40px 20px;
+  padding: 40px 40px 40px 40px;
   border-radius: 15px;
   border: 2px solid #948ca3;
   width: 100%;
@@ -182,7 +182,7 @@ export const ForgotPassword = styled.a`
 `;
 
 export const Button = styled.button`
-  width: 106%;
+  width: 16rem;
   background: #8a38f5;
   color: #fff;
   font-size: 20px;

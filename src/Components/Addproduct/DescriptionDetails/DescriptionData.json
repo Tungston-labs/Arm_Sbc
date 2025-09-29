@@ -1,0 +1,111 @@
+[
+  {
+    "header": "Processor",
+    "items": [
+      { "label": "CPU", "value": "Intel® Core™ Ultra Processors (Meteor Lake-PS)" },
+      { "label": "Socket", "value": "LGA 1851" },
+      { "label": "BIOS", "value": "AMI SPI 256 Mbit" },
+      { "label": "Secure Flash", "value": "AMI SPI 32Mbit (Optional)" }
+    ]
+  },
+  {
+    "header": "Memory",
+    "items": [
+      { "label": "Technology", "value": "Single Channel DDR5 5600 MHz" },
+      { "label": "Capacity", "value": "48GB" },
+      { "label": "Socket", "value": "1 x 262-pin SO-DIMM" }
+    ]
+  },
+  {
+    "header": "Expansion Slot",
+    "items": [
+      { "label": "M.2", "value": "1 x M.2 (Key E, 2230) with PCIe Gen4 x1 and USB 2.0 for Wireless" }
+    ]
+  },
+  {
+    "header": "Ethernet",
+    "items": [
+      { "label": "Controller/Speed", "value": "LAN1: Intel® I226V with 10/100/1000/2500 Mbps; LAN2: Intel® I219LM with 10/100/1000 Mbps, supports vPro" },
+      { "label": "Connector", "value": "2 x RJ-45" }
+    ]
+  },
+  {
+    "header": "Graphics",
+    "items": [
+      { "label": "Controller", "value": "Intel® Xe LPG Graphics" },
+      { "label": "HDMI", "value": "HDMI 2.1 TMDS, Max resolution up to 4096 × 2160 @60Hz" },
+      { "label": "Display Port", "value": "DisplayPort 1.4a, DP++ , Max resolution up to 4096 × 2160 @60Hz" },
+      { "label": "LVDS", "value": "Dual channel 24 bit up to 1920 × 1200 @60Hz (Connector shared with eDP)" },
+      { "label": "eDP", "value": "Max resolution up to 1920 × 1080 @60Hz (Connector shared with LVDS)" },
+      { "label": "MultiDisplay", "value": "Quad display (including 1 output from Type-C)" }
+    ]
+  },
+  {
+    "header": "Storage",
+    "items": [
+      { "label": "M.2", "value": "1 x M.2 (Key M, 2242/2280) with PCIe Gen4 x4 for SSD" },
+      { "label": "SATA", "value": "2 x RJ-45" }
+    ]
+  },
+  {
+    "header": "Power Requirements",
+    "items": [
+      { "label": "Input PWR", "value": "12~24V DC-in with 4-pin wafer PWR" },
+      { "label": "Power On", "value": "AT/ATX Supported – AT: Directly Power on as power input ready – ATX: Press button to PWR on after power input ready" }
+    ]
+  },
+  {
+    "header": "Dimensions",
+    "items": [
+      { "label": "Size", "value": "3.5” SBC (5.8 in × 4 in × 1.09 in, 14.7 cm × 10.2 cm × 2.77 cm)" }
+    ]
+  },
+  {
+    "header": "External I/O",
+    "items": [
+      { "label": "HDMI", "value": "1 x HDMI 2.1 TMDS" },
+      { "label": "Display Port", "value": "1 x DP 1.4a" },
+      { "label": "Display Ethernet", "value": "1 x 1 Gigabit LAN, 1 x 2.5 Gigabit LAN" },
+      { "label": "USB", "value": "1 x USB 3.2 Gen2x2 (Type-C, 5V/3A, Support DP 1.4a display output), 2 x USB 3.2 Gen2, 2 x USB 2.0" }
+    ]
+  },
+  {
+    "header": "Internal Connector",
+    "items": [
+      { "label": "USB", "value": "4 x USB 2.0 (2 x 2.00 pitch header)" },
+      { "label": "COM", "value": "COM1, COM2 (RS-232/422/485)" },
+      { "label": "GPIO", "value": "4 x GPI, 4 x GPO" },
+      { "label": "LVDS", "value": "1 (Connector with LVDS/eDP signal, switch by BIOS)" },
+      { "label": "Speaker Header", "value": "1" },
+      { "label": "MIPI Camera Header", "value": "1" }
+    ]
+  },
+  {
+    "header": "Audio",
+    "items": [
+      { "label": "Interface", "value": "Realtek ALC256 HD, High Definition Audio" }
+    ]
+  },
+  {
+    "header": "Security",
+    "items": [
+      { "label": "TPM", "value": "TPM 2.0 onboard IC" }
+    ]
+  },
+  {
+    "header": "Watchdog Timer",
+    "items": [
+      { "label": "Output", "value": "From Super I/O to drag RSTCON#" },
+      { "label": "Interval", "value": "256 Segments, 0.1, 1, 2 … 255sec" }
+    ]
+  },
+  {
+    "header": "Environment",
+    "items": [
+      { "label": "Operating Temp", "value": "-20°C ~ 70°C" },
+      { "label": "Storage Temp", "value": "-40°C ~ 85°C" },
+      { "label": "Operating Humidity", "value": "5% ~ 90%" },
+      { "label": "Storage Humidity", "value": "5% ~ 90%" }
+    ]
+  }
+]

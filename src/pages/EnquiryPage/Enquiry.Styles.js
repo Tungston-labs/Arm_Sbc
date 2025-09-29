@@ -94,37 +94,38 @@ export const TableCell = styled.td`
 `;
 
 export const StatusBadge = styled.span`
-  display: inline-flex;              /* flex for alignment */
-  align-items: center;               /* vertical center */
-  justify-content: center;           /* horizontal center */
-  min-width: clamp(60px, 8vw, 100px); /* responsive width */
-  padding: clamp(0.2rem, 0.4vw, 0.5rem) clamp(0.5rem, 1vw, 1rem); /* responsive padding */
-  border-radius: clamp(4px, 0.5vw, 8px); /* responsive radius */
+  display: inline-flex;             
+  align-items: center;               
+  justify-content: center;         
+  min-width: clamp(60px, 8vw, 100px); 
+  padding: clamp(0.2rem, 0.4vw, 0.5rem) clamp(0.5rem, 1vw, 1rem);
+  border-radius: clamp(4px, 0.5vw, 8px); 
   font-weight: 600;
-  font-size: clamp(0.7rem, 0.9vw, 1.5rem); /* responsive font size */
+  font-size: clamp(0.7rem, 0.9vw, 1.5rem); 
   text-align: center;
    font-family: "Roboto";
 
-  ${({ status }) =>
-    status === "Pending" &&
-    css`
-      background: #F97316;
-      color: white;
-    `}
+ ${({ status }) =>
+  status === "pending" &&
+  css`
+    background: #f97316;
+    color: white;
+  `}
 
-  ${({ status }) =>
-    status === "Open" &&
-    css`
-      background: #22C55E;
-      color: white;
-    `}
+${({ status }) =>
+  status === "open" &&
+  css`
+    background: #22c55e;
+    color: white;
+  `}
 
-  ${({ status }) =>
-    status === "Closed" &&
-    css`
-      background: #E53935;
-      color: white;
-    `}
+${({ status }) =>
+  status === "closed" &&
+  css`
+    background: #e53935;
+    color: white;
+  `}
+
 `;
 
 
@@ -181,5 +182,50 @@ export const ViewIcon = styled(FaEye)`
 
   &:hover {
     color: #b76cff;
+  }
+`;
+
+export const EmptyState = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+  text-align: center;
+
+  img {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 16px;
+
+    @media (min-width: 768px) {
+      width: 200px;
+      height: 200px;
+    }
+
+@media (min-width: 1440px) {
+      width: 300px;
+      height: 300px;
+    }
+
+    @media (min-width: 1920px) {
+      width: 300px;
+      height: 300px;
+    }
+
+    @media (min-width: 2560px) {
+      width: 500px;
+      height: 500px;
+    }
+
+    @media (min-width: 3840px) {
+      width: 800px;
+      height: 800px;
+    }
+
+    @media (min-width: 7680px) {
+      width: 800px;
+      height: 800px;
+    }
   }
 `;

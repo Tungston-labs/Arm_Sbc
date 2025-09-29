@@ -1,23 +1,29 @@
 import api from "./api";
-
+import privateApi from "./api";
+const config = {
+  headers: {
+    "Content-Type": "application/json",
+     Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+  },
+}
 // Admin APIs
 export const addProduct = async (productData) => {
-  const response = await api.post("products/create/", productData);
+  const response = await privateApi.post("products/create/", productData);
   return response.data;
 };
 
 export const listProductsAdmin = async () => {
-  const response = await api.get("products/create/");
+  const response = await privateApi.get("products/create/",config);
   return response.data;
 };
 
 export const updateProduct = async (productId, productData) => {
-  const response = await api.put(`products/${productId}/`, productData);
+  const response = await privateApi.put(`products/${productId}/`, productData);
   return response.data;
 };
 
 export const getProductByIdAdmin = async (productId) => {
-  const response = await api.get(`products/${productId}/`);
+  const response = await privateApi.get(`products/${productId}/`);
   return response.data;
 };
 

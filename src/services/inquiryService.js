@@ -1,4 +1,6 @@
 import api from "./api";
+import privateApi from "./api";
+
 
 //  Create Inquiry (unauthenticated)
 export const createInquiry = async (inquiryData) => {
@@ -7,8 +9,8 @@ export const createInquiry = async (inquiryData) => {
 };
 
 //  List all inquiries (admin)
-export const getInquiries = async (token) => {
-  const response = await api.get("inquiries/", {
+export const getInquiries = async (token, page = 1) => {
+  const response = await privateApi.get(`inquiries/?page=${page}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
   return response.data;
@@ -16,7 +18,7 @@ export const getInquiries = async (token) => {
 
 //  Get inquiry details (admin)
 export const getInquiryDetail = async (id, token) => {
-  const response = await api.get(`inquiries/${id}/`, {
+  const response = await privateApi.get(`inquiries/${id}/`, {
     headers: { Authorization: `Bearer ${token}` },
   });
   return response.data;
@@ -24,7 +26,7 @@ export const getInquiryDetail = async (id, token) => {
 
 //  Update inquiry status (admin)
 export const updateInquiryStatus = async (id, status, token) => {
-  const response = await api.patch(
+  const response = await privateApi.patch(
     `inquiries/${id}/`,
     { status },
     {

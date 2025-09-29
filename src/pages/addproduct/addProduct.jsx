@@ -8,6 +8,7 @@ import {
 } from "./addProduct.styled";
 import SmallCard from "../../components/Addproduct/SmallCard";
 import { useNavigate } from "react-router-dom";
+import CustomPagination from "../../Components/paginaton/CustomPagination";
 const AddProduct = () => {
   const navigate = useNavigate();
   const handleNavigate = () => {
@@ -24,6 +25,7 @@ const AddProduct = () => {
         Enter new products fast and accurately. Stay on top of your inventory.
       </Text>
       <SmallCard />
+  
     </AddContainer>
   );
 };

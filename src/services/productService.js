@@ -11,9 +11,12 @@ export const addProduct = async (productData) => {
   return response.data;
 };
 
-export const listProductsAdmin = async () => {
-  const response = await privateApi.get("products/create/",config);
-  return response.data;
+export const listProductsAdmin = async ({ page = 1, pageSize = 20 } = {}) => {
+  const response = await privateApi.get(
+    `products/create/?page=${page}&page_size=${pageSize}`,
+    config
+  );
+  return response.data; 
 };
 
 export const updateProduct = async (productId, productData) => {

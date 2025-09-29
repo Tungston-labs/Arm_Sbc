@@ -135,26 +135,36 @@ const handleNavigate=()=>{
               <Input
                 placeholder="Enter product name"
                 defaultValue={productDetailAdmin?.name || ""}
+                  readOnly
+
               />
               <Input
                 placeholder="Ram"
                 defaultValue={productDetailAdmin?.ram || ""}
+                  readOnly
+
               />
             </TwoCols>
             <TwoCols>
               <Input
                 placeholder="Core"
                 defaultValue={productDetailAdmin?.cores || ""}
+                  readOnly
+
               />
               <Input
                 placeholder="Storage"
                 defaultValue={productDetailAdmin?.storage || ""}
+                  readOnly
+
               />
             </TwoCols>
             <FullWidth>
               <TextArea
                 placeholder="Add description"
                 defaultValue={productDetailAdmin?.description || ""}
+                  readOnly
+
               />
             </FullWidth>
           </FormArea>

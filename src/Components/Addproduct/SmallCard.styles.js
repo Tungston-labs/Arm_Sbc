@@ -4,7 +4,7 @@ export const CardGrid = styled.div`
   display: grid;
   gap: 24px;
   margin: 32px 0;
-  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr)); /* ≥2600px */
+  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr)); 
 
   @media (max-width: 2600px) {
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));

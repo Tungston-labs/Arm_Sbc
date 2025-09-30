@@ -3,13 +3,14 @@ import styled from "styled-components";
 export const Container = styled.div`
   background-color: #0e0619;
   width: 100%;
+  min-height: 100vh;
 `;
 
 export const Header = styled.h1`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 32px; 
+  font-size: 32px;
   font-weight: 700;
   font-family: "Roboto", sans-serif;
   padding: 20px 30px;
@@ -31,15 +32,14 @@ export const Header = styled.h1`
   }
 `;
 
-
 export const RowBox = styled.div`
   display: grid;
   grid-template-columns: 200px repeat(${(p) => p.count}, minmax(220px, 1fr));
   border: 1px solid #fff;
   border-radius: 8px;
   margin: 16px 30px;
-    @media (max-width: 768px) {
-        border: none;
+  @media (max-width: 768px) {
+    border: none;
 
     grid-template-columns: 60px repeat(${(p) => p.count}, minmax(120px, 1fr));
   }
@@ -82,7 +82,6 @@ export const Cell = styled.div`
   &:last-child::after {
     content: none;
     border-top: none;
-
   }
 
   border-top: 1px solid #fff;
@@ -91,7 +90,6 @@ export const Cell = styled.div`
     border-top: none;
   }
 `;
-
 
 export const Button = styled.button`
   background-color: #8a38f5;
@@ -108,62 +106,96 @@ export const FeatureName = styled(Cell)`
   font-weight: 600;
   font-family: "Roboto", sans-serif;
   color: white;
-  font-size: 24px;            
+  font-size: 24px;
 
-  @media (max-width: 3800px) { font-size: 22px; }
-  @media (max-width: 2600px) { font-size: 18px; }
-  @media (max-width: 1600px) { font-size: 16px; }
-  @media (max-width: 1024px) { font-size: 12px; }
-  @media (max-width: 768px)  { font-size: 10px; }
+  @media (max-width: 3800px) {
+    font-size: 22px;
+  }
+  @media (max-width: 2600px) {
+    font-size: 18px;
+  }
+  @media (max-width: 1600px) {
+    font-size: 16px;
+  }
+  @media (max-width: 1024px) {
+    font-size: 12px;
+  }
+  @media (max-width: 768px) {
+    font-size: 10px;
+  }
 `;
-
 
 export const ProductInfoCell = styled(Cell)`
   text-align: center;
-    position: relative;
-img {
-  margin-bottom: 12px;  
-  width: 230px;
+  position: relative;
+  img {
+    margin-bottom: 12px;
+    width: 230px;
 
-  @media (max-width: 2600px) { width: 200px; }
-  @media (max-width: 1500px) { width: 160px; }
-  @media (max-width: 1024px) { width: 100px; }
-  @media (max-width: 768px)  { width: 40px; }
-}
+    @media (max-width: 2600px) {
+      width: 200px;
+    }
+    @media (max-width: 1500px) {
+      width: 160px;
+    }
+    @media (max-width: 1024px) {
+      width: 100px;
+    }
+    @media (max-width: 768px) {
+      width: 40px;
+    }
+  }
 
+  p {
+    color: white;
+    font-weight: 600;
+    font-family: "Roboto", sans-serif;
+    font-size: 24px;
 
-p {
-  color: white;
-  font-weight: 600;
-  font-family: "Roboto", sans-serif;
-  font-size: 24px;                       
-
-  @media (max-width: 3800px) { font-size: 22px; }
-  @media (max-width: 2600px) { font-size: 16px; }
-  @media (max-width: 1600px) { font-size: 12px; }
-  @media (max-width: 1100px) { font-size: 10px; }
-  @media (max-width: 768px)  { font-size: 8px;  }
-}
+    @media (max-width: 3800px) {
+      font-size: 22px;
+    }
+    @media (max-width: 2600px) {
+      font-size: 16px;
+    }
+    @media (max-width: 1600px) {
+      font-size: 12px;
+    }
+    @media (max-width: 1100px) {
+      font-size: 10px;
+    }
+    @media (max-width: 768px) {
+      font-size: 8px;
+    }
+  }
 
   button {
-  color: white;
-  padding: 8px;
-  margin-top: 8px;
-  width: 100px;
-  font-size: 18px;
-  border-radius: 8px;
-  border: none;
-  background-color: #8a38f5;
-  font-family: "Roboto", sans-serif;
-   
-  @media (max-width: 3800px) { font-size: 22px; }
-  @media (max-width: 2600px) { font-size: 16px; }
-  @media (max-width: 1600px) { font-size: 12px; }
-  @media (max-width: 1100px) { font-size: 10px; }
-  @media (max-width: 768px)  { font-size: 8px;  }
-}
+    color: white;
+    padding: 8px;
+    margin-top: 8px;
+    width: 100px;
+    font-size: 18px;
+    border-radius: 8px;
+    border: none;
+    background-color: #8a38f5;
+    font-family: "Roboto", sans-serif;
 
-  
+    @media (max-width: 3800px) {
+      font-size: 22px;
+    }
+    @media (max-width: 2600px) {
+      font-size: 16px;
+    }
+    @media (max-width: 1600px) {
+      font-size: 12px;
+    }
+    @media (max-width: 1100px) {
+      font-size: 10px;
+    }
+    @media (max-width: 768px) {
+      font-size: 8px;
+    }
+  }
 `;
 
 export const FeatureCell = styled(Cell)`
@@ -191,7 +223,7 @@ export const FeatureCell = styled(Cell)`
   }
 `;
 export const ReadMoreButton = styled.button`
-   color: white;
+  color: white;
   padding: 10px;
   width: 200px;
   font-size: 18px;
@@ -221,7 +253,4 @@ export const RemoveButton = styled.div`
   line-height: 24px;
   text-align: center;
   cursor: pointer;
-
-
-
 `;

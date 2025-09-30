@@ -44,20 +44,20 @@ const InquiryPage = () => {
   };
   const validate = () => {
     let newErrors = {};
-    if (!formData.firstName.trim()) newErrors.firstName = "First name is required";
-    if (!formData.lastName.trim()) newErrors.lastName = "Last name is required";
-    if (!formData.company.trim()) newErrors.company = "Company name is required";
+    if (!formData.firstName?.trim()) newErrors.firstName = "First name is required";
+    if (!formData.lastName?.trim()) newErrors.lastName = "Last name is required";
+    if (!formData.company?.trim()) newErrors.company = "Company name is required";
     if (!formData.email) {
       newErrors.email = "Email is required";
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = "Invalid email format";
     }
-    if (!formData.phone.trim()) newErrors.phone = "Phone number is required";
-    if (!formData.address.trim()) newErrors.address = "Street address is required";
-    if (!formData.country.trim()) newErrors.country = "Country is required";
-    if (!formData.state.trim()) newErrors.state = "State is required";
-    if (!formData.delivery.trim()) newErrors.delivery = "Delivery location is required";
-    if (!formData.description.trim()) newErrors.description = "Description is required";
+    if (!formData.phone?.trim()) newErrors.phone = "Phone number is required";
+    if (!formData.address?.trim()) newErrors.address = "Street address is required";
+    if (!formData.country?.trim()) newErrors.country = "Country is required";
+    if (!formData.state?.trim()) newErrors.state = "State is required";
+    if (!formData.delivery?.trim()) newErrors.delivery = "Delivery location is required";
+    if (!formData.description?.trim()) newErrors.description = "Description is required";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -78,7 +78,7 @@ const payload = {
   state: formData.state,
   delivery_location: formData.delivery,
   description: formData.description,
-  product_ids: products.length > 0 ? products.map((p) => p.id) : [],
+  product_ids: products.length > 0 ? products.map((p) => p?.product?.id) : [],
 };
 
 

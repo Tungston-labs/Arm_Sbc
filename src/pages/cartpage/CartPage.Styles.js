@@ -154,7 +154,7 @@ export const CartItem = styled.div`
   }
 
   @media (max-width: 768px) {
-    gap: 0; 
+    gap: 20px; 
   }
 `;
 

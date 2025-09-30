@@ -13,6 +13,7 @@ const SingleProduct = ({
   description,
   productId,
   loading,
+  error,
 }) => {
   return (
     <>
@@ -25,6 +26,12 @@ const SingleProduct = ({
             <OvalSpinner />
           </CenterContainer>
         </HeaderContainer>
+      ) : error ? (
+        <HeaderContainer>
+          <CenterContainer>
+            <p>{error || "no data available"}</p>
+          </CenterContainer>
+        </HeaderContainer>
       ) : (
         <>
           <SingleProductDeatilSection
@@ -32,10 +39,12 @@ const SingleProduct = ({
             description={product?.description}
             image={product?.image}
             category={product?.ram}
+            productId={productId}
           />
           <SpecificationSection
             description={description}
             addetionalInformation={addetionalInformation}
+            productId={productId}
           />
           <RelatedProductContainer productId={productId} />
         </>

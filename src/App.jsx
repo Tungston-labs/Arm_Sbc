@@ -19,7 +19,7 @@ import AddProduct from "./pages/addproduct/addProduct";
 import AddForm from "./pages/addproduct/addForm/addForm.jsx";
 import AddViewProduct from "./pages/AddSingleView/AddViewProduct.jsx";
 import ProtectedRoute from "./Components/ProtectedRoute";
-import { Bounce, ToastContainer } from "react-toastify";
+import { ToastContainer, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import Products from "./pages/product/Products.jsx";
@@ -27,6 +27,7 @@ import SingleProduct from "./pages/product/SingleProduct.jsx";
 
 function App() {
   return (
+
       <>
       <ScrollToTop />
       <ToastContainer

@@ -81,6 +81,7 @@ export const HeaderImageContainer = styled.section`
   }
 `;
 export const HeaderTextContainer = styled.section`
+  width: 100%;
   padding-inline: 3rem;
   h2 {
     font-size: 1.75rem;
@@ -750,8 +751,8 @@ export const FormButton = styled.button`
   &:active {
     transform: scale(0.95);
   }
-   &:disabled {
-    background: #bfa0f9; 
+  &:disabled {
+    background: #bfa0f9;
     border: 1px solid #bfa0f9;
     cursor: not-allowed;
     opacity: 0.6;

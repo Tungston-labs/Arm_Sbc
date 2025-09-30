@@ -20,7 +20,6 @@ const Dashboard = () => {
   const { counts, loading, error } = useSelector((state) => state.dashboard);
 const token = localStorage.getItem("accessToken");
 
-console.log("🔑 Token from localStorage:", token);
 
 
 
@@ -29,7 +28,6 @@ console.log("🔑 Token from localStorage:", token);
 }, [dispatch]);
 
 useEffect(() => {
-  console.log("Dashboard counts from Redux:", counts);
 }, [counts]);
   return (
     <Layout>
@@ -41,7 +39,7 @@ useEffect(() => {
       </DashboardHeader>
 
       {loading && <p>Loading...</p>}
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {/* {error && <p style={{ color: "red" }}>{error}</p>} */}
 
       <CardGrid>
         <Card>

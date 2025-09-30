@@ -12,7 +12,7 @@ export const AddContainer = styled.div`
   );
   display: flex;
   flex-direction: column;
-  padding: 0 32px;
+  padding: 0 100px;
 `;
 
 export const TopBar = styled.div`

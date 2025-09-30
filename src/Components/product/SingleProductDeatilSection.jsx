@@ -10,33 +10,30 @@ import {
 } from "../../pages/product/singleProduct.style";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { addProductToCart } from "../../redux/cartSlice";
+import { toast } from "react-toastify";
 const SingleProductDeatilSection = ({
-  id,
+  productId,
   name,
   description,
   image,
   category,
 }) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const cartToken = localStorage.getItem("cartToken");
+  const cartToken = localStorage.getItem("cartToken") || null;
 
-  const handleAddToCart = () => {
-    if (!cartToken) {
-      // generate or fetch a token if needed
-      console.error("No cart token found");
-      return;
-    }
+ const handleAddToCart = () => {
+  dispatch(addProductToCart({ productId, cartToken }))
+    .unwrap()
+    .then((response) => {
+      toast.success("Product added to cart successfully!");
+    })
+    .catch((error) => {
+      console.log(error)
+      toast.error("Failed to add product to cart.");
+    });
+};
 
-    // dispatch redux action to backend
-  dispatch(addProductToCart({ productId: id, cartToken }))
-  .then(() => {
-    navigate("/cartpage");
-  });
-  
-  };
   const handleViewMore = () => {
     const el = document.getElementById("specification");
     if (el) el.scrollIntoView({ behavior: "smooth" });
@@ -57,7 +54,7 @@ const SingleProductDeatilSection = ({
             <Link as="button" onClick={handleViewMore}>
               View more
             </Link>
-          <AddToCartButton onClick={handleAddToCart}>
+            <AddToCartButton onClick={handleAddToCart}>
               <AiOutlineShoppingCart />
               Add to cart
             </AddToCartButton>
@@ -67,7 +64,7 @@ const SingleProductDeatilSection = ({
               <li key={i}>{i}</li>
             ))}
           </ul>
-          <p></p>  {/* need to add SKU here */}
+          <p></p> {/* need to add SKU here */}
           <p>
             {/* {[1, 2, 3].map((i) => ( */}
             <span>{category}</span>
@@ -78,7 +75,7 @@ const SingleProductDeatilSection = ({
             <Link as="button" onClick={handleViewMore}>
               View more
             </Link>
-                       <AddToCartButton onClick={handleAddToCart}>
+            <AddToCartButton onClick={handleAddToCart}>
               <AiOutlineShoppingCart />
               Add to cart
             </AddToCartButton>

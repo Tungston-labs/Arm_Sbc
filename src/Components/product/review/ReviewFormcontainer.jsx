@@ -1,71 +1,65 @@
-import styled from "styled-components";
-import { Collapse } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import ReviewFrom from "./ReviewFrom";
+import { StyledCollapse } from "./reviewFormContainer.styled";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { createReview, fetchReviews } from "../../../redux/reviewSlice";
+import { toast } from "react-toastify";
+import { validateReview } from "../../../utils/reviewValidation";
 
-const StyledCollapse = styled(Collapse)`
-  border: none;
+const ReviewFormContainer = ({ productId }) => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    rating: 0,
+    review: "",
+  });
+  const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState({});
 
-  .ant-collapse-item {
-    border: none !important;
-  }
+  const dispatch = useDispatch();
 
-  .ant-collapse-header {
-    background: #110324;
-    color: #fff !important;
-    font-size: 14px;
-    font-weight: 400;
-    padding: 12px 16px !important;
-    border-radius: 0.5rem !important;
-    border-bottom: none !important;
-    align-items: center !important;
-    @media (width >= 1280px) {
-      font-size: 1rem;
-      svg {
-        height: 0.8rem;
-        width: 0.8rem;
+  const updateForm = (name, value) => {
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    setErrors((prevErrors) => {
+      if (prevErrors[name]) {
+        const newErrors = { ...prevErrors };
+        delete newErrors[name];
+        return newErrors;
       }
-    }
-    @media (width >= 1536px) {
-      font-size: 1.5rem;
-      svg {
-        height: 1.2rem;
-        width: 1.2rem;
-      }
-    }
-    @media (width >= 2560px) {
-      font-size: 2rem;
-      border-radius: 1rem !important;
-      padding: 1.5rem !important;
-      svg {
-        height: 1.6rem;
-        width: 1.6rem;
-      }
-    }
-    @media (width >= 3840px) {
-      font-size: 3.5rem;
-      border-radius: 2rem !important;
-      padding: 2.5rem !important;
-      margin-bottom: 2rem;
-      svg {
-        height: 2.6rem;
-        width: 2.6rem;
-      }
-    }
-  }
+      return prevErrors;
+    });
+  };
 
-  .ant-collapse-expand-icon {
-    color: #fff !important;
-  }
+  const handleChange = (e) => updateForm(e.target.name, e.target.value);
+  const handleStarClick = (index) => updateForm("rating", index + 1);
 
-  .ant-collapse-content {
-    background: none !important;
-    color: white;
-    border-top: none !important;
-  }
-`;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const validationErrors = validateReview(formData);
+    if (Object.keys(validationErrors).length) {
+      setErrors(validationErrors);
+      return;
+    }
+    setLoading(true);
+    try {
+      await dispatch(
+        createReview({
+          productId,
+          reviewData: formData,
+        })
+      ).unwrap();
 
-const ReviewFormContainer = () => {
+      toast.success("Review added successfully!");
+      setFormData({ name: "", email: "", rating: 0, review: "" });
+      dispatch(fetchReviews({ productId }));
+    } catch (error) {
+      toast.error("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <StyledCollapse
       expandIconPosition="end"
@@ -76,7 +70,16 @@ const ReviewFormContainer = () => {
         {
           key: "1",
           label: "Add Review",
-          children: <ReviewFrom />,
+          children: (
+            <ReviewFrom
+              formData={formData}
+              handleChange={handleChange}
+              handleStarClick={handleStarClick}
+              errors={errors}
+              onSubmit={handleSubmit}
+              loading={loading}
+            />
+          ),
         },
       ]}
     />

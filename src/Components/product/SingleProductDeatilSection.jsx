@@ -29,6 +29,7 @@ const SingleProductDeatilSection = ({
       toast.success("Product added to cart successfully!");
     })
     .catch((error) => {
+      console.log(error)
       toast.error("Failed to add product to cart.");
     });
 };

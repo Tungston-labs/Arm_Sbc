@@ -19,12 +19,14 @@ import {
 import { FaBars, FaTimes } from "react-icons/fa";
 import logo from "../../assets/main/logo.svg";
 import { IoMdCart } from "react-icons/io";
-import { useNavigate } from "react-router-dom";  // ✅ import navigate
+import { Link, useNavigate } from "react-router-dom";  
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const navigate = useNavigate(); // ✅ hook for navigation
-
+  const navigate = useNavigate(); 
+const { items } = useSelector((state) => state.cart); 
+  const cartCount = items?.items?.length || 0;
   return (
     <Nav>
       <NavContainer>
@@ -33,9 +35,9 @@ const Navbar = () => {
         </Logo>
 
         <NavLinks>
-          <NavLinkItem href="/">Home</NavLinkItem>
-          <NavLinkItem href="/product">Products</NavLinkItem>
-          <NavLinkItem href="/compare" className="compare" data-count="3">
+          <NavLinkItem as={Link} to="/">Home</NavLinkItem>
+          <NavLinkItem as={Link} to="/product">Products</NavLinkItem>
+          <NavLinkItem as={Link} to="/compare" className="compare" data-count="3">
             Compare
           </NavLinkItem>
         </NavLinks>
@@ -46,11 +48,10 @@ const Navbar = () => {
             <SearchInput type="text" placeholder="Search" />
           </SearchBox>
 
-          {/* ✅ Navigate to cartpage when clicked */}
-          <CartIcon onClick={() => navigate("/cartpage")}>
-            <IoMdCart />
-          </CartIcon>
-
+        <CartIcon onClick={() => navigate("/cartpage")}>
+  <IoMdCart />
+  <span className="badge">{cartCount}</span> 
+</CartIcon>
           <InquiryButton  onClick={() => navigate("/inquiry-page")}>Inquiry</InquiryButton>
         </RightSection>
 
@@ -61,11 +62,11 @@ const Navbar = () => {
 
       {isOpen && (
         <MobileMenu>
-          <MobileNavItem href="/">Home</MobileNavItem>
-          <MobileNavItem href="/product">Product</MobileNavItem>
-          <MobileNavItem href="/compare">Compare</MobileNavItem>
-          <MobileNavItem href="/cartpage">Cart</MobileNavItem>
-          <MobileInquiryButton>Inquiry</MobileInquiryButton>
+          <MobileNavItem as={Link} to="/">Home</MobileNavItem>
+          <MobileNavItem as={Link} to="/product">Product</MobileNavItem>
+          <MobileNavItem as={Link} to="/compare">Compare</MobileNavItem>
+          <MobileNavItem as={Link} to="/cartpage">Cart</MobileNavItem>
+          <MobileInquiryButton onClick={() => navigate("/inquiry-page")}>Inquiry</MobileInquiryButton>
         </MobileMenu>
       )}
     </Nav>

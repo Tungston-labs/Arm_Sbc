@@ -307,6 +307,7 @@ export const SearchIcon = styled(FiSearch)`
 `;
 
 export const CartIcon = styled.div`
+  position: relative; 
   font-size: 2rem;
   cursor: pointer;
 
@@ -333,7 +334,26 @@ export const CartIcon = styled.div`
   @media (max-width: 600px) {
     font-size: 0.9rem;
   }
+
+.badge {
+  position: absolute;
+  top: -8px;
+  right: -7px;
+  background: #ff4c4c;
+  color: white;
+  border-radius: 50%;
+  padding: 0.1rem 0.3rem; 
+  font-size: 0.6rem;     
+  font-weight: bold;
+  min-width: 16px;        
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 `;
+
 
 export const InquiryButton = styled.button`
   padding: 0.7rem 1.4rem;

@@ -76,12 +76,13 @@ const Enquiry = () => {
           <tbody>
             {enquiries.map((item) => (
               <TableRow key={item.id}>
-                <TableCell>
-                  {item.first_name} {item.last_name}
-                </TableCell>
-                <TableCell>{item.email}</TableCell>
-                <TableCell>{item.phone}</TableCell>
-                <TableCell>{item.delivery_location}</TableCell>
+               <TableCell title={`${item.first_name} ${item.last_name}`}>
+  {item.first_name} {item.last_name}
+</TableCell>
+<TableCell title={item.email}>{item.email}</TableCell>
+<TableCell title={item.phone}>{item.phone}</TableCell>
+<TableCell title={item.delivery_location}>{item.delivery_location}</TableCell>
+
                 <TableCell>
                   <StatusBadge status={item.status?.toLowerCase()}>
                     {item.status}

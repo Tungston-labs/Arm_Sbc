@@ -6,7 +6,7 @@ export const DashboardHeader = styled.div`
 `;
 
 export const DashboardTitle = styled.h2`
-  font-family: 'Roboto';
+  font-family: 'Inter';
   font-weight: 700;
   font-style: normal;
   line-height: 1.2; 
@@ -17,7 +17,7 @@ export const DashboardTitle = styled.h2`
 
 
 export const SubTitle = styled.p`
-  font-family: 'Roboto';
+  font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
   line-height: 1.4; 
@@ -82,7 +82,7 @@ export const CardIcon = styled.div`
 export const CardValue = styled.div`
   font-family: 'Roboto';
   font-style: normal;
-  font-weight: 700;
+  font-weight: 400;
   line-height: 1.2; 
   margin-top: auto;
   color: #FFF;

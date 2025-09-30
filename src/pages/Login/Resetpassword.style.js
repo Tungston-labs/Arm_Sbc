@@ -74,8 +74,6 @@ export const Form = styled.form`
 
 export const Label = styled.label`
   font-size: 1rem;
-Email
-
   font-family: 'Roboto', sans-serif;
   font-weight: 500;
   margin: 0 0 10px 8px;
@@ -93,10 +91,10 @@ export const Input = styled.input`
   color: #fff;
   margin-bottom: 20px;
   box-shadow: 
-  inset 4px 4px 4px rgba(68, 67, 66, 0.92),   /* top-left */
-  inset -4px -4px 4px rgba(68, 67, 66, 0.92), /* bottom-right */
-  inset 4px -4px 4px rgba(68, 67, 66, 0.92),  /* top-right */
-  inset -4px 4px 4px rgba(68, 67, 66, 0.92);  /* bottom-left */
+  inset 4px 4px 4px rgba(68, 67, 66, 0.92),   
+  inset -4px -4px 4px rgba(68, 67, 66, 0.92),
+  inset 4px -4px 4px rgba(68, 67, 66, 0.92), 
+  inset -4px 4px 4px rgba(68, 67, 66, 0.92);  
 
 Email
 

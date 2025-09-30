@@ -96,7 +96,6 @@ export const Input = styled.input`
   inset 4px -4px 4px rgba(68, 67, 66, 0.92), 
   inset -4px 4px 4px rgba(68, 67, 66, 0.92); 
 
-
   &::placeholder {
   color: #bbb;
   font-size: 14px;
@@ -129,7 +128,6 @@ export const Input = styled.input`
     padding: 18px;
     font-size: 16px;
   }
-
 `;
 
 export const InputWrapper = styled.div`

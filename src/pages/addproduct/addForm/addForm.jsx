@@ -22,7 +22,6 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 import ImageUploader from "../../../Components/Addproduct/ImageUploadSection/ImageUpload";
 import DemoCollapse from "../../../Components/Addproduct/Ant-design/CardsAndInput";
 import axios from "axios";
-// import Swal from "sweetalert2";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -71,56 +70,85 @@ const AddForm = () => {
       });
     }
   }, [productId, productDetailAdmin]);
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const token = localStorage.getItem("accessToken");
-      const fd = new FormData();
+async function urlToFile(url, filename, token) {
+  const headers = token ? { Authorization: `Bearer ${token}` } : {};
+  const res = await fetch(url, { headers });
+  if (!res.ok) throw new Error('Failed to fetch image');
+  const blob = await res.blob();
+  return new File([blob], filename || 'image', { type: blob.type || 'image/jpeg' });
+}
 
-      fd.append("name", formData.name);
-      fd.append("ram", parseInt(formData.ram, 10));
-      fd.append("cores", parseInt(formData.cores, 10));
-      fd.append("storage", parseInt(formData.storage, 10));
-      fd.append("description", formData.description);
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const token = localStorage.getItem("accessToken");
+    const fd = new FormData();
 
-      fd.append(
-        "additional_info",
-        JSON.stringify({
-          weight: formData.additional_info.weight,
-          dimension: formData.additional_info.dimension,
-        })
-      );
+    fd.append("name", formData.name);
+    fd.append("ram", parseInt(formData.ram, 10) || 0);
+    fd.append("cores", parseInt(formData.cores, 10) || 0);
+    fd.append("storage", parseInt(formData.storage, 10) || 0);
+    fd.append("description", formData.description || "");
+    fd.append("additional_info", JSON.stringify({
+      weight: formData.additional_info.weight || "",
+      dimension: formData.additional_info.dimension || "",
+    }));
+    fd.append("specs", JSON.stringify(formData.specifications || {}));
 
-      fd.append("specs", JSON.stringify(formData.specifications || {}));
-
+    if (!productId) {
+      if (!(formData.images?.[0] instanceof File)) {
+        toast.error("Please upload an image before creating the product.");
+        return;
+      }
+      fd.append("image", formData.images[0]);
+    } else {
       if (formData.images?.[0] instanceof File) {
         fd.append("image", formData.images[0]);
+      } else if (typeof formData.images?.[0] === "string") {
+        try {
+          const imageUrl = formData.images[0];
+          const filename = imageUrl.split("/").pop().split("?")[0] || "image";
+          const file = await urlToFile(imageUrl, filename, token);
+          fd.append("image", file);
+        } catch (err) {
+          console.warn("Could not fetch remote image to attach - user may need to re-upload.", err);
+        }
       }
+    }
 
-      const config = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
-        },
-      };
+    for (let pair of fd.entries()) {
+      console.log("FormData:", pair[0], pair[1]);
+    }
 
-      const url = productId
-        ? `http://178.248.112.16:8002/api/products/${productId}/`
-        : `http://178.248.112.16:8002/api/products/create/`;
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
 
-      const method = productId ? "put" : "post";
+    const url = productId
+      ? `http://178.248.112.16:8002/api/products/${productId}/`
+      : `http://178.248.112.16:8002/api/products/create/`;
 
-      await axios[method](url, fd, config);
+    if (productId) {
+      await axios.put(url, fd, config); 
+    } else {
+      await axios.post(url, fd, config);
+    }
 
-      toast.success(`Product ${productId ? "updated" : "added"} successfully!`);
-
-     setTimeout(() => navigate("/addproduct"), 1000);
-      
-    } catch (error) {
-      console.error("Error saving product:", error);
+    toast.success(`Product ${productId ? "updated" : "added"} successfully!`);
+    setTimeout(() => navigate("/addproduct"), 1000);
+  } catch (error) {
+    console.error("Error saving product:", error);
+    if (error?.response) {
+      console.error("Response data:", error.response.data);
+      toast.error(`Save failed: ${JSON.stringify(error.response.data)}`);
+    } else {
       toast.error("Failed to save product. Please check your input.");
     }
-  };
+  }
+};
+
 
   return (
    <Layout>

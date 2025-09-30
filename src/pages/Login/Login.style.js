@@ -260,7 +260,13 @@ export const ForgotPassword = styled.a`
   }
 
   @media (min-width: 2560px) {
-    font-size: 1rem;
+    font-size: 1rem;￼
+Verification
+We sent a code to
+armsbctls@gmail.com
+
+￼￼￼￼￼
+￼Verify
   }
 
   @media (min-width: 3840px) {

@@ -14,6 +14,7 @@ import {
 } from "./Comparison.styled";
 import Navbar from "../../Components/Navbar/Navbar";
 import ModalWithCards from "../../Components/Comparison/ModalWithCards";
+import { Main } from "../Homepage/Header.style";
 
 // Define the order of features for the table
 export const featureOrder = [
@@ -92,8 +93,11 @@ const Comparison = () => {
   };
 
   return (
+    <> 
+    <Main>
+     <Navbar />
     <Container>
-      <Navbar />
+    
       <Header>
         Comparison Chart
         <Button onClick={handleAddProduct}>Compare Product</Button>
@@ -134,6 +138,8 @@ const Comparison = () => {
 
       {showModal && <ModalWithCards onClose={handleCloseModal} />}
     </Container>
+    </Main>
+    </>
   );
 };
 

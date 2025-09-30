@@ -16,28 +16,71 @@ export const HeaderWrapper = styled.section`
   }
 `;
 
+export const Main = styled.div`
+  color: #fff;
+  margin: auto;
+
+  @media (max-width: 900px) {
+     background: url('/images/inquiry/backgroundpic.png') no-repeat center center;
+    background-size: cover;
+      padding: 1rem;
+  }
+
+  @media (min-width: 3840px) {
+    font-size: 1.5rem;
+  }
+
+  @media (min-width: 7680px) {
+    font-size: 2rem;
+  }
+`;
+
+
 export const Content = styled.div`
   max-width: 1000px;
   color: #fff;
   z-index: 2; 
   text-align: left;
 `;
-
 export const Title = styled.h1`
-  font-size: 2.5rem;
+  font-size: 1.6rem; /* base for mobile first */
   font-weight: 700;
   font-family: "Montserrat", sans-serif;
   margin-bottom: 40px;
-  
   color: #FFFFFF;
 
-  @media (max-width: 768px) {
+
+  /* Small screens */
+  @media (min-width: 481px) {
     font-size: 2rem;
   }
-  @media (max-width: 480px) {
-    font-size: 1.6rem;
+
+  @media (min-width: 769px) {
+    font-size: 2rem;
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 1.5rem;
+  }
+
+  /* Larger screens */
+  @media (min-width: 1800px) {
+    font-size: 1.5rem;
+
+  }
+
+  @media (min-width: 2560px) {
+    font-size: 2.7rem;
+  }
+
+@media (min-width: 3860px) {
+    font-size: 4.5rem;
+    width: 1900px;
+
   }
 `;
+
+
 
 export const Description = styled.p`
   font-size: 1rem;
@@ -46,21 +89,38 @@ export const Description = styled.p`
   margin-bottom: 39px;
   color: #FFFFFF;
  
-  @media (max-width: 1024px) {
-    font-size: 0.95rem;
-  }
-  @media (max-width: 1440px) {
-    font-size: 1rem;
-  }
-  @media (min-width: 1441px) {
-    font-size: 1.1rem;
+   @media (min-width: 481px) {
+    font-size: 0.5rem;
   }
 
-  @media (max-width: 768px) {
-    font-size: 0.9rem;
+  @media (min-width: 769px) {
+    font-size: 0.8rem;
   }
-  @media (max-width: 480px) {
-    font-size: 0.85rem;
+
+  @media (min-width: 1024px) {
+    font-size: 0.8rem;
+    width: 600px;
+  }
+
+  /* Larger screens */
+  @media (min-width: 1800px) {
+    font-size: 1rem;
+    width: 650px;
+
+
+  }
+
+  @media (min-width: 2560px) {
+    font-size: 2rem;
+        width: 1200px;
+
+
+  }
+
+  @media (min-width: 3860px) {
+    font-size: 3rem;
+            width: 1900px;
+
   }
 `;
 

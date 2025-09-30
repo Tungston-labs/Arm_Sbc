@@ -1,4 +1,4 @@
-import api, { privateApi } from "./api";
+import api,{privateApi} from "./api";
 
 export const loginAdmin = async (email, password) => {
   const response = await api.post("accounts/login/", { email, password });
@@ -6,7 +6,7 @@ export const loginAdmin = async (email, password) => {
 };
 
 export const refreshAccessToken = async (refresh) => {
-  const response = await api.post("accounts/token/refresh/", { refresh });
+  const response = await privateApi.post("accounts/token/refresh/", { refresh });
   return response.data;
 };
 

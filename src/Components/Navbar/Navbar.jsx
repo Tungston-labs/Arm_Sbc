@@ -61,9 +61,17 @@ const Navbar = () => {
         </NavLinks>
 
         <RightSection>
-          <SearchBox>
+          <SearchBox onSubmit={handleSearch}>
             <SearchIcon />
-            <SearchInput type="text" placeholder="Search" />
+            <SearchInput
+              type="text"
+              placeholder="Search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") handleSearch(e);
+              }}
+            />
           </SearchBox>
 
           <CartIcon onClick={() => navigate("/cartpage")}>

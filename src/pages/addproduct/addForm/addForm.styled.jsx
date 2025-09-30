@@ -133,7 +133,7 @@ export const Input = styled.input`
   color: #FFFFFF;
   border: none;
   border-radius: 6px;
-  width: 100%;
+  width: 90%;
   font-size: 16px;
 
   @media (min-width: 1920px) {
@@ -153,7 +153,8 @@ export const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 90%;
+   margin-left: 190px;
   margin-top: 16px;
   gap: 12px;
   margin-bottom: 40px;
@@ -173,6 +174,7 @@ export const AddButton = styled.button`
   border-radius: 5px;
   padding: 8px 20px;
   font-size: 16px;
+
   min-width: 100px;
   @media (min-width: 768px) {
     min-width: 120px;
@@ -213,7 +215,7 @@ export const TextArea = styled.textarea`
   color: #FFFFFF;
   border: none;
   border-radius: 6px;
-  width: 100%;
+  width: 95%;
   min-height: 100px;
   resize: vertical;
   font-size: 16px;

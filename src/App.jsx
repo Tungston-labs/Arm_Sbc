@@ -20,9 +20,14 @@ import AddForm from "./pages/addproduct/addForm/addForm.jsx";
 import AddViewProduct from "./pages/AddSingleView/AddViewProduct.jsx";
 import ProtectedRoute from "./Components/ProtectedRoute";
 import { Bounce, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+import Products from "./pages/product/Products.jsx";
+import SingleProduct from "./pages/product/SingleProduct.jsx";
+
 function App() {
   return (
-    <>
+      <>
       <ScrollToTop />
       <ToastContainer
         position="top-right"
@@ -49,17 +54,24 @@ function App() {
         <Route path="/reset-password" element={<Resetpassword />} />
         <Route path="/verification" element={<Verification />} />
         <Route path="/setnewpassword" element={<SetNewPassword />} />
-        <Route path="/singleview" element={<AddViewProduct />} />
+        {/* <Route path="/singleview" element={<AddViewProduct />} /> */}
 
         {/* <Route element={<PersistLogin />}> */}
+
+       
+        {/* <Route path="/product" element={<Products />} />
+        <Route path="/product/:id" element={<SingleProduct />} /> */}
+      
         <Route element={<ProtectedRoute />}>
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/products/:productId" element={<AddViewProduct />} />
           <Route path="/enquiry-page" element={<Enquiry />} />
           <Route path="/enquiry-details/:id" element={<EnquiryDetails />} />
           <Route path="/addproduct" element={<AddProduct />} />
           <Route path="/addform" element={<AddForm />} />
+          <Route path="/addform/:productId" element={<AddForm />} />
         </Route>
-        {/* </Route> */}
+
       </Routes>
     </>
   );

@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 import { FaEye } from "react-icons/fa";
 
 export const PageTitle = styled.h2`
-  font-family: 'Roboto';
+  font-family: 'Inter';
   font-weight: 700;
   font-style: normal;
   line-height: 1.2; 
@@ -89,15 +89,41 @@ export const TableCell = styled.td`
   padding: clamp(0.8rem, 1vw, 1.5rem);
   font-size: clamp(0.85rem, 1vw, 2rem); 
   color: #ddd;
-   font-family: "Roboto";
-   text-align: center;
+  font-family: "Roboto";
+  text-align: center;
+
+  max-width: 150px;   /* adjust per column */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  /* Tooltip-like effect on hover */
+  position: relative;
+  cursor: pointer;
+
+  &:hover::after {
+    content: attr(title);
+    position: absolute;
+    background: #333;
+    color: #fff;
+    font-size: 0.8rem;
+    padding: 5px 8px;
+    border-radius: 4px;
+    white-space: normal;
+    max-width: 300px;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+  }
 `;
+
 
 export const StatusBadge = styled.span`
   display: inline-flex;             
   align-items: center;               
   justify-content: center;         
-  min-width: clamp(60px, 8vw, 100px); 
+min-width: clamp(80px, 10vw, 160px);
   padding: clamp(0.2rem, 0.4vw, 0.5rem) clamp(0.5rem, 1vw, 1rem);
   border-radius: clamp(4px, 0.5vw, 8px); 
   font-weight: 600;

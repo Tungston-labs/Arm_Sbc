@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const Container = styled.div`
   background-color: #0e0619;
   width: 100%;
-  padding-bottom: 40px;
 `;
 
 export const Header = styled.h1`
@@ -173,6 +172,7 @@ export const FeatureCell = styled(Cell)`
   font-weight: 600;
   font-family: "Roboto", sans-serif;
   color: white;
+  padding-bottom: 40px;
   font-size: 14px;
   @media (min-width: 768px) {
     font-size: 10px;

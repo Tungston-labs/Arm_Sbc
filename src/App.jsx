@@ -63,6 +63,7 @@ function App() {
         <Route path="/product/:id" element={<SingleProduct />} /> */}
       
         <Route element={<ProtectedRoute />}>
+        
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/products/:productId" element={<AddViewProduct />} />
           <Route path="/enquiry-page" element={<Enquiry />} />

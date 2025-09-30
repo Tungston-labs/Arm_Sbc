@@ -1,4 +1,3 @@
-// src/pages/AddViewProduct.jsx
 import React, { useEffect, useState } from "react";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import productImg from "../../assets/Comparison/chip.svg";

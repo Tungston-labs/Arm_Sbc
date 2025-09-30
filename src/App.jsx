@@ -26,7 +26,7 @@ import SingleProduct from "./pages/product/SingleProduct.jsx";
 
 function App() {
   return (
-      <>
+    <>
       <ToastContainer
         position="top-right"
         autoClose={3000}
@@ -53,14 +53,16 @@ function App() {
         <Route path="/verification" element={<Verification />} />
         <Route path="/setnewpassword" element={<SetNewPassword />} />
 
-        <Route element={<ProtectedRoute />}>
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/products/:productId" element={<AddViewProduct />} />
-          <Route path="/enquiry-page" element={<Enquiry />} />
-          <Route path="/enquiry-details/:id" element={<EnquiryDetails />} />
-          <Route path="/addproduct" element={<AddProduct />} />
-          <Route path="/addform" element={<AddForm />} />
-          <Route path="/addform/:productId" element={<AddForm />} />
+        <Route element={<PersistLogin />}>
+          <Route element={<ProtectedRoute />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/products/:productId" element={<AddViewProduct />} />
+            <Route path="/enquiry-page" element={<Enquiry />} />
+            <Route path="/enquiry-details/:id" element={<EnquiryDetails />} />
+            <Route path="/addproduct" element={<AddProduct />} />
+            <Route path="/addform" element={<AddForm />} />
+            <Route path="/addform/:productId" element={<AddForm />} />
+          </Route>
         </Route>
       </Routes>
     </>

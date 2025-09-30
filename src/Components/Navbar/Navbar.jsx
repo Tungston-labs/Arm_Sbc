@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Nav,
   NavContainer,
@@ -19,13 +19,20 @@ import {
 import { FaBars, FaTimes } from "react-icons/fa";
 import logo from "../../assets/main/logo.svg";
 import { IoMdCart } from "react-icons/io";
-import { useNavigate } from "react-router-dom";
+ import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCartItems } from "../../redux/cartSlice";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [compareCount, setCompareCount] = useState(0);
   const navigate = useNavigate();
+ 
+
+  const dispatch = useDispatch();
+  const { items } = useSelector((state) => state.cart);
+  const cartToken = localStorage.getItem("cartToken");
 
   // Load comparison count from localStorage
   useEffect(() => {
@@ -51,6 +58,12 @@ const Navbar = () => {
     }
   };
 
+  useEffect(() => {
+    if (cartToken && (!items || !items.items)) {
+      dispatch(fetchCartItems({ cartToken }));
+    }
+  }, [dispatch, cartToken, items]);
+  const cartCount = items?.items?.length || 0;
   return (
     <Nav>
       <NavContainer>
@@ -59,13 +72,20 @@ const Navbar = () => {
         </Logo>
 
         <NavLinks>
-          <NavLinkItem href="/">Home</NavLinkItem>
-          <NavLinkItem href="/product">Products</NavLinkItem>
-          <NavLinkItem href="/compare" className="compare">
+          <NavLinkItem as={Link} to="/">
+            Home
+          </NavLinkItem>
+          <NavLinkItem as={Link} to="/product">
+            Products
+          </NavLinkItem>
+          <NavLinkItem
+            as={Link}
+            to="/compare"
+            className="compare"
+            // data-count="3"
+          >
   Compare {compareCount > 0 && <Badge>{compareCount}</Badge>}
-</NavLinkItem>
-
-
+          </NavLinkItem>
         </NavLinks>
 
         <RightSection>
@@ -84,8 +104,8 @@ const Navbar = () => {
 
           <CartIcon onClick={() => navigate("/cartpage")}>
             <IoMdCart />
+            {cartCount > 0 && <span className="badge">{cartCount}</span>}
           </CartIcon>
-
           <InquiryButton onClick={() => navigate("/inquiry-page")}>
             Inquiry
           </InquiryButton>
@@ -98,13 +118,21 @@ const Navbar = () => {
 
       {isOpen && (
         <MobileMenu>
-          <MobileNavItem href="/">Home</MobileNavItem>
-          <MobileNavItem href="/product">Product</MobileNavItem>
-          <MobileNavItem href="/compare">
+          <MobileNavItem as={Link} to="/">
+            Home
+          </MobileNavItem>
+          <MobileNavItem as={Link} to="/product">
+            Product
+          </MobileNavItem>
+          <MobileNavItem as={Link} to="/compare">
             Compare {compareCount > 0 && `(${compareCount})`}
           </MobileNavItem>
-          <MobileNavItem href="/cartpage">Cart</MobileNavItem>
-          <MobileInquiryButton>Inquiry</MobileInquiryButton>
+          <MobileNavItem as={Link} to="/cartpage">
+            Cart
+          </MobileNavItem>
+          <MobileInquiryButton onClick={() => navigate("/inquiry-page")}>
+            Inquiry
+          </MobileInquiryButton>
         </MobileMenu>
       )}
     </Nav>

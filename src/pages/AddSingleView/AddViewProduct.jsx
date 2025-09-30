@@ -2,8 +2,8 @@
 import React, { useEffect, useState } from "react";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import productImg from "../../assets/Comparison/chip.svg";
-import AddProductNavBar from "../../components/Addproduct/AddProductNavbar";
-import AddProductDescriptionCard from "../../components/Addproduct/DescriptionDetails/DescriptionSection";
+import AddProductNavBar from "../../Components/Addproduct/AddProductNavbar";
+import AddProductDescriptionCard from "../../Components/Addproduct/DescriptionDetails/DescriptionSection";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";

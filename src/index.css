@@ -78,3 +78,11 @@ button:focus-visible {
   box-sizing: border-box;
 font-family: 'Roboto', sans-serif;
 }
+
+@media (max-width: 768px) {
+  .Toastify__toast {
+    max-width: 60% !important;
+    font-size: 0.9rem !important;
+    border-radius: 0.4rem !important;
+  }
+}

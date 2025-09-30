@@ -1,24 +1,38 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useSearchParams } from "react-router-dom"; // ✅ import this
+import { useSearchParams } from "react-router-dom"; 
 import { fetchProductsPublic } from "../../redux/productSlice";
 import Products from "./Products";
+import { toast } from "react-toastify";
 
 const ProductsContainer = () => {
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
   const limit = 12;
 
-  const [searchParams] = useSearchParams(); // ✅ get search params
-  const query = searchParams.get("search") || ""; // ✅ extract search query
+  const [searchParams] = useSearchParams(); 
+  const query = searchParams.get("search") || ""; 
 
   const { productsPublic, loading, error } = useSelector(
     (state) => state.product
   );
+  const hasFetched = useRef(false);
 
   useEffect(() => {
-    dispatch(fetchProductsPublic({ currentPage, limit, search: query }));
-  }, [dispatch, currentPage, query]); // ✅ include query
+    const loadProducts = async () => {
+      if (hasFetched.current) return;
+      hasFetched.current = true;
+
+      try {
+        // await dispatch(fetchProductsPublic({ currentPage, limit })).unwrap();
+        await dispatch(fetchProductsPublic({ currentPage, limit, search: query })).unwrap();
+      } catch (err) {
+        toast.error("Failed to load products");
+      }
+    };
+
+    loadProducts();
+  }, [dispatch, currentPage, limit]);
 
   return (
     <Products

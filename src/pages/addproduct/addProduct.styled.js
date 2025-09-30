@@ -3,16 +3,17 @@ import styled from "styled-components";
 export const AddContainer = styled.div`
   width: 100%;
   min-height: 100vh;
-  background: linear-gradient(
+  // background: linear-gradient(
     to bottom right,
     rgba(137, 99, 211, 1) 0%,
-    rgba(17, 3, 36, 1) 20%,
+    rgba(17, 3, 36, 1) 15%,
     rgba(3, 2, 6, 1) 30%,
     rgba(3, 2, 6, 1) 100%
   );
   display: flex;
   flex-direction: column;
   padding: 0 32px;
+  margin-top:-80px;
 `;
 
 export const TopBar = styled.div`
@@ -27,7 +28,6 @@ export const Header = styled.h1`
   font-family: "Roboto", sans-serif;
   font-weight: 600;
 
-  /* Base mobile styles */
   font-size: 20px;
   width: auto;
   margin: 0;
@@ -78,7 +78,7 @@ export const Text = styled.p`
   font-family: "Roboto", sans-serif;
   font-weight: 400;
   margin-top: 24px;
-
+ margin-bottom: -0px;
   font-size: 16px;
 
   @media (min-width: 480px) {

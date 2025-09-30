@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import Chip from "../../assets/Comparison/chip.svg";
+import React, { useState, useEffect } from "react";
 import {
   CompareButton,
   InnerGrid,
@@ -9,45 +8,72 @@ import {
   SubHeader,
   Title,
 } from "./ModalWithCards.styled";
-
-const productInfo = [
-  { img: Chip, text: "ARM Development Board Rockchip 3288, Quad Core 1.7 GHz. This board is perfect for embedded systems and high-performance applications." },
-  { img: Chip, text: "ARM Development Board Rockchip 3288, Quad Core 1.7 GHz. Great for embedded projects and prototyping." },
-  { img: Chip, text: "ARM Development Board Rockchip 3288, Quad Core 1.7 GHz. Built for high-performance embedded systems." },
-  { img: Chip, text: "ARM Development Board Rockchip 3288 ..." },
-  { img: Chip, text: "ARM Development Board Rockchip 3288 ..." },
-  { img: Chip, text: "ARM Development Board Rockchip 3288 ..." },
-];
+import Chip from "../../assets/Comparison/chip.svg";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProductsPublic } from "../../redux/productSlice";
 
 export default function ModalWithCards({ onClose }) {
+  const dispatch = useDispatch();
+  const { productsPublic, loading } = useSelector((state) => state.product);
   const [selectedIds, setSelectedIds] = useState([]);
 
+  useEffect(() => {
+    dispatch(fetchProductsPublic({ currentPage: 1, limit: 12 }));
+  }, [dispatch]);
+
+  const handleSelect = (id) => {
+    setSelectedIds((prev) => {
+      if (prev.includes(id)) {
+        return prev.filter((pid) => pid !== id);
+      } else if (prev.length < 4) {
+        return [...prev, id];
+      } else {
+        alert("You can select up to 4 products only!");
+        return prev;
+      }
+    });
+  };
+
+  const handleCompare = () => {
+    const selectedProducts = productsPublic.results.filter((p) =>
+      selectedIds.includes(p.id)
+    );
+    localStorage.setItem("comparisonProducts", JSON.stringify(selectedProducts));
+    onClose();
+  };
+
+  // Close if click outside modal
+  const handleOverlayClick = (e) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
   return (
-    <Overlay>
-      <ModalCard>
+    <Overlay onClick={handleOverlayClick}>
+      <ModalCard onClick={(e) => e.stopPropagation()}>
         <Title>Product Comparison</Title>
-        <SubHeader>Choose products to compare</SubHeader>
+        <SubHeader>Select up to 4 products</SubHeader>
 
-        <InnerGrid>
-          {productInfo.map((item, idx) => (
-            <ProductCard
-              key={idx}
-              $selected={selectedIds.includes(idx)}
-              onClick={() => {
-                setSelectedIds((prev) =>
-                  prev.includes(idx)
-                    ? prev.filter((id) => id !== idx)
-                    : [...prev, idx]
-                );
-              }}
-            >
-              <img src={item.img} alt="product" />
-              <p>{item.text}</p>
-            </ProductCard>
-          ))}
-        </InnerGrid>
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          <InnerGrid>
+            {productsPublic?.results?.map((item) => (
+              <ProductCard
+                key={item.id}
+                $selected={selectedIds.includes(item.id)}
+                onClick={() => handleSelect(item.id)}
+              >
+                <img src={item.image || Chip} alt={item.name} />
+                <p>{item.name}</p>
+                <p>{item.ram} || {item.cores} || {item.storage}</p>
+              </ProductCard>
+            ))}
+          </InnerGrid>
+        )}
 
-        <CompareButton onClick={onClose}>Compare</CompareButton>
+        <CompareButton onClick={handleCompare}>Compare</CompareButton>
       </ModalCard>
     </Overlay>
   );

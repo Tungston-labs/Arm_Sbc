@@ -4,19 +4,19 @@ export const TopBar = styled.div`
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-top: 64px;
+  margin-top: 65px;
 
   @media (min-width: 1920px) {
     gap: 20px;
-    margin-top: 80px;
+    margin-top: 24px;
   }
   @media (min-width: 2560px) {
     gap: 28px;
-    margin-top: 96px;
+    margin-top: 32px;
   }
   @media (min-width: 3860px) {
     gap: 36px;
-    margin-top: 120px;
+    margin-top: 48px;
   }
 `;
 
@@ -154,7 +154,6 @@ export const ButtonContainer = styled.div`
   justify-content: center;
   align-items: center;
   width: 90%;
-   margin-left: 190px;
   margin-top: 16px;
   gap: 12px;
   margin-bottom: 40px;

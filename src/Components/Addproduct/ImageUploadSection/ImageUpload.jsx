@@ -11,6 +11,7 @@ import {
   RemoveButton,
 } from "./ImageUpload.styles";
 import fileIcon from "../../../assets/AddProduct/imagesmode.png";
+import { IoCloudUpload } from "react-icons/io5";
 
 export default function ImageUploader({ images = [], onImagesChange }) {
   const inputRef = useRef(null);
@@ -18,7 +19,6 @@ export default function ImageUploader({ images = [], onImagesChange }) {
   const handleFileChange = (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    // Replace remote URL if currently only a URL is present (edit scenario)
     const shouldReplace = images.length === 1 && !(images[0] instanceof File);
     const next = shouldReplace ? [file] : [...images, file];
     onImagesChange(next);
@@ -32,21 +32,19 @@ export default function ImageUploader({ images = [], onImagesChange }) {
 
   return (
     <CardWrapper>
-      <UploadCard onClick={() => inputRef.current?.click()} role="button">
+      <UploadCard  role="button">
         <HiddenInput
           ref={inputRef}
           type="file"
           accept="image/*"
           onChange={handleFileChange}
-          // do not set name here; we append manually to FormData
         />
-        <UploadIcon>☁️</UploadIcon>
+        <IoCloudUpload size={100}/>{" "}
         <UploadText>
           Click to upload or drag and drop
           <br />
           Max 20&nbsp;MB
         </UploadText>
-
         {images.map((img, i) => {
           const isFile = img instanceof File;
           const previewSrc = isFile ? URL.createObjectURL(img) : img;

@@ -89,7 +89,7 @@ const Comparison = () => {
     <Main>
       <Navbar />
       <Container>
-        <Header>// ✅ navigate on click
+        <Header>
           <h1>Comparison </h1>
           <Button onClick={handleAddProduct}>Compare Product</Button>
         </Header>

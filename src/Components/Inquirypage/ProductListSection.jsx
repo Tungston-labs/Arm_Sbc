@@ -9,6 +9,7 @@ import {
   MobileOnly,
   DesktopOnly,
   EmptyCartWrapper,
+  QuantityInput,
 } from "../../pages/Inquiryform/InquiryPage.Styles";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { Divider } from "../../pages/cartpage/CartPage.Styles";
@@ -79,8 +80,25 @@ function ProductListSection({ selectedProducts, setSelectedProducts }) {
                     <ProductTitle>{product?.product?.name}</ProductTitle>
                     <ProductSpecs>
                       <li>{product?.product?.cores} core</li>
-                      <li>{product?.product?.ram}</li>
-                      <li>{product?.product?.storage}</li>
+                      <li>{product?.product?.ram} Ram</li>
+                      <li>{product?.product?.storage} Storage</li>
+                    <li>
+    Qty:{" "}
+    <QuantityInput
+  type="number"
+  min={1}
+  value={product.quantity || 1}
+  onChange={(e) => {
+    const updated = selectedProducts.map((p) =>
+      p.product.id === product.product.id
+        ? { ...p, quantity: parseInt(e.target.value) }
+        : p
+    );
+    setSelectedProducts(updated);
+  }}
+/>
+
+  </li>
                     </ProductSpecs>
                     <ProductAction>
                       <button
@@ -115,6 +133,23 @@ function ProductListSection({ selectedProducts, setSelectedProducts }) {
                   <li>{product?.product?.cores} core</li>
                   <li>{product?.product?.ram}</li>
                   <li>{product?.product?.storage}</li>
+                <li>
+    Qty:{" "}
+    <QuantityInput
+  type="number"
+  min={1}
+  value={product.quantity || 1}
+  onChange={(e) => {
+    const updated = selectedProducts.map((p) =>
+      p.product.id === product.product.id
+        ? { ...p, quantity: parseInt(e.target.value) }
+        : p
+    );
+    setSelectedProducts(updated);
+  }}
+/>
+
+  </li>
                 </ProductSpecs>
                 <ProductAction>
                   <button onClick={() => handleDelete(product?.product?.id)}>

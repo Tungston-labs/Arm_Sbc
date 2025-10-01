@@ -92,6 +92,7 @@ export const Footer = styled.div`
   justify-content: flex-end;
   margin-top: auto;
 `;
+
 export const ProductCard = styled.div`
   flex: 0 0 260px;
   background: #ffffff26;
@@ -121,6 +122,7 @@ export const ProductCard = styled.div`
     font-family: "Roboto", sans-serif;
   }
 `;
+
 export const CompareButton = styled.button`
   position: absolute;
   bottom: 24px;
@@ -150,5 +152,21 @@ export const CompareButton = styled.button`
   }
   @media (max-width: 768px) {
     font-size: 8px;
+  }
+`;
+export const CloseButton = styled.button`
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  font-size: 22px;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.1);
+    color: #ff4d4f;
   }
 `;

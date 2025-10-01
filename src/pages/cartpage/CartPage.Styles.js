@@ -6,7 +6,7 @@ export const CartContainer = styled.div`
 min-height: 100vh;
 
   @media (max-width: 900px) {
-     background: url('/images/cart/cardbackpic .png') no-repeat center center;
+background: linear-gradient(155deg, rgb(57, 24, 100) 0%, rgb(10, 6, 15) 17%);
     background-size: cover;
       padding: 1rem;
   }
@@ -20,7 +20,7 @@ min-height: 100vh;
   }
 `;
 export const Container = styled.div`
- background: url('/images/cart/cardbackpic .png') no-repeat center center;
+background: linear-gradient(155deg, rgb(57, 24, 100) 0%, rgb(10, 6, 15) 17%);
   background-size: cover;
   color: #fff;
   padding: 8rem;
@@ -28,8 +28,7 @@ export const Container = styled.div`
   min-height: 100vh;
 
   @media (max-width: 900px) {
-     background: url('/images/cart/cardbackpic .png') no-repeat center center;
-    background-size: cover;
+  background: none;
       padding: 1rem;
   }
 
@@ -84,7 +83,7 @@ export const CartTitle = styled.h2`
 `;
 
 export const EnquiryButton = styled.button`
-  background: #AD8FE5;
+  background: rgba(173, 143, 229, 1);
   color: #fff;
   border: none;
   border-radius: 6px;

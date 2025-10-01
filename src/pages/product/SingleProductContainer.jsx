@@ -14,8 +14,8 @@ const SingleProductContainer = () => {
   const productId = useParams()?.id;
   const dispatch = useDispatch();
 
-  const hasFetched = useRef(false); //for reviews
-  const hasFetchedProduct = useRef(false); // prevent multiple product fetches
+  const hasFetched = useRef(false); 
+  const hasFetchedProduct = useRef(false);
 
   const { productDetailPublic, productDetailLoading,productDetailError } = useSelector(
     (state) => state.product

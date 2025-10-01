@@ -86,8 +86,10 @@ const Cart = () => {
                       <li>{item?.product?.cores} core</li>
                       <li>{item?.product?.ram}</li>
                       <li>{item?.product?.storage}</li>
+    
                     </ProductSpecs>
                     <QuantityControl>
+                  Qty:
                       <QuantityButton
                         onClick={() => decreaseQty(item.id, item.quantity)}
                       >

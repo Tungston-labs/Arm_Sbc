@@ -1,10 +1,21 @@
 import styled from "styled-components";
 
 export const NavbarContainer = styled.div`
-  padding: 1rem 1rem 0 1rem;
-  background: #0e0619;
-  @media (width>=500px) {
-    padding: 0;
+ color: #fff;
+  margin: auto;
+
+  @media (max-width: 900px) {
+background: linear-gradient(155deg, rgb(57, 24, 100) 0%, rgb(10, 6, 15) 17%);
+    background-size: cover;
+      padding: 1rem;
+  }
+
+  @media (min-width: 3840px) {
+    font-size: 1.5rem;
+  }
+
+  @media (min-width: 7680px) {
+    font-size: 2rem;
   }
 `;
 export const HeaderContainer = styled.section`
@@ -26,7 +37,7 @@ export const HeaderContainer = styled.section`
 `;
 export const DividerDiv = styled.div`
   width: 50%;
-  display: flex;
+  /* display: flex; */
   justify-content: center;
   align-items: center;
   @media (max-width: 480px) {
@@ -51,6 +62,16 @@ export const HeaderImageContainer = styled.section`
     }
   }
   @media (max-width: 780px) {
+    padding-block: 1rem;
+    display: flex;
+    justify-content: center;
+    img {
+      width: 70%;
+      min-width: 250px;
+      height: auto;
+    }
+  }
+    @media (max-width: 1024px) {
     padding-block: 1rem;
     display: flex;
     justify-content: center;
@@ -206,36 +227,34 @@ export const ButtonSection = styled.div`
     padding-block: 1rem;
   }
 `;
-
 export const CompareButton = styled.button`
+  display: none; 
   background: transparent;
   border: 1px solid #8a38f5;
   border-radius: 0.5rem;
-  padding: 0.5rem 3rem;
+  padding: 0.6rem 2rem;
   color: white;
-  font-size: 0.7rem;
+  font-size: 0.9rem;
   cursor: pointer;
-  display: flex;
   align-items: center;
   gap: 0.5rem;
 
   &:hover {
     opacity: 0.8;
   }
+
   &:active {
     transform: scale(0.95);
   }
-  @media (max-width: 480px) {
+
+  /* 🔹 Show only on small screens */
+  @media (max-width: 768px) {
+    display: flex;
     margin: 0 auto;
   }
-  @media (width >= 2560px) {
-    font-size: 1.5rem;
-  }
-  @media (width >= 3840px) {
-    font-size: 2.5rem;
-    border-radius: 1rem;
-  }
 `;
+
+
 export const AddToCartButton = styled.button`
   background: #facc15;
   border: 1px solid #facc15;
@@ -294,10 +313,10 @@ export const Link = styled.a`
     font-size: 0.8rem;
   }
   @media (max-width: 780px) {
-    font-size: 0.8rem;
+    font-size: 1rem;
   }
   @media (min-width: 1024px) and (max-width: 1439px) {
-    font-size: 0.8rem;
+    font-size: 1rem;
   }
   @media (width >= 2560px) {
     font-size: 2rem;

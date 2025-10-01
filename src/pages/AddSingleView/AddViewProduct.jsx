@@ -35,6 +35,7 @@ import {
   DeleteButton,
 } from "./AddViewProduct.styled";
 import AddetionalInformationCard from "../../Components/product/Specification/AddetionalInformationCard";
+import Layout from "../../Layout/Layout";
 
 const AddViewProduct = () => {
   const [activeTab, setActiveTab] = useState("Description");
@@ -142,6 +143,7 @@ const AddViewProduct = () => {
     navigate(`/addform/${productId}`);
   };
   return (
+    <Layout>
     <AddContainer>
       <TopBar>
         <button
@@ -254,6 +256,7 @@ const AddViewProduct = () => {
         </DescriptionSection>
       )}
     </AddContainer>
+    </Layout>
   );
 };
 

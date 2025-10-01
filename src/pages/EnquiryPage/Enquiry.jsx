@@ -16,6 +16,7 @@ import {
   ViewIcon,
   ArrowButton,
   EmptyState,
+  TableWrapper,
 } from "./Enquiry.Styles";
 import { fetchInquiries } from "../../redux/inquirySlice";
 
@@ -53,7 +54,7 @@ const Enquiry = () => {
       </SubTitle>
 
       {loading && <p>Loading enquiries...</p>}
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {/* {error && <p style={{ color: "red" }}>{error}</p>} */}
 
       {!loading && enquiries.length === 0 && (
         <EmptyState>
@@ -62,6 +63,7 @@ const Enquiry = () => {
       )}
 
       {enquiries.length > 0 && (
+        <TableWrapper>
         <Table>
           <thead>
             <TableRow>
@@ -95,6 +97,7 @@ const Enquiry = () => {
             ))}
           </tbody>
         </Table>
+        </TableWrapper>
       )}
 
       {total_pages > 1 && (

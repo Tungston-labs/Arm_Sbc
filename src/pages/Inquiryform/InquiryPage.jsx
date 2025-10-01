@@ -20,6 +20,8 @@ import Swal from "sweetalert2";
 import ProductListSection from "../../Components/Inquirypage/ProductListSection";
 import { useDispatch, useSelector } from "react-redux";
 import { submitInquiry } from "../../redux/inquirySlice";
+import { deleteCartItem } from "../../redux/cartSlice";
+
 const InquiryPage = () => {
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.inquiry);
@@ -62,25 +64,28 @@ const InquiryPage = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-   const handleSubmit = async (e) => {
+
+const handleSubmit = async (e) => {
   e.preventDefault();
   if (!validate()) return;
-
-const payload = {
-  first_name: formData.firstName,
-  last_name: formData.lastName,
-  company_name: formData.company,
-  email: formData.email,
-  
-  phone: formData.phone,
-  address: formData.address,
-  country: formData.country,
-  state: formData.state,
-  delivery_location: formData.delivery,
-  description: formData.description,
-  product_ids: products.length > 0 ? products.map((p) => p?.product?.id) : [],
-};
-
+  const productIds = products
+    .filter((p) => p?.product?.id)
+    .map((p) => p.product.id);
+  const payload = {
+    first_name: formData.firstName,
+    last_name: formData.lastName,
+    company_name: formData.company,
+    email: formData.email,
+    phone: formData.phone,
+    address: formData.address,
+    country: formData.country,
+    state: formData.state,
+    delivery_location: formData.delivery,
+    description: formData.description,
+    product_ids: products
+      .filter(p => p?.product?.id) // keep only valid products
+      .map(p => p.product.id)      // send array of UUID strings
+  };
 
   try {
     await dispatch(submitInquiry(payload)).unwrap();
@@ -104,7 +109,7 @@ const payload = {
       delivery: "",
       description: "",
     });
-    setProducts([]); 
+    setProducts([]);
   } catch (err) {
     Swal.fire({
       icon: "error",

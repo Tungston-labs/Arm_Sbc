@@ -153,7 +153,7 @@ export const RowBox = styled.div`
   }
 
   @media (max-width: 600px) {
-    grid-template-columns: ${(p) => (p.isHeader ? "110px" : "110px")} repeat(
+    grid-template-columns: ${(p) => (p.isHeader ? "140px" : "140px")} repeat(
         ${(p) => Math.max(p.count, 1)},
         minmax(120px, 1fr)
       );

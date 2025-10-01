@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const AddContainer = styled.div`
   width: 100%;
   min-height: 100vh;
-  background: linear-gradient(155deg, rgb(57, 24, 100) 0%, rgb(10, 6, 15) 17%);
+  /* background: linear-gradient(155deg, rgb(57, 24, 100) 0%, rgb(10, 6, 15) 17%); */
   display: flex;
   flex-direction: column;
   padding: 0 100px;

@@ -133,7 +133,7 @@ export const Input = styled.input`
   color: #FFFFFF;
   border: none;
   border-radius: 6px;
-  width: 90%;
+  width: 100%;
   font-size: 16px;
 
   @media (min-width: 1920px) {
@@ -151,9 +151,8 @@ export const Input = styled.input`
 `;
 export const ButtonContainer = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 90%;
+  justify-content: end;
+  align-items: end;
   margin-top: 16px;
   gap: 12px;
   margin-bottom: 40px;
@@ -168,12 +167,11 @@ export const ButtonContainer = styled.div`
   }
 `
 export const AddButton = styled.button`
-  background-color: #8a38f5;
+  background-color: #5a06c7;
   color: #fff;
   border-radius: 5px;
   padding: 8px 20px;
   font-size: 16px;
-
   min-width: 100px;
   @media (min-width: 768px) {
     min-width: 120px;
@@ -214,7 +212,7 @@ export const TextArea = styled.textarea`
   color: #FFFFFF;
   border: none;
   border-radius: 6px;
-  width: 95%;
+  width: 100%;
   min-height: 100px;
   resize: vertical;
   font-size: 16px;

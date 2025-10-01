@@ -6,8 +6,9 @@ export const AddContainer = styled.div`
   /* background: linear-gradient(155deg, rgb(57, 24, 100) 0%, rgb(10, 6, 15) 17%); */
   display: flex;
   flex-direction: column;
-  padding: 0 32px;
-  margin-top:-80px;
+  padding: 0 64px 0 32px;
+    margin-top:-80px;
+
 `;
 
 export const TopBar = styled.div`
@@ -72,7 +73,6 @@ export const Text = styled.p`
   font-family: "Roboto", sans-serif;
   font-weight: 400;
   margin-top: 24px;
- margin-bottom: -0px;
   font-size: 16px;
 
   @media (min-width: 480px) {

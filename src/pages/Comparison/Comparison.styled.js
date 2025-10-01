@@ -71,7 +71,6 @@ export const EmptyState = styled.div`
     }
   }
 
-  /* Laptop screens (1025px – 1439px) */
   @media (max-width: 1439px) and (min-width: 1025px) {
     img {
       width: 280px;
@@ -81,7 +80,6 @@ export const EmptyState = styled.div`
     }
   }
 
-  /* Tablets (768px – 1024px) */
   @media (max-width: 1024px) and (min-width: 768px) {
     img {
       width: 240px;
@@ -91,7 +89,6 @@ export const EmptyState = styled.div`
     }
   }
 
-  /* Mobile devices (480px – 767px) */
   @media (max-width: 767px) and (min-width: 480px) {
     img {
       width: 200px;
@@ -101,7 +98,6 @@ export const EmptyState = styled.div`
     }
   }
 
-  /* Small mobile devices (≤ 479px) */
   @media (max-width: 479px) {
     img {
       width: 160px;
@@ -136,7 +132,7 @@ export const RowBox = styled.div`
   border: 1px solid ${BORDER};
   border-radius: 10px;
   margin: 14px 0;
-  overflow: hidden;
+  overflow-y: scroll;
   background: transparent;
 
   min-width: ${(p) => `${260 + Math.max(p.count, 1) * 200}px`};

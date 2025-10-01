@@ -204,3 +204,19 @@ export const CompareButton = styled.button`
     right: 12px;
   }
 `;
+export const CloseButton = styled.button`
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  font-size: 22px;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.1);
+    color: #ff4d4f;
+  }
+`;

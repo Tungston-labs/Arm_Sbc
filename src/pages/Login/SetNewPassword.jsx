@@ -29,7 +29,7 @@ const SetNewPassword = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // Get email from previous page or fallback to localStorage
+  
   let email = location.state?.email || localStorage.getItem("resetEmail");
 
   const [newPassword, setNewPassword] = useState("");
@@ -43,7 +43,7 @@ const SetNewPassword = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Check if both fields are filled
+ 
     if (!newPassword || !confirmPassword) {
       Swal.fire({
         icon: "warning",
@@ -53,7 +53,7 @@ const SetNewPassword = () => {
       return;
     }
 
-    // Check minimum 6 characters
+  
     if (newPassword.length < 6) {
       Swal.fire({
         icon: "warning",
@@ -63,7 +63,7 @@ const SetNewPassword = () => {
       return;
     }
 
-    // Check password match
+   
     if (newPassword !== confirmPassword) {
       Swal.fire({
         icon: "error",
@@ -73,7 +73,6 @@ const SetNewPassword = () => {
       return;
     }
 
-    // Check email exists
     if (!email) {
       Swal.fire({
         icon: "error",
@@ -83,7 +82,7 @@ const SetNewPassword = () => {
       return;
     }
 
-    // Dispatch reset password action
+   
     dispatch(
       resetPasswordAction({
         email: email.trim(),

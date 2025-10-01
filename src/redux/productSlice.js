@@ -58,7 +58,7 @@ export const fetchProductsPublic = createAsyncThunk(
   "product/fetchProductsPublic",
   async ({ currentPage = 1, limit = 10, search = "" }) => {
     const data = await listProductsPublic({ currentPage, limit, search });
-    return data;
+    return data; // don’t overwrite API fields
   }
 );
 
@@ -154,15 +154,16 @@ const productSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchProductsPublic.fulfilled, (state, action) => {
-        state.loading = false;
-        state.productsPublic = {
-          results: action.payload.results,
-          currentPage: action.payload.current_page,
-          totalPages: action.payload.total_pages,
-          totalCount: action.payload.count,
-        };
-      })
+     .addCase(fetchProductsPublic.fulfilled, (state, action) => {
+  state.loading = false;
+  state.productsPublic = {
+    results: action.payload.results,
+    currentPage: action.payload.current_page,
+    totalPages: action.payload.total_pages,
+    totalCount: action.payload.count,
+  };
+})
+
       .addCase(fetchProductsPublic.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error?.message || "Failed to fetch products";

@@ -1,9 +1,12 @@
+import { useSelector } from "react-redux";
 import {
   NavItem,
   SpecificationNav,
 } from "../../../pages/product/singleProduct.style";
 
 const SpecificationNavBar = ({ activeIndex, setActiveIndex, navItem }) => {
+    const { items } = useSelector((state) => state.reviews);
+
   return (
     <SpecificationNav>
       <ul>
@@ -14,7 +17,7 @@ const SpecificationNavBar = ({ activeIndex, setActiveIndex, navItem }) => {
             onClick={() => setActiveIndex(tab)}
           >
             {tab}
-            {tab === "Reviews" && <span>(0)</span>}
+            {tab === "Reviews" && <span>({Number(items?.total_reviews)||0})</span>}
           </NavItem>
         ))}
       </ul>

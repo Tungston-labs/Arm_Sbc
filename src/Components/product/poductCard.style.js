@@ -92,7 +92,7 @@ export const ButtonRow = styled.div`
   justify-content: space-between;
   @media (min-width: 640px) {
     display: ${(props) => (props.display ? props.display : "flex")};
-    width: 100%;
+    width: 90%;
   }
 `;
 export const CardButton = styled.button`
@@ -113,7 +113,7 @@ export const CardButton = styled.button`
 
   @media (width>=1280px) {
     font-size: 0.9rem;
-    padding: 0.63rem 1.25rem;
+    padding: 0.7rem 1.25rem;
   }
   @media (width>=1536px) {
     font-size: 0.7rem;

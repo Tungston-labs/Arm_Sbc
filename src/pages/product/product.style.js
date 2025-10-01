@@ -2,10 +2,16 @@ import styled from "styled-components";
 
 export const AllProductContainer = styled.section`
   width: 100%;
-  background: #0e0619;
+background: linear-gradient(155deg, rgb(96, 40, 170) 0%, rgb(10, 6, 15) 17%);
   color: white;
   padding-block: 2rem;
+
+  @media (max-width: 768px) {
+    background: none;
+ 
+  }
 `;
+
 export const ProductHeader = styled.h2`
   margin: 0 auto;
   font-size: 1.2rem;

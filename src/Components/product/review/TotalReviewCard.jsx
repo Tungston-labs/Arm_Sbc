@@ -1,22 +1,24 @@
-import { StartContainer, TotalReviewCardContainer } from "../../../pages/product/singleProduct.style";
+import {
+  StartContainer,
+  TotalReviewCardContainer,
+} from "../../../pages/product/singleProduct.style";
 import StarToggle from "./StarToggle";
 
-const TotalReviewCard = () => {
-  const filledStars = 2;
+const TotalReviewCard = ({ rating, total }) => {
+  const safeRating = Math.min(Math.max(Number(rating) || 0, 0), 5);
+  const safeTotal = Number(total) >= 0 ? Number(total) : 0;
   return (
     <TotalReviewCardContainer>
       <h4>Reviews</h4>
-      <h5>4.0</h5>
+      <h5>{safeRating.toFixed(1)}</h5>
       <StartContainer>
         {[...Array(5)].map((_, index) => (
-          <StarToggle
-            key={index}
-            readOnly={true}
-            filled={index < filledStars}
-          />
+          <StarToggle key={index} readOnly filled={index < safeRating} />
         ))}
       </StartContainer>
-      <p>Based on 00 reviews</p>
+      <p>
+        Based on {safeTotal} {safeTotal === 1 ? "review" : "reviews"}
+      </p>
     </TotalReviewCardContainer>
   );
 };

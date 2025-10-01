@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Star } from "lucide-react";
 import styled, { keyframes, css } from "styled-components";
 
@@ -10,7 +9,7 @@ const popIn = keyframes`
 
 const StyledStar = styled(Star)`
   cursor: pointer;
-  transition: fill 1s ease, stroke 1s ease;
+  transition: fill 0.3s ease, stroke 0.3s ease;
 
   ${(props) =>
     props.animFill &&
@@ -20,25 +19,14 @@ const StyledStar = styled(Star)`
 `;
 
 export default function StarToggle({
+  filled = false,
   readOnly = false,
-  filled: initialFilled = false,
+  onClick,
 }) {
-  const [filled, setFilled] = useState(initialFilled);
-  const [animFill, setAnimFill] = useState(false);
-
-  const handleClick = () => {
-    if (readOnly) return;
-    if (!filled) {
-      setAnimFill(false);
-      requestAnimationFrame(() => setAnimFill(true));
-    }
-    setFilled(!filled);
-  };
-
   return (
     <StyledStar
-      onClick={handleClick}
-      animFill={animFill}
+      onClick={() => !readOnly && onClick?.()}
+      animFill={filled}
       strokeWidth={1.5}
       stroke={filled ? "#FFB531" : "#817878"}
       fill={filled ? "#FFB531" : "none"}

@@ -28,9 +28,30 @@ export const ResetBox = styled.div`
   box-shadow: 0px 4px 20px rgba(0,0,0,0.5);
   text-align: center;
 
-  @media (max-width: 768px) {
-    padding: 20px;
-    max-width: 90%;
+  @media (max-width: 250px) {
+    padding: 20px 15px;
+    border-radius: 10px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 20px 15px;
+    border-radius: 10px;
+  }
+
+  /* Large screens */
+  @media (min-width: 1920px) {
+    max-width: 500px;
+    padding: 50px;
+  }
+
+  @media (min-width: 2560px) {
+    max-width: 600px;
+    padding: 60px;
+  }
+
+  @media (min-width: 3840px) {
+    max-width: 900px;
+    padding: 90px;
   }
 `;
 
@@ -74,8 +95,6 @@ export const Form = styled.form`
 
 export const Label = styled.label`
   font-size: 1rem;
-Email
-
   font-family: 'Roboto', sans-serif;
   font-weight: 500;
   margin: 0 0 10px 8px;
@@ -92,7 +111,11 @@ export const Input = styled.input`
   background: #2C2C2D;
   color: #fff;
   margin-bottom: 20px;
-  box-shadow: inset 0px 2px 6px rgba(53, 50, 50, 0.6);
+  box-shadow: 
+  inset 4px 4px 4px rgba(68, 67, 66, 0.92),   
+  inset -4px -4px 4px rgba(68, 67, 66, 0.92),
+  inset 4px -4px 4px rgba(68, 67, 66, 0.92), 
+  inset -4px 4px 4px rgba(68, 67, 66, 0.92);  
 
 Email
 

@@ -3,7 +3,7 @@ import { getReviews, addReview } from "../services/reviewService";
 
 export const fetchReviews = createAsyncThunk(
   "reviews/fetchReviews",
-  async (productId) => {
+  async ({ productId }) => {
     return await getReviews(productId);
   }
 );
@@ -45,14 +45,11 @@ const reviewSlice = createSlice({
       })
 
       // Add Review
-      .addCase(createReview.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(createReview.fulfilled, (state, action) => {
+      .addCase(createReview.fulfilled, (state, payload) => {
         state.loading = false;
         state.success = true;
-        state.items.push(action.payload); 
       })
+
       .addCase(createReview.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;

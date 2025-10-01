@@ -13,7 +13,7 @@ export const ResetContainer = styled.div`
   width: 100%;
   
   height: 100vh;
-  background: ${({backgroundimage }) =>
+  background: ${({ backgroundimage }) =>
     `url(${backgroundimage}) no-repeat center center/cover`};
   display: flex;
   justify-content: center;
@@ -30,9 +30,30 @@ export const ResetBox = styled.div`
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
   text-align: center;
 
-  @media (max-width: 768px) {
-    padding: 20px;
-    max-width: 90%;
+  @media (max-width: 250px) {
+    padding: 20px 15px;
+    border-radius: 10px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 20px 15px;
+    border-radius: 10px;
+  }
+
+  /* Large screens */
+  @media (min-width: 1920px) {
+    max-width: 500px;
+    padding: 50px;
+  }
+
+  @media (min-width: 2560px) {
+    max-width: 600px;
+    padding: 60px;
+  }
+
+  @media (min-width: 3840px) {
+    max-width: 900px;
+    padding: 90px;
   }
 `;
 
@@ -113,6 +134,24 @@ export const Button = styled.button`
 
   &:hover {
     opacity: 0.9;
+  }
+
+
+  @media (max-width: 480px) {
+    font-size: 16px;
+    padding: 10px;
+    width: 100%;
+  }
+
+  @media (min-width: 2560px) {
+    font-size: 22px;
+    padding: 14px;
+  }
+
+  @media (min-width: 3840px) {
+    font-size: 20px;
+     width: 40%;
+
   }
 `;
 

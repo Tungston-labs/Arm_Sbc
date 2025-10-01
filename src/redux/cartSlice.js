@@ -1,24 +1,24 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { addToCart, getCartItems, updateCartItem, removeCartItem } from "../services/cartService";
+import {
+  addToCart,
+  getCartItems,
+  updateCartItem,
+  removeCartItem,
+} from "../services/cartService";
 
 // Add product to cart
 export const addProductToCart = createAsyncThunk(
   "cart/addProductToCart",
-  async ({ id, token }) => {
-    const response = await api.post(
-      `/cart/add/${id}/`,
-      { quantity: 1 },
-      { headers: { "X-Cart-Token": token } }
-    );
-    return response.data;
+  async ({ productId, cartToken }) => {
+    const data = await addToCart(productId, cartToken);
+    return data;
   }
 );
-
 
 // Get cart items
 export const fetchCartItems = createAsyncThunk(
   "cart/fetchCartItems",
-  async (cartToken) => {
+  async ({ cartToken }) => {
     const data = await getCartItems(cartToken);
     return data;
   }
@@ -58,7 +58,7 @@ const cartSlice = createSlice({
       })
       .addCase(addProductToCart.fulfilled, (state, action) => {
         state.loading = false;
-        state.items.push(action.payload);
+        state.items = action.payload;
       })
       .addCase(addProductToCart.rejected, (state, action) => {
         state.loading = false;
@@ -80,13 +80,21 @@ const cartSlice = createSlice({
 
       // Update quantity
       .addCase(updateCartQuantity.fulfilled, (state, action) => {
-        const index = state.items.findIndex((item) => item.id === action.payload.id);
-        if (index !== -1) state.items[index] = action.payload;
+        const index = state.items.items.findIndex(
+          (item) => item.id === action.payload.id
+        );
+        if (index !== -1) {
+          state.items.items[index] = action.payload;
+        }
       })
 
       // Delete item
       .addCase(deleteCartItem.fulfilled, (state, action) => {
-        state.items = state.items.filter((item) => item.id !== action.payload);
+        if (state.items.items) {
+          state.items.items = state.items.items.filter(
+            (item) => item.id !== action.payload
+          );
+        }
       });
   },
 });

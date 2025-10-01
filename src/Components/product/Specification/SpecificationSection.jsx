@@ -10,7 +10,7 @@ import ReviewFormcontainer from "../review/ReviewFormcontainer";
 import ReviewCardSContainer from "../review/ReviewCardSContainer";
 import { CenterContainer } from "../../../pages/product/product.style";
 
-const SpecificationSection = ({ description, addetionalInformation }) => {
+const SpecificationSection = ({ description, addetionalInformation,productId }) => {
   const [activeIndex, setActiveIndex] = useState("Description");
   const navItem = ["Description", "Additional Information", "Reviews"];
 
@@ -50,8 +50,8 @@ const SpecificationSection = ({ description, addetionalInformation }) => {
       )}
       {activeIndex === navItem[2] && (
         <DescriptionSection display="block">
-          <ReviewFormcontainer />
-          <ReviewCardSContainer />
+          <ReviewFormcontainer productId={productId}/>
+          <ReviewCardSContainer/>
         </DescriptionSection>
       )}
     </SpecificationContainer>

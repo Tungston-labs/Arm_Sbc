@@ -24,4 +24,9 @@ export const Title = styled.h2`
   @media (max-width: 768px) {
     font-size: 2rem;
   }
+    
+  @media (max-width: 3860px) {
+    font-size: 3rem;
+    padding: 0 15px;  
+  }
 `;

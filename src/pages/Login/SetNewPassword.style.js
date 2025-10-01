@@ -81,16 +81,20 @@ export const Label = styled.label`
 `;
 
 export const Input = styled.input`
-  width: calc(100% - 4px); 
-  padding: 15px 3px;
-  border: 1px solid #AAA4A4;
+  width: 100%;
+  padding: 14px 10px;
+  border: 1px solid #aaa4a4;
   border-radius: 6px;
   font-size: 14px;
-  font-family: 'Roboto', sans-serif;
-  background: #2C2C2D;
-  color: #fff;
+  font-family: "Roboto", sans-serif;
+  background-color: #2C2C2D !important; 
+  color: #FFFFFF !important;            
   margin-bottom: 20px;
-  box-shadow: inset 0px 2px 6px rgba(53, 50, 50, 0.6);
+  box-shadow: 
+  inset 4px 4px 4px rgba(68, 67, 66, 0.92),  
+  inset -4px -4px 4px rgba(68, 67, 66, 0.92), 
+  inset 4px -4px 4px rgba(68, 67, 66, 0.92), 
+  inset -4px 4px 4px rgba(68, 67, 66, 0.92); 
 
   &::placeholder {
   color: #bbb;
@@ -98,6 +102,32 @@ export const Input = styled.input`
   font-family: "Roboto", sans-serif;
   margin: 20px 20px 6px 8px;
 }
+
+@media (max-width: 300px) {
+    padding: 12px 8px;
+    font-size: 13px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 12px 8px;
+    font-size: 13px;
+  }
+
+  @media (max-width: 768px) {
+    padding: 10px;
+    margin-right: 15px;
+    font-size: 14px;
+  }
+
+  @media (min-width: 2560px) {
+    padding: 16px;
+    font-size: 15px;
+  }
+
+  @media (min-width: 3840px) {
+    padding: 18px;
+    font-size: 16px;
+  }
 `;
 
 export const InputWrapper = styled.div`

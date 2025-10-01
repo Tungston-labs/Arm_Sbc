@@ -1,4 +1,3 @@
-// src/pages/AddViewProduct.jsx
 import React, { useEffect, useState } from "react";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import productImg from "../../assets/Comparison/chip.svg";
@@ -56,8 +55,8 @@ const AddViewProduct = () => {
       text: "You won’t be able to revert this!",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
@@ -66,7 +65,7 @@ const AddViewProduct = () => {
           .then(() => {
             Swal.fire("Deleted!", "Product has been deleted.", "success").then(
               () => {
-                navigate("/addproduct"); // ✅ redirect here
+                navigate("/addproduct"); 
               }
             );
           })

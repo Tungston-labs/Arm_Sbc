@@ -53,7 +53,7 @@ const Enquiry = () => {
       </SubTitle>
 
       {loading && <p>Loading enquiries...</p>}
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {/* {error && <p style={{ color: "red" }}>{error}</p>} */}
 
       {!loading && enquiries.length === 0 && (
         <EmptyState>

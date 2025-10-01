@@ -29,6 +29,19 @@ export const LoginContainer = styled.div`
     min-height: 100vh;
     padding: 15px;
   }
+
+  /* Large screens */
+  @media (min-width: 1920px) {
+    padding: 30px;
+  }
+
+  @media (min-width: 2560px) {
+    padding: 50px;
+  }
+
+  @media (min-width: 3840px) {
+    padding: 80px;
+  }
 `;
 
 export const LoginBox = styled.div`
@@ -50,6 +63,22 @@ export const LoginBox = styled.div`
     padding: 20px 15px;
     border-radius: 10px;
   }
+
+  /* Large screens */
+  @media (min-width: 1920px) {
+    max-width: 500px;
+    padding: 50px;
+  }
+
+  @media (min-width: 2560px) {
+    max-width: 600px;
+    padding: 60px;
+  }
+
+  @media (min-width: 3840px) {
+    max-width: 900px;
+    padding: 90px;
+  }
 `;
 
 export const LogoWrapper = styled.div`
@@ -67,6 +96,14 @@ export const Logo = styled.img`
   @media (max-width: 480px) {
     max-width: 160px;
   }
+
+  @media (min-width: 2560px) {
+    max-width: 260px;
+  }
+
+  @media (min-width: 3840px) {
+    max-width: 320px;
+  }
 `;
 
 export const Title = styled.h3`
@@ -79,6 +116,14 @@ export const Title = styled.h3`
   @media (max-width: 480px) {
     font-size: 1.5rem;
     margin: 15px 0 20px 0;
+  }
+
+  @media (min-width: 2560px) {
+    font-size: 2rem;
+  }
+
+  @media (min-width: 3840px) {
+    font-size: 2.2rem;
   }
 `;
 
@@ -94,11 +139,19 @@ export const Label = styled.label`
   font-weight: 500;
   font-family: "Roboto", sans-serif;
   margin: 0 0 6px 8px;
-  color: #fff;
+  color: #FFFFFF;
   align-self: flex-start;
 
   @media (max-width: 480px) {
     font-size: 0.9rem;
+  }
+
+  @media (min-width: 2560px) {
+    font-size: 1.1rem;
+  }
+
+  @media (min-width: 3840px) {
+    font-size: 1.2rem;
   }
 `;
 
@@ -109,23 +162,32 @@ export const Input = styled.input`
   border-radius: 6px;
   font-size: 14px;
   font-family: "Roboto", sans-serif;
-  background: #2c2c2d;
+  background-color: #2C2C2D !important; 
+  color: #FFFFFF !important;            
   margin-bottom: 20px;
-  box-shadow: inset 0px 2px 6px rgba(53, 50, 50, 0.6);
-
+  box-shadow: 
+  inset 4px 4px 4px rgba(68, 67, 66, 0.92),  
+  inset -4px -4px 4px rgba(68, 67, 66, 0.92), 
+  inset 4px -4px 4px rgba(68, 67, 66, 0.92), 
+  inset -4px 4px 4px rgba(68, 67, 66, 0.92); 
+   
+ &:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #2C2C2D inset !important;
+    -webkit-text-fill-color: #ffffffff !important;
+    transition: background-color 5000s ease-in-out 0s;
+  } 
+ 
   &::placeholder {
-  color: #bbb;
-  font-size: 14px;
-  font-family: "Roboto", sans-serif;
-   margin: 20px 20px 6px 8px;
-}
+    color: #48484A;
+    font-size: 14px;
+    font-family: "Roboto", sans-serif;
+    margin: 20px 20px 6px 8px;
+  }
 
-
-   @media (max-width: 300px) {
+  @media (max-width: 300px) {
     padding: 12px 8px;
     font-size: 13px;
   }
-
 
   @media (max-width: 480px) {
     padding: 12px 8px;
@@ -133,9 +195,19 @@ export const Input = styled.input`
   }
 
   @media (max-width: 768px) {
-    padding: 10px ;
+    padding: 10px;
     margin-right: 15px;
     font-size: 14px;
+  }
+
+  @media (min-width: 2560px) {
+    padding: 16px;
+    font-size: 15px;
+  }
+
+  @media (min-width: 3840px) {
+    padding: 18px;
+    font-size: 16px;
   }
 `;
 
@@ -163,6 +235,14 @@ export const EyeIcon = styled.span`
     font-size: 16px;
     right: 10px;
   }
+
+  @media (min-width: 2560px) {
+    font-size: 20px;
+  }
+
+  @media (min-width: 3840px) {
+    font-size: 22px;
+  }
 `;
 
 export const ForgotPassword = styled.a`
@@ -177,6 +257,20 @@ export const ForgotPassword = styled.a`
 
   @media (max-width: 480px) {
     font-size: 0.8rem;
+  }
+
+  @media (min-width: 2560px) {
+    font-size: 1rem;￼
+Verification
+We sent a code to
+armsbctls@gmail.com
+
+￼￼￼￼￼
+￼Verify
+  }
+
+  @media (min-width: 3840px) {
+    font-size: 1.1rem;
   }
 `;
 
@@ -200,5 +294,16 @@ export const Button = styled.button`
   @media (max-width: 480px) {
     font-size: 16px;
     padding: 10px;
+    width: 100%;
+  }
+
+  @media (min-width: 2560px) {
+    font-size: 22px;
+    padding: 14px;
+  }
+
+  @media (min-width: 3840px) {
+    font-size: 24px;
+    padding: 16px;
   }
 `;

@@ -1,6 +1,8 @@
 
 import styled from "styled-components";
 import { FiSearch } from "react-icons/fi";
+import { NavLink } from "react-router-dom";
+
 export const Nav = styled.nav`
   width: 100%;
   background: #2b2534;
@@ -63,7 +65,7 @@ export const Logo = styled.div`
 
     img,
     svg {
-      width: 4rem;
+      width: 6rem;
     }
   }
 
@@ -73,17 +75,17 @@ export const Logo = styled.div`
 
     img,
     svg {
-      width: 5rem;
+      width: 8rem;
     }
   }
 
 
   @media (min-width: 1441px) and (max-width: 2560px) {
-    font-size: 1.8rem;
+    font-size: 1.9rem;
 
     img,
     svg {
-      width: 7rem;
+      width: 10rem;
     }
   }
 
@@ -92,7 +94,7 @@ export const Logo = styled.div`
 
     img,
     svg {
-      width: 10rem;
+      width: 12rem;
     }
   }
 
@@ -110,7 +112,7 @@ export const Logo = styled.div`
 export const NavLinks = styled.div`
   display: flex;
   gap: 3rem;
-
+ font-family: 'Roboto';
   @media (max-width: 7680px) {
     gap: 15rem;
   }
@@ -136,6 +138,7 @@ export const Badge = styled.span`
   color: RED;
   font-size: 0.9rem;
   font-weight: bold;
+   font-family: 'Roboto';
   border-radius: 50%;
   padding: 0.2rem 0.5rem;
   min-width: 18px;
@@ -148,16 +151,21 @@ export const Badge = styled.span`
   right: -10px;
 `;
 
-export const NavLinkItem = styled.a`
+export const NavLinkItem = styled(NavLink)`
   position: relative;
   text-decoration: none;
   color: #ddd;
   font-size: 1.5rem; 
   font-family: 'Roboto';
 
+  &.active {
+    color: #9a6bff; /* Highlight the current page link */
+  }
+
   &:hover {
     color: #9a6bff;
   }
+
 
   @media (max-width: 7680px) {
     font-size: 1.8rem;
@@ -166,13 +174,17 @@ export const NavLinkItem = styled.a`
   @media (max-width: 3840px) {
     font-size: 1.8rem;
   }
-
-  @media (max-width: 1920px) {
-    font-size: 1rem;
+  @media (max-width: 2560px) {
+    font-size: 1.2rem;
   }
-
-  @media (max-width: 1200px) {
+  @media (max-width: 1920px) {
+    font-size: 0.9rem;
+  }
+  @media (max-width: 1440px) {
     font-size: 0.8rem;
+  }
+  @media (max-width: 1200px) {
+    font-size: 0.6rem;
   }
 
   @media (max-width: 900px) {
@@ -199,7 +211,8 @@ export const NavLinkItem = styled.a`
 export const RightSection = styled.div`
   display: flex;
   align-items: center;
-  gap: 2.5rem; 
+  gap: 2rem; 
+  padding-right: 1rem;
 
   @media (max-width: 7680px) {
     gap: 1.8rem;
@@ -225,25 +238,29 @@ export const RightSection = styled.div`
 
 export const SearchBox = styled.div`
   position: relative;
-  width: 350px;
+  width: 250px;
   display: flex;
   align-items: center;
   padding: 0.5rem;
-
+ font-family: 'Roboto';
   @media (max-width: 7680px) {
     width: 300px;
   }
 
   @media (max-width: 3840px) {
+    width: 350px;
+  }
+@media (max-width: 2560px) {
+    width: 320px;
+  }
+  @media (max-width: 1920px) {
+    width: 280px;
+  }
+  @media (max-width: 1440px) {
     width: 250px;
   }
-
-  @media (max-width: 1920px) {
-    width: 220px;
-  }
-
   @media (max-width: 1200px) {
-    width: 180px;
+    width: 200px;
   }
 
   @media (max-width: 900px) {
@@ -261,9 +278,10 @@ export const SearchInput = styled.input`
   background-color: #2B2534;
   color: #fff;
   outline: none;
-
+ font-family: 'Roboto';
   ::placeholder {
-    color: #d3d3d3;
+    color: #716F6F;
+    
   }
 
   @media (max-width: 7680px) {
@@ -297,10 +315,10 @@ export const SearchIcon = styled(FiSearch)`
   left: 0.8rem;
   top: 50%;
   transform: translateY(-50%);
-  color: #d3d3d3;
+  color: #716F6F;
   font-size: 1.2rem;
   pointer-events: none; 
-
+ font-family: 'Roboto';
   @media (max-width: 7680px) {
     left: 1.5;
     font-size: 1.1rem;
@@ -308,12 +326,12 @@ export const SearchIcon = styled(FiSearch)`
 
   @media (max-width: 3840px) {
     left: 1.2rem;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
   }
 
   @media (max-width: 1920px) {
     left: 0.9rem;
-    font-size: 1rem;
+    font-size: 1.2rem;
   }
 
   @media (max-width: 1200px) {
@@ -326,7 +344,7 @@ export const CartIcon = styled.div`
   position: relative; 
   font-size: 2rem;
   cursor: pointer;
-
+ font-family: 'Roboto';
   @media (max-width: 7680px) {
     font-size: 1.8rem;
   }
@@ -381,7 +399,7 @@ export const InquiryButton = styled.button`
   font-size: 1.4rem;
   cursor: pointer;
   transition: all 0.2s ease;
-
+ font-family: 'Roboto';
   &:hover {
     background: #7f4ce0;
   }
@@ -392,18 +410,24 @@ export const InquiryButton = styled.button`
   }
 
   @media (max-width: 3840px) {
-    font-size: 1.2rem;
-    padding: 0.6rem 1.2rem;
+    font-size: 1.8rem;
+  padding: 0.8rem 2rem;
   }
-
+ @media (max-width: 2560px) {
+    font-size: 1.5rem;
+     padding: 0.7rem 2rem;
+  }
   @media (max-width: 1920px) {
-    font-size: 1.1rem;
-    padding: 0.55rem 1.1rem;
+    font-size: 1rem;
+    padding: 0.7rem 2rem;
   }
-
+ @media (max-width: 1440px) {
+    font-size: 1rem;
+    padding: 0.5rem 1.5rem;
+  }
   @media (max-width: 1200px) {
     font-size: 1rem;
-    padding: 0.5rem 1rem;
+   padding: 0.5rem 1.5rem;
   }
 
   @media (max-width: 900px) {
@@ -424,7 +448,7 @@ export const Hamburger = styled.div`
   display: none;
   font-size: 1.8rem;
   cursor: pointer;
-
+ font-family: 'Roboto';
   @media (max-width: 900px) {
     display: block;
   }
@@ -438,17 +462,23 @@ export const MobileMenu = styled.div`
   border-radius: 0 0 8px 8px;
 `;
 
-export const MobileNavItem = styled.a`
+export const MobileNavItem = styled(NavLink)`
   text-decoration: none;
   color: #ddd;
   padding: 0.8rem 0;
-border-bottom: 0.2px solid #FFF;
+  border-bottom: 0.2px solid #FFF;
   font-size: 1rem;
   text-align: left;
 
-  &:first-child {
+  &.active {
     color: #9a6bff; 
   }
+
+  &:hover {
+    color: #9a6bff;
+  }
+
+ 
 
   &:last-of-type {
     border-bottom: none;
@@ -468,6 +498,7 @@ export const MobileInquiryButton = styled.button`
   border-radius: 4px;
   color: white;
   font-weight: 600;
+   font-family: 'Roboto';
   cursor: pointer;
 
   &:hover {

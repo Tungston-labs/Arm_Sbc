@@ -12,8 +12,8 @@ import {
   CopyRight,
 } from "./Footer.Styles";
 
-import { FaWhatsapp, FaInstagram, FaLinkedin, FaFacebook } from "react-icons/fa";
-import logo from "../../assets/main/logo.svg";
+import { FaWhatsapp, FaInstagram, FaLinkedin, FaFacebookF } from "react-icons/fa";
+import logo from "../../assets/main/logo2.svg";
 
 const Footer = () => {
   return (
@@ -34,7 +34,7 @@ const Footer = () => {
         <Icon href="#"><FaWhatsapp /></Icon>
         <Icon href="#"><FaInstagram /></Icon>
         <Icon href="#"><FaLinkedin /></Icon>
-        <Icon href="#"><FaFacebook /></Icon>
+        <Icon href="#"><FaFacebookF /></Icon>
       </SocialIcons>
       <BottomBar>
         <CopyRight>© Copyright 2025. ARM-SBC. Designed by Tungston Labs.</CopyRight>

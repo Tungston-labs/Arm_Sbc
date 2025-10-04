@@ -97,12 +97,14 @@ export const ButtonRow = styled.div`
 `;
 export const CardButton = styled.button`
   padding: 0.5rem;
-  border-radius: 0.5rem;
-  border: 1px solid #8a38f5;
+  border-radius: 7px;
+  border: 0.1px solid #8a38f5;
   color: #fff;
+  font-family: "Roboto";
+  font-weight: 400;
   background: ${(props) => props.$bg || "transparent"};
   cursor: pointer;
-  font-size: 0.63rem;
+  font-size: 0.5rem;
   transition: background 0.2s, color 0.2s;
   &:hover {
     box-shadow: 0 4px 16px rgba(138, 56, 245, 0.15);
@@ -112,8 +114,8 @@ export const CardButton = styled.button`
   }
 
   @media (width>=1280px) {
-    font-size: 0.9rem;
-    padding: 0.7rem 1.25rem;
+    font-size: 0.6rem;
+    padding: 0.4rem 1rem;
   }
   @media (width>=1536px) {
     font-size: 0.7rem;
@@ -121,11 +123,11 @@ export const CardButton = styled.button`
   }
   @media (width>=2560px) {
     font-size: 1.2rem;
-    padding: 1rem 2rem;
+    padding: rem 2rem;
   }
   @media (width>=3840px) {
     font-size: 2rem;
-    padding: 1rem 2rem;
+    padding: 1.5rem 2rem;
     border-radius: 1rem;
   }
 `;

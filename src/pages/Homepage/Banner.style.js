@@ -3,16 +3,12 @@ import styled from "styled-components";
 export const HeaderWrapper = styled.div`
   position: relative;
   width: 100%;
-  height: 500px; 
+  height: clamp(200px, 40vh, 600px);
   background: url(${props => props.bg}) no-repeat center center;
   background-size: cover;
   display: flex;
   align-items: center;
-  justify-content: center; 
-
-  @media (max-width: 768px) {
-    height: 200px;
-  }
+  justify-content: center;
 `;
 
 export const ContentWrapper = styled.div`
@@ -20,54 +16,41 @@ export const ContentWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 85%;
-  max-width: 1200px;
+  max-width: 1400px;
 
   @media (max-width: 768px) {
-    width: 90%;
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
   }
 `;
 
 export const LogoWrapper = styled.div`
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: clamp(10px, 1vw, 16px);
 
   img {
-    width: 9re,;
-    height: 9rem;
-
-    @media (max-width: 768px) {
-     width: 9re,;
-    height: 9rem;
-    }
-
-    @media (max-width: 425px) {
-     width: 3re,;
-    height: 3rem;
-    }
-
-   @media (max-width: 250px) {
-     width: 2re,;
-    height: 2rem;
-    }
-
+    /* Tie logo height to text scale */
+    height: 7rem;   /* 👈 matches font-size of sibling text */
+    width: auto;
   }
+
+   
 `;
 
 export const LogoText = styled.h2`
   font-family: 'Montserrat', sans-serif;
-  font-weight: 700;
+  font-weight: 400;
   color: #FFFFFF;
-  font-size: clamp(1rem, 3vw, 2rem);
   margin: 0;
+
+  /* Match heading scale */
+  font-size: clamp(14.8rem, 4vw, 3rem);
 
   span {
     color: #FFFFFF; 
     margin-right: 5px;
-  }
-
-  @media (max-width: 768px) {
-    font-size: 1.2rem;
   }
 `;
 
@@ -75,17 +58,22 @@ export const PossibilityText = styled.h1`
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   color: #8A38F5; 
-  font-size: clamp(1.2rem, 4vw, 2rem);
   margin: 0;
 
+  /* Same scale as LogoText */
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.2;
+
   @media (max-width: 768px) {
-    text-align: right;
-    font-size: 0.9rem;
+    text-align: center;
   }
 
-  @media (max-width: 3860px) {
-    text-align: right;
-    font-size: 1.5rem;
+  @media (min-width: 769px) {
+    text-align: left;
   }
 
+   @media (min-width: 1800px) {
+    text-align: right;
+    font-size: 4rem;
+  }
 `;

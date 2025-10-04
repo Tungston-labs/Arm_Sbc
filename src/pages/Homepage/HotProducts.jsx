@@ -18,7 +18,6 @@ const HotProducts = () => {
   if (loading) return <p>Loading hot products...</p>;
   if (error) return <p>Error loading products: {error}</p>;
 
-  // Only first 4 products from results array
   const hotProducts = productsPublic?.results?.slice(0, 4) || [];
   console.log({ hotProducts });
 
@@ -26,9 +25,7 @@ const HotProducts = () => {
     <>
       <Section>
         <Title>Hot products</Title>
-
         <ProductSection products={hotProducts} />
-
       </Section>
       <Banner />
     </>

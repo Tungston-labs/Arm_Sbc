@@ -39,13 +39,19 @@ export default function ModalWithCards({ onClose, triggerProductId }) {
   };
 
   const handleCompare = () => {
+    if (selectedIds.length < 2) {
+      alert("Please select at least 2 products to compare.");
+      return;
+    }
     const selectedProducts = productsPublic.results.filter((p) =>
       selectedIds.includes(p.id)
     );
-    localStorage.setItem("comparisonProducts", JSON.stringify(selectedProducts));
+    localStorage.setItem(
+      "comparisonProducts",
+      JSON.stringify(selectedProducts)
+    );
     onClose();
   };
-
 
   const handleOverlayClick = (e) => {
     if (e.target === e.currentTarget) {

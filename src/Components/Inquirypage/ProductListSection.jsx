@@ -79,7 +79,7 @@ function ProductListSection({ selectedProducts, setSelectedProducts }) {
                   <ProductCard key={product.id}>
                     <ProductTitle>{product?.product?.name}</ProductTitle>
                     <ProductSpecs>
-                      <li>{product?.product?.cores} core</li>
+                      <li>{product?.product?.cores} Core</li>
                       <li>{product?.product?.ram} Ram</li>
                       <li>{product?.product?.storage} Storage</li>
                     <li>

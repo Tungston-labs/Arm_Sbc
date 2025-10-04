@@ -9,6 +9,7 @@ export const Container = styled.div`
   min-height: 100vh;
   padding: 24px 32px 56px;
   box-sizing: border-box;
+    overflow-y: scroll;
 
   @media (max-width: 768px) {
     padding: 12px;
@@ -58,7 +59,7 @@ export const EmptyState = styled.div`
 
     strong {
       font-weight: 600;
-      color: #fff;
+      color: #b41f1fff;
     }
   }
 
@@ -114,8 +115,7 @@ export const RowCell = styled.div`
   overflow-x: auto;
   padding-bottom: 8px;
   touch-action: pan-x;
-
-  @media (min-width: 2000px) {
+@media (min-width: 2000px) {
     padding: 0 40px 12px;
   }
 `;
@@ -132,7 +132,6 @@ export const RowBox = styled.div`
   border: 1px solid ${BORDER};
   border-radius: 10px;
   margin: 14px 0;
-  overflow-y: scroll;
   background: transparent;
 
   min-width: ${(p) => `${260 + Math.max(p.count, 1) * 200}px`};
@@ -190,11 +189,13 @@ export const Cell = styled.div`
 `;
 
 export const FeatureName = styled(Cell)`
-  justify-content: flex-start;
+  justify-content: center;
   font-weight: 300;
+
   color: ${LIGHT};
   font-size: clamp(12px, 1.6vw, 18px);
   min-height: ${(p) => (p.isHeader ? "260px" : "64px")};
+  font-family: "Roboto", sans-serif;
 
   white-space: normal;
   overflow: visible;
@@ -227,6 +228,7 @@ export const ProductInfoCell = styled(Cell)`
   p {
     margin: 6px 0;
     font-weight: 300;
+    font-family: "Roboto", sans-serif;
     font-size: clamp(10px, 1.6vw, 14px);
     color: ${LIGHT};
   }
@@ -296,7 +298,7 @@ export const FeatureCell = styled(Cell)`
   font-weight: 300;
   min-height: 64px;
   padding: 16px 20px;
-
+  font-family: "Roboto", sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -306,12 +308,12 @@ export const Button = styled.button`
   background-color: #8a38f5;
   color: #fff;
   border: none;
-  padding: 8px 14px;
+  padding: 8px 10px;
   border-radius: 4px;
   cursor: pointer;
   font-weight: 600;
   font-family: "Roboto", sans-serif;
-  font-size: clamp(10px, 1.2vw, 16px);
+  font-size: clamp(10px, 1.2vw, 14px);
 
   &:hover {
     opacity: 0.95;
@@ -351,7 +353,7 @@ export const RemoveButton = styled.div`
 `;
 
 export const RowSpacer = styled.div`
-  height: 8px;
+  height: 0;
 `;
 
 export const Main = styled.div`

@@ -94,18 +94,17 @@ export const SubHeader = styled.h2`
     width: 100%;
   }
 `;
-
 export const InnerGrid = styled.div`
   display: flex;
   gap: 24px;
   width: 100%;
-  overflow-x: auto;
+  overflow-x: auto;   
   padding-bottom: 8px;
-  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth; 
+  -webkit-overflow-scrolling: touch; 
 
-  &::-webkit-scrollbar {
-    height: 8px;
-  }
+  scrollbar-width: thin;          
+  scrollbar-color: #bbb transparent;
 
   @media (max-width: 768px) {
     gap: 12px;

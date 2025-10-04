@@ -83,9 +83,9 @@ const Cart = () => {
                       </RemoveButton>
                     </ProductHeader>
                     <ProductSpecs>
-                      <li>{item?.product?.cores} core</li>
-                      <li>{item?.product?.ram}</li>
-                      <li>{item?.product?.storage}</li>
+                      <li>{item?.product?.cores} Core</li>
+                      <li>{item?.product?.ram} Ram</li>
+                      <li>{item?.product?.storage} Storage</li>
     
                     </ProductSpecs>
                     <QuantityControl>
@@ -93,7 +93,7 @@ const Cart = () => {
                       <QuantityButton
                         onClick={() => decreaseQty(item.id, item.quantity)}
                       >
-                        -
+                    −
                       </QuantityButton>
                       <QuantityValue>{item.quantity}</QuantityValue>
                       <QuantityButton

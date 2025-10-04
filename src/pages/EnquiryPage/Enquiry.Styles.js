@@ -255,3 +255,20 @@ export const EmptyState = styled.div`
     }
   }
 `;
+export const TableWrapper = styled.div`
+  width: 100%;
+  overflow-x: auto; 
+  -webkit-overflow-scrolling: touch;
+
+  
+  padding-bottom: 1rem;
+
+
+  &::-webkit-scrollbar {
+    height: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+  }
+`;

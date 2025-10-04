@@ -17,9 +17,9 @@ import {
   SearchIcon,Badge
 } from "./Navbar.Styles";
 import { FaBars, FaTimes } from "react-icons/fa";
-import logo from "../../assets/main/logo.svg";
-import { IoMdCart } from "react-icons/io";
- import { Link, useNavigate } from "react-router-dom";
+import logo from "../../assets/main/logo2.svg";
+import { IoCartOutline } from "react-icons/io5";
+ import { Link, NavLink,useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCartItems } from "../../redux/cartSlice";
 
@@ -71,22 +71,18 @@ const Navbar = () => {
           <img src={logo} alt="ARM SBC" />
         </Logo>
 
-        <NavLinks>
-          <NavLinkItem as={Link} to="/">
-            Home
-          </NavLinkItem>
-          <NavLinkItem as={Link} to="/product">
-            Products
-          </NavLinkItem>
-          <NavLinkItem
-            as={Link}
-            to="/compare"
-            className="compare"
-            // data-count="3"
-          >
-  Compare {compareCount > 0 && <Badge>{compareCount}</Badge>}
-          </NavLinkItem>
-        </NavLinks>
+   <NavLinks>
+  <NavLinkItem to="/" end>
+    Home
+  </NavLinkItem>
+  <NavLinkItem to="/product">
+    Products
+  </NavLinkItem>
+  <NavLinkItem to="/compare">
+    Compare {compareCount > 0 && <Badge>{compareCount}</Badge>}
+  </NavLinkItem>
+</NavLinks>
+
 
         <RightSection>
           <SearchBox onSubmit={handleSearch}>
@@ -103,7 +99,7 @@ const Navbar = () => {
           </SearchBox>
 
           <CartIcon onClick={() => navigate("/cartpage")}>
-            <IoMdCart />
+            <IoCartOutline />
             {cartCount > 0 && <span className="badge">{cartCount}</span>}
           </CartIcon>
           <InquiryButton onClick={() => navigate("/inquiry-page")}>
@@ -118,18 +114,18 @@ const Navbar = () => {
 
       {isOpen && (
         <MobileMenu>
-          <MobileNavItem as={Link} to="/">
-            Home
-          </MobileNavItem>
-          <MobileNavItem as={Link} to="/product">
-            Product
-          </MobileNavItem>
-          <MobileNavItem as={Link} to="/compare">
-            Compare {compareCount > 0 && `(${compareCount})`}
-          </MobileNavItem>
-          <MobileNavItem as={Link} to="/cartpage">
-            Cart
-          </MobileNavItem>
+          <MobileNavItem as={NavLink} to="/" end>
+    Home
+  </MobileNavItem>
+  <MobileNavItem as={NavLink} to="/product">
+    Product
+  </MobileNavItem>
+  <MobileNavItem as={NavLink} to="/compare">
+    Compare {compareCount > 0 && `(${compareCount})`}
+  </MobileNavItem>
+  <MobileNavItem as={NavLink} to="/cartpage">
+    Cart
+  </MobileNavItem>
           <MobileInquiryButton onClick={() => navigate("/inquiry-page")}>
             Inquiry
           </MobileInquiryButton>

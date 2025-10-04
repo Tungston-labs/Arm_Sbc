@@ -83,4 +83,9 @@ export const PossibilityText = styled.h1`
     font-size: 0.9rem;
   }
 
+  @media (max-width: 3860px) {
+    text-align: right;
+    font-size: 1.5rem;
+  }
+
 `;

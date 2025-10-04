@@ -161,7 +161,7 @@ export const ProductSpecs = styled.ul`
   margin: 0.5rem 0;
   padding-left: 1rem;
   list-style: disc;
-  color: #cfd2f3;
+  color: white;
  font-family: "Roboto";
   font-size: 2.5rem; 
 @media (max-width: 3860px) {
@@ -296,24 +296,30 @@ export const FormTitle = styled.h2`
   font-weight: 700;
   margin-bottom: 1rem;
   text-align: center;
-font-family: "Roboto";
+font-family: "Montserrat";
+
   @media (max-width: 480px) {
     font-size: 1rem;
   }
 
   @media (max-width: 768px) {
-    font-size: 1.5rem;
-  }
- @media (max-width: 1440px) {
     font-size: 1.8rem;
   }
-
-  @media (max-width: 1024px) {
-    font-size: 1.2rem;
+ @media (max-width: 1440px) {
+    font-size: 1.5rem;
   }
 
+@media (max-width: 1980px) {
+    font-size: 2rem;
+  }
+  @media (max-width: 1024px) {
+    font-size: 1.5rem;
+  }
+  @media (max-width: 1440px) {
+    font-size: 1.8rem;
+  }
   @media (min-width: 2560px) {
-    font-size: 2.5rem;
+    font-size: 2.8rem;
   }
 
   @media (min-width: 3840px) {
@@ -327,7 +333,7 @@ font-family: "Roboto";
 
 
 export const FormDescription = styled.p`
-  color: #cfd2f3;
+  color: white;
   margin-bottom: 2rem;
   line-height: 1.7;
   font-family: "Roboto";
@@ -413,7 +419,7 @@ export const InputGroup = styled.div`
 
 export const Label = styled.label`
   font-size: clamp(0.9rem, 1vw, 1rem);
-  color: #cfd2f3;
+   color: white;
   font-weight: 500;
   white-space: nowrap;
   font-family: "Roboto";
@@ -595,8 +601,8 @@ export const InputRow = styled.div`
 
 
 export const Heading = styled.div`
-  color: #FFF;
-  font-family: "Roboto";
+  color: white;
+  font-family: "Montserrat";
   font-style: normal;
   font-weight: 400;
   line-height: 1.4;

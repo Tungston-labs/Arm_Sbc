@@ -28,9 +28,30 @@ export const ResetBox = styled.div`
   box-shadow: 0px 4px 20px rgba(0,0,0,0.5);
   text-align: center;
 
-  @media (max-width: 768px) {
-    padding: 20px;
-    max-width: 90%;
+  @media (max-width: 250px) {
+    padding: 20px 15px;
+    border-radius: 10px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 20px 15px;
+    border-radius: 10px;
+  }
+
+  /* Large screens */
+  @media (min-width: 1920px) {
+    max-width: 500px;
+    padding: 50px;
+  }
+
+  @media (min-width: 2560px) {
+    max-width: 600px;
+    padding: 60px;
+  }
+
+  @media (min-width: 3840px) {
+    max-width: 900px;
+    padding: 90px;
   }
 `;
 

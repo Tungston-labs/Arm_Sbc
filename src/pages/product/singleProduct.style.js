@@ -45,7 +45,7 @@ export const DividerDiv = styled.div`
   }
 `;
 export const HeaderImageContainer = styled.section`
-  padding-block: 3rem;
+  padding-block: 1rem;
   img {
     width: 70%;
     min-width: 600px;
@@ -103,7 +103,7 @@ export const HeaderImageContainer = styled.section`
 `;
 export const HeaderTextContainer = styled.section`
   width: 100%;
-  padding-inline: 3rem;
+  padding-inline: 1rem;
   h2 {
     font-size: 1.75rem;
     padding-bottom: 2rem;
@@ -111,7 +111,7 @@ export const HeaderTextContainer = styled.section`
   }
   p,
   li {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: 400;
     line-height: 2.1rem;
   }
@@ -227,6 +227,7 @@ export const ButtonSection = styled.div`
     padding-block: 1rem;
   }
 `;
+
 export const CompareButton = styled.button`
   display: none; 
   background: transparent;
@@ -247,7 +248,6 @@ export const CompareButton = styled.button`
     transform: scale(0.95);
   }
 
-  /* 🔹 Show only on small screens */
   @media (max-width: 768px) {
     display: flex;
     margin: 0 auto;
@@ -301,7 +301,7 @@ export const AddToCartButton = styled.button`
 export const Link = styled.a`
   color: #06b6d4;
   text-decoration: underline;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   cursor: pointer;
   background: none;
   border: none;
@@ -338,7 +338,7 @@ export const SpecificationContainer = styled.section`
     color: #8a38f5;
     text-align: center;
     font-size: 1.25rem;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Roboto", sans-serif;
   }
   @media (width >= 760px) {
     padding-block: 1rem;
@@ -386,11 +386,14 @@ export const SpecificationContainer = styled.section`
 
 export const SpecificationNav = styled.nav`
   padding-block: 1rem;
+  margin-bottom: 2.5rem;
+  
   ul {
     display: flex;
     list-style: none;
     justify-content: space-between;
     font-size: 0.75rem;
+    font-family: "Roboto", sans-serif;
   }
   @media (width >= 1024px) {
     width: 50%;
@@ -419,6 +422,7 @@ export const SpecificationNav = styled.nav`
     }
   }
 `;
+
 export const NavItem = styled.li`
   padding: 0.5rem 0.7rem;
   cursor: pointer;
@@ -467,7 +471,7 @@ export const DescriptionSection = styled.div`
     display: ${(props) => props.display || "flex"};
     flex-wrap: wrap;
     background: ${(props) =>
-      props.background ? props.background : "#ffffff1a"};
+    props.background ? props.background : "#ffffff1a"};
     border-radius: 0.63rem;
     padding: 1.6rem 2.1rem;
   }
@@ -483,7 +487,7 @@ export const DescriptionSection = styled.div`
     margin-top: 1rem;
   }
   @media (width >= 3840px) {
-    padding: 4rem 5.6rem;
+    padding: 4rem 5.6rem;red
     border-radius: 1.5rem;
     margin-top: 2rem;
   }
@@ -497,19 +501,21 @@ export const Descriptioncard = styled.div`
 `;
 
 export const DescriptionHeader = styled.h4`
-  color: #8a38f5;
+  color: #8A38F5;
   font-size: 0.88rem;
   font-weight: 400;
   margin-bottom: 1rem;
-  font-family: "Montserrat", sans-serif;
-
+  font-family: 'Roboto', sans-serif;
+  
   @media (width >= 1024px) {
     font-weight: 600;
     font-size: 0.9rem;
   }
+
   @media (width >= 1280px) {
     font-size: 1rem;
   }
+    
   @media (width >= 1536px) {
     font-size: 1.13rem;
   }
@@ -522,6 +528,7 @@ export const DescriptionHeader = styled.h4`
     margin-bottom: 2.5rem;
   }
 `;
+
 export const DescriptionTextContainer = styled.div`
   display: flex;
   margin-bottom: 1rem;
@@ -540,7 +547,7 @@ export const DescriptionLabel = styled.h5`
   border-right: ${(props) => props.border && "1px solid #696464"};
   padding: ${(props) => props.padding && "1rem"};
   @media (width >= 1024px) {
-    font-weight: 600;
+    font-weight: 500;
     font-size: 0.9rem;
   }
   @media (width >= 1280px) {
@@ -963,6 +970,7 @@ export const TotalReviewCardContainer = styled.div`
     }
   }
 `;
+
 export const ReviewCardHeader = styled.div`
   display: flex;
   width: 100%;

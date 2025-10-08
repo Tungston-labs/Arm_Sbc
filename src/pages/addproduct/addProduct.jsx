@@ -21,7 +21,7 @@ const AddProduct = () => {
       <AddContainer>
       <TopBar>
         <Header>Products</Header>
-        <Button onClick={handleNavigate}>Add Product</Button>
+        <Button onClick={handleNavigate}>Add new product</Button>
       </TopBar>
 
       <Text>

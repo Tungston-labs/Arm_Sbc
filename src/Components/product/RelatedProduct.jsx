@@ -39,3 +39,4 @@ const RelatedProduct = ({ products, loading }) => {
 };
 
 export default RelatedProduct;
+

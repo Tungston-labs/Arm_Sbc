@@ -36,9 +36,12 @@ export const SectionHeader = styled.h3`
   @media (min-width: 1920px) {      /* 1080p / 2K */
     font-size: 1.5rem;
   }
+
  @media (min-width: 2560px) {     
     font-size: 2rem;
   }
+
+
   @media (min-width: 3840px) {      /* 4K */
     font-size: 2.5rem;
   }
@@ -62,24 +65,24 @@ export const Label = styled.span`
   font-weight: 500;
   flex: 0 0 45%;
   word-break: break-word;
-  font-size: 0.9rem;        /* default mobile */
+  font-size: 0.9rem;        
 
-  @media (min-width: 768px) {     /* tablets */
+  @media (min-width: 768px) {     
     font-size: 1rem;
   }
 
-  @media (min-width: 1920px) {    /* 1080p/2K */
+  @media (min-width: 1920px) {   
     font-size: 1rem;
   }
- @media (min-width: 2560px) {    /* 1080p/2K */
+ @media (min-width: 2560px) {    
     font-size: 1.8rem;
   }
 
-  @media (min-width: 3840px) {    /* 4K */
+  @media (min-width: 3840px) {   
     font-size: 2.2rem;
   }
 
-  @media (min-width: 5120px) {    /* 5K–6K */
+  @media (min-width: 5120px) {    
     font-size: 2.5rem;
   }
 

@@ -19,7 +19,7 @@ export const Header = styled.h1`
   color: #fff;
   font-family: "Roboto", sans-serif;
   font-weight: 600;
-  font-size: 28px; 
+  font-size: 28px;
 
   @media (max-width: 768px) {
     font-size: 18px;
@@ -38,12 +38,11 @@ export const Header = styled.h1`
   }
 `;
 
-
 export const SubText = styled.p`
   color: #fff;
   margin-top: 16px;
   font-family: "Roboto", sans-serif;
-  font-size: 20px; 
+  font-size: 20px;
 
   @media (max-width: 768px) {
     font-size: 14px;
@@ -160,13 +159,12 @@ export const DeleteButton = styled.button`
   }
 `;
 
-
 export const ImageRow = styled.div`
   display: flex;
-  align-items: flex-start;   
+  align-items: flex-start;
   gap: 40px;
   margin-top: 40px;
-  flex-wrap: nowrap;       
+  flex-wrap: nowrap;
 `;
 
 export const ImageWrapper = styled.div`
@@ -189,52 +187,46 @@ export const ImageWrapper = styled.div`
   @media (min-width: 2560px) {
     max-width: 440px;
   }
-  @media (min-width: 3840px) { 
+  @media (min-width: 3840px) {
     max-width: 500px;
   }
   @media (min-width: 5120px) {
     max-width: 600px;
   }
- 
 `;
 
 export const ImageContainer = styled.img`
   width: 100%;
   height: auto;
-  max-width: 100%;          
+  max-width: 100%;
   object-fit: contain;
   background-color: #363042;
 
-  @media (min-width: 2560px) { 
+  @media (min-width: 2560px) {
     max-height: 700px;
   }
-  @media (min-width: 3840px) { 
+  @media (min-width: 3840px) {
     max-height: 900px;
   }
-  @media (min-width: 7680px) { 
+  @media (min-width: 7680px) {
     max-height: 1400px;
   }
-   @media (min-width: 1920px) { 
+  @media (min-width: 1920px) {
     max-height: 1400px;
   }
-`
-
-export const NavbarContainer=styled.div`
-display: flex;
-justify-content: center;
-
-`
-
-export const FormBlock = styled.div`
-  flex: 1;                  
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start; 
 `;
 
+export const NavbarContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
 
-
-
+export const FormBlock = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+`;
 
 export const HeadingBox = styled.h2`
   color: #fff;
@@ -243,7 +235,7 @@ export const HeadingBox = styled.h2`
   border-bottom: 1px solid #fff;
   padding-bottom: 4px;
   font-weight: 500;
-  font-size: 20px;  
+  font-size: 20px;
 
   /* Tablet / small desktop */
   @media (min-width: 768px) {
@@ -263,7 +255,7 @@ export const HeadingBox = styled.h2`
   /* 4K */
   @media (min-width: 3840px) {
     font-size: 3rem;
-    width:300px;
+    width: 300px;
   }
 
   /* 8K */
@@ -271,9 +263,6 @@ export const HeadingBox = styled.h2`
     font-size: 36px;
   }
 `;
-
-
-
 
 export const FormArea = styled.div`
   flex: 1;
@@ -287,10 +276,12 @@ export const FormArea = styled.div`
   @media (min-width: 2560px) {
     gap: 32px;
   }
-  @media (min-width: 3840px) {   /* 4K */
+  @media (min-width: 3840px) {
+    /* 4K */
     gap: 40px;
   }
-  @media (min-width: 7680px) {   /* 8K */
+  @media (min-width: 7680px) {
+    /* 8K */
     gap: 56px;
   }
 `;
@@ -309,15 +300,13 @@ export const TwoCols = styled.div`
   @media (min-width: 3840px) {
     gap: 40px;
   }
-
 `;
 
 export const FullWidth = styled.div`
   display: flex;
 `;
-
 export const Input = styled.input`
-  padding: 15px 14px;
+  padding: 12px 14px;
   background: #2b2534;
   color: #fff;
   border: none;
@@ -325,19 +314,27 @@ export const Input = styled.input`
   width: 100%;
   font-size: 16px;
 
-  @media (min-width: 1920px) {
-    font-size: 1.5rem;
-    padding: 18px 16px;
-  }
-  @media (min-width: 2560px) {
-    font-size: 2rem;
-    padding: 20px 18px;
-  }
-  @media (min-width: 3840px) {   /* 4K */
+  @media (max-width: 3840px) {
+    /* 4K */
     font-size: 2.5rem;
     padding: 24px 20px;
   }
-
+  @media (max-width: 2560px) {
+    font-size: 2rem;
+    padding: 20px 18px;
+  }
+  @media (max-width: 1920px) {
+    font-size: 1.5rem;
+    padding: 18px 16px;
+  }
+  @media (max-width: 1620px) {
+    font-size: 1.5rem;
+    padding: 12px 16px;
+  }
+  @media (max-width: 1024px) {
+    font-size: 1.2rem;
+    padding: 8px 16px;
+  }
 `;
 
 export const TextArea = styled.textarea`
@@ -363,7 +360,6 @@ export const TextArea = styled.textarea`
     font-size: 2.5rem;
     padding: 28px 20px;
   }
- 
 `;
 
 export const DescriptionSection = styled.div`

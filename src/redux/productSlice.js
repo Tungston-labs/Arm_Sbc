@@ -13,6 +13,7 @@ export const fetchProductsAdmin = createAsyncThunk(
   "product/fetchProductsAdmin",
   async ({ page = 1, pageSize = 20 }) => {
     const data = await listProductsAdmin({ page, pageSize });
+    console.log("dataaaaaaaaa",data)
     return {
       results: data.results,
       count: data.count,

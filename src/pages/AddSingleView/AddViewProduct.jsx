@@ -5,7 +5,7 @@ import AddProductNavBar from "../../Components/Addproduct/AddProductNavbar";
 import AddProductDescriptionCard from "../../Components/Addproduct/DescriptionDetails/DescriptionSection";
 
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import {
   fetchProductAdmin,
   deleteExistingProduct,
@@ -38,7 +38,7 @@ import AddetionalInformationCard from "../../Components/product/Specification/Ad
 import Layout from "../../Layout/Layout";
 import { FaEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
-
+import { formatHeader, sortSectionsByHeader } from "../../utils/formatHeader";
 
 const AddViewProduct = () => {
   const [activeTab, setActiveTab] = useState("Description");
@@ -46,6 +46,7 @@ const AddViewProduct = () => {
   const navigate = useNavigate();
   const { productId } = useParams();
   const { productDetailAdmin, loading } = useSelector((state) => state.product);
+  const location = useLocation();
 
   useEffect(() => {
     if (productId) {
@@ -69,7 +70,12 @@ const AddViewProduct = () => {
           .then(() => {
             Swal.fire("Deleted!", "Product has been deleted.", "success").then(
               () => {
-                navigate("/addproduct"); 
+                const stateFromPage = location.state?.fromPage;
+                const queryParams = new URLSearchParams(location.search);
+                const queryPage = queryParams.get("page");
+                const targetPage = stateFromPage || queryPage;
+                if (targetPage) navigate(`/addproduct?page=${targetPage}`);
+                else navigate("/addproduct");
               }
             );
           })
@@ -103,20 +109,36 @@ const AddViewProduct = () => {
     productDetailAdmin?.details ||
     [];
 
+  // const titleCase = (str = "") =>
+  //   String(str)
+  //     .replace(/[_-]+/g, " ")
+  //     .replace(/\s+/g, " ")
+  //     .trim()
+  //     .toLowerCase()
+  //     .replace(/\b\w/g, (c) => c.toUpperCase());
+
   const normalizeDescription = (raw) => {
     if (!raw) return [];
-    if (Array.isArray(raw) && raw.length && raw[0].header) return raw;
+    if (Array.isArray(raw) && raw.length && raw[0].header) {
+      return raw.map((section) => ({
+        ...section,
+        header: formatHeader(section.header),
+      }));
+    }
 
     if (typeof raw === "object" && !Array.isArray(raw)) {
       return Object.entries(raw).map(([header, itemsObj]) => {
+        const headerLabel = formatHeader(header);
+
         if (Array.isArray(itemsObj)) {
-          return { header, items: itemsObj };
+          return { header: headerLabel, items: itemsObj };
         }
+
         const items = Object.entries(itemsObj || {}).map(([label, value]) => ({
           label,
           value,
         }));
-        return { header, items };
+        return { header: headerLabel, items };
       });
     }
 
@@ -139,128 +161,187 @@ const AddViewProduct = () => {
     return [];
   };
 
-  const descriptionDataFromApiNormalized = normalizeDescription(
-    descriptionDataFromApi
+  const descriptionDataFromApiNormalized = sortSectionsByHeader(
+    normalizeDescription(descriptionDataFromApi)
   );
+
+
+  const params = new URLSearchParams(location.search);
+  const queryPage = params.get("page");
+  const statePage = location.state?.fromPage;
+  const currentFromPage = statePage || queryPage || null;
+
   const handleNavigate = () => {
-    navigate(`/addform/${productId}`);
+    const pageQuery = currentFromPage ? `?page=${currentFromPage}` : "";
+    navigate(`/addform/${productId}${pageQuery}`, {
+      state: { fromPage: currentFromPage },
+    });
   };
+
+  const handleBack = () => {
+    if (currentFromPage) {
+      navigate(`/addproduct?page=${currentFromPage}`);
+      return;
+    }
+
+    if (window.history && window.history.length > 1) {
+      navigate(-1);
+      return;
+    }
+
+    navigate("/addproduct");
+  };
+
+  const UNITS = {
+    weight: "kg",
+    dimension: "cm",
+  };
+
+  function formatAdditionalLabel(key) {
+    if (!key && key !== 0) return "";
+    return formatHeader(key);
+  }
+
+  function formatAdditionalValue(key, value) {
+    if (value === null || value === undefined) return "";
+    const normalizedKey = String(key).trim().toLowerCase();
+    const unit = UNITS[normalizedKey];
+
+    const hasAlpha = /[a-zA-Z]/.test(String(value));
+    const numericCheck = String(value).replace(/[^0-9.\-]/g, "");
+    if (
+      !hasAlpha &&
+      unit &&
+      numericCheck !== "" &&
+      !isNaN(Number(numericCheck))
+    ) {
+      return `${value} ${unit}`;
+    }
+    return value;
+  }
+
   return (
     <Layout>
-    <AddContainer>
-      <TopBar>
-        <button
-          type="button"
-          style={{
-            background: "transparent",
-            border: "none",
-            cursor: "pointer",
-            padding: 0,
-            display: "flex",
-            alignItems: "center",
-          }}
-          onClick={() => navigate("/addproduct")}
-        >
-          <IoMdArrowRoundBack size={28} color="#fff" />
-        </button>
-        <Header>{productId ? "Edit product" : "Add product"}</Header>
-        <ActionBar>
-          <EditButton type="primary" onClick={handleNavigate}>
-            <FaEdit style={{ marginRight:"12px"}}/>
-            Edit
-          </EditButton>{" "}
-          <DeleteButton danger onClick={handleDelete}>
-            <RiDeleteBin6Line style={{ marginRight:"12px"}}/>
-            Delete
-          </DeleteButton>
-        </ActionBar>
-      </TopBar>
+      <AddContainer>
+        <TopBar>
+          <button
+            type="button"
+            style={{
+              background: "transparent",
+              border: "none",
+              cursor: "pointer",
+              padding: 0,
+              display: "flex",
+              alignItems: "center",
+            }}
+            onClick={handleBack}
+            aria-label="Go back"
+          >
+            <IoMdArrowRoundBack size={28} color="#fff" />
+          </button>
+          <Header>{productId ? "Edit product" : "Add product"}</Header>
+          <ActionBar>
+            <EditButton type="primary" onClick={handleNavigate}>
+              <FaEdit style={{ marginRight: "12px" }} />
+              Edit
+            </EditButton>{" "}
+            <DeleteButton danger onClick={handleDelete}>
+              <RiDeleteBin6Line style={{ marginRight: "12px" }} />
+              Delete
+            </DeleteButton>
+          </ActionBar>
+        </TopBar>
 
-      <SubText>
-        Enter new products fast and accurately. Stay on top of your inventory.
-      </SubText>
+        <SubText>
+          Enter new products fast and accurately. Stay on top of your inventory.
+        </SubText>
 
-      <ImageRow>
-        <ImageWrapper>
-          <ImageContainer
-            src={productDetailAdmin?.image || productImg}
-            alt={productDetailAdmin?.name || "Product preview"}
-          />
-        </ImageWrapper>
-
-        <FormBlock>
-          <HeadingBox>Base details</HeadingBox>
-
-          <FormArea>
-            <TwoCols>
-              <Input
-                placeholder="Enter product name"
-                defaultValue={productDetailAdmin?.name || ""}
-                readOnly
-              />
-              <Input
-                placeholder="Ram"
-                defaultValue={productDetailAdmin?.ram || ""}
-                readOnly
-              />
-            </TwoCols>
-            <TwoCols>
-              <Input
-                placeholder="Core"
-                defaultValue={productDetailAdmin?.cores || ""}
-                readOnly
-              />
-              <Input
-                placeholder="Storage"
-                defaultValue={productDetailAdmin?.storage || ""}
-                readOnly
-              />
-            </TwoCols>
-            <FullWidth>
-              <TextArea
-                placeholder="Add description"
-                defaultValue={productDetailAdmin?.description || ""}
-                readOnly
-              />
-            </FullWidth>
-          </FormArea>
-        </FormBlock>
-      </ImageRow>
-
-      <NavbarContainer>
-        <AddProductNavBar activeTab={activeTab} setActiveTab={setActiveTab} />
-      </NavbarContainer>
-
-      {activeTab === "Description" && (
-        <div style={{ marginTop: "2rem" }}>
-          {loading ? (
-            <div>Loading...</div>
-          ) : descriptionDataFromApiNormalized.length ? (
-            <AddProductDescriptionCard
-              allData={descriptionDataFromApiNormalized}
+        <ImageRow>
+          <ImageWrapper>
+            <ImageContainer
+              src={productDetailAdmin?.image || productImg}
+              alt={productDetailAdmin?.name || "Product preview"}
             />
-          ) : (
-            <div>No description data available.</div>
-          )}
-        </div>
-      )}
-      {activeTab === "Additional Information" && (
-        <DescriptionSection background="#ffffff1a">
-          {productDetailAdmin?.additional_info ? (
-            Object.entries(productDetailAdmin.additional_info).map(
-              ([key, value], idx) => (
-                <AddetionalInformationCard
-                  key={idx}
-                  data={{ label: key, value }}
+          </ImageWrapper>
+
+          <FormBlock>
+            <HeadingBox>Base details</HeadingBox>
+
+            <FormArea>
+              <TwoCols>
+                <Input
+                  placeholder="Enter product name"
+                  defaultValue={productDetailAdmin?.name || ""}
+                  readOnly
                 />
+                <Input
+                  placeholder="Ram"
+                  defaultValue={productDetailAdmin?.ram || ""}
+                  readOnly
+                />
+              </TwoCols>
+              <TwoCols>
+                <Input
+                  placeholder="Core"
+                  defaultValue={productDetailAdmin?.cores || ""}
+                  readOnly
+                />
+                <Input
+                  placeholder="Storage"
+                  defaultValue={productDetailAdmin?.storage || ""}
+                  readOnly
+                />
+              </TwoCols>
+              <FullWidth>
+                <TextArea
+                  placeholder="Add description"
+                  defaultValue={productDetailAdmin?.description || ""}
+                  readOnly
+                />
+              </FullWidth>
+            </FormArea>
+          </FormBlock>
+        </ImageRow>
+
+        <NavbarContainer>
+          <AddProductNavBar activeTab={activeTab} setActiveTab={setActiveTab} />
+        </NavbarContainer>
+
+        {activeTab === "Description" && (
+          <div style={{ marginTop: "2rem" }}>
+            {loading ? (
+              <div>Loading...</div>
+            ) : descriptionDataFromApiNormalized.length ? (
+              <AddProductDescriptionCard
+                allData={descriptionDataFromApiNormalized}
+              />
+            ) : (
+              <div>No description data available.</div>
+            )}
+          </div>
+        )}
+
+        {activeTab === "Additional Information" && (
+          <DescriptionSection background="#ffffff1a">
+            {productDetailAdmin?.additional_info ? (
+              Object.entries(productDetailAdmin.additional_info).map(
+                ([key, value], idx) => {
+                  const label = formatAdditionalLabel(key);
+                  const displayValue = formatAdditionalValue(key, value);
+                  return (
+                    <AddetionalInformationCard
+                      key={idx}
+                      data={{ label, value: displayValue }}
+                    />
+                  );
+                }
               )
-            )
-          ) : (
-            <div>No additional info</div>
-          )}
-        </DescriptionSection>
-      )}
-    </AddContainer>
+            ) : (
+              <div>No additional info</div>
+            )}
+          </DescriptionSection>
+        )}
+      </AddContainer>
     </Layout>
   );
 };

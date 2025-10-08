@@ -8,7 +8,6 @@ export const TermsContainer = styled.section`
   flex-direction: column;
   align-items: center;
   text-align: left;
-  min-height: 100vh;
   box-sizing: border-box;
 
   @media (min-width: 768px) {

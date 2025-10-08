@@ -6,14 +6,13 @@ export const AddContainer = styled.div`
   /* background: linear-gradient(155deg, rgb(57, 24, 100) 0%, rgb(10, 6, 15) 17%); */
   display: flex;
   flex-direction: column;
-  padding: 0 100px;
+  padding: 0px 100px;
 `;
 
 export const TopBar = styled.div`
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-top: 64px;
 `;
 export const Header = styled.h1`
   color: #fff;
@@ -165,6 +164,7 @@ export const ImageRow = styled.div`
   gap: 40px;
   margin-top: 40px;
   flex-wrap: nowrap;
+  height: auto;
 `;
 
 export const ImageWrapper = styled.div`
@@ -315,7 +315,6 @@ export const Input = styled.input`
   font-size: 16px;
 
   @media (max-width: 3840px) {
-    /* 4K */
     font-size: 2.5rem;
     padding: 24px 20px;
   }
@@ -347,14 +346,42 @@ export const TextArea = styled.textarea`
   min-height: 100px;
   resize: vertical;
   font-size: 16px;
+  height: auto;
+  @media (min-width: 768px) {
+    font-size: 15px;
+    padding: 14px 16px;
+    min-height: 120px;
+    height: 260px;
+  }
 
+  @media (min-width: 1024px) {
+    font-size: 16px;
+    padding: 16px 18px;
+    min-height: 130px;
+  }
+
+  @media (min-width: 1440px) {
+    font-size: 18px;
+    padding: 18px 20px;
+    min-height: 140px;
+    height: 300px;
+  }
+
+  @media (min-width: 1800px) {
+    font-size: 20px;
+    padding: 20px 22px;
+    min-height: 150px;
+    height: 220px;
+  }
   @media (min-width: 1920px) {
     font-size: 1.5rem;
     padding: 22px 16px;
+    height: 200px;
   }
   @media (min-width: 2560px) {
     font-size: 2rem;
-    padding: 24px 18px;
+    padding: px 18px;
+    height: 300px;
   }
   @media (min-width: 3840px) {
     font-size: 2.5rem;
@@ -364,6 +391,7 @@ export const TextArea = styled.textarea`
 
 export const DescriptionSection = styled.div`
   width: 100%;
+  margin-top: 32px;
   color: white;
   background: ${(props) => (props.background ? props.background : "none")};
   border-radius: 0.25rem;
@@ -372,7 +400,7 @@ export const DescriptionSection = styled.div`
     display: ${(props) => props.display || "flex"};
     flex-wrap: wrap;
     background: ${(props) =>
-      props.background ? props.background : "#ffffff1a"};
+      props.background ? props.background : "#64ec151a"};
     border-radius: 0.63rem;
     padding: 1.6rem 2.1rem;
   }

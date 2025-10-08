@@ -25,7 +25,7 @@ const PrivacyPolicy = () => {
                     <TermsContent>
 
                         <TermsIntro>
-                            By accessing and using this website, you agree to comply with the following terms:
+                           We value your privacy and are committed to protecting your personal information.
                         </TermsIntro>
 
                         <TermsItem>

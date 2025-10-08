@@ -23,7 +23,7 @@ export const TermsTitle = styled.h2`
   font-size: 1.8rem;
   font-weight: 700;
   text-align: center;
-  margin-bottom: 15px; /* Reduced gap between title and intro */
+  margin-bottom: 15px; 
 
   @media (min-width: 768px) {
     font-size: 2.2rem;
@@ -70,7 +70,7 @@ export const TermsContent = styled.div`
 `;
 
 export const TermsItem = styled.p`
-  margin-bottom: 12px; /* Slightly tighter spacing */
+  margin-bottom: 12px;
   text-align: justify;
 
   strong {

@@ -6,14 +6,13 @@ export const AddContainer = styled.div`
   /* background: linear-gradient(155deg, rgb(57, 24, 100) 0%, rgb(10, 6, 15) 17%); */
   display: flex;
   flex-direction: column;
-  padding: 0 100px;
+  padding: 0px 100px;
 `;
 
 export const TopBar = styled.div`
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-top: 64px;
 `;
 export const Header = styled.h1`
   color: #fff;

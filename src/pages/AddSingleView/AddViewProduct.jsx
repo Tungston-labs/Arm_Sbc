@@ -36,6 +36,9 @@ import {
 } from "./AddViewProduct.styled";
 import AddetionalInformationCard from "../../Components/product/Specification/AddetionalInformationCard";
 import Layout from "../../Layout/Layout";
+import { FaEdit } from "react-icons/fa";
+import { RiDeleteBin6Line } from "react-icons/ri";
+
 
 const AddViewProduct = () => {
   const [activeTab, setActiveTab] = useState("Description");
@@ -163,9 +166,11 @@ const AddViewProduct = () => {
         <Header>{productId ? "Edit product" : "Add product"}</Header>
         <ActionBar>
           <EditButton type="primary" onClick={handleNavigate}>
+            <FaEdit style={{ marginRight:"12px"}}/>
             Edit
           </EditButton>{" "}
           <DeleteButton danger onClick={handleDelete}>
+            <RiDeleteBin6Line style={{ marginRight:"12px"}}/>
             Delete
           </DeleteButton>
         </ActionBar>

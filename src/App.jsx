@@ -24,6 +24,8 @@ import "react-toastify/dist/ReactToastify.css";
 
 import Products from "./pages/product/Products.jsx";
 import SingleProduct from "./pages/product/SingleProduct.jsx";
+import TermsAndConditions from "./pages/Terms&Privacy/TermsAndConditions.jsx";
+import PrivacyPolicy from "./pages/Terms&Privacy/PrivacyPolicy.jsx";
 
 function App() {
   return (
@@ -55,6 +57,9 @@ function App() {
         <Route path="/reset-password" element={<Resetpassword />} />
         <Route path="/verification" element={<Verification />} />
         <Route path="/setnewpassword" element={<SetNewPassword />} />
+        <Route path="/terms" element={<TermsAndConditions />} />
+        <Route path="/privacy" element={< PrivacyPolicy/>} />
+
         {/* <Route path="/singleview" element={<AddViewProduct />} /> */}
 
         <Route element={<PersistLogin />}>

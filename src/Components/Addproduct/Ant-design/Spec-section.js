@@ -72,6 +72,7 @@ export const specSections = [
     title: "Watchdog Timer",
     fields: ["Output","Interval"],
   },
+
    {
     key: "enviorment",
     title: "Enviorment",

@@ -17,6 +17,8 @@ import {
 import Navbar from "../../Components/Navbar/Navbar";
 import ModalWithCards from "../../Components/Comparison/ModalWithCards";
 import Empty from "../../assets/Comparison/picture.svg";
+import Footer from "../../Components/Footer/Footer";
+
 // feature order stays the same
 export const featureOrder = [
   "dimension",
@@ -147,6 +149,7 @@ const Comparison = () => {
 
         {showModal && <ModalWithCards onClose={handleCloseModal} />}
       </Container>
+      <Footer/>
     </Main>
   );
 };

@@ -58,7 +58,7 @@ export const TextBox = styled.div`
   width: 220px;
   font-size: 16px;
   color: #fff;
-  padding-top: 6px;
+  /* padding-top: 6px; */
   display: flex;
   align-items: flex-start;
 
@@ -186,6 +186,22 @@ export const AddButton = styled.button`
     font-size: 20px;
   }
   `
+  export const SectionDivider = styled.hr`
+  border: none;
+  border-top: 0.2px solid rgba(255, 255, 255, 1);
+  margin: 60px 0;
+
+  @media (min-width: 1920px) {
+    margin: 80px 0;
+  }
+  @media (min-width: 2560px) {
+    margin: 100px 0;
+  }
+  @media (min-width: 3860px) {
+    margin: 120px 0;
+  }
+`;
+
   export const CancelButton = styled.button`
   background-color: white;
   color: #000;
@@ -207,7 +223,7 @@ export const AddButton = styled.button`
   }
 `;
 export const TextArea = styled.textarea`
-  padding: 24px 14px;
+  padding: 12px 14px;
   background: #2b2534;
   color: #FFFFFF;
   border: none;

@@ -7,12 +7,17 @@ export const specSections = [
   {
     key: "expansion_slot",
     title: "ExpansionSlot",
-    fields: ["M:2"],
+    fields: ["M.2"],
   },
   {
     key: "memory",
     title: "Memory",
     fields: ["Technology", "Capacity", "Socket"],
+  },
+   {
+    key: "ethernet",
+    title: "Ethernet",
+    fields: ["Controller Speed", "Connector" ],
   },
 
   {
@@ -30,7 +35,7 @@ export const specSections = [
     {
     key: "storage",
     title: "Storage",
-    fields: ["Sata", "M:2",]
+    fields: [ "M:2","SATA",]
     },
      {
     key: "power",
@@ -55,7 +60,7 @@ export const specSections = [
      {
     key: "audio",
     title: "Audio",
-    fields: ["Interface 2"],
+    fields: ["Interface.2"],
   },
     {
     key: "security",
@@ -70,6 +75,6 @@ export const specSections = [
    {
     key: "enviorment",
     title: "Enviorment",
-    fields: ["Operating Temp", "Storage temp", "Operating humidity", "Storage humidity"],
+    fields: ["Operating Temp", "Storage Temp", "Operating Humidity", "Storage Humidity"],
   },
 ]

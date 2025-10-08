@@ -4,7 +4,7 @@ export const Overlay = styled.div`
   position: fixed;
   inset: 0;
   background: rgba(15, 15, 15, 0.5);
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(18px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,12 +16,13 @@ export const ModalCard = styled.div`
   padding: 80px 120px;
   max-width: 65vw;
   display: flex;
+    opacity: 0.8;
   flex-direction: column;
+  border-radius: 32px;
   align-items: stretch;
   gap: 24px;
   position: relative;
 
-  /* Large screens (4K+) */
   @media (min-width: 3840px) {
     padding: 140px 220px;
     max-width: 98vw;
@@ -98,16 +99,20 @@ export const InnerGrid = styled.div`
   display: flex;
   gap: 24px;
   width: 100%;
-  overflow-x: auto;   
-  padding-bottom: 8px;
-  scroll-behavior: smooth; 
-  -webkit-overflow-scrolling: touch; 
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
 
-  scrollbar-width: thin;          
-  scrollbar-color: #bbb transparent;
+  scrollbar-width: thin;
+  scrollbar-color: #504c5aff transparent;
+
+  padding-bottom: 24px; 
+  margin-bottom: -12px; 
 
   @media (max-width: 768px) {
     gap: 12px;
+    padding-bottom: 16px;
+    margin-bottom: -8px;
   }
 `;
 
@@ -121,7 +126,7 @@ export const ProductCard = styled.div`
   flex: 0 0 260px;
   background: #ffffff26;
   padding: 32px 16px;
-  border-radius: 20px;
+  border-radius: 12px;
   text-align: center;
   color: #fff;
   cursor: pointer;

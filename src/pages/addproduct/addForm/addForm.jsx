@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addNewProduct, fetchProductAdmin, fetchProductsAdmin } from "../../../redux/productSlice";
+import {
+  addNewProduct,
+  fetchProductAdmin,
+  fetchProductsAdmin,
+} from "../../../redux/productSlice";
 import { AddContainer, Header, Text } from "../addProduct.styled";
 import Layout from "../../../Layout/Layout";
 import {
@@ -17,6 +21,7 @@ import {
   TopBar,
   TwoCols,
   TextArea,
+  SectionDivider,
 } from "./addForm.styled";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import ImageUploader from "../../../Components/Addproduct/ImageUploadSection/ImageUpload";
@@ -231,10 +236,11 @@ const AddForm = () => {
               </FullWidth>
             </FormArea>
           </Row>
+          <SectionDivider />
 
           <Row>
             <TextBox>
-              <LabelInline style={{ marginTop: "60px" }}>
+              <LabelInline style={{ marginTop: "40px" }}>
                 Specifications
               </LabelInline>
             </TextBox>
@@ -247,6 +253,7 @@ const AddForm = () => {
               />
             </FormArea>
           </Row>
+          <SectionDivider />
 
           <Row>
             <TextBox>

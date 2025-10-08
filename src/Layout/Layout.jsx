@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import {
   PageWrapper,
@@ -43,26 +43,26 @@ const Layout = ({ children }) => {
         </SidebarHeader>
 
         <SidebarMenu>
-         <SidebarItem
-  $active={getActive() === "dashboard"}
-  onClick={() => navigate("/dashboard")}
->
-  <FaTachometerAlt /> Dashboard
-</SidebarItem>
+          <SidebarItem
+            $active={getActive() === "dashboard"}
+            onClick={() => navigate("/dashboard")}
+          >
+            <FaTachometerAlt /> Dashboard
+          </SidebarItem>
 
-<SidebarItem
-  $active={getActive() === "enquiry"}
-  onClick={() => navigate("/enquiry-page")}
->
-  <FaClipboardList /> Enquiry
-</SidebarItem>
+          <SidebarItem
+            $active={getActive() === "enquiry"}
+            onClick={() => navigate("/enquiry-page")}
+          >
+            <FaClipboardList /> Enquiry
+          </SidebarItem>
 
-<SidebarItem
-  $active={getActive() === "product"}
-  onClick={() => navigate("/addproduct")}
->
-  <FaBox /> Product
-</SidebarItem>
+          <SidebarItem
+            $active={getActive() === "product"}
+            onClick={() => navigate("/addproduct")}
+          >
+            <FaBox /> Product
+          </SidebarItem>
 
 
 
@@ -92,9 +92,9 @@ const Layout = ({ children }) => {
         <LogoutModal
           onConfirm={() => {
             console.log("Logging out...");
-            localStorage.removeItem("token"); 
+            localStorage.removeItem("token");
             setShowLogout(false);
-            navigate("/login"); 
+            navigate("/login");
           }}
           onCancel={() => setShowLogout(false)}
         />

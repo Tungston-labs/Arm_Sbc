@@ -104,12 +104,12 @@ export const BrandName = styled.span`
 `;
 
 export const Hamburger = styled.div`
-  font-size: 1.5rem;
+  font-size: 1rem;
   cursor: pointer;
   color: #9d4edd;
 
   @media (min-width: 768px) {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
   @media (min-width: 1920px) {
     font-size: 3rem;

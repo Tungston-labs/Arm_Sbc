@@ -64,14 +64,13 @@ export const CardHeader = styled.div`
 
 export const CardTitle = styled.span`
   font-family: 'Roboto';
+ 
   font-style: normal;
   font-weight: 300;
   line-height: 1.4; 
   color: #FFF;
-
   font-size: clamp(0.9rem, 1vw, 2.5rem);
 `;
-
 
 export const CardIcon = styled.div`
   font-size: clamp(1.2rem, 1.8vw, 2rem);
@@ -84,7 +83,7 @@ export const CardValue = styled.div`
   font-style: normal;
   font-weight: 400;
   line-height: 1.2; 
-  margin-top: auto;
+  margin-top: 10%;
   color: #FFF;
   font-size: clamp(1.8rem, 3vw, 3rem);
 `;

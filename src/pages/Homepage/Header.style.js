@@ -11,7 +11,6 @@ export const HeaderWrapper = styled.section`
   padding: 0 5%;
   position: relative;
 
- 
   @media (max-width: 480px) {
     background: ${({ backgroundMobile }) =>
     `url(${backgroundMobile}) no-repeat center center/cover`};
@@ -31,8 +30,7 @@ export const HeaderWrapper = styled.section`
     height: 100vh;
   }
 
- 
-  @media (min-width: 1024px) and (max-width: 1439px) {
+@media (min-width: 769px) and (max-width: 1023px) {
     background: ${({ backgroundImage }) =>
     `url(${backgroundImage}) no-repeat center center/cover`};
      background-size: contain;
@@ -40,6 +38,24 @@ export const HeaderWrapper = styled.section`
     height: 100vh;
   }
 
+  @media (min-width: 1024px) and (max-width: 1439px) {
+    background: ${({ backgroundImage }) =>
+    `url(${backgroundImage}) no-repeat center center/cover`};
+     background-size: contain;
+     background-color: #0F071B; 
+    height: 100vh;
+  }
+ 
+  @media (min-width: 481px) and (max-width: 1023px) {
+     background: ${({ backgroundMobile }) =>
+    `url(${backgroundMobile}) no-repeat center center/cover`};
+    background-size: contain;
+    background-position: center;
+    background-color: #07040C; 
+    text-align: left;
+    padding: 2rem;
+    height: 100vh;
+  }
  
   @media (min-width: 1440px) and (max-width: 1799px) {
     background: ${({ backgroundImage }) =>
@@ -50,14 +66,6 @@ export const HeaderWrapper = styled.section`
 
   @media (min-width: 2560px) {
     padding: 0 3%;
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
-  }
-
-  
-  @media (min-width: 7680px) {
-    padding: 0 15%;
     background-size: cover;
     background-position: center;
     height: 100vh;
@@ -102,10 +110,17 @@ export const Content = styled.div`
     padding: 0 10px;
   }
 
-  @media (min-width: 481px) and (max-width: 1024px) {
-    text-align: center;
+  @media (min-width: 481px) and (max-width: 768px) {
+    
+    text-align: left;
     max-width: 70%;
   }
+
+   @media (max-width: 1024px)  {
+    text-align: left;
+    max-width: 50%;
+  }
+
 
   @media (min-width: 2560px) {
     max-width: 1400px;
@@ -116,16 +131,16 @@ export const Content = styled.div`
     margin-top: 300px;
     text-align: center;
 
-
   }
+
 `;
 
 export const Title = styled.h1`
-  font-size: 1rem;
+  font-size: 2rem;
   font-weight: 700;
   font-family: "Montserrat", sans-serif;
   margin-bottom: 30px;
-    margin-top:40px;
+  margin-top:40px;
 
   color: #ffffff;
 
@@ -133,14 +148,17 @@ export const Title = styled.h1`
     font-size: 1.3rem;
     line-height: 2rem;
     margin-bottom: 15px;
+    text-align: center;
   }
 
-  @media (min-width: 769px) and (max-width: 1440px) {
-    font-size: 1.9rem;
+  @media (min-width: 769px) and (max-width: 1023px) {
+    max-width: 2000px;
+    margin-top: 300px;
+    text-align: center;
   }
 
   @media (min-width: 1800px) {
-    font-size: 2.7rem;
+    font-size: 2rem;
   }
 
   @media (min-width: 2560px) {
@@ -167,46 +185,37 @@ export const Description = styled.p`
   margin-bottom: 30px;
   color: #ffffff;
   
-
-
   @media (max-width: 480px) {
     font-size: 0.9rem;
     line-height: 1.1rem;
     margin-bottom: 15px;
    
-
   }
 
   @media (min-width: 481px) and (max-width: 1023px) {
     font-size: 1rem;
-  }
+  }1024
    
    @media (max-width: 1024px) {
-    font-size: 1rem;
-    width: 90%;
-    text-align: left;
+    font-size: 0.8rem;
+    width: 100%;
+    text-align: justify;
 
   }
 
   @media (min-width: 769px) and (max-width: 1440px) {
-    font-size: 1rem;
-    max-width: 700px;
-    
+    font-size: 0.6rem;
 
   }
 
   @media (min-width: 1800px) {
-    font-size: 1.2rem;
-    width: 800px;
-
+    font-size: 1rem;
+    width: 900px;
   }
 
-  
   @media (min-width: 2560px) {
     font-size: 1.3rem;
     width: 1200px;
-
-
   }
 
    @media (min-width: 3860px) {
@@ -219,7 +228,7 @@ export const ExploreButton = styled.a`
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: #a64cff;
+  background: #8963D3;
   color: #fff;
   font-size: 1.2rem;
   font-weight: 600;
@@ -229,15 +238,26 @@ export const ExploreButton = styled.a`
   text-decoration: none;
   cursor: pointer;
   transition: all 0.3s ease;
+  
+
+  border: 3px solid transparent;
+  background-image: 
+    linear-gradient(#a64cff, #8963D3), 
+    linear-gradient(to right bottom, #e4e4e4, #bdbcc2, #9895a1, #757081, #544d62); 
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
 
   span {
     font-size: 1.2rem;
     margin-top: 4px;
     display: flex;
+    
   }
 
   &:hover {
-    background: #8b3de6;
+    background-image: 
+      linear-gradient(#8963D3, #8963D3),
+      linear-gradient(to right bottom, #e4e4e4, #bdbcc2, #9895a1, #757081, #544d62);
     transform: translateY(-2px);
   }
 
@@ -245,6 +265,7 @@ export const ExploreButton = styled.a`
     font-size: 0.8rem;
     padding: 6px 14px;
     margin: 10px auto;
+    margin-left: 330;
   }
 
   @media (min-width: 481px) and (max-width: 768px) {
@@ -253,7 +274,7 @@ export const ExploreButton = styled.a`
   }
 
   @media (min-width: 1800px) {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     padding: 14px 28px;
   }
 

@@ -19,9 +19,9 @@ export const ProductsWrapper = styled.div`
 
 export const Card = styled.div`
   background-color: rgba(255, 255, 255, 0.05);
-  padding: 20px;
+  padding: 40px;
   border-radius: 16px;
-  width: 280px;
+  width: 340px;
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   backdrop-filter: blur(10px);

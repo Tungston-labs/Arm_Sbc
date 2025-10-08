@@ -39,8 +39,8 @@ const Footer = () => {
       <BottomBar>
         <CopyRight>© Copyright 2025. ARM-SBC. Designed by Tungston Labs.</CopyRight>
         <Links>
-          <a href="#">Terms of Use</a>
-          <a href="#">Privacy Policy</a>
+          <a href="/terms">Terms & Conditions</a>
+          <a href="/privacy">Privacy Policy</a>
         </Links>
 
       </BottomBar>

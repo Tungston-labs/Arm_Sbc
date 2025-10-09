@@ -109,14 +109,6 @@ const AddViewProduct = () => {
     productDetailAdmin?.details ||
     [];
 
-  // const titleCase = (str = "") =>
-  //   String(str)
-  //     .replace(/[_-]+/g, " ")
-  //     .replace(/\s+/g, " ")
-  //     .trim()
-  //     .toLowerCase()
-  //     .replace(/\b\w/g, (c) => c.toUpperCase());
-
   const normalizeDescription = (raw) => {
     if (!raw) return [];
     if (Array.isArray(raw) && raw.length && raw[0].header) {

@@ -11,6 +11,7 @@ import {
   CardDetailsWrap,
 } from "./SmallCard.styles";
 import CustomPagination from "../../Components/paginaton/CustomPagination";
+import noProductsImg from "../../assets/AddProduct/AddIcon.png";
 
 const SmallCard = () => {
   const dispatch = useDispatch();
@@ -49,13 +50,53 @@ const SmallCard = () => {
     navigate(`${location.pathname}?${qs.toString()}`, { replace: true });
   };
 
-  if (loading) return <p>Loading…</p>;
-  if (error) return <p>Error: {String(error)}</p>;
+  if (loading) return <p style={{ textAlign: "center" }}>Loading…</p>;
+  if (error)
+    return (
+      <p style={{ textAlign: "center", color: "red" }}>
+        Error: {String(error)}
+      </p>
+    );
+
+  const hasNoProducts = !productsAdmin || productsAdmin.length === 0;
+
+  if (hasNoProducts) {
+    return (
+      <div
+        style={{
+          textAlign: "center",
+          padding: "4rem 1rem",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          color: "#ccc",
+        }}
+      >
+        <img
+          src={noProductsImg}
+          alt="No products found"
+          style={{
+            width: "400px",
+            height: "auto",
+            marginBottom: "1.5rem",
+            opacity: 0.9,
+          }}
+        />
+        <h2 style={{ color: "#fff", marginBottom: "0.5rem" }}>
+          No Products Found
+        </h2>
+        <p style={{ color: "#bbb" }}>
+          Start adding products to see them listed here.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <>
       <CardGrid>
-        {productsAdmin?.map((item) => (
+        {productsAdmin.map((item) => (
           <Card
             key={item.id}
             onClick={() => handleCardClick(item.id)}
@@ -72,12 +113,14 @@ const SmallCard = () => {
         ))}
       </CardGrid>
 
-      <CustomPagination
-        total={totalCount || 0}
-        pageSize={pageSize}
-        defaultPage={page}    
-        onChange={(newPage) => handlePageChange(newPage)}
-      />
+      {totalCount > pageSize && (
+        <CustomPagination
+          total={totalCount || 0}
+          pageSize={pageSize}
+          defaultPage={page}
+          onChange={handlePageChange}
+        />
+      )}
     </>
   );
 };

@@ -26,7 +26,7 @@ export const UploadCard = styled.label`
   overflow: hidden;
 
   @media (min-width: 768px)  { height: 240px; border-radius: 28px; }
-  @media (min-width: 1920px) { max-width: 450px; height: 270px; border-radius: 34px; }
+  @media (min-width: 1920px) { max-width: 450px; height: 320px; border-radius: 34px; }
   @media (min-width: 2560px) { max-width: 500px; height: 320px; border-radius: 38px; }
   @media (min-width: 3840px) { max-width: 600px; height: 400px; border-radius: 44px; }
 
@@ -36,7 +36,7 @@ export const UploadCard = styled.label`
     top: 0;
     left: 0;
     width: 100%;
-    height: 80%;
+    height: 70%;
     border: 2px dotted rgba(255, 255, 255, 0.4);
     border-radius: inherit;
     pointer-events: none;
@@ -69,10 +69,9 @@ export const UploadText = styled.p`
   @media (min-width: 3840px) { font-size: 24px; }
 `;
 
-/* === Thumbnail with remove === */
 export const FileInfo = styled.div`
   position: absolute;
-  top: calc(80% + 10px);
+  top: calc(70% + 15px);
   left: 18px;
   right: 18px;
   display: flex;
@@ -84,7 +83,7 @@ export const FileInfo = styled.div`
   font-size: 12px;
 
   @media (min-width: 768px) { font-size: 14px; }
-  @media (min-width: 1920px) { font-size: 16px; }
+  @media (min-width: 1920px) { font-size:  16px; }
   @media (min-width: 2560px) { font-size: 18px; }
   @media (min-width: 3840px) { font-size: 20px; }
 `;

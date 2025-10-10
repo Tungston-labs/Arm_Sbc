@@ -11,10 +11,6 @@ background: radial-gradient(
  rgba(3, 2, 6, 1)80%
 );
 
-
-
-
-
   color: #fff;
   font-family: "Satoshi", sans-serif;
   display: flex;
@@ -24,7 +20,7 @@ background: radial-gradient(
 
 export const Content = styled.main`
   flex: 1;
-  padding: clamp(1rem, 2vw, 3rem);
+  padding: 3.8rem;
 
   @media (min-width: 2560px) {
     padding: 4rem;

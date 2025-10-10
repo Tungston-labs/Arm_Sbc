@@ -1,9 +1,8 @@
-// src/pages/AddViewProduct.jsx
 import React, { useEffect, useState } from "react";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import productImg from "../../assets/Comparison/chip.svg";
-import AddProductNavBar from "../../components/Addproduct/AddProductNavbar";
-import AddProductDescriptionCard from "../../components/Addproduct/DescriptionDetails/DescriptionSection";
+import AddProductNavBar from "../../Components/Addproduct/AddProductNavbar";
+import AddProductDescriptionCard from "../../Components/Addproduct/DescriptionDetails/DescriptionSection";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -36,6 +35,10 @@ import {
   DeleteButton,
 } from "./AddViewProduct.styled";
 import AddetionalInformationCard from "../../Components/product/Specification/AddetionalInformationCard";
+import Layout from "../../Layout/Layout";
+import { FaEdit } from "react-icons/fa";
+import { RiDeleteBin6Line } from "react-icons/ri";
+
 
 const AddViewProduct = () => {
   const [activeTab, setActiveTab] = useState("Description");
@@ -56,8 +59,8 @@ const AddViewProduct = () => {
       text: "You won’t be able to revert this!",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
@@ -66,7 +69,7 @@ const AddViewProduct = () => {
           .then(() => {
             Swal.fire("Deleted!", "Product has been deleted.", "success").then(
               () => {
-                navigate("/addproduct"); // ✅ redirect here
+                navigate("/addproduct"); 
               }
             );
           })
@@ -143,6 +146,7 @@ const AddViewProduct = () => {
     navigate(`/addform/${productId}`);
   };
   return (
+    <Layout>
     <AddContainer>
       <TopBar>
         <button
@@ -162,9 +166,11 @@ const AddViewProduct = () => {
         <Header>{productId ? "Edit product" : "Add product"}</Header>
         <ActionBar>
           <EditButton type="primary" onClick={handleNavigate}>
+            <FaEdit style={{ marginRight:"12px"}}/>
             Edit
           </EditButton>{" "}
           <DeleteButton danger onClick={handleDelete}>
+            <RiDeleteBin6Line style={{ marginRight:"12px"}}/>
             Delete
           </DeleteButton>
         </ActionBar>
@@ -255,6 +261,7 @@ const AddViewProduct = () => {
         </DescriptionSection>
       )}
     </AddContainer>
+    </Layout>
   );
 };
 

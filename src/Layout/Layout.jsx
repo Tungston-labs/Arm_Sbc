@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; 
-
+import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import {
   PageWrapper,
   Content,
@@ -23,8 +23,15 @@ const Layout = ({ children }) => {
   const [active, setActive] = useState("dashboard");
   const [showModal, setShowModal] = useState(false);
   const [showLogout, setShowLogout] = useState(false);
-
+  const location = useLocation();
   const navigate = useNavigate();
+
+  const getActive = () => {
+    if (location.pathname.includes("/dashboard")) return "dashboard";
+    if (location.pathname.includes("/enquiry-page")) return "enquiry";
+    if (location.pathname.includes("/addproduct")) return "product";
+    return "";
+  };
 
   return (
     <PageWrapper>
@@ -37,34 +44,28 @@ const Layout = ({ children }) => {
 
         <SidebarMenu>
           <SidebarItem
-            $active={active === "dashboard"}
-            onClick={() => {
-              setActive("dashboard");
-              navigate("/dashboard"); 
-            }}
+            $active={getActive() === "dashboard"}
+            onClick={() => navigate("/dashboard")}
           >
             <FaTachometerAlt /> Dashboard
           </SidebarItem>
 
           <SidebarItem
-            $active={active === "enquiry"}
-            onClick={() => {
-              setActive("enquiry");
-              navigate("/enquiry-page"); 
-            }}
+            $active={getActive() === "enquiry"}
+            onClick={() => navigate("/enquiry-page")}
           >
             <FaClipboardList /> Enquiry
           </SidebarItem>
 
           <SidebarItem
-            $active={active === "product"}
-            onClick={() => {
-              setActive("product");
-              navigate("/addproduct"); 
-            }}
+            $active={getActive() === "product"}
+            onClick={() => navigate("/addproduct")}
           >
             <FaBox /> Product
           </SidebarItem>
+
+
+
         </SidebarMenu>
 
         <SidebarFooter>
@@ -91,9 +92,9 @@ const Layout = ({ children }) => {
         <LogoutModal
           onConfirm={() => {
             console.log("Logging out...");
-            localStorage.removeItem("token"); 
+            localStorage.removeItem("token");
             setShowLogout(false);
-            navigate("/login"); 
+            navigate("/login");
           }}
           onCancel={() => setShowLogout(false)}
         />

@@ -27,19 +27,18 @@ const Verification = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // Get email from navigation state or localStorage fallback
+
   const locationStateEmail = location.state?.email;
   const verifiedEmail = locationStateEmail || localStorage.getItem("resetEmail");
 
   const [otp, setOtp] = useState(Array(5).fill(""));
   const inputsRef = useRef([]);
 
-  // Get redux state
+  
   const { forgotLoading, otpVerified, forgotError, otpSent } = useSelector(
     (state) => state.auth
   );
 
-  // Handle OTP input change
   const handleChange = (value, index) => {
     if (/^[0-9]?$/.test(value)) {
       const newOtp = [...otp];
@@ -51,14 +50,13 @@ const Verification = () => {
     }
   };
 
-  // Handle backspace key
+
   const handleKeyDown = (e, index) => {
     if (e.key === "Backspace" && !otp[index] && index > 0) {
       inputsRef.current[index - 1].focus();
     }
   };
 
-  // Submit OTP
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -77,7 +75,7 @@ const Verification = () => {
     dispatch(verifyOtpAction({ email: verifiedEmail, otp: enteredOtp }));
   };
 
-  // Navigate on OTP verified or show error
+  
   useEffect(() => {
     if (otpVerified) {
       navigate("/setnewpassword", { state: { email: verifiedEmail } });
@@ -86,14 +84,16 @@ const Verification = () => {
     }
   }, [otpVerified, forgotError, navigate, verifiedEmail]);
 
-  // Save email in localStorage
+
   useEffect(() => {
     if (verifiedEmail) {
       localStorage.setItem("resetEmail", verifiedEmail);
     }
   }, [verifiedEmail]);
 
-  // Resend OTP
+ 
+  
+  
   const handleResend = () => {
     if (!verifiedEmail) {
       toast.error("Email not found. Cannot resend OTP.");

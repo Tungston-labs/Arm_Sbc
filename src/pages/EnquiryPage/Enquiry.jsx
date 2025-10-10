@@ -16,6 +16,8 @@ import {
   ViewIcon,
   ArrowButton,
   EmptyState,
+  TableWrapper,
+  
 } from "./Enquiry.Styles";
 import { fetchInquiries } from "../../redux/inquirySlice";
 
@@ -49,11 +51,11 @@ const Enquiry = () => {
       <PageTitle>Enquiry</PageTitle>
       <SubTitle>
         Stay organized with your product booking enquiries. Follow up on
-        pending, open, or closed requests instantly.
+        pending, open, or <br /> closed requests instantly.
       </SubTitle>
 
       {loading && <p>Loading enquiries...</p>}
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {/* {error && <p style={{ color: "red" }}>{error}</p>} */}
 
       {!loading && enquiries.length === 0 && (
         <EmptyState>
@@ -62,39 +64,41 @@ const Enquiry = () => {
       )}
 
       {enquiries.length > 0 && (
-        <Table>
-          <thead>
-            <TableRow>
-              <TableHead>Name</TableHead>
-              <TableHead>Email ID</TableHead>
-              <TableHead>Phone number</TableHead>
-              <TableHead>Delivery location</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead></TableHead>
-            </TableRow>
-          </thead>
-          <tbody>
-            {enquiries.map((item) => (
-              <TableRow key={item.id}>
-               <TableCell title={`${item.first_name} ${item.last_name}`}>
-  {item.first_name} {item.last_name}
-</TableCell>
-<TableCell title={item.email}>{item.email}</TableCell>
-<TableCell title={item.phone}>{item.phone}</TableCell>
-<TableCell title={item.delivery_location}>{item.delivery_location}</TableCell>
-
-                <TableCell>
-                  <StatusBadge status={item.status?.toLowerCase()}>
-                    {item.status}
-                  </StatusBadge>
-                </TableCell>
-                <TableCell>
-                  <ViewIcon onClick={() => handleViewClick(item.id)} />
-                </TableCell>
+        <TableWrapper>
+          <Table>
+            <thead>
+              <TableRow>
+                <TableHead>Name</TableHead>
+                <TableHead>Email ID</TableHead>
+                <TableHead>Phone number</TableHead>
+                <TableHead>Delivery location</TableHead>
+                <TableHead>Status</TableHead>
+                <TableHead></TableHead>
               </TableRow>
-            ))}
-          </tbody>
-        </Table>
+            </thead>
+            <tbody>
+              {enquiries.map((item) => (
+                <TableRow key={item.id}>
+                  <TableCell title={`${item.first_name} ${item.last_name}`}>
+                    {item.first_name} {item.last_name}
+                  </TableCell>
+                  <TableCell title={item.email}>{item.email}</TableCell>
+                  <TableCell title={item.phone}>{item.phone}</TableCell>
+                  <TableCell title={item.delivery_location}>{item.delivery_location}</TableCell>
+
+                  <TableCell>
+                    <StatusBadge status={item.status?.toLowerCase()}>
+                      {item.status}
+                    </StatusBadge>
+                  </TableCell>
+                  <TableCell>
+                    <ViewIcon onClick={() => handleViewClick(item.id)} />
+                  </TableCell>
+                </TableRow>
+              ))}
+            </tbody>
+          </Table>
+        </TableWrapper>
       )}
 
       {total_pages > 1 && (

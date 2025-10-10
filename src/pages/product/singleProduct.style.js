@@ -1,10 +1,21 @@
 import styled from "styled-components";
 
 export const NavbarContainer = styled.div`
-  padding: 1rem 1rem 0 1rem;
-  background: #0e0619;
-  @media (width>=500px) {
-    padding: 0;
+ color: #fff;
+  margin: auto;
+
+  @media (max-width: 900px) {
+background: linear-gradient(155deg, rgb(57, 24, 100) 0%, rgb(10, 6, 15) 17%);
+    background-size: cover;
+      padding: 1rem;
+  }
+
+  @media (min-width: 3840px) {
+    font-size: 1.5rem;
+  }
+
+  @media (min-width: 7680px) {
+    font-size: 2rem;
   }
 `;
 export const HeaderContainer = styled.section`
@@ -26,7 +37,7 @@ export const HeaderContainer = styled.section`
 `;
 export const DividerDiv = styled.div`
   width: 50%;
-  display: flex;
+  /* display: flex; */
   justify-content: center;
   align-items: center;
   @media (max-width: 480px) {
@@ -34,13 +45,33 @@ export const DividerDiv = styled.div`
   }
 `;
 export const HeaderImageContainer = styled.section`
-  padding-block: 3rem;
+  padding-block: 1rem;
   img {
     width: 70%;
     min-width: 600px;
     height: auto;
   }
   @media (max-width: 480px) {
+    padding-block: 1rem;
+    display: flex;
+    justify-content: center;
+    img {
+      width: 70%;
+      min-width: 250px;
+      height: auto;
+    }
+  }
+  @media (max-width: 780px) {
+    padding-block: 1rem;
+    display: flex;
+    justify-content: center;
+    img {
+      width: 70%;
+      min-width: 250px;
+      height: auto;
+    }
+  }
+    @media (max-width: 1024px) {
     padding-block: 1rem;
     display: flex;
     justify-content: center;
@@ -71,7 +102,8 @@ export const HeaderImageContainer = styled.section`
   }
 `;
 export const HeaderTextContainer = styled.section`
-  padding-inline: 3rem;
+  width: 100%;
+  padding-inline: 1rem;
   h2 {
     font-size: 1.75rem;
     padding-bottom: 2rem;
@@ -79,7 +111,7 @@ export const HeaderTextContainer = styled.section`
   }
   p,
   li {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: 400;
     line-height: 2.1rem;
   }
@@ -91,6 +123,26 @@ export const HeaderTextContainer = styled.section`
     padding-left: 2.5rem;
   }
   @media (max-width: 480px) {
+    width: 100%;
+    padding-inline: 0rem;
+    h2 {
+      font-size: 1.12rem;
+      padding-bottom: 0rem;
+    }
+    p,
+    li {
+      font-size: 0.8rem;
+      line-height: 1.5rem;
+    }
+    ul {
+      padding-bottom: 1rem;
+      padding-left: 1.5rem;
+    }
+    p:nth-of-type(2) {
+      padding-bottom: 0.5rem;
+    }
+  }
+  @media (max-width: 780px) {
     width: 100%;
     padding-inline: 0rem;
     h2 {
@@ -177,34 +229,32 @@ export const ButtonSection = styled.div`
 `;
 
 export const CompareButton = styled.button`
+  display: none; 
   background: transparent;
   border: 1px solid #8a38f5;
   border-radius: 0.5rem;
-  padding: 0.5rem 3rem;
+  padding: 0.6rem 2rem;
   color: white;
-  font-size: 0.7rem;
+  font-size: 0.9rem;
   cursor: pointer;
-  display: flex;
   align-items: center;
   gap: 0.5rem;
 
   &:hover {
     opacity: 0.8;
   }
+
   &:active {
     transform: scale(0.95);
   }
-  @media (max-width: 480px) {
+
+  @media (max-width: 768px) {
+    display: flex;
     margin: 0 auto;
   }
-  @media (width >= 2560px) {
-    font-size: 1.5rem;
-  }
-  @media (width >= 3840px) {
-    font-size: 2.5rem;
-    border-radius: 1rem;
-  }
 `;
+
+
 export const AddToCartButton = styled.button`
   background: #facc15;
   border: 1px solid #facc15;
@@ -228,6 +278,10 @@ export const AddToCartButton = styled.button`
     font-size: 0.8rem;
     padding: 0.6rem 1rem;
   }
+  @media (max-width: 780px) {
+    font-size: 0.8rem;
+    padding: 0.6rem 1rem;
+  }
   @media (min-width: 1024px) and (max-width: 1439px) {
     padding: 0.7rem 1.2rem;
     color: #000;
@@ -247,7 +301,7 @@ export const AddToCartButton = styled.button`
 export const Link = styled.a`
   color: #06b6d4;
   text-decoration: underline;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   cursor: pointer;
   background: none;
   border: none;
@@ -258,8 +312,11 @@ export const Link = styled.a`
   @media (max-width: 480px) {
     font-size: 0.8rem;
   }
+  @media (max-width: 780px) {
+    font-size: 1rem;
+  }
   @media (min-width: 1024px) and (max-width: 1439px) {
-    font-size: 0.8rem;
+    font-size: 1rem;
   }
   @media (width >= 2560px) {
     font-size: 2rem;
@@ -281,7 +338,15 @@ export const SpecificationContainer = styled.section`
     color: #8a38f5;
     text-align: center;
     font-size: 1.25rem;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Roboto", sans-serif;
+  }
+  @media (width >= 760px) {
+    padding-block: 1rem;
+    padding-inline: 2rem;
+    h2 {
+      font-size: 2.1rem;
+      padding-bottom: 1rem;
+    }
   }
   @media (width >= 1024px) {
     padding-block: 2rem;
@@ -321,11 +386,14 @@ export const SpecificationContainer = styled.section`
 
 export const SpecificationNav = styled.nav`
   padding-block: 1rem;
+  margin-bottom: 2.5rem;
+  
   ul {
     display: flex;
     list-style: none;
     justify-content: space-between;
     font-size: 0.75rem;
+    font-family: "Roboto", sans-serif;
   }
   @media (width >= 1024px) {
     width: 50%;
@@ -354,6 +422,7 @@ export const SpecificationNav = styled.nav`
     }
   }
 `;
+
 export const NavItem = styled.li`
   padding: 0.5rem 0.7rem;
   cursor: pointer;
@@ -402,7 +471,7 @@ export const DescriptionSection = styled.div`
     display: ${(props) => props.display || "flex"};
     flex-wrap: wrap;
     background: ${(props) =>
-      props.background ? props.background : "#ffffff1a"};
+    props.background ? props.background : "#ffffff1a"};
     border-radius: 0.63rem;
     padding: 1.6rem 2.1rem;
   }
@@ -418,7 +487,7 @@ export const DescriptionSection = styled.div`
     margin-top: 1rem;
   }
   @media (width >= 3840px) {
-    padding: 4rem 5.6rem;
+    padding: 4rem 5.6rem;red
     border-radius: 1.5rem;
     margin-top: 2rem;
   }
@@ -432,19 +501,21 @@ export const Descriptioncard = styled.div`
 `;
 
 export const DescriptionHeader = styled.h4`
-  color: #8a38f5;
+  color: #8A38F5;
   font-size: 0.88rem;
   font-weight: 400;
   margin-bottom: 1rem;
-  font-family: "Montserrat", sans-serif;
-
+  font-family: 'Roboto', sans-serif;
+  
   @media (width >= 1024px) {
     font-weight: 600;
     font-size: 0.9rem;
   }
+
   @media (width >= 1280px) {
     font-size: 1rem;
   }
+    
   @media (width >= 1536px) {
     font-size: 1.13rem;
   }
@@ -457,6 +528,7 @@ export const DescriptionHeader = styled.h4`
     margin-bottom: 2.5rem;
   }
 `;
+
 export const DescriptionTextContainer = styled.div`
   display: flex;
   margin-bottom: 1rem;
@@ -475,7 +547,7 @@ export const DescriptionLabel = styled.h5`
   border-right: ${(props) => props.border && "1px solid #696464"};
   padding: ${(props) => props.padding && "1rem"};
   @media (width >= 1024px) {
-    font-weight: 600;
+    font-weight: 500;
     font-size: 0.9rem;
   }
   @media (width >= 1280px) {
@@ -705,6 +777,12 @@ export const FormButton = styled.button`
   &:active {
     transform: scale(0.95);
   }
+  &:disabled {
+    background: #bfa0f9;
+    border: 1px solid #bfa0f9;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
   margin-block: 1rem;
   @media (width >= 1280px) {
     font-size: 1.2rem;
@@ -892,6 +970,7 @@ export const TotalReviewCardContainer = styled.div`
     }
   }
 `;
+
 export const ReviewCardHeader = styled.div`
   display: flex;
   width: 100%;

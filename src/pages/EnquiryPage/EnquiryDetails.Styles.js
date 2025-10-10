@@ -50,7 +50,6 @@ export const PageTitle = styled.h1`
   font-weight: 700;
   font-style: normal;
   line-height: 1.2; 
-  margin: 0 0 0.5rem 0;
   color: #FFF;
   font-size: clamp(1.5rem, 2vw, 6rem);
 `;
@@ -99,9 +98,10 @@ export const SubHeaderRow = styled.div`
 export const StatusSelect = styled.select`
   background: ${(props) => props.bgColor || "#1e1e24"};
   border: 1px solid #333;
-  padding: 0.5rem 2.5rem 0.5rem 1rem; /* extra right padding for arrow */
+  padding: 0.5rem 5.5rem 0.5rem 1rem; /* extra right padding for arrow */
   border-radius: 6px;
   color: #fff;
+  text-align: left;
   font-family: 'Roboto', sans-serif;
   font-size: 0.9rem;
   appearance: none;
@@ -131,7 +131,7 @@ export const StatusSelect = styled.select`
 
   @media (min-width: 1024px) {
     font-size: 1.1rem;
-    padding: 0.7rem 3rem 0.7rem 1.3rem;
+    padding: 0.7rem 5.8rem 0.7rem 1.3rem;
   }
 `;
 
@@ -177,7 +177,7 @@ export const CustomerDetailsGrid = styled.div`
   background: linear-gradient(90deg,rgb(13, 13, 14),rgb(58, 20, 88));
   padding: 1rem;
   border-radius: 10px;
- 
+  border-color: #FFFFFF;
 
  
   @media (min-width: 768px) {
@@ -208,6 +208,7 @@ export const CustomerDetailsGrid = styled.div`
 `;
 
 export const DetailItem = styled.p`
+  padding-top: 1rem;
   font-size: 0.8rem;
   color: white;
   font-family: 'Roboto', sans-serif;
@@ -252,77 +253,56 @@ letter-spacing: 0%;
 
 export const ProductGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(200px, max-content));
   gap: 1rem;
-  justify-content: center; 
-
+  justify-content: start; /* aligns cards to the left edge */
 
   @media (min-width: 768px) {
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(220px, max-content));
+    gap: 1.2rem;
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(auto-fill, minmax(250px, max-content));
     gap: 1.5rem;
   }
 
- 
-  @media (min-width: 1024px) {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-  }
-
-
   @media (min-width: 2560px) {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2.5rem;
-  }
-
-
-  @media (min-width: 7680px) {
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 3rem;
+    grid-template-columns: repeat(auto-fill, minmax(300px, max-content));
+    gap: 2rem;
   }
 `;
 
+
 export const ProductCard = styled.div`
-  background: rgba(30, 30, 36, 0.4); 
+  background: rgba(30, 30, 36, 0.4);
   border-radius: 10px;
   padding: 1rem;
   text-align: center;
   transition: transform 0.2s ease;
-  font-family: 'Roboto', sans-serif;
-
+  font-family: "Roboto", sans-serif;
 
   backdrop-filter: blur(50px);
   -webkit-backdrop-filter: blur(50px);
-  border: 1px solid rgba(255, 255, 255, 0.1); 
+  border: 1px solid rgba(255, 255, 255, 0.1);
 
-  width: 100%;
-  max-width: 250px;
-  margin: 0 auto;
+  width: 200px;
+  margin: 0; /* remove auto-centering that adds extra spacing */
 
   &:hover {
     transform: translateY(-5px);
   }
 
   @media (min-width: 1024px) {
-    max-width: 280px;
+    width: 250px;
     padding: 1.5rem;
   }
 
   @media (min-width: 2560px) {
-    max-width: 350px;
+    width: 300px;
     padding: 2rem;
   }
-
-  @media (min-width: 3860px) {
-    max-width: 500px;
-    padding: 4rem;
-  }
-
-  @media (min-width: 7680px) {
-    max-width: 700px;
-    padding: 3rem;
-  }
 `;
-
 
 
 export const ProductImage = styled.img`

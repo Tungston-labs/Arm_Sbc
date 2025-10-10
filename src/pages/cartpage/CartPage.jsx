@@ -26,18 +26,18 @@ import {
   updateCartQuantity,
   deleteCartItem,
 } from "../../redux/cartSlice";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { EmptyState } from "../EnquiryPage/EnquiryDetails.Styles";
 import NoEnquiry from "../../assets/inquriy/noenquiry.svg";
+import OvalSpinner from "../../Components/spinner/OvalSpinner";
 const Cart = () => {
   const dispatch = useDispatch();
-  const { items: cartItems, loading } = useSelector((state) => state.cart);
+  const { items, loading } = useSelector((state) => state.cart);
   const navigate = useNavigate();
-  const cartToken = localStorage.getItem("cartToken"); 
-
+  const cartToken = localStorage.getItem("cartToken");
   useEffect(() => {
     if (cartToken) {
-      dispatch(fetchCartItems(cartToken));
+      dispatch(fetchCartItems({ cartToken }));
     }
   }, [dispatch, cartToken]);
 
@@ -62,36 +62,38 @@ const Cart = () => {
         <Container>
           <CartHeader>
             <CartTitle>Cart</CartTitle>
-          <EnquiryButton onClick={() => navigate("/inquiry-page")}>
-        Product Inquire
-      </EnquiryButton>
+            <EnquiryButton onClick={() => navigate("/inquiry-page")}>
+              Product Inquire
+            </EnquiryButton>
           </CartHeader>
           <Divider />
 
           {loading ? (
-            <p>Loading...</p>
-          ) : cartItems.length > 0 ? (
-            cartItems.map((item, index) => (
+            <OvalSpinner />
+          ) : items?.items?.length > 0 ? (
+            items?.items?.map((item, index) => (
               <React.Fragment key={item.id}>
                 <CartItem>
-                  <ProductImage src={item.image} alt={item.name} />
+                  <ProductImage src={item?.product?.image} alt={item.name} />
                   <ProductDetails>
                     <ProductHeader>
-                      <ProductName>{item.name}</ProductName>
+                      <ProductName>{item?.product?.name}</ProductName>
                       <RemoveButton onClick={() => removeItem(item.id)}>
                         ✕
                       </RemoveButton>
                     </ProductHeader>
                     <ProductSpecs>
-                      {item.specs.map((spec, idx) => (
-                        <li key={idx}>{spec}</li>
-                      ))}
+                      <li>{item?.product?.cores} Core</li>
+                      <li>{item?.product?.ram} Ram</li>
+                      <li>{item?.product?.storage} Storage</li>
+    
                     </ProductSpecs>
                     <QuantityControl>
+                  Qty:
                       <QuantityButton
                         onClick={() => decreaseQty(item.id, item.quantity)}
                       >
-                        -
+                    −
                       </QuantityButton>
                       <QuantityValue>{item.quantity}</QuantityValue>
                       <QuantityButton
@@ -99,17 +101,19 @@ const Cart = () => {
                       >
                         +
                       </QuantityButton>
-                      <MoreInfo href="#">See more like this</MoreInfo>
+                      <MoreInfo as={Link} to="/product">
+                        See more like this
+                      </MoreInfo>
                     </QuantityControl>
                   </ProductDetails>
                 </CartItem>
-                {index < cartItems.length - 1 && <Divider />}
+                <Divider />
               </React.Fragment>
             ))
           ) : (
             <EmptyState>
-                   <img src={NoEnquiry} alt="No product enquiries" />
-                 </EmptyState>
+              <img src={NoEnquiry} alt="No product enquiries" />
+            </EmptyState>
           )}
         </Container>
       </CartContainer>

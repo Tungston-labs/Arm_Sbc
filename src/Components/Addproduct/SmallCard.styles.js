@@ -45,6 +45,7 @@ export const CardTitle = styled.p`
   font-size: 28px; 
   font-weight: 600;
   text-align: center;
+  font-family: "Roboto", sans-serif;
   margin-bottom: 8px;
 
   @media (max-width: 3900px) {

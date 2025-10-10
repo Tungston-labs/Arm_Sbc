@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Section = styled.section`
   width: 100%;
-  padding: 80px 5%;
+  padding: 150px 5%;
   background: linear-gradient(
     152deg,
     rgba(138, 56, 245, 1) 0%,
@@ -15,13 +15,15 @@ export const Section = styled.section`
 `;
 
 export const Title = styled.h2`
-  font-size: 2.5rem;
-  font-weight: 700;
+  font-size: 2rem;
+  font-weight: 550;
   text-align: center;
-  margin-bottom: 60px;
-  font-family: "Montserrat", sans-serif;
+  color: #ffffff;
+  font-family: 'Montserrat', sans-serif;
+  margin-bottom: 30px;
+  margin-top: -70px;
 
-  @media (max-width: 768px) {
-    font-size: 2rem;
+  @media (max-width: 480px) {
+    font-size: 1.6rem;
   }
 `;

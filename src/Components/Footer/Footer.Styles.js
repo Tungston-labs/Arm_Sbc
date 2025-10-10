@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const FooterContainer = styled.footer`
-  background: #0E0619; 
+  background: #170B27; 
   color: #fff;
   padding: 3rem 2rem;
   text-align: center;
@@ -41,28 +41,25 @@ export const LogoSection = styled.div`
 
   @media (min-width: 901px) and (max-width: 1200px) {
     gap: 0.6rem;
-   margin-bottom: 0.2rem;
+   margin-bottom: 2rem;
   }
 
   @media (min-width: 1201px) and (max-width: 1920px) {
     gap: 0.7rem;
-   margin-bottom: 0.2rem;
+   margin-bottom: 2rem;
   }
 
   @media (min-width: 1921px) and (max-width: 3840px) {
     gap: 0.8rem;
-   margin-bottom: 0.2rem;
+   margin-bottom: 3rem;
   }
 
   @media (min-width: 3841px) and (max-width: 7680px) {
     gap: 0.9rem;
-   margin-bottom: 0.2rem;
+   margin-bottom: 3rem;
   }
 
-  @media (min-width: 7681px) {
-    gap: 1rem;
-   margin-bottom: 0.2rem;
-  }
+
 `;
 
 export const Logo = styled.img`
@@ -79,20 +76,18 @@ export const Logo = styled.img`
   }
 
   @media (min-width: 1201px) and (max-width: 1920px) {
-    width: 10rem;
+    width: 15rem;
   }
 
   @media (min-width: 1921px) and (max-width: 3840px) {
-    width: 12rem;
+    width: 18rem;
   }
 
   @media (min-width: 3841px) and (max-width: 7680px) {
-    width: 14rem;
+    width: 20rem;
   }
 
-  @media (min-width: 7681px) {
-    width: 100px;
-  }
+ 
 `;
 
 
@@ -100,7 +95,7 @@ export const Logo = styled.img`
 export const Heading = styled.h3`
   font-size: 1.8rem; 
   font-weight: bold;
-  margin-bottom: 0.1rem;
+  margin-bottom: 0.5rem;
   font-family: 'Roboto';
   @media (min-width: 600px) {
     font-size: 1.5rem;
@@ -113,13 +108,15 @@ export const Heading = styled.h3`
   @media (min-width: 1200px) {
     font-size: 2rem;
   }
-
-  @media (min-width: 1920px) {
+ @media (min-width: 1440px) {
     font-size: 2.5rem;
+  }
+  @media (min-width: 1920px) {
+    font-size: 2.8rem;
   }
 
   @media (min-width: 3840px) {
-    font-size: 2.8rem;
+    font-size: 3rem;
   }
 
   @media (min-width: 7680px) {
@@ -129,16 +126,49 @@ export const Heading = styled.h3`
 
 
 export const Subtitle = styled.p`
-  max-width: 600px;
-  font-size: 1rem;
+  font-family: 'Roboto';
   opacity: 0.8;
   margin-bottom: 1.5rem;
-  font-family: 'Roboto';
+  text-align: center;
+  max-width: 100%;
 
-  @media (min-width: 3840px) {
+  /* Extra small screens (mobile) */
+  @media (max-width: 600px) {
+    font-size: 0.8rem;
+    max-width: 90%;
+  }
+
+  /* Small screens (tablet) */
+  @media (min-width: 601px) and (max-width: 900px) {
+    font-size: 0.9rem;
+   
+  }
+
+  /* Medium screens (desktop) */
+  @media (min-width: 901px) and (max-width: 1200px) {
+    font-size: 1rem;
+   
+  }
+
+  /* Large screens */
+  @media (min-width: 1201px) and (max-width: 1920px) {
+    font-size: 1.2rem;
+   
+  }
+
+  /* Extra large screens (4K) */
+  @media (min-width: 1921px) and (max-width: 3840px) {
     font-size: 1.5rem;
+
+  }
+
+  /* Ultra large screens (8K) */
+  @media (min-width: 3841px) {
+    font-size: 2rem;
+
   }
 `;
+
 
 export const SocialIcons = styled.div`
   display: flex;
@@ -150,7 +180,7 @@ export const Icon = styled.a`
   background: #8c52ff;
   color: #fff;
   font-size: 1.5rem;
-  padding: 0.5rem;
+  padding: 0.8rem;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -162,20 +192,46 @@ export const Icon = styled.a`
     color: #8c52ff;
   }
 
-  @media (min-width: 3840px) {
+
+  @media (max-width: 600px) {
+    font-size: 1.2rem;
+    padding: 0.6rem;
+  }
+
+
+  @media (min-width: 601px) and (max-width: 900px) {
+    font-size: 1.3rem;
+    padding: 0.7rem;
+  }
+
+
+  @media (min-width: 901px) and (max-width: 1920px) {
+    font-size: 1.5rem;
+    padding: 0.8rem;
+  }
+
+
+  @media (min-width: 1921px) and (max-width: 3840px) {
     font-size: 3rem;
     padding: 1rem;
   }
+
+
+  @media (min-width: 3841px) {
+    font-size: 4rem;
+    padding: 1.2rem;
+  }
 `;
 
+
 export const BottomBar = styled.div`
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-top: 1px solid #B2B2B2;
   padding-top: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.75rem;
-  width: 100%;
+  width: 90%;
 
   @media (min-width: 768px) {
     flex-direction: row;
@@ -186,11 +242,11 @@ export const BottomBar = styled.div`
 export const Links = styled.div`
   display: flex;
   gap: 1.5rem; 
-
+color: #FFFFFF;
   a {
     color: #fff;
     text-decoration: none;
-    opacity: 0.8;
+    /* opacity: 0.8; */
     font-size: 0.85rem; 
 
     &:hover {
@@ -240,9 +296,9 @@ export const Links = styled.div`
 
 export const CopyRight = styled.p`
   font-size: 0.8rem;
-  opacity: 0.7;
+  /* opacity: 0.7; */
   text-align: center;
-
+color: #FFFFFF;
   @media (min-width: 768px) {
     font-size: 0.9rem;
   }

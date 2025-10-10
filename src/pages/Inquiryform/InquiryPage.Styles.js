@@ -1,16 +1,19 @@
 
 import styled from "styled-components";
 
-import background from "../../assets/inquriy/background.svg";
 
 export const PageWrapper = styled.div`
-  background: url(${background}) no-repeat center center;
+background: linear-gradient(155deg, rgb(57, 24, 100) 0%, rgb(10, 6, 15) 17%);
   min-height: 100vh;
   color: #fff;
   font-family: "Satoshi", sans-serif;
   padding: clamp(1rem, 2vw, 3rem);
   background-size: cover;
   
+
+  @media (max-width: 768px) {
+    background: none;
+  }
 `;
 
 export const MobileSelect = styled.select`
@@ -59,7 +62,7 @@ export const Main = styled.div`
   margin: auto;
 
   @media (max-width: 900px) {
-     background: url('/images/inquiry/backgroundpic.png') no-repeat center center;
+background: linear-gradient(155deg, rgb(57, 24, 100) 0%, rgb(10, 6, 15) 17%);
     background-size: cover;
       padding: 1rem;
   }
@@ -158,7 +161,7 @@ export const ProductSpecs = styled.ul`
   margin: 0.5rem 0;
   padding-left: 1rem;
   list-style: disc;
-  color: #cfd2f3;
+  color: white;
  font-family: "Roboto";
   font-size: 2.5rem; 
 @media (max-width: 3860px) {
@@ -193,7 +196,14 @@ export const ProductSpecs = styled.ul`
   }
 `;
 
-
+export const QuantityInput = styled.input`
+  width: 60px;
+  margin-left: 0.5rem;
+  background: transparent;
+  color: #fff;
+  border: none;
+font-size: 1rem;
+`;
 export const ProductAction = styled.div`
   display: flex;
   align-items: center;
@@ -286,24 +296,30 @@ export const FormTitle = styled.h2`
   font-weight: 700;
   margin-bottom: 1rem;
   text-align: center;
-font-family: "Roboto";
+font-family: "Montserrat";
+
   @media (max-width: 480px) {
     font-size: 1rem;
   }
 
   @media (max-width: 768px) {
-    font-size: 1.5rem;
-  }
- @media (max-width: 1440px) {
     font-size: 1.8rem;
   }
-
-  @media (max-width: 1024px) {
-    font-size: 1.2rem;
+ @media (max-width: 1440px) {
+    font-size: 1.5rem;
   }
 
+@media (max-width: 1980px) {
+    font-size: 2rem;
+  }
+  @media (max-width: 1024px) {
+    font-size: 1.5rem;
+  }
+  @media (max-width: 1440px) {
+    font-size: 1.8rem;
+  }
   @media (min-width: 2560px) {
-    font-size: 2.5rem;
+    font-size: 2.8rem;
   }
 
   @media (min-width: 3840px) {
@@ -317,7 +333,7 @@ font-family: "Roboto";
 
 
 export const FormDescription = styled.p`
-  color: #cfd2f3;
+  color: white;
   margin-bottom: 2rem;
   line-height: 1.7;
   font-family: "Roboto";
@@ -403,7 +419,7 @@ export const InputGroup = styled.div`
 
 export const Label = styled.label`
   font-size: clamp(0.9rem, 1vw, 1rem);
-  color: #cfd2f3;
+   color: white;
   font-weight: 500;
   white-space: nowrap;
   font-family: "Roboto";
@@ -466,7 +482,7 @@ export const TextArea = styled.textarea`
   border: none;
   outline: none;
   font-size: clamp(0.9rem, 1vw, 1.2rem);
-  background: rgba(255, 255, 255, 0.08);
+  background:#2B2534;
   color: #fff;
 
   &::placeholder {
@@ -485,7 +501,7 @@ export const TextArea = styled.textarea`
   }
 
   @media (min-width: 3840px) {
-    font-size: 2em;
+    font-size: 2rem;
     padding: 1.2rem;
     min-height: 200px;
   }
@@ -499,7 +515,7 @@ export const TextArea = styled.textarea`
 
 
 export const SubmitButton = styled.button`
-  width: 103%;
+  width: 100%;
   border-radius: 7px;
   background: #8A38F5;
   border: none;
@@ -561,19 +577,32 @@ export const InputRow = styled.div`
   grid-template-columns: 1fr 1fr; 
   gap: 5rem;
 
-  @media (max-width: 768px) {
-  grid-template-columns: 1fr 1fr; 
-      gap: 2rem;
-      /* padding: 10px; */
-  }
 
-  
+@media (max-width: 768px) {
+  gap: 1rem;
+}
+
+
+@media (min-width: 769px) and (max-width: 1440px) {
+  gap: 1rem;
+}
+
+
+@media (min-width: 1441px) and (max-width: 2560px) {
+  gap: 2rem;
+}
+
+
+@media (min-width: 2561px) and (max-width: 3840px) {
+  gap: 2rem;
+}
+
 `;
 
 
 export const Heading = styled.div`
-  color: #FFF;
-  font-family: "Roboto";
+  color: white;
+  font-family: "Montserrat";
   font-style: normal;
   font-weight: 400;
   line-height: 1.4;

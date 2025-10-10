@@ -22,6 +22,7 @@
       { "label": "M.2", "value": "1 x M.2 (Key E, 2230) with PCIe Gen4 x1 and USB 2.0 for Wireless" }
     ]
   },
+
   {
     "header": "Ethernet",
     "items": [

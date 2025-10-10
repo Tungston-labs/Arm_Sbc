@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Nav,
   NavContainer,
@@ -17,15 +17,22 @@ import {
   SearchIcon,Badge
 } from "./Navbar.Styles";
 import { FaBars, FaTimes } from "react-icons/fa";
-import logo from "../../assets/main/logo.svg";
-import { IoMdCart } from "react-icons/io";
-import { useNavigate } from "react-router-dom";
+import logo from "../../assets/main/logo2.svg";
+import { IoCartOutline } from "react-icons/io5";
+ import { Link, NavLink,useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCartItems } from "../../redux/cartSlice";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [compareCount, setCompareCount] = useState(0);
   const navigate = useNavigate();
+ 
+
+  const dispatch = useDispatch();
+  const { items } = useSelector((state) => state.cart);
+  const cartToken = localStorage.getItem("cartToken");
 
   // Load comparison count from localStorage
   useEffect(() => {
@@ -51,6 +58,12 @@ const Navbar = () => {
     }
   };
 
+  useEffect(() => {
+    if (cartToken && (!items || !items.items)) {
+      dispatch(fetchCartItems({ cartToken }));
+    }
+  }, [dispatch, cartToken, items]);
+  const cartCount = items?.items?.length || 0;
   return (
     <Nav>
       <NavContainer>
@@ -58,15 +71,18 @@ const Navbar = () => {
           <img src={logo} alt="ARM SBC" />
         </Logo>
 
-        <NavLinks>
-          <NavLinkItem href="/">Home</NavLinkItem>
-          <NavLinkItem href="/product">Products</NavLinkItem>
-          <NavLinkItem href="/compare" className="compare">
-  Compare {compareCount > 0 && <Badge>{compareCount}</Badge>}
-</NavLinkItem>
+   <NavLinks>
+  <NavLinkItem to="/" end>
+    Home
+  </NavLinkItem>
+  <NavLinkItem to="/product">
+    Products
+  </NavLinkItem>
+  <NavLinkItem to="/compare">
+    Compare {compareCount > 0 && <Badge>{compareCount}</Badge>}
+  </NavLinkItem>
+</NavLinks>
 
-
-        </NavLinks>
 
         <RightSection>
           <SearchBox onSubmit={handleSearch}>
@@ -83,9 +99,9 @@ const Navbar = () => {
           </SearchBox>
 
           <CartIcon onClick={() => navigate("/cartpage")}>
-            <IoMdCart />
+            <IoCartOutline />
+            {cartCount > 0 && <span className="badge">{cartCount}</span>}
           </CartIcon>
-
           <InquiryButton onClick={() => navigate("/inquiry-page")}>
             Inquiry
           </InquiryButton>
@@ -98,13 +114,21 @@ const Navbar = () => {
 
       {isOpen && (
         <MobileMenu>
-          <MobileNavItem href="/">Home</MobileNavItem>
-          <MobileNavItem href="/product">Product</MobileNavItem>
-          <MobileNavItem href="/compare">
-            Compare {compareCount > 0 && `(${compareCount})`}
-          </MobileNavItem>
-          <MobileNavItem href="/cartpage">Cart</MobileNavItem>
-          <MobileInquiryButton>Inquiry</MobileInquiryButton>
+          <MobileNavItem as={NavLink} to="/" end>
+    Home
+  </MobileNavItem>
+  <MobileNavItem as={NavLink} to="/product">
+    Product
+  </MobileNavItem>
+  <MobileNavItem as={NavLink} to="/compare">
+    Compare {compareCount > 0 && `(${compareCount})`}
+  </MobileNavItem>
+  <MobileNavItem as={NavLink} to="/cartpage">
+    Cart
+  </MobileNavItem>
+          <MobileInquiryButton onClick={() => navigate("/inquiry-page")}>
+            Inquiry
+          </MobileInquiryButton>
         </MobileMenu>
       )}
     </Nav>

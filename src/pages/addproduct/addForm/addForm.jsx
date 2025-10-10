@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addNewProduct, fetchProductAdmin } from "../../../redux/productSlice";
+import {
+  addNewProduct,
+  fetchProductAdmin,
+  fetchProductsAdmin,
+} from "../../../redux/productSlice";
 import { AddContainer, Header, Text } from "../addProduct.styled";
-import Layout from "../../../Layout/Layout"
+import Layout from "../../../Layout/Layout";
 import {
   AddButton,
   ButtonContainer,
@@ -17,12 +21,12 @@ import {
   TopBar,
   TwoCols,
   TextArea,
+  SectionDivider,
 } from "./addForm.styled";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import ImageUploader from "../../../Components/Addproduct/ImageUploadSection/ImageUpload";
 import DemoCollapse from "../../../Components/Addproduct/Ant-design/CardsAndInput";
 import axios from "axios";
-// import Swal from "sweetalert2";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -71,6 +75,16 @@ const AddForm = () => {
       });
     }
   }, [productId, productDetailAdmin]);
+  async function urlToFile(url, filename, token) {
+    const headers = token ? { Authorization: `Bearer ${token}` } : {};
+    const res = await fetch(url, { headers });
+    if (!res.ok) throw new Error("Failed to fetch image");
+    const blob = await res.blob();
+    return new File([blob], filename || "image", {
+      type: blob.type || "image/jpeg",
+    });
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -78,29 +92,50 @@ const AddForm = () => {
       const fd = new FormData();
 
       fd.append("name", formData.name);
-      fd.append("ram", parseInt(formData.ram, 10));
-      fd.append("cores", parseInt(formData.cores, 10));
-      fd.append("storage", parseInt(formData.storage, 10));
-      fd.append("description", formData.description);
-
+      fd.append("ram", parseInt(formData.ram, 10) || 0);
+      fd.append("cores", parseInt(formData.cores, 10) || 0);
+      fd.append("storage", parseInt(formData.storage, 10) || 0);
+      fd.append("description", formData.description || "");
       fd.append(
         "additional_info",
         JSON.stringify({
-          weight: formData.additional_info.weight,
-          dimension: formData.additional_info.dimension,
+          weight: formData.additional_info.weight || "",
+          dimension: formData.additional_info.dimension || "",
         })
       );
-
       fd.append("specs", JSON.stringify(formData.specifications || {}));
 
-      if (formData.images?.[0] instanceof File) {
+      if (!productId) {
+        if (!(formData.images?.[0] instanceof File)) {
+          toast.error("Please upload an image before creating the product.");
+          return;
+        }
         fd.append("image", formData.images[0]);
+      } else {
+        if (formData.images?.[0] instanceof File) {
+          fd.append("image", formData.images[0]);
+        } else if (typeof formData.images?.[0] === "string") {
+          try {
+            const imageUrl = formData.images[0];
+            const filename = imageUrl.split("/").pop().split("?")[0] || "image";
+            const file = await urlToFile(imageUrl, filename, token);
+            fd.append("image", file);
+          } catch (err) {
+            console.warn(
+              "Could not fetch remote image to attach - user may need to re-upload.",
+              err
+            );
+          }
+        }
+      }
+
+      for (let pair of fd.entries()) {
+        console.log("FormData:", pair[0], pair[1]);
       }
 
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
         },
       };
 
@@ -108,148 +143,161 @@ const AddForm = () => {
         ? `http://178.248.112.16:8002/api/products/${productId}/`
         : `http://178.248.112.16:8002/api/products/create/`;
 
-      const method = productId ? "put" : "post";
-
-      await axios[method](url, fd, config);
+      if (productId) {
+        await axios.put(url, fd, config);
+        dispatch(fetchProductAdmin(productId));
+        dispatch(fetchProductsAdmin({ page: 1, pageSize: 20 }));
+      } else {
+        await axios.post(url, fd, config);
+      }
 
       toast.success(`Product ${productId ? "updated" : "added"} successfully!`);
-
-     setTimeout(() => navigate("/addproduct"), 1000);
-      
+      setTimeout(() => navigate("/addproduct"), 1000);
     } catch (error) {
       console.error("Error saving product:", error);
-      toast.error("Failed to save product. Please check your input.");
+      if (error?.response) {
+        console.error("Response data:", error.response.data);
+        toast.error(`Save failed: ${JSON.stringify(error.response.data)}`);
+      } else {
+        toast.error("Failed to save product. Please check your input.");
+      }
     }
   };
 
   return (
-   <Layout>
-     <AddContainer as="form" onSubmit={handleSubmit}>
-      <TopBar>
-        <button
-          type="button"
-          style={{
-            background: "transparent",
-            border: "none",
-            cursor: "pointer",
-            padding: 0,
-            display: "flex",
-            alignItems: "center",
-          }}
-          onClick={() => navigate("/addproduct")}
-        >
-          <IoMdArrowRoundBack size={28} color="#fff" />
-        </button>
+    <Layout>
+      <AddContainer as="form" onSubmit={handleSubmit}>
+        <TopBar>
+          <button
+            type="button"
+            style={{
+              background: "transparent",
+              border: "none",
+              cursor: "pointer",
+              padding: 0,
+              display: "flex",
+              alignItems: "center",
+            }}
+            onClick={() => navigate("/addproduct")}
+          >
+            <IoMdArrowRoundBack size={28} color="#fff" />
+          </button>
 
-        <Header>{productId ? "Edit Product" : "Add Product"}</Header>
-      </TopBar>
+          <Header>{productId ? "Edit Product" : "Add Product"}</Header>
+        </TopBar>
 
-      <Text>
-        Enter new products fast and accurately. Stay on top of your inventory.
-      </Text>
+        <Text>
+          Enter new products fast and accurately. Stay on top of your inventory.
+        </Text>
 
-      <ImageUploader
-        images={formData.images}
-        onImagesChange={(imgs) => updateFormData("images", imgs)}
-      />
+        <ImageUploader
+          images={formData.images}
+          onImagesChange={(imgs) => updateFormData("images", imgs)}
+        />
 
-      <LabelInputBox>
-        <Row>
-          <TextBox>
-            <LabelInline>Base details</LabelInline>
-          </TextBox>
-          <FormArea>
-            <TwoCols>
-              <Input
-                placeholder="Enter product name"
-                value={formData.name}
-                onChange={(e) => updateFormData("name", e.target.value)}
-              />
-              <Input
-                placeholder="Ram"
-                value={formData.ram}
-                onChange={(e) => updateFormData("ram", e.target.value)}
-              />
-            </TwoCols>
-            <TwoCols>
-              <Input
-                placeholder="Core"
-                value={formData.cores}
-                onChange={(e) => updateFormData("cores", e.target.value)}
-              />
-              <Input
-                placeholder="Storage"
-                value={formData.storage}
-                onChange={(e) => updateFormData("storage", e.target.value)}
-              />
-            </TwoCols>
-            <FullWidth>
-              <TextArea
-                placeholder="Add description"
-                value={formData.description}
-                onChange={(e) => updateFormData("description", e.target.value)}
-              />
-            </FullWidth>
-          </FormArea>
-        </Row>
+        <LabelInputBox>
+          <Row>
+            <TextBox>
+              <LabelInline>Base details</LabelInline>
+            </TextBox>
+            <FormArea>
+              <TwoCols>
+                <Input
+                  placeholder="Enter product name"
+                  value={formData.name}
+                  onChange={(e) => updateFormData("name", e.target.value)}
+                />
+                <Input
+                  placeholder="Ram"
+                  value={formData.ram}
+                  onChange={(e) => updateFormData("ram", e.target.value)}
+                />
+              </TwoCols>
+              <TwoCols>
+                <Input
+                  placeholder="Core"
+                  value={formData.cores}
+                  onChange={(e) => updateFormData("cores", e.target.value)}
+                />
+                <Input
+                  placeholder="Storage"
+                  value={formData.storage}
+                  onChange={(e) => updateFormData("storage", e.target.value)}
+                />
+              </TwoCols>
+              <FullWidth>
+                <TextArea
+                  placeholder="Add description"
+                  value={formData.description}
+                  onChange={(e) =>
+                    updateFormData("description", e.target.value)
+                  }
+                />
+              </FullWidth>
+            </FormArea>
+          </Row>
+          <SectionDivider />
 
-        <Row>
-          <TextBox>
-            <LabelInline style={{ marginTop: "60px" }}>
-              Specifications
-            </LabelInline>
-          </TextBox>
-          <FormArea>
-            <DemoCollapse
-              specs={formData.specifications}
-              onSpecsChange={(specs) => updateFormData("specifications", specs)}
-            />
-          </FormArea>
-        </Row>
-
-        <Row>
-          <TextBox>
-            <LabelInline>Additional information</LabelInline>
-          </TextBox>
-          <FormArea>
-            <TwoCols>
-              <Input
-                placeholder="Weight"
-                value={formData.additional_info.weight || ""}
-                onChange={(e) =>
-                  updateFormData("additional_info", {
-                    ...formData.additional_info,
-                    weight: e.target.value,
-                  })
+          <Row>
+            <TextBox>
+              <LabelInline style={{ marginTop: "40px" }}>
+                Specifications
+              </LabelInline>
+            </TextBox>
+            <FormArea>
+              <DemoCollapse
+                specs={formData.specifications}
+                onSpecsChange={(specs) =>
+                  updateFormData("specifications", specs)
                 }
               />
-              <Input
-                placeholder="Dimension"
-                value={formData.additional_info.dimension || ""}
-                onChange={(e) =>
-                  updateFormData("additional_info", {
-                    ...formData.additional_info,
-                    dimension: e.target.value,
-                  })
-                }
-              />
-            </TwoCols>
-          </FormArea>
-        </Row>
-      </LabelInputBox>
-      <ButtonContainer>
-        <CancelButton
-          type="button"
-          onClick={() => {
-            navigate("/addproduct");
-          }}
-        >
-          Cancel
-        </CancelButton>
-        <AddButton type="submit">Save</AddButton>
-      </ButtonContainer>
-    </AddContainer>
-   </Layout>
+            </FormArea>
+          </Row>
+          <SectionDivider />
+
+          <Row>
+            <TextBox>
+              <LabelInline>Additional information</LabelInline>
+            </TextBox>
+            <FormArea>
+              <TwoCols>
+                <Input
+                  placeholder="Weight"
+                  value={formData.additional_info.weight || ""}
+                  onChange={(e) =>
+                    updateFormData("additional_info", {
+                      ...formData.additional_info,
+                      weight: e.target.value,
+                    })
+                  }
+                />
+                <Input
+                  placeholder="Dimension"
+                  value={formData.additional_info.dimension || ""}
+                  onChange={(e) =>
+                    updateFormData("additional_info", {
+                      ...formData.additional_info,
+                      dimension: e.target.value,
+                    })
+                  }
+                />
+              </TwoCols>
+            </FormArea>
+          </Row>
+        </LabelInputBox>
+        <ButtonContainer>
+          <CancelButton
+            type="button"
+            onClick={() => {
+              navigate("/addproduct");
+            }}
+          >
+            Cancel
+          </CancelButton>
+          <AddButton type="submit">Save</AddButton>
+        </ButtonContainer>
+      </AddContainer>
+    </Layout>
   );
 };
 

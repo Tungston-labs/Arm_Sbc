@@ -1,6 +1,6 @@
 
 import styled, { css } from "styled-components";
-import { FaEye } from "react-icons/fa";
+import { MdOutlineRemoveRedEye } from "react-icons/md";
 
 export const PageTitle = styled.h2`
   font-family: 'Inter';
@@ -29,7 +29,6 @@ margin-bottom: 10px;
     font-size: 1.3rem;
   }
 
-  
   @media (min-width: 2560px) {
     font-size: 2rem;
   }
@@ -43,7 +42,6 @@ margin-bottom: 10px;
   }
 `;
 
-
 export const Table = styled.table`
   width: 100%;
   border-collapse: separate; 
@@ -54,7 +52,7 @@ export const Table = styled.table`
 `;
 
 export const TableHead = styled.th`
-  text-align: center;
+  text-align: left;
   padding: clamp(0.8rem, 0.8vw, 1.5rem); 
   font-size: clamp(0.9rem, 1vw, 2.5rem); 
   background: #8963D3;
@@ -73,8 +71,6 @@ export const TableHead = styled.th`
 `;
 
 
-
-
 export const TableRow = styled.tr`
   background: #000000;
   border-radius: 8px;
@@ -90,7 +86,7 @@ export const TableCell = styled.td`
   font-size: clamp(0.85rem, 1vw, 2rem); 
   color: #ddd;
   font-family: "Roboto";
-  text-align: center;
+  text-align: left;
 
   max-width: 150px;   /* adjust per column */
   white-space: nowrap;
@@ -123,7 +119,7 @@ export const StatusBadge = styled.span`
   display: inline-flex;             
   align-items: center;               
   justify-content: center;         
-min-width: clamp(80px, 10vw, 160px);
+  min-width: clamp(80px, 10vw, 200px);
   padding: clamp(0.2rem, 0.4vw, 0.5rem) clamp(0.5rem, 1vw, 1rem);
   border-radius: clamp(4px, 0.5vw, 8px); 
   font-weight: 600;
@@ -132,32 +128,30 @@ min-width: clamp(80px, 10vw, 160px);
    font-family: "Roboto";
 
  ${({ status }) =>
-  status === "pending" &&
-  css`
+    status === "pending" &&
+    css`
     background: #f97316;
     color: white;
   `}
 
 ${({ status }) =>
-  status === "open" &&
-  css`
+    status === "open" &&
+    css`
     background: #22c55e;
     color: white;
   `}
 
 ${({ status }) =>
-  status === "closed" &&
-  css`
+    status === "closed" &&
+    css`
     background: #e53935;
     color: white;
   `}
 
 `;
 
-
-
 export const Pagination = styled.div`
-  position: fixed;          
+       
   bottom: clamp(1rem, 1.5vw, 2rem);  
   left: clamp(1rem, 1.5vw, 2rem);   
   display: flex;
@@ -202,7 +196,7 @@ export const PageButton = styled.button`
 
 
 
-export const ViewIcon = styled(FaEye)`
+export const ViewIcon = styled(MdOutlineRemoveRedEye)`
   cursor: pointer;
   font-size: clamp(1rem, 1.5vw, 2rem);
 
@@ -253,5 +247,22 @@ export const EmptyState = styled.div`
       width: 800px;
       height: 800px;
     }
+  }
+`;
+export const TableWrapper = styled.div`
+  width: 100%;
+  overflow-x: auto; 
+  -webkit-overflow-scrolling: touch;
+
+  
+  padding-bottom: 1rem;
+
+
+  &::-webkit-scrollbar {
+    height: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
   }
 `;

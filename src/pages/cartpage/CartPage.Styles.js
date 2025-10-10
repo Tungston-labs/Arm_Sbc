@@ -6,7 +6,7 @@ export const CartContainer = styled.div`
 min-height: 100vh;
 
   @media (max-width: 900px) {
-     background: url('/images/cart/cardbackpic .png') no-repeat center center;
+background: linear-gradient(155deg, rgb(57, 24, 100) 0%, rgb(10, 6, 15) 17%);
     background-size: cover;
       padding: 1rem;
   }
@@ -20,16 +20,17 @@ min-height: 100vh;
   }
 `;
 export const Container = styled.div`
- background: url('/images/cart/cardbackpic .png') no-repeat center center;
+background: linear-gradient(155deg, rgb(57, 24, 100) 0%, rgb(10, 6, 15) 17%);
   background-size: cover;
   color: #fff;
-  padding: 8rem;
+padding: 3rem 10rem 2rem 10rem;
+
   margin: auto;
   min-height: 100vh;
+  
 
   @media (max-width: 900px) {
-     background: url('/images/cart/cardbackpic .png') no-repeat center center;
-    background-size: cover;
+  background: none;
       padding: 1rem;
   }
 
@@ -52,7 +53,7 @@ export const CartHeader = styled.div`
 
 export const CartTitle = styled.h2`
   color: #fff;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Montserrat';
   font-weight: 700;
   font-style: normal;
   line-height: normal;
@@ -69,22 +70,21 @@ export const CartTitle = styled.h2`
   @media (min-width: 1200px) {
     font-size: 3rem;
   }
-
+ @media (min-width: 1440px) {
+    font-size: 2.2rem;
+  }
   @media (min-width: 1920px) {
-    font-size: 3.5rem;
+    font-size: 2.5rem;
   }
 
   @media (min-width: 3840px) {
-    font-size: 5rem;
+    font-size: 3rem;
   }
 
-  @media (min-width: 7680px) {
-    font-size: 6rem;
-  }
 `;
 
 export const EnquiryButton = styled.button`
-  background: #AD8FE5;
+  background: rgba(173, 143, 229, 1);
   color: #fff;
   border: none;
   border-radius: 6px;
@@ -117,8 +117,8 @@ export const EnquiryButton = styled.button`
   }
 
   @media (min-width: 1200px) {
-    font-size: 1.2rem;
-    padding: 0.8rem 1.6rem;
+    font-size: 1rem;
+    padding: 0.6rem 2rem;
     border-radius: 9px;
   }
 
@@ -154,7 +154,7 @@ export const CartItem = styled.div`
   }
 
   @media (max-width: 768px) {
-    gap: 0; 
+    gap: 20px; 
   }
 `;
 
@@ -188,7 +188,7 @@ export const ProductName = styled.h3`
   font-style: normal;
   font-weight: 500;
   font-size: 0.8rem;
-  
+  margin-bottom: 1rem;
   @media (min-width: 600px) {
     font-size: 1rem; 
   }
@@ -198,20 +198,20 @@ export const ProductName = styled.h3`
   }
 
   @media (min-width: 1200px) {
-    font-size: 1.5rem; 
+    font-size: 1rem; 
   }
-
+ @media (min-width: 1440px) {
+    font-size: 1.3rem; 
+  }
   @media (min-width: 1920px) {
-    font-size: 2rem; 
+    font-size: 1.8rem; 
   }
 
   @media (min-width: 3840px) {
-    font-size: 2.5rem; 
+    font-size: 2rem; 
   }
 
-  @media (min-width: 7680px) {
-    font-size: 3rem;
-  }
+ 
 `;
 
 
@@ -222,7 +222,7 @@ export const ProductSpecs = styled.ul`
   font-size: 0.9rem; 
   opacity: 0.8;
 
-  margin-top: 10px;
+  /* margin-top: 10px; */
 
   li {
     margin-bottom: 0.3rem;
@@ -234,28 +234,27 @@ export const ProductSpecs = styled.ul`
   }
 
 
-  @media (min-width: 900px) {
-    font-size: 1.1rem;
-  }
-
-
-  @media (min-width: 1200px) {
+@media (min-width: 900px) {
     font-size: 1.2rem; 
   }
 
-  @media (min-width: 1920px) {
-    font-size: 1.4rem; 
+  @media (min-width: 1200px) {
+    font-size: 1rem; 
   }
-
-
-  @media (min-width: 3840px) {
+ @media (min-width: 1440px) {
+    font-size: 1.2rem; 
+  }
+  @media (min-width: 1920px) {
+    font-size: 1.5rem; 
+  }
+@media (min-width: 2560px) {
     font-size: 1.5rem; 
   }
 
-
-  @media (min-width: 7680px) {
+  @media (min-width: 3840px) {
     font-size: 2rem; 
   }
+
 `;
 
 
@@ -264,12 +263,40 @@ export const QuantityControl = styled.div`
   display: flex;
   align-items: center;
   gap: 0.5rem;
+    font-size:1.2rem;
+      @media (min-width: 900px) {
+    font-size: 1.5rem;
+   
+  }
+
+  @media (min-width: 1200px) {
+    font-size: 2rem;
+  }
+@media (min-width: 1440px) {
+    font-size: 1.3rem;
+  }
+  @media (min-width: 1920px) {
+    font-size: 2.5rem;
+  }
+  @media (min-width: 2048px) {
+    font-size: 2rem;
+  }
+   @media (min-width: 2560px) {
+    font-size: 2rem;
+  }
+  @media (min-width: 3840px) {
+    font-size: 2.2rem;
+  }
+
+  @media (min-width: 7680px) {
+    font-size: 2.8rem;
+  }
 `;
 
 export const QuantityButton = styled.button`
   background: none;      
   border: none;         
-  color: inherit;       
+  color: #898595;       
   font-size: 1rem;      
   cursor: pointer;      
   min-width: 20px;
@@ -291,11 +318,17 @@ export const QuantityButton = styled.button`
   }
 
   @media (min-width: 1200px) {
-    font-size: 1.8rem;
+    font-size: 2rem;
   }
 
   @media (min-width: 1920px) {
+    font-size: 2.5rem;
+  }
+  @media (min-width: 2048px) {
     font-size: 2rem;
+  }
+     @media (min-width: 2560px) {
+    font-size: 2.5rem;
   }
   @media (min-width: 3840px) {
     font-size: 2.5rem;
@@ -308,17 +341,66 @@ export const QuantityButton = styled.button`
 
 
 export const QuantityValue = styled.span`
- background: #fff;
+  background: #CAC4C4;
   border: 1px solid #fff;
   color: black;
-  padding: 0.2rem 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;       
+  height: 2rem;
+  font-size: 1rem;
+  padding: 0;         
   border-radius: 4px;
   cursor: pointer;
 
-  @media (min-width: 3840px) {
+  /* Small screens */
+  @media (max-width: 600px) {
+    width: 1.5rem;
+    height: 1.5rem;
+    font-size: 0.8rem;
+  }
+
+  /* Medium screens */
+  @media (min-width: 900px) {
+    width: 2rem;
+    height: 2rem;
+    font-size: 1rem;
+  }
+
+  /* Large screens */
+  @media (min-width: 1200px) {
+    width: 2rem;
+    height: 2rem;
+    font-size: 1.3rem;
+  }
+
+  /* Extra large screens */
+  @media (min-width: 1920px) {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.3rem;
+  }
+ @media (min-width: 2048px) {
+    width: 3rem;
+    height: 3rem;
     font-size: 1.5rem;
   }
+  /* 4K screens */
+  @media (min-width: 3840px) {
+    width: 3rem;
+    height: 3rem;
+    font-size: 1.8rem;
+  }
+
+  /* 8K screens */
+  @media (min-width: 7680px) {
+    width: 6rem;
+    height: 6rem;
+    font-size: 2.8rem;
+  }
 `;
+
 
 export const RemoveButton = styled.button`
   background: transparent;
@@ -326,7 +408,7 @@ export const RemoveButton = styled.button`
   color: #fff;
   font-size: 1.2rem;
   cursor: pointer;
-
+margin-right:10px ;
   &:hover {
     color: #ff4d4d;
   }
@@ -337,23 +419,33 @@ export const RemoveButton = styled.button`
 `;
 
 export const MoreInfo = styled.a`
-  font-size: 0.9rem;
-  color: #8c52ff;
-  text-decoration: none;
+  font-size: 0.8rem;
+  color: #4C67FF;
+  text-decoration: underline;
+  margin-left: 2rem;
 
   &:hover {
     text-decoration: underline;
   }
 
+  /* Small screens */
+  @media (max-width: 600px) {
+    font-size: 0.7rem;
+    margin-left: 1px;
+  }
+
+  /* Medium screens */
   @media (min-width: 3840px) {
     font-size: 1.5rem;
   }
 `;
 
+
 export const Divider = styled.hr`
   border: none;
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  border-top: 1px solid rgb(134, 134, 134);
   margin: 1rem 0;
+  margin-bottom: 2rem;
 `;
 
 

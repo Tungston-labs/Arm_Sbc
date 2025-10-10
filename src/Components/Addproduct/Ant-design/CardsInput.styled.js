@@ -22,7 +22,7 @@ export const StyledCollapse = styled(Collapse)`
 
   .ant-collapse-item {
     border-radius: 12px;
-     width: 95%;
+     width: 100%;
     margin-bottom: 20px;
     border-top: none;
     overflow: hidden;

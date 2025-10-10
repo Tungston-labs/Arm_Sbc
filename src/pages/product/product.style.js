@@ -2,21 +2,46 @@ import styled from "styled-components";
 
 export const AllProductContainer = styled.section`
   width: 100%;
-  background: #0e0619;
+background: linear-gradient(155deg, rgb(96, 40, 170) 0%, rgb(10, 6, 15) 17%);
   color: white;
   padding-block: 2rem;
+
+  @media (max-width: 768px) {
+    background: none;
+ 
+  }
 `;
+
 export const ProductHeader = styled.h2`
   margin: 0 auto;
-  font-size: 1.2rem;
+  font-size: 2rem;
   text-align: center;
+  font-family: "Montserrat";
+  margin-bottom: 5rem;
+font-weight:600;
+ @media (width>=375px) {
+    font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+  }
+   @media (width>=425px) {
+    font-size: 1.8rem;
+      margin-bottom: 1rem;
+  }
+  @media (width>=768px) {
+    font-size: 2rem;
+      margin-bottom: 1rem;
+  }
+
   @media (width>=1024px) {
     font-size: 2.5rem;
   }
   @media (width>=1280px) {
-    font-size: 3rem;
+    font-size: 2.5rem;
   }
-  @media (width>=1536px) {
+  @media (width>=1440px) {
+    font-size: 3rem;
+
+  }  @media (width>=1960px) {
     font-size: 3.75rem;
   }
   @media (width>=2560px) {
@@ -43,7 +68,7 @@ export const ProductCardContainer = styled.div`
   }
   @media (width>=1280px) {
     padding: 3rem 13rem;
-    gap: 3rem 2.5rem;
+    gap: 3rem 2rem;
   }
   @media (width>=1536px) {
     padding: 4rem 20rem;
